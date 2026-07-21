@@ -41,6 +41,10 @@ class ProfileListViewModel @Inject constructor(
         viewModelScope.launch { profileRepository.setActive(id) }
     }
 
+    fun deactivate() {
+        viewModelScope.launch { profileRepository.clearActive() }
+    }
+
     fun duplicate(id: String) {
         viewModelScope.launch { profileRepository.duplicateProfile(id) }
     }

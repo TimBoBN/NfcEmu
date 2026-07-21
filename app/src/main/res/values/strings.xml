@@ -21,6 +21,7 @@
     <string name="action_back">Back</string>
     <string name="action_more">More actions</string>
     <string name="action_set_active">Set as active</string>
+    <string name="action_deactivate">Deactivate</string>
     <string name="action_edit">Edit</string>
     <string name="action_duplicate">Duplicate</string>
     <string name="action_pin">Pin</string>
@@ -64,6 +65,11 @@
     <string name="field_custom_uri">Any URI (e.g. myapp://…)</string>
     <string name="field_aar_checkbox">Bind to a specific app (Android Application Record)</string>
     <string name="field_aar_package">App package name</string>
+    <string name="field_aar_pick_app">Choose from installed apps</string>
+    <string name="field_aar_pick_app_title">Choose an app</string>
+    <string name="field_aar_pick_app_empty">No matching app found. You can still type a package name manually.</string>
+    <string name="field_aar_pick_app_loading">Loading installed apps…</string>
+    <string name="action_search">Search</string>
     <string name="action_add_phone">+ Phone number</string>
     <string name="action_add_email">+ Email</string>
     <string name="action_save">Save</string>

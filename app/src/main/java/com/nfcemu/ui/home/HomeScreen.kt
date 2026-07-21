@@ -40,6 +40,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -95,7 +96,7 @@ fun HomeScreen(
                 }
             }
 
-            ActiveProfileCard(profile = uiState.activeProfile)
+            ActiveProfileCard(profile = uiState.activeProfile, onDeactivate = viewModel::deactivate)
 
             Spacer(Modifier.height(Spacing.lg))
 
@@ -159,7 +160,7 @@ private fun NfcDisabledBanner(state: NfcHardwareState, onOpenSettings: () -> Uni
 }
 
 @Composable
-private fun ActiveProfileCard(profile: Profile?) {
+private fun ActiveProfileCard(profile: Profile?, onDeactivate: () -> Unit) {
     ElevatedCard(modifier = Modifier.fillMaxWidth()) {
         Column(modifier = Modifier.padding(20.dp)) {
             Text(
@@ -189,13 +190,16 @@ private fun ActiveProfileCard(profile: Profile?) {
                             tint = MaterialTheme.colorScheme.primary,
                         )
                         Spacer(Modifier.size(Spacing.md))
-                        Column {
+                        Column(modifier = Modifier.weight(1f)) {
                             Text(targetProfile.name, style = MaterialTheme.typography.headlineSmall)
                             Text(
                                 targetProfile.fields.previewText(),
                                 style = MaterialTheme.typography.bodyMedium,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                             )
+                        }
+                        TextButton(onClick = onDeactivate) {
+                            Text(stringResource(R.string.action_deactivate))
                         }
                     }
                 }

@@ -8,6 +8,8 @@ import com.nfcemu.data.ProfileRepository
 import com.nfcemu.ndefengine.AarConfig
 import com.nfcemu.ndefengine.NdefMessageFactory
 import com.nfcemu.ui.components.previewText
+import com.nfcemu.util.InstalledApp
+import com.nfcemu.util.InstalledAppsSource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -37,6 +39,7 @@ data class ProfileFormUiState(
 @HiltViewModel
 class ProfileFormViewModel @Inject constructor(
     private val profileRepository: ProfileRepository,
+    private val installedAppsSource: InstalledAppsSource,
     savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
 
@@ -48,8 +51,14 @@ class ProfileFormViewModel @Inject constructor(
     private val _uiState = MutableStateFlow(buildInitialState(savedStateHandle))
     val uiState: StateFlow<ProfileFormUiState> = _uiState.asStateFlow()
 
+    private val _installedApps = MutableStateFlow<List<InstalledApp>>(emptyList())
+    val installedApps: StateFlow<List<InstalledApp>> = _installedApps.asStateFlow()
+
     init {
         recompute()
+        viewModelScope.launch {
+            _installedApps.value = installedAppsSource.queryLaunchableApps()
+        }
     }
 
     private fun buildInitialState(savedStateHandle: SavedStateHandle): ProfileFormUiState {

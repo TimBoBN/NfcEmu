@@ -1,5 +1,12 @@
 <resources>
-    <style name="Theme.NfcEmu" parent="android:Theme.Material.Light.NoActionBar" />
+    <!-- android:windowBackground is set explicitly (and overridden in values-night)
+         to match NfcEmuTheme's Compose background exactly. Without this, the raw
+         Android window background (a generic light default) can flash through
+         for a frame during activity start or screen transitions - most jarring
+         in dark mode, where it's white against otherwise-dark content. -->
+    <style name="Theme.NfcEmu" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:windowBackground">@color/window_background</item>
+    </style>
 
     <!-- Transient theme shown only while the splash screen / first Compose frame render. -->
     <style name="Theme.NfcEmu.Splash" parent="Theme.SplashScreen">

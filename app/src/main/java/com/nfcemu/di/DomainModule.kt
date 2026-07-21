@@ -4,6 +4,8 @@ import com.nfcemu.data.ProfileRepository
 import com.nfcemu.domain.ActiveNdefSource
 import com.nfcemu.nfc.NfcStateObserver
 import com.nfcemu.nfc.NfcStateSource
+import com.nfcemu.util.InstalledAppsSource
+import com.nfcemu.util.PackageManagerInstalledAppsSource
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -18,4 +20,7 @@ abstract class DomainModule {
 
     @Binds
     abstract fun bindNfcStateSource(observer: NfcStateObserver): NfcStateSource
+
+    @Binds
+    abstract fun bindInstalledAppsSource(source: PackageManagerInstalledAppsSource): InstalledAppsSource
 }

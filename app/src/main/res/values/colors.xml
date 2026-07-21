@@ -1,3 +1,7 @@
 <resources>
-    <color name="splash_background">#FFFFFF</color>
+    <!-- Matches Material3's default light background/surface token so the raw
+         Android window background can never visibly differ from what Compose
+         draws (avoids a flash during activity start or screen transitions). -->
+    <color name="splash_background">#FFFBFE</color>
+    <color name="window_background">#FFFBFE</color>
 </resources>

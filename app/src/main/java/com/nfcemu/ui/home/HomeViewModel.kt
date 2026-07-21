@@ -52,6 +52,10 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch { profileRepository.setActive(id) }
     }
 
+    fun deactivate() {
+        viewModelScope.launch { profileRepository.clearActive() }
+    }
+
     fun togglePinned(id: String) {
         viewModelScope.launch { profileRepository.togglePinned(id) }
     }

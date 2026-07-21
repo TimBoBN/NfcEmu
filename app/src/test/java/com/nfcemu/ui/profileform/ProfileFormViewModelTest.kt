@@ -6,6 +6,8 @@ import com.nfcemu.data.Profile
 import com.nfcemu.data.ProfileRepository
 import com.nfcemu.data.local.ProfileDataStore
 import com.nfcemu.ndefengine.NdefPayload
+import com.nfcemu.util.InstalledApp
+import com.nfcemu.util.InstalledAppsSource
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -22,6 +24,10 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
+
+private object FakeInstalledAppsSource : InstalledAppsSource {
+    override suspend fun queryLaunchableApps(): List<InstalledApp> = emptyList()
+}
 
 @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
 class ProfileFormViewModelTest {
@@ -48,7 +54,7 @@ class ProfileFormViewModelTest {
 
     @Test
     fun `new profile starts on the requested template with invalid, empty state`() {
-        val viewModel = ProfileFormViewModel(repository, SavedStateHandle(mapOf("template" to "TEXT")))
+        val viewModel = ProfileFormViewModel(repository, FakeInstalledAppsSource, SavedStateHandle(mapOf("template" to "TEXT")))
         val state = viewModel.uiState.value
         assertEquals(ProfileTypeTemplate.TEXT, state.template)
         assertTrue(!state.isEditing)
@@ -57,7 +63,7 @@ class ProfileFormViewModelTest {
 
     @Test
     fun `filling in a valid name and text makes the form valid and estimates a size`() {
-        val viewModel = ProfileFormViewModel(repository, SavedStateHandle(mapOf("template" to "TEXT")))
+        val viewModel = ProfileFormViewModel(repository, FakeInstalledAppsSource, SavedStateHandle(mapOf("template" to "TEXT")))
         viewModel.updateName("My Text")
         viewModel.updateFields(ProfileFormFields.Text("Hello"))
 
@@ -69,7 +75,7 @@ class ProfileFormViewModelTest {
 
     @Test
     fun `saving a new profile creates it in the repository with the entered fields`() = runTest {
-        val viewModel = ProfileFormViewModel(repository, SavedStateHandle(mapOf("template" to "WEBSITE")))
+        val viewModel = ProfileFormViewModel(repository, FakeInstalledAppsSource, SavedStateHandle(mapOf("template" to "WEBSITE")))
         viewModel.updateName("My Site")
         viewModel.updateFields(ProfileFormFields.Website("example.com"))
 
@@ -84,7 +90,7 @@ class ProfileFormViewModelTest {
 
     @Test
     fun `enabling aar with an invalid package name blocks saving`() {
-        val viewModel = ProfileFormViewModel(repository, SavedStateHandle(mapOf("template" to "TEXT")))
+        val viewModel = ProfileFormViewModel(repository, FakeInstalledAppsSource, SavedStateHandle(mapOf("template" to "TEXT")))
         viewModel.updateName("X")
         viewModel.updateFields(ProfileFormFields.Text("hi"))
         viewModel.setAarEnabled(true)
@@ -97,7 +103,7 @@ class ProfileFormViewModelTest {
 
     @Test
     fun `enabling aar with a valid package name is included on save`() = runTest {
-        val viewModel = ProfileFormViewModel(repository, SavedStateHandle(mapOf("template" to "TEXT")))
+        val viewModel = ProfileFormViewModel(repository, FakeInstalledAppsSource, SavedStateHandle(mapOf("template" to "TEXT")))
         viewModel.updateName("X")
         viewModel.updateFields(ProfileFormFields.Text("hi"))
         viewModel.setAarEnabled(true)
@@ -112,7 +118,7 @@ class ProfileFormViewModelTest {
 
     @Test
     fun `blank profile name is invalid even with otherwise-valid fields`() {
-        val viewModel = ProfileFormViewModel(repository, SavedStateHandle(mapOf("template" to "TEXT")))
+        val viewModel = ProfileFormViewModel(repository, FakeInstalledAppsSource, SavedStateHandle(mapOf("template" to "TEXT")))
         viewModel.updateFields(ProfileFormFields.Text("hi"))
         assertTrue(viewModel.uiState.value.nameError != null)
         assertTrue(!viewModel.uiState.value.isValid)
@@ -124,7 +130,7 @@ class ProfileFormViewModelTest {
         repository.createProfile(existing)
         repository.profiles.first { it.isNotEmpty() }
 
-        val viewModel = ProfileFormViewModel(repository, SavedStateHandle(mapOf("profileId" to existing.id)))
+        val viewModel = ProfileFormViewModel(repository, FakeInstalledAppsSource, SavedStateHandle(mapOf("profileId" to existing.id)))
         val initialState = viewModel.uiState.value
         assertTrue(initialState.isEditing)
         assertEquals("Original", initialState.name)

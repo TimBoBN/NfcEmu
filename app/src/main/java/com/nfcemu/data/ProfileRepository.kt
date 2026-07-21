@@ -106,6 +106,11 @@ class ProfileRepository @Inject constructor(
         dataStore.saveActiveProfileId(target.id)
     }
 
+    /** Deactivates whichever profile is currently active - the card then emulates nothing. */
+    suspend fun clearActive() {
+        dataStore.saveActiveProfileId(null)
+    }
+
     suspend fun togglePinned(id: String) {
         dataStore.saveProfiles(
             currentProfiles().map { if (it.id == id) it.copy(pinned = !it.pinned) else it },

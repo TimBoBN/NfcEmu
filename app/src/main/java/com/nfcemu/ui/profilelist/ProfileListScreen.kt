@@ -99,6 +99,7 @@ fun ProfileListScreen(
                     profile = profile,
                     isActive = profile.id == uiState.activeProfileId,
                     onSetActive = { viewModel.setActive(profile.id) },
+                    onDeactivate = viewModel::deactivate,
                     onEdit = { onEditProfile(profile) },
                     onDuplicate = { viewModel.duplicate(profile.id) },
                     onTogglePin = { viewModel.togglePinned(profile.id) },
@@ -140,6 +141,7 @@ private fun ProfileRow(
     profile: Profile,
     isActive: Boolean,
     onSetActive: () -> Unit,
+    onDeactivate: () -> Unit,
     onEdit: () -> Unit,
     onDuplicate: () -> Unit,
     onTogglePin: () -> Unit,
@@ -201,9 +203,12 @@ private fun ProfileRow(
                 }
                 DropdownMenu(expanded = menuExpanded, onDismissRequest = { menuExpanded = false }) {
                     DropdownMenuItem(
-                        text = { Text(stringResource(R.string.action_set_active)) },
-                        onClick = { menuExpanded = false; onSetActive() },
-                        enabled = !isActive,
+                        text = {
+                            Text(
+                                if (isActive) stringResource(R.string.action_deactivate) else stringResource(R.string.action_set_active),
+                            )
+                        },
+                        onClick = { menuExpanded = false; if (isActive) onDeactivate() else onSetActive() },
                     )
                     DropdownMenuItem(
                         text = { Text(stringResource(R.string.action_edit)) },

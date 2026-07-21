@@ -9,16 +9,22 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.shrinkVertically
 import androidx.compose.animation.togetherWith
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.Apps
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.Checkbox
@@ -47,11 +53,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.nfcemu.R
 import com.nfcemu.ndefengine.WifiAuthType
 import com.nfcemu.ui.theme.Motion
 import com.nfcemu.ui.theme.Spacing
+import com.nfcemu.util.InstalledApp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -61,6 +69,7 @@ fun ProfileFormScreen(
     viewModel: ProfileFormViewModel = hiltViewModel(),
 ) {
     val uiState by viewModel.uiState.collectAsState()
+    val installedApps by viewModel.installedApps.collectAsState()
 
     LaunchedEffect(uiState.saved) {
         if (uiState.saved) onSaved()
@@ -107,6 +116,7 @@ fun ProfileFormScreen(
                 enabled = uiState.aarEnabled,
                 packageName = uiState.aarPackageName,
                 error = uiState.aarError,
+                installedApps = installedApps,
                 onEnabledChange = viewModel::setAarEnabled,
                 onPackageNameChange = viewModel::updateAarPackageName,
             )
@@ -272,9 +282,12 @@ private fun AarSection(
     enabled: Boolean,
     packageName: String,
     error: String?,
+    installedApps: List<InstalledApp>,
     onEnabledChange: (Boolean) -> Unit,
     onPackageNameChange: (String) -> Unit,
 ) {
+    var showPicker by remember { mutableStateOf(false) }
+
     Column {
         Row(verticalAlignment = Alignment.CenterVertically) {
             Checkbox(checked = enabled, onCheckedChange = onEnabledChange)
@@ -287,10 +300,101 @@ private fun AarSection(
         ) {
             Column {
                 Spacer()
-                LabeledField(packageName, stringResource(R.string.field_aar_package), error, onPackageNameChange)
+                OutlinedTextField(
+                    value = packageName,
+                    onValueChange = onPackageNameChange,
+                    label = { Text(stringResource(R.string.field_aar_package)) },
+                    isError = error != null,
+                    supportingText = { error?.let { Text(it) } },
+                    trailingIcon = {
+                        IconButton(onClick = { showPicker = true }) {
+                            Icon(Icons.Filled.Apps, contentDescription = stringResource(R.string.field_aar_pick_app))
+                        }
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    singleLine = true,
+                )
             }
         }
     }
+
+    if (showPicker) {
+        AppPickerDialog(
+            apps = installedApps,
+            onDismiss = { showPicker = false },
+            onSelect = { app ->
+                onPackageNameChange(app.packageName)
+                showPicker = false
+            },
+        )
+    }
+}
+
+@Composable
+private fun AppPickerDialog(
+    apps: List<InstalledApp>,
+    onDismiss: () -> Unit,
+    onSelect: (InstalledApp) -> Unit,
+) {
+    var query by remember { mutableStateOf("") }
+    val filtered = remember(apps, query) {
+        if (query.isBlank()) {
+            apps
+        } else {
+            apps.filter { it.label.contains(query, ignoreCase = true) || it.packageName.contains(query, ignoreCase = true) }
+        }
+    }
+
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text(stringResource(R.string.field_aar_pick_app_title)) },
+        text = {
+            Column {
+                OutlinedTextField(
+                    value = query,
+                    onValueChange = { query = it },
+                    label = { Text(stringResource(R.string.action_search)) },
+                    singleLine = true,
+                    modifier = Modifier.fillMaxWidth(),
+                )
+                Spacer()
+                if (apps.isEmpty()) {
+                    Text(
+                        stringResource(R.string.field_aar_pick_app_loading),
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    )
+                } else if (filtered.isEmpty()) {
+                    Text(
+                        stringResource(R.string.field_aar_pick_app_empty),
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    )
+                } else {
+                    LazyColumn(modifier = Modifier.heightIn(max = 360.dp)) {
+                        items(filtered, key = { it.packageName }) { app ->
+                            Column(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .clickable { onSelect(app) }
+                                    .padding(vertical = Spacing.sm),
+                            ) {
+                                Text(app.label, style = MaterialTheme.typography.bodyLarge)
+                                Text(
+                                    app.packageName,
+                                    style = MaterialTheme.typography.bodySmall,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                )
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        confirmButton = {
+            TextButton(onClick = onDismiss) { Text(stringResource(R.string.action_cancel)) }
+        },
+    )
 }
 
 @Composable
