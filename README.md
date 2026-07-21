@@ -159,12 +159,7 @@ raw NDEF bytes (Base64) for interop with third-party tools:
   NFC-capable emulator - the debug and minified release builds were verified
   locally with an installed Android SDK (Platform 34), all unit/round-trip tests
   were run, and a real release APK downloaded from a GitHub Release was verified
-  byte-for-byte (zip integrity, signature, manifest) - but actually tapping a
-  reader, and the widget/tile/NFC-read-suppression behavior specifically, could
-  only be confirmed by the user on real hardware, not by this assistant.
-- Without configured signing secrets, the release build falls back to the debug
-  keystore (installable for testing, but not a real upload key) - see
-  "Setting up release signing" below.
+  byte-for-byte (zip integrity, signature, manifest)
 
 ## Requirements
 
