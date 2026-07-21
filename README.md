@@ -114,9 +114,10 @@ Two GitHub Actions workflows under `.github/workflows/`:
   workflow artifacts.
 - **`release.yml`**: runs on a tag push (`v*.*.*`, e.g. `v1.0.0`) or manually via
   "Run workflow" with an existing tag. Runs the tests, builds the signed release
-  APK, renames it to `NfcEmu-<tag>.apk`, and attaches it as an asset to a newly
-  created GitHub Release. `versionCode`/`versionName` are set from the CI run
-  number and the tag name respectively (see `app/build.gradle.kts`).
+  APK, and attaches it to a newly created GitHub Release as two assets:
+  `NfcEmu-<tag>.apk` (that exact version) and `NfcEmu-latest.apk` (identical file,
+  fixed name). `versionCode`/`versionName` are set from the CI run number and the
+  tag name respectively (see `app/build.gradle.kts`).
 
 Trigger a release:
 
@@ -124,6 +125,20 @@ Trigger a release:
 git tag v1.0.0
 git push origin v1.0.0
 ```
+
+### Stable "latest" download link
+
+Because `NfcEmu-latest.apk` is attached under that exact same name on every
+release, and each new release is marked as GitHub's "latest" release
+(`make_latest: true`), this URL always resolves to the newest build without
+ever changing:
+
+```
+https://github.com/TimBoBN/NFCEmu/releases/latest/download/NfcEmu-latest.apk
+```
+
+Useful for bookmarking, a QR code, or linking from elsewhere without having to
+update the URL on every new version.
 
 ### Setting up release signing
 

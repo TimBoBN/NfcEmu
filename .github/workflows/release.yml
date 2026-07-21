@@ -80,6 +80,10 @@ jobs:
           mkdir -p release-artifacts
           apk=$(find app/build/outputs/apk/release -name '*.apk' | head -n1)
           cp "$apk" "release-artifacts/NfcEmu-${{ steps.version.outputs.tag }}.apk"
+          # Fixed-name copy so /releases/latest/download/NfcEmu-latest.apk always
+          # resolves to whichever release GitHub currently considers "latest" -
+          # a stable link that never changes between versions.
+          cp "$apk" "release-artifacts/NfcEmu-latest.apk"
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
@@ -88,3 +92,4 @@ jobs:
           files: release-artifacts/*.apk
           generate_release_notes: true
           draft: false
+          make_latest: true
