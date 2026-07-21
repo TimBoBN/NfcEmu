@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.nfcemu.ndefengine.WifiHandoverRecordEncoderTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2026-07-21T19:45:57" hostname="archie" time="0.002">
+  <properties/>
+  <testcase name="whole message round-trips through the message factory()" classname="com.nfcemu.ndefengine.WifiHandoverRecordEncoderTest" time="0.0"/>
+  <testcase name="wpa2-psk credential contains ssid, auth type, encryption type and network key()" classname="com.nfcemu.ndefengine.WifiHandoverRecordEncoderTest" time="0.001"/>
+  <testcase name="produces exactly two records - Hs select and wsc carrier()" classname="com.nfcemu.ndefengine.WifiHandoverRecordEncoderTest" time="0.0"/>
+  <testcase name="hs record embeds an ac record referencing the same carrier id()" classname="com.nfcemu.ndefengine.WifiHandoverRecordEncoderTest" time="0.0"/>
+  <testcase name="open network omits network key attribute entirely()" classname="com.nfcemu.ndefengine.WifiHandoverRecordEncoderTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
