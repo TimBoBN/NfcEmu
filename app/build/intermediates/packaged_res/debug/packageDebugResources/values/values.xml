@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="splash_background">#FFFFFF</color>
+    <string name="app_name">NfcEmu</string>
+    <string name="hce_aid_group_description">NDEF Tag Application</string>
+    <string name="hce_service_description">NfcEmu NDEF Tag Emulation</string>
+    <style name="Theme.NfcEmu" parent="android:Theme.Material.Light.NoActionBar"/>
+    <style name="Theme.NfcEmu.Splash" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/splash_background</item>
+        <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_launcher</item>
+        <item name="postSplashScreenTheme">@style/Theme.NfcEmu</item>
+    </style>
+</resources>

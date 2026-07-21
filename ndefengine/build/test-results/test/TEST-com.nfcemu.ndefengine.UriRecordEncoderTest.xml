@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.nfcemu.ndefengine.UriRecordEncoderTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2026-07-21T19:45:57" hostname="archie" time="0.004">
+<testsuite name="com.nfcemu.ndefengine.UriRecordEncoderTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2026-07-21T20:01:12" hostname="archie" time="0.004">
   <properties/>
   <testcase name="utf-8 characters in path round-trip()" classname="com.nfcemu.ndefengine.UriRecordEncoderTest" time="0.001"/>
   <testcase name="mailto uri uses code 0x06 and keeps query string for subject and body()" classname="com.nfcemu.ndefengine.UriRecordEncoderTest" time="0.0"/>

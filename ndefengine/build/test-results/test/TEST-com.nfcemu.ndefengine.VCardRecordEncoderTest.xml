@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.nfcemu.ndefengine.VCardRecordEncoderTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2026-07-21T19:45:57" hostname="archie" time="0.01">
+<testsuite name="com.nfcemu.ndefengine.VCardRecordEncoderTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2026-07-21T20:01:12" hostname="archie" time="0.003">
   <properties/>
-  <testcase name="record uses MIME media tnf and text-vcard type()" classname="com.nfcemu.ndefengine.VCardRecordEncoderTest" time="0.006"/>
-  <testcase name="blank strings and blank list entries are omitted, not emitted empty()" classname="com.nfcemu.ndefengine.VCardRecordEncoderTest" time="0.001"/>
-  <testcase name="round-trips through NdefParser()" classname="com.nfcemu.ndefengine.VCardRecordEncoderTest" time="0.001"/>
+  <testcase name="record uses MIME media tnf and text-vcard type()" classname="com.nfcemu.ndefengine.VCardRecordEncoderTest" time="0.001"/>
+  <testcase name="blank strings and blank list entries are omitted, not emitted empty()" classname="com.nfcemu.ndefengine.VCardRecordEncoderTest" time="0.0"/>
+  <testcase name="round-trips through NdefParser()" classname="com.nfcemu.ndefengine.VCardRecordEncoderTest" time="0.0"/>
   <testcase name="minimal vcard with all fields absent still produces a valid begin-end block()" classname="com.nfcemu.ndefengine.VCardRecordEncoderTest" time="0.0"/>
-  <testcase name="all fields populated appear with correct vcard property names()" classname="com.nfcemu.ndefengine.VCardRecordEncoderTest" time="0.002"/>
+  <testcase name="all fields populated appear with correct vcard property names()" classname="com.nfcemu.ndefengine.VCardRecordEncoderTest" time="0.0"/>
   <testcase name="special characters are escaped per rfc 2426()" classname="com.nfcemu.ndefengine.VCardRecordEncoderTest" time="0.0"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>

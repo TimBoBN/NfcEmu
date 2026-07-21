@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.nfcemu.ndefengine.NdefMessageEncoderTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2026-07-21T19:45:57" hostname="archie" time="0.007">
+<testsuite name="com.nfcemu.ndefengine.NdefMessageEncoderTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2026-07-21T20:01:12" hostname="archie" time="0.009">
   <properties/>
-  <testcase name="multiple records set MB only on first and ME only on last()" classname="com.nfcemu.ndefengine.NdefMessageEncoderTest" time="0.001"/>
+  <testcase name="multiple records set MB only on first and ME only on last()" classname="com.nfcemu.ndefengine.NdefMessageEncoderTest" time="0.0"/>
   <testcase name="payload over 255 bytes uses long 4-byte length and clears SR()" classname="com.nfcemu.ndefengine.NdefMessageEncoderTest" time="0.0"/>
-  <testcase name="id present sets IL and emits id length and bytes()" classname="com.nfcemu.ndefengine.NdefMessageEncoderTest" time="0.001"/>
+  <testcase name="id present sets IL and emits id length and bytes()" classname="com.nfcemu.ndefengine.NdefMessageEncoderTest" time="0.0"/>
   <testcase name="empty payload is encoded without crashing()" classname="com.nfcemu.ndefengine.NdefMessageEncoderTest" time="0.0"/>
   <testcase name="empty record list is rejected()" classname="com.nfcemu.ndefengine.NdefMessageEncoderTest" time="0.0"/>
-  <testcase name="single short record sets MB, ME and SR, clears CF and IL()" classname="com.nfcemu.ndefengine.NdefMessageEncoderTest" time="0.004"/>
+  <testcase name="single short record sets MB, ME and SR, clears CF and IL()" classname="com.nfcemu.ndefengine.NdefMessageEncoderTest" time="0.006"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

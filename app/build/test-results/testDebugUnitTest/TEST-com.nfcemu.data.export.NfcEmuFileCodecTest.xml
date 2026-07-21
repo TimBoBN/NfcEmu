@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.nfcemu.data.export.NfcEmuFileCodecTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2026-07-21T20:16:07" hostname="archie" time="0.016">
+  <properties/>
+  <testcase name="encode then decode round-trips name, fields and aar package()" classname="com.nfcemu.data.export.NfcEmuFileCodecTest" time="0.004"/>
+  <testcase name="profile without aar package round-trips as null, not a literal string()" classname="com.nfcemu.data.export.NfcEmuFileCodecTest" time="0.001"/>
+  <testcase name="valid json missing required fields is rejected as corrupt()" classname="com.nfcemu.data.export.NfcEmuFileCodecTest" time="0.001"/>
+  <testcase name="invalid base64 ndef payload is rejected as corrupt rather than crashing()" classname="com.nfcemu.data.export.NfcEmuFileCodecTest" time="0.001"/>
+  <testcase name="unknown payload type discriminator is rejected as corrupt()" classname="com.nfcemu.data.export.NfcEmuFileCodecTest" time="0.001"/>
+  <testcase name="unknown extra json fields are tolerated for forward compatibility()" classname="com.nfcemu.data.export.NfcEmuFileCodecTest" time="0.001"/>
+  <testcase name="future format version is rejected with an unsupported-version error()" classname="com.nfcemu.data.export.NfcEmuFileCodecTest" time="0.003"/>
+  <testcase name="garbage input is rejected as corrupt, not an uncaught exception()" classname="com.nfcemu.data.export.NfcEmuFileCodecTest" time="0.0"/>
+  <testcase name="round-trips every payload type()" classname="com.nfcemu.data.export.NfcEmuFileCodecTest" time="0.002"/>
+  <testcase name="blank profile name is rejected as corrupt()" classname="com.nfcemu.data.export.NfcEmuFileCodecTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -15,5 +15,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "NfcEmu"
 
-// ":app" is added once the Android application module exists (step 2 of the build).
+include(":app")
 include(":ndefengine")

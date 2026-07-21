@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.nfcemu.ndefengine.NdefMessageFactoryTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2026-07-21T19:45:57" hostname="archie" time="0.003">
+<testsuite name="com.nfcemu.ndefengine.NdefMessageFactoryTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2026-07-21T20:01:12" hostname="archie" time="0.009">
   <properties/>
-  <testcase name="every supported payload type round-trips without throwing()" classname="com.nfcemu.ndefengine.NdefMessageFactoryTest" time="0.001"/>
-  <testcase name="large vcard forces long-form 4-byte length and still round-trips (chunking precondition)()" classname="com.nfcemu.ndefengine.NdefMessageFactoryTest" time="0.0"/>
+  <testcase name="every supported payload type round-trips without throwing()" classname="com.nfcemu.ndefengine.NdefMessageFactoryTest" time="0.006"/>
+  <testcase name="large vcard forces long-form 4-byte length and still round-trips (chunking precondition)()" classname="com.nfcemu.ndefengine.NdefMessageFactoryTest" time="0.001"/>
   <testcase name="uri payload without aar produces a single message-begin-and-end record()" classname="com.nfcemu.ndefengine.NdefMessageFactoryTest" time="0.0"/>
-  <testcase name="capability container max ndef size matches actual factory output length()" classname="com.nfcemu.ndefengine.NdefMessageFactoryTest" time="0.0"/>
-  <testcase name="aar is appended as final record and does not disturb the primary payload()" classname="com.nfcemu.ndefengine.NdefMessageFactoryTest" time="0.001"/>
-  <testcase name="wifi handover plus aar produces three records with aar last()" classname="com.nfcemu.ndefengine.NdefMessageFactoryTest" time="0.0"/>
+  <testcase name="capability container max ndef size matches actual factory output length()" classname="com.nfcemu.ndefengine.NdefMessageFactoryTest" time="0.001"/>
+  <testcase name="aar is appended as final record and does not disturb the primary payload()" classname="com.nfcemu.ndefengine.NdefMessageFactoryTest" time="0.0"/>
+  <testcase name="wifi handover plus aar produces three records with aar last()" classname="com.nfcemu.ndefengine.NdefMessageFactoryTest" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

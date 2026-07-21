@@ -1,0 +1,10 @@
+<resources>
+    <style name="Theme.NfcEmu" parent="android:Theme.Material.Light.NoActionBar" />
+
+    <!-- Transient theme shown only while the splash screen / first Compose frame render. -->
+    <style name="Theme.NfcEmu.Splash" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/splash_background</item>
+        <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_launcher</item>
+        <item name="postSplashScreenTheme">@style/Theme.NfcEmu</item>
+    </style>
+</resources>
