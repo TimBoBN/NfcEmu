@@ -5,22 +5,55 @@ Emulation (HCE), serving various NDEF contents (website, phone number, email, SM
 location, Play Store app, Wi-Fi credentials, business card, plain text, arbitrary
 URI). Fully offline, no analytics, no network permission.
 
+## Features
+
+- **Profile types**: website, phone number, email, SMS, geo location, Play Store
+  app, Wi-Fi credentials, vCard business card, plain text, or any custom URI -
+  each with its own input form and live validation.
+- **Multiple profiles**, one active at a time. Pin profiles for quick access, set
+  or clear the active one from the Home screen, the profile list, the home screen
+  widget, or the Quick Settings tile.
+- **Android Application Record (AAR)**: optionally bind a profile to a specific
+  installed app, picked from a searchable list (or typed manually if the target
+  app isn't installed on this device yet).
+- **Home screen widget**: shows the active profile and a tappable list of
+  pinned/recently-used profiles - switch without opening the app.
+- **Quick Settings tile**: cycles through pinned profiles on tap (Android allows
+  one static tile per app, not one per profile, so cycling is the closest fit).
+- **Save & reuse**: export any profile as a `.nfcemu` file (structured + re-editable)
+  via the Storage Access Framework, or as a raw `.ndef` binary dump for third-party
+  NFC-writing tools. Import `.nfcemu` files back in, browse them in the in-app
+  library, re-activate or share them from there.
+- **NFC read suppression while open**: since NfcEmu emulates a card, it actively
+  ignores the phone's own tag-discovery dispatch while in the foreground, so
+  holding two HCE-capable phones together doesn't trigger Android's default
+  "empty tag" handling on either side.
+- Onboarding on first launch, dark/light theme (Material You dynamic color on
+  Android 12+), edge-to-edge, animated screen transitions, accessible (content
+  descriptions, TalkBack-friendly).
+
 ## Architecture
 
 ```
-:ndefengine   pure Kotlin/JVM module, no Android dependency
-              - NdefPayload (sealed interface) + one encoder per type
-              - NdefMessageEncoder/-Parser (binary NDEF format)
-              - CapabilityContainer (Type 4 Tag CC file)
-              - Type4TagApduProcessor (SELECT/READ BINARY, chunking, status words)
+:ndefengine        pure Kotlin/JVM module, no Android dependency
+                    - NdefPayload (sealed interface) + one encoder per type
+                    - NdefMessageEncoder/-Parser (binary NDEF format)
+                    - CapabilityContainer (Type 4 Tag CC file)
+                    - Type4TagApduProcessor (SELECT/READ BINARY, chunking, status words)
 
-:app          Android app (Kotlin, Jetpack Compose, Material 3, Hilt)
-  hce/        thin HostApduService wrapper around Type4TagApduProcessor
-  domain/     ActiveNdefSource interface (consumed by the service)
-  data/       Profile model, ProfileRepository (DataStore), .nfcemu export/import,
-              library index for saved files
-  ui/         Compose screens + ViewModels (Home, profile list, forms, library)
-  di/         Hilt modules (DataStore instances, CoroutineScope, bindings)
+:app                Android app (Kotlin, Jetpack Compose, Material 3, Hilt)
+  hce/              thin HostApduService wrapper around Type4TagApduProcessor
+  nfc/              NfcStateSource (NFC on/off) - consumed by Home's status banner
+  domain/           ActiveNdefSource interface (consumed by the HCE service)
+  data/             Profile model, ProfileRepository (DataStore), .nfcemu export/
+                    import (data/export), library index for saved files (data/library)
+  widget/           home screen widget: AppWidgetProvider, RemoteViewsService,
+                    click receiver, and the updater that keeps it in sync
+  tile/             Quick Settings TileService
+  util/             InstalledAppsSource (AAR app picker)
+  ui/               Compose screens + ViewModels: home, profilelist, profileform,
+                    library, onboarding, navigation, theme, components
+  di/               Hilt modules (DataStore instances, CoroutineScope, bindings)
 ```
 
 MVVM: Compose (UI) → ViewModel → Repository (data layer) → NdefEngine (domain
@@ -28,12 +61,25 @@ encoding). Everything Flow-based, no blocking I/O in the service hot path: the H
 service only ever reads pre-encoded NDEF bytes from an in-memory cache that's only
 recomputed on a profile switch.
 
-### Why `NdefPayload` is both the engine and the persistence model
+### Design decisions worth knowing about
 
-`NdefPayload` (in `:ndefengine`) is `@Serializable` and reused directly as the
-`Profile.fields` type. That avoids a separate mapper layer between "how it gets
-encoded" and "how it gets persisted" - a profile is structurally identical to
-what ends up as NDEF bytes.
+- **`NdefPayload` is both the engine and the persistence model.** It's
+  `@Serializable` (in `:ndefengine`) and reused directly as `Profile.fields`. That
+  avoids a separate mapper layer between "how it gets encoded" and "how it gets
+  persisted" - a profile is structurally identical to what ends up as NDEF bytes.
+- **Eager singletons for entry points that aren't the UI.** `ProfileRepository` and
+  `ProfileWidgetUpdater` are field-injected into `NfcEmuApplication` so Hilt
+  constructs them - and starts their DataStore-backed Flows - as soon as the
+  process exists. This matters because the HCE service, the widget, or the QS tile
+  can all be the very first thing the system starts in this process, with the
+  Activity never having run.
+- **Interfaces at every Android-framework seam** (`ActiveNdefSource`,
+  `NfcStateSource`, `InstalledAppsSource`) so ViewModels are unit-testable against
+  fakes without Robolectric or an emulator - see the `test` source sets.
+- **Read-modify-write mutators always go through the DataStore Flow directly**
+  (`dataStore.profiles.first()`), never through the UI-facing cached StateFlow, to
+  avoid a race where two calls back-to-back (e.g. create-then-activate) read a
+  stale pre-write snapshot.
 
 ## Adding a new NdefPayload type
 
@@ -91,15 +137,31 @@ raw NDEF bytes (Base64) for interop with third-party tools:
 - A plain NDEF binary dump export (`.ndef`/`.bin`, no JSON wrapper) is a separate
   export option for third-party tools like NFC-writing apps for physical tags.
 
+## Permissions & privacy
+
+- **`android.permission.NFC`** only. No storage permission (file export/import is
+  entirely Storage Access Framework based - the user picks the file location every
+  time), no network permission, no analytics/tracking of any kind.
+- The home screen widget and Quick Settings tile only ever read/write the local
+  profile DataStore; nothing they do requires additional permissions beyond NFC.
+
 ## Known limitations
 
 - The Wi-Fi handover encoder (Connection Handover + WSC carrier) is deliberately
   isolated as a stretch goal; the structure follows the spec closely but hasn't
   been verified against real hardware.
-- This environment had no access to a physical Android device or an emulator with
-  NFC support - the debug and minified release build were successfully built
-  locally with an installed Android SDK (Platform 34) and all unit/round-trip
-  tests were run, but actually tapping a reader could not be manually verified.
+- The home screen widget shows a single generic icon per row instead of a
+  type-specific one (website/vCard/Wi-Fi/...): `RemoteViews` can only reference
+  drawable resources, not the Compose `ImageVector`s the rest of the app uses, so
+  matching the in-app icon set exactly would mean maintaining a parallel set of
+  vector drawables purely for the widget.
+- This development environment had no access to a physical Android device or an
+  NFC-capable emulator - the debug and minified release builds were verified
+  locally with an installed Android SDK (Platform 34), all unit/round-trip tests
+  were run, and a real release APK downloaded from a GitHub Release was verified
+  byte-for-byte (zip integrity, signature, manifest) - but actually tapping a
+  reader, and the widget/tile/NFC-read-suppression behavior specifically, could
+  only be confirmed by the user on real hardware, not by this assistant.
 - Without configured signing secrets, the release build falls back to the debug
   keystore (installable for testing, but not a real upload key) - see
   "Setting up release signing" below.
@@ -161,6 +223,15 @@ For a real upload key:
 
 Never commit the keystore itself to the repository.
 
+## Requirements
+
+- minSdk 24 (Android 7.0), targetSdk 34.
+- A device or emulator with `android.hardware.nfc.hce` support to actually emulate
+  a card (the app still builds and installs without it, but the HCE service won't
+  be selectable as a reader target).
+- JDK 17 and an Android SDK with Platform 34 / Build-Tools 34.0.0 for building
+  locally; `local.properties` must point to it (`sdk.dir=...`).
+
 ## Running tests
 
 ```
@@ -173,6 +244,3 @@ JAVA_HOME=<jdk17> ./gradlew :ndefengine:test :app:testDebugUnitTest
 JAVA_HOME=<jdk17> ./gradlew :app:assembleDebug
 JAVA_HOME=<jdk17> ./gradlew :app:assembleRelease   # minified, R8
 ```
-
-`local.properties` must point to an Android SDK with Platform 34 / Build-Tools
-34.0.0 (`sdk.dir=...`).

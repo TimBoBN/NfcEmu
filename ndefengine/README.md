@@ -24,6 +24,10 @@ encoders run as plain, fast JUnit tests without an emulator or Robolectric.
 - `CapabilityContainer.kt` — Type 4 Tag CC file (E103), sized dynamically from the actual
   NDEF message length.
 - `NdefParser.kt` — minimal decoder used only by tests to verify round-trips.
+- `hce/Type4TagApduProcessor.kt` / `hce/StatusWord.kt` — the Type 4 Tag command set
+  itself (SELECT AID/CC/NDEF, READ BINARY with offset-based chunking), kept here
+  rather than in `:app` so the whole ISO 7816-4 state machine is testable as plain
+  JUnit too. `:app`'s `NfcEmuHostApduService` is just a thin Android wrapper around it.
 
 ## Wi-Fi handover caveat
 
