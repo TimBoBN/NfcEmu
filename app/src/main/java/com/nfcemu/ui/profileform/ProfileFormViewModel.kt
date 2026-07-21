@@ -95,9 +95,9 @@ class ProfileFormViewModel @Inject constructor(
     private fun recompute() {
         _uiState.update { state ->
             val validation = ProfileFormCodec.validate(state.fields)
-            val nameError = if (state.name.isBlank()) "Bitte einen Namen für das Profil eingeben" else null
+            val nameError = if (state.name.isBlank()) "Please enter a name for the profile" else null
             val aarError = if (state.aarEnabled && !isValidPackageName(state.aarPackageName)) {
-                "Bitte einen gültigen Package-Namen eingeben (z. B. com.example.app)"
+                "Please enter a valid package name (e.g. com.example.app)"
             } else null
 
             var estimatedSize = 0

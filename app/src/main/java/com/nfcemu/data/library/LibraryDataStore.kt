@@ -14,7 +14,7 @@ import kotlinx.serialization.json.Json
 import javax.inject.Inject
 import javax.inject.Singleton
 
-/** Persists the "Gespeicherte Dateien" index (see [LibraryEntry]) as JSON, same pattern as ProfileDataStore. */
+/** Persists the "Saved Files" index (see [LibraryEntry]) as JSON, same pattern as ProfileDataStore. */
 @Singleton
 class LibraryDataStore @Inject constructor(
     @LibraryStore private val dataStore: DataStore<Preferences>,

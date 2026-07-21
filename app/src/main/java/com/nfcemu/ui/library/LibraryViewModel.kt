@@ -28,16 +28,16 @@ class LibraryViewModel @Inject constructor(
     fun importFile(uri: Uri) {
         viewModelScope.launch {
             fileRepository.importProfile(uri)
-                .onSuccess { _message.value = "„${it.name}“ wurde als neues Profil importiert." }
-                .onFailure { _message.value = it.message ?: "Import fehlgeschlagen" }
+                .onSuccess { _message.value = "“${it.name}” was imported as a new profile." }
+                .onFailure { _message.value = it.message ?: "Import failed" }
         }
     }
 
     fun loadAsActive(entry: LibraryEntry) {
         viewModelScope.launch {
             fileRepository.loadEntryAsActiveProfile(entry)
-                .onSuccess { _message.value = "„${entry.profileName}“ ist jetzt aktiv." }
-                .onFailure { _message.value = it.message ?: "Laden fehlgeschlagen" }
+                .onSuccess { _message.value = "“${entry.profileName}” is now active." }
+                .onFailure { _message.value = it.message ?: "Loading failed" }
         }
     }
 

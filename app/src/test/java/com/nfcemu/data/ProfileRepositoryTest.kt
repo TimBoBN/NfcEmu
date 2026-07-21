@@ -122,7 +122,7 @@ class ProfileRepositoryTest {
 
         assertTrue(copy != null)
         assertTrue(copy.id != original.id)
-        assertEquals("Original (Kopie)", copy.name)
+        assertEquals("Original (Copy)", copy.name)
         assertEquals(false, copy.pinned)
         assertEquals(2, repository.profiles.first { it.size == 2 }.size)
     }

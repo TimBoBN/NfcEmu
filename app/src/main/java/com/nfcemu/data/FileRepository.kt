@@ -120,17 +120,17 @@ class FileRepository @Inject constructor(
 
     private fun writeText(uri: Uri, content: String) {
         context.contentResolver.openOutputStream(uri, "wt")?.use { it.write(content.toByteArray(Charsets.UTF_8)) }
-            ?: error("Konnte Zieldatei nicht öffnen")
+            ?: error("Could not open target file")
     }
 
     private fun writeBytes(uri: Uri, bytes: ByteArray) {
         context.contentResolver.openOutputStream(uri, "wt")?.use { it.write(bytes) }
-            ?: error("Konnte Zieldatei nicht öffnen")
+            ?: error("Could not open target file")
     }
 
     private fun readText(uri: Uri): String =
         context.contentResolver.openInputStream(uri)?.use { it.readBytes().toString(Charsets.UTF_8) }
-            ?: error("Konnte Datei nicht öffnen")
+            ?: error("Could not open file")
 
     private fun queryDisplayName(uri: Uri): String? =
         context.contentResolver.query(uri, arrayOf(android.provider.OpenableColumns.DISPLAY_NAME), null, null, null)

@@ -60,7 +60,7 @@ class ProfileListViewModel @Inject constructor(
             } else {
                 fileRepository.exportProfile(profile, targetUri)
             }
-            result.onFailure { _exportError.value = it.message ?: "Export fehlgeschlagen" }
+            result.onFailure { _exportError.value = it.message ?: "Export failed" }
         }
     }
 

@@ -412,30 +412,30 @@ public final class DaggerNfcEmuApplication_HiltComponents_SingletonC {
 
     @IdentifierNameString
     private static final class LazyClassKeyProvider {
+      static String com_nfcemu_ui_library_LibraryViewModel = "com.nfcemu.ui.library.LibraryViewModel";
+
       static String com_nfcemu_ui_onboarding_OnboardingViewModel = "com.nfcemu.ui.onboarding.OnboardingViewModel";
+
+      static String com_nfcemu_ui_profileform_ProfileFormViewModel = "com.nfcemu.ui.profileform.ProfileFormViewModel";
 
       static String com_nfcemu_ui_home_HomeViewModel = "com.nfcemu.ui.home.HomeViewModel";
 
       static String com_nfcemu_ui_profilelist_ProfileListViewModel = "com.nfcemu.ui.profilelist.ProfileListViewModel";
 
-      static String com_nfcemu_ui_library_LibraryViewModel = "com.nfcemu.ui.library.LibraryViewModel";
-
-      static String com_nfcemu_ui_profileform_ProfileFormViewModel = "com.nfcemu.ui.profileform.ProfileFormViewModel";
+      @KeepFieldType
+      LibraryViewModel com_nfcemu_ui_library_LibraryViewModel2;
 
       @KeepFieldType
       OnboardingViewModel com_nfcemu_ui_onboarding_OnboardingViewModel2;
+
+      @KeepFieldType
+      ProfileFormViewModel com_nfcemu_ui_profileform_ProfileFormViewModel2;
 
       @KeepFieldType
       HomeViewModel com_nfcemu_ui_home_HomeViewModel2;
 
       @KeepFieldType
       ProfileListViewModel com_nfcemu_ui_profilelist_ProfileListViewModel2;
-
-      @KeepFieldType
-      LibraryViewModel com_nfcemu_ui_library_LibraryViewModel2;
-
-      @KeepFieldType
-      ProfileFormViewModel com_nfcemu_ui_profileform_ProfileFormViewModel2;
     }
   }
 
@@ -490,30 +490,30 @@ public final class DaggerNfcEmuApplication_HiltComponents_SingletonC {
 
     @IdentifierNameString
     private static final class LazyClassKeyProvider {
-      static String com_nfcemu_ui_profilelist_ProfileListViewModel = "com.nfcemu.ui.profilelist.ProfileListViewModel";
-
-      static String com_nfcemu_ui_onboarding_OnboardingViewModel = "com.nfcemu.ui.onboarding.OnboardingViewModel";
-
       static String com_nfcemu_ui_profileform_ProfileFormViewModel = "com.nfcemu.ui.profileform.ProfileFormViewModel";
-
-      static String com_nfcemu_ui_home_HomeViewModel = "com.nfcemu.ui.home.HomeViewModel";
 
       static String com_nfcemu_ui_library_LibraryViewModel = "com.nfcemu.ui.library.LibraryViewModel";
 
-      @KeepFieldType
-      ProfileListViewModel com_nfcemu_ui_profilelist_ProfileListViewModel2;
+      static String com_nfcemu_ui_home_HomeViewModel = "com.nfcemu.ui.home.HomeViewModel";
 
-      @KeepFieldType
-      OnboardingViewModel com_nfcemu_ui_onboarding_OnboardingViewModel2;
+      static String com_nfcemu_ui_onboarding_OnboardingViewModel = "com.nfcemu.ui.onboarding.OnboardingViewModel";
+
+      static String com_nfcemu_ui_profilelist_ProfileListViewModel = "com.nfcemu.ui.profilelist.ProfileListViewModel";
 
       @KeepFieldType
       ProfileFormViewModel com_nfcemu_ui_profileform_ProfileFormViewModel2;
 
       @KeepFieldType
+      LibraryViewModel com_nfcemu_ui_library_LibraryViewModel2;
+
+      @KeepFieldType
       HomeViewModel com_nfcemu_ui_home_HomeViewModel2;
 
       @KeepFieldType
-      LibraryViewModel com_nfcemu_ui_library_LibraryViewModel2;
+      OnboardingViewModel com_nfcemu_ui_onboarding_OnboardingViewModel2;
+
+      @KeepFieldType
+      ProfileListViewModel com_nfcemu_ui_profilelist_ProfileListViewModel2;
     }
 
     private static final class SwitchingProvider<T> implements Provider<T> {

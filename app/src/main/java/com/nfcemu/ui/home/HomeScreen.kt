@@ -216,9 +216,9 @@ private fun QuickSelectRow(
                 } else null,
                 modifier = Modifier.semantics {
                     contentDescription = if (profile.id == activeProfileId) {
-                        "${profile.name}, aktiv"
+                        "${profile.name}, active"
                     } else {
-                        "${profile.name}, antippen um zu aktivieren"
+                        "${profile.name}, tap to activate"
                     }
                 },
             )

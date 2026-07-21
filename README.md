@@ -1,70 +1,70 @@
 # NfcEmu
 
-Ein NFC-Multi-Tool für Android, das per Host Card Emulation (HCE) einen NFC Forum
-Type 4 Tag emuliert und dabei verschiedene NDEF-Inhalte (Website, Telefonnummer,
-E-Mail, SMS, Standort, Play-Store-App, WLAN-Zugang, Visitenkarte, Freitext, beliebige
-URI) ausliefert. Komplett offline, keine Analytics, keine Netzwerk-Permission.
+An NFC multi-tool for Android that emulates an NFC Forum Type 4 Tag via Host Card
+Emulation (HCE), serving various NDEF contents (website, phone number, email, SMS,
+location, Play Store app, Wi-Fi credentials, business card, plain text, arbitrary
+URI). Fully offline, no analytics, no network permission.
 
-## Architektur
+## Architecture
 
 ```
-:ndefengine   reines Kotlin/JVM-Modul, keine Android-Abhängigkeit
-              - NdefPayload (sealed interface) + ein Encoder pro Typ
-              - NdefMessageEncoder/-Parser (binäres NDEF-Format)
-              - CapabilityContainer (Type-4-Tag CC-Datei)
-              - Type4TagApduProcessor (SELECT/READ BINARY, Chunking, Statuswörter)
+:ndefengine   pure Kotlin/JVM module, no Android dependency
+              - NdefPayload (sealed interface) + one encoder per type
+              - NdefMessageEncoder/-Parser (binary NDEF format)
+              - CapabilityContainer (Type 4 Tag CC file)
+              - Type4TagApduProcessor (SELECT/READ BINARY, chunking, status words)
 
-:app          Android-App (Kotlin, Jetpack Compose, Material 3, Hilt)
-  hce/        dünner HostApduService-Wrapper um Type4TagApduProcessor
-  domain/     ActiveNdefSource-Schnittstelle (vom Service konsumiert)
-  data/       Profile-Modell, ProfileRepository (DataStore), .nfcemu-Export/Import,
-              Bibliotheks-Index für gespeicherte Dateien
-  ui/         Compose-Screens + ViewModels (Home, Profil-Liste, Formulare, Bibliothek)
-  di/         Hilt-Module (DataStore-Instanzen, CoroutineScope, Bindings)
+:app          Android app (Kotlin, Jetpack Compose, Material 3, Hilt)
+  hce/        thin HostApduService wrapper around Type4TagApduProcessor
+  domain/     ActiveNdefSource interface (consumed by the service)
+  data/       Profile model, ProfileRepository (DataStore), .nfcemu export/import,
+              library index for saved files
+  ui/         Compose screens + ViewModels (Home, profile list, forms, library)
+  di/         Hilt modules (DataStore instances, CoroutineScope, bindings)
 ```
 
-MVVM: Compose (UI) → ViewModel → Repository (Datenschicht) → NdefEngine (Domain-Encoding).
-Alles Flow-basiert, kein blockierendes I/O im Service-Hot-Path: der HCE-Service liest
-ausschließlich vorab kodierte NDEF-Bytes aus einem In-Memory-Cache, der nur bei
-Profilwechsel neu berechnet wird.
+MVVM: Compose (UI) → ViewModel → Repository (data layer) → NdefEngine (domain
+encoding). Everything Flow-based, no blocking I/O in the service hot path: the HCE
+service only ever reads pre-encoded NDEF bytes from an in-memory cache that's only
+recomputed on a profile switch.
 
-### Warum `NdefPayload` sowohl Engine- als auch Persistenz-Modell ist
+### Why `NdefPayload` is both the engine and the persistence model
 
-`NdefPayload` (in `:ndefengine`) ist `@Serializable` und wird direkt als
-`Profile.fields`-Typ wiederverwendet. Das erspart eine separate Mapper-Schicht
-zwischen "wie wird encodiert" und "wie wird gespeichert" – ein Profil ist
-strukturell identisch mit dem, was am Ende auf den NDEF-Bytes landet.
+`NdefPayload` (in `:ndefengine`) is `@Serializable` and reused directly as the
+`Profile.fields` type. That avoids a separate mapper layer between "how it gets
+encoded" and "how it gets persisted" - a profile is structurally identical to
+what ends up as NDEF bytes.
 
-## Einen neuen NdefPayload-Typ hinzufügen
+## Adding a new NdefPayload type
 
-1. In `ndefengine/.../NdefPayload.kt`: neue `@Serializable @SerialName("...")`-Variante
-   zum sealed interface hinzufügen.
-2. Einen `XyzRecordEncoder`-Objekt schreiben, der `RawNdefRecord` (oder eine Liste
-   davon) erzeugt.
-3. Den neuen Zweig in `NdefMessageFactory.encodePayloadRecords` verdrahten (der
-   Compiler erzwingt das, da der `when` exhaustiv ist).
-4. Unit-Test für den Encoder + Round-Trip-Test über `NdefParser` in
+1. In `ndefengine/.../NdefPayload.kt`: add a new `@Serializable @SerialName("...")`
+   variant to the sealed interface.
+2. Write an `XyzRecordEncoder` object that produces a `RawNdefRecord` (or a list of
+   them).
+3. Wire the new branch into `NdefMessageFactory.encodePayloadRecords` (the compiler
+   enforces this since the `when` is exhaustive).
+4. Unit-test the encoder + a round-trip test via `NdefParser` in
    `NdefMessageFactoryTest`.
-5. Für die UI: in `app/.../ui/profileform/ProfileFormFields.kt` eine passende
-   `ProfileTypeTemplate` + Formular-Feld-Variante ergänzen, dazu Validierung/Mapping
-   in `ProfileFormCodec.kt` (validate/toPayload/toFormFields) sowie Icon/Label in
+5. For the UI: add a matching `ProfileTypeTemplate` + form field variant in
+   `app/.../ui/profileform/ProfileFormFields.kt`, plus validation/mapping in
+   `ProfileFormCodec.kt` (validate/toPayload/toFormFields) and an icon/label in
    `ui/components/ProfileTypeIcon.kt`.
 
-Siehe `ndefengine/README.md` für Details zur Engine selbst.
+See `ndefengine/README.md` for details on the engine itself.
 
-## Das `.nfcemu`-Dateiformat
+## The `.nfcemu` file format
 
-JSON, versioniert, enthält sowohl die strukturierten (wieder editierbaren) Profildaten
-als auch die rohen NDEF-Bytes (Base64) für Interop mit Drittprogrammen:
+JSON, versioned, contains both the structured (re-editable) profile data and the
+raw NDEF bytes (Base64) for interop with third-party tools:
 
 ```jsonc
 {
   "formatVersion": 1,
-  "exportedAt": 1732000000000,        // Unix-Millis
+  "exportedAt": 1732000000000,        // Unix millis
   "profile": {
-    "name": "Meine Visitenkarte",
-    "fields": {                        // NdefPayload, polymorph serialisiert
-      "type": "vcard",                 // Diskriminator: uri | vcard | text | wifi
+    "name": "My Business Card",
+    "fields": {                        // NdefPayload, polymorphically serialized
+      "type": "vcard",                 // discriminator: uri | vcard | text | wifi
       "name": "Ada Lovelace",
       "phones": ["+491701234567"],
       "emails": [],
@@ -73,93 +73,91 @@ als auch die rohen NDEF-Bytes (Base64) für Interop mit Drittprogrammen:
       "website": null,
       "address": null
     },
-    "aarPackageName": null             // optional, bindet an eine bestimmte App
+    "aarPackageName": null             // optional, binds to a specific app
   },
-  "ndefBase64": "AwoAA1UDaHR0cH..."     // fertig kodierte NDEF-Message, Base64
+  "ndefBase64": "AwoAA1UDaHR0cH..."     // fully encoded NDEF message, Base64
 }
 ```
 
-- **`formatVersion`**: wird erhöht, sobald sich das Schema inkompatibel ändert.
-  `NfcEmuFileCodec` lehnt Dateien mit einer höheren Version als der eigenen
-  `CURRENT_FORMAT_VERSION` mit einer klaren Fehlermeldung ab
-  (`NfcEmuFileException.UnsupportedVersion`), statt sie falsch zu interpretieren.
-- **Unbekannte zusätzliche Felder** werden beim Lesen ignoriert (`ignoreUnknownKeys`),
-  damit künftige, abwärtskompatible Erweiterungen alte App-Versionen nicht brechen.
-- **Defensive Deserialisierung**: jede Art von kaputtem/manipuliertem Input (invalides
-  JSON, fehlende Pflichtfelder, ungültiges Base64, unbekannter `type`-Diskriminator)
-  führt zu `NfcEmuFileException.Corrupt` mit verständlicher Meldung – nie zu einem
-  Absturz.
-- Reiner NDEF-Binärdump-Export (`.ndef`/`.bin`, ohne JSON-Hülle) ist eine separate
-  Export-Option für Drittprogramme wie NFC-Tools zum Beschreiben physischer Tags.
+- **`formatVersion`**: bumped whenever the schema changes incompatibly.
+  `NfcEmuFileCodec` rejects files with a version higher than its own
+  `CURRENT_FORMAT_VERSION` with a clear error (`NfcEmuFileException.UnsupportedVersion`)
+  instead of misinterpreting them.
+- **Unknown extra fields** are ignored on read (`ignoreUnknownKeys`), so future,
+  backward-compatible extensions don't break older app versions.
+- **Defensive deserialization**: any kind of broken/tampered input (invalid JSON,
+  missing required fields, invalid Base64, unknown `type` discriminator) results in
+  `NfcEmuFileException.Corrupt` with an understandable message - never a crash.
+- A plain NDEF binary dump export (`.ndef`/`.bin`, no JSON wrapper) is a separate
+  export option for third-party tools like NFC-writing apps for physical tags.
 
-## Bekannte Einschränkungen
+## Known limitations
 
-- Der Wifi-Handover-Encoder (Connection Handover + WSC-Carrier) ist bewusst als
-  Stretch-Goal isoliert; die Struktur ist spezifikationsnah, aber nicht an echter
-  Hardware verifiziert.
-- Es gab in dieser Umgebung keinen Zugriff auf ein physisches Android-Gerät oder
-  einen Emulator mit NFC-Unterstützung – Debug- und minifizierter Release-Build
-  wurden lokal mit einem installierten Android SDK (Platform 34) erfolgreich gebaut
-  und alle Unit-/Round-Trip-Tests ausgeführt, aber das tatsächliche Antippen eines
-  Lesegeräts konnte nicht manuell verifiziert werden.
-- Ohne konfigurierte Signing-Secrets fällt der Release-Build auf den Debug-Keystore
-  zurück (installierbar zum Testen, aber kein echter Upload-Key) – siehe
-  "Release-Signing einrichten" unten.
+- The Wi-Fi handover encoder (Connection Handover + WSC carrier) is deliberately
+  isolated as a stretch goal; the structure follows the spec closely but hasn't
+  been verified against real hardware.
+- This environment had no access to a physical Android device or an emulator with
+  NFC support - the debug and minified release build were successfully built
+  locally with an installed Android SDK (Platform 34) and all unit/round-trip
+  tests were run, but actually tapping a reader could not be manually verified.
+- Without configured signing secrets, the release build falls back to the debug
+  keystore (installable for testing, but not a real upload key) - see
+  "Setting up release signing" below.
 
 ## CI/CD
 
-Zwei GitHub-Actions-Workflows unter `.github/workflows/`:
+Two GitHub Actions workflows under `.github/workflows/`:
 
-- **`ci.yml`**: läuft bei jedem Push/PR auf `main`. Führt alle Unit-Tests
-  (`:ndefengine:test`, `:app:testDebugUnitTest`) aus, baut Debug- und minifizierte
-  Release-APK (um R8/ProGuard-Regressionen früh zu fangen) und lädt beide als
-  Workflow-Artefakte hoch.
-- **`release.yml`**: läuft bei einem Tag-Push (`v*.*.*`, z. B. `v1.0.0`) oder manuell
-  über "Run workflow" mit einem bestehenden Tag. Führt die Tests aus, baut die
-  signierte Release-APK, benennt sie in `NfcEmu-<tag>.apk` um und legt sie als Asset
-  an ein neu erstelltes GitHub Release. `versionCode`/`versionName` werden dabei aus
-  der CI-Run-Nummer bzw. dem Tag-Namen gesetzt (siehe `app/build.gradle.kts`).
+- **`ci.yml`**: runs on every push/PR to `main`. Runs all unit tests
+  (`:ndefengine:test`, `:app:testDebugUnitTest`), builds the debug and minified
+  release APK (to catch R8/ProGuard regressions early), and uploads both as
+  workflow artifacts.
+- **`release.yml`**: runs on a tag push (`v*.*.*`, e.g. `v1.0.0`) or manually via
+  "Run workflow" with an existing tag. Runs the tests, builds the signed release
+  APK, renames it to `NfcEmu-<tag>.apk`, and attaches it as an asset to a newly
+  created GitHub Release. `versionCode`/`versionName` are set from the CI run
+  number and the tag name respectively (see `app/build.gradle.kts`).
 
-Ein Release auslösen:
+Trigger a release:
 
 ```
 git tag v1.0.0
 git push origin v1.0.0
 ```
 
-### Release-Signing einrichten
+### Setting up release signing
 
-Ohne die folgenden Repository-Secrets baut `release.yml` trotzdem durch, signiert
-aber nur mit dem Debug-Keystore (Warnung erscheint im Workflow-Log). Für einen
-echten Upload-Key:
+Without the following repository secrets, `release.yml` still builds successfully
+but only signs with the debug keystore (a warning appears in the workflow log).
+For a real upload key:
 
-1. Keystore erzeugen (falls noch nicht vorhanden):
+1. Generate a keystore (if you don't have one yet):
    ```
    keytool -genkey -v -keystore release.keystore.jks -keyalg RSA -keysize 2048 \
      -validity 10000 -alias nfcemu
    ```
-2. Als Base64 kodieren: `base64 -w0 release.keystore.jks`
-3. In den Repository-Settings unter *Settings → Secrets and variables → Actions*
-   folgende Secrets anlegen:
-   - `KEYSTORE_BASE64` – Ausgabe aus Schritt 2
-   - `KEYSTORE_PASSWORD` – Keystore-Passwort
-   - `KEY_ALIAS` – z. B. `nfcemu`
-   - `KEY_PASSWORD` – Passwort des Alias (oft identisch mit dem Keystore-Passwort)
+2. Base64-encode it: `base64 -w0 release.keystore.jks`
+3. In the repository settings under *Settings → Secrets and variables → Actions*,
+   create these secrets:
+   - `KEYSTORE_BASE64` - output from step 2
+   - `KEYSTORE_PASSWORD` - keystore password
+   - `KEY_ALIAS` - e.g. `nfcemu`
+   - `KEY_PASSWORD` - the alias's password (often the same as the keystore password)
 
-Den Keystore selbst niemals ins Repository committen.
+Never commit the keystore itself to the repository.
 
-## Tests ausführen
+## Running tests
 
 ```
 JAVA_HOME=<jdk17> ./gradlew :ndefengine:test :app:testDebugUnitTest
 ```
 
-## Bauen
+## Building
 
 ```
 JAVA_HOME=<jdk17> ./gradlew :app:assembleDebug
-JAVA_HOME=<jdk17> ./gradlew :app:assembleRelease   # minifiziert, R8
+JAVA_HOME=<jdk17> ./gradlew :app:assembleRelease   # minified, R8
 ```
 
-`local.properties` muss auf einen Android SDK mit Platform 34 / Build-Tools 34.0.0
-zeigen (`sdk.dir=...`).
+`local.properties` must point to an Android SDK with Platform 34 / Build-Tools
+34.0.0 (`sdk.dir=...`).

@@ -4,10 +4,10 @@ package com.nfcemu.data.export
 sealed class NfcEmuFileException(message: String) : Exception(message) {
 
     class Corrupt(message: String) : NfcEmuFileException(
-        "Datei ist beschädigt oder kein gültiges .nfcemu-Format: $message",
+        "File is corrupted or not a valid .nfcemu format: $message",
     )
 
     class UnsupportedVersion(fileVersion: Int, supportedVersion: Int) : NfcEmuFileException(
-        "Diese Datei wurde mit einer neueren App-Version erstellt (Format $fileVersion, unterstützt bis $supportedVersion). Bitte NfcEmu aktualisieren.",
+        "This file was created with a newer app version (format $fileVersion, supported up to $supportedVersion). Please update NfcEmu.",
     )
 }

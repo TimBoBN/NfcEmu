@@ -7,7 +7,7 @@ import java.util.UUID
 enum class LibraryEntryDirection { EXPORTED, IMPORTED }
 
 /**
- * One row in the "Gespeicherte Dateien" library screen: a `.nfcemu` file the user
+ * One row in the "Saved Files" library screen: a `.nfcemu` file the user
  * exported or imported via SAF, plus enough metadata to show it without re-opening
  * the file. [uri] is a persisted (`takePersistableUriPermission`) SAF URI string.
  *

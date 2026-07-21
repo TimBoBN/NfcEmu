@@ -1,11 +1,11 @@
 [
     {
-        "merged": "/home/timbobn/.gradle/daemon/8.9/com.nfcemu.app-release-57:/drawable-mdpi-v4_notify_panel_notification_icon_bg.png.flat",
-        "source": "/home/timbobn/.gradle/daemon/8.9/com.nfcemu.app-core-1.13.1-45:/drawable-mdpi-v4/notify_panel_notification_icon_bg.png"
-    },
-    {
         "merged": "/home/timbobn/.gradle/daemon/8.9/com.nfcemu.app-release-57:/layout-v21_notification_template_icon_group.xml.flat",
         "source": "/home/timbobn/.gradle/daemon/8.9/com.nfcemu.app-core-1.13.1-45:/layout-v21/notification_template_icon_group.xml"
+    },
+    {
+        "merged": "/home/timbobn/.gradle/daemon/8.9/com.nfcemu.app-release-57:/drawable-mdpi-v4_notify_panel_notification_icon_bg.png.flat",
+        "source": "/home/timbobn/.gradle/daemon/8.9/com.nfcemu.app-core-1.13.1-45:/drawable-mdpi-v4/notify_panel_notification_icon_bg.png"
     },
     {
         "merged": "/home/timbobn/.gradle/daemon/8.9/com.nfcemu.app-release-57:/drawable-ldpi-v4_ic_call_answer_video.png.flat",

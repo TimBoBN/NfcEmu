@@ -41,6 +41,8 @@ Marking string:home_quick_select:2131427391 reachable: referenced from /home/tim
 Marking id:hide_in_inspector_tag:2131165233 reachable: referenced from /home/timbobn/Data/vsc/NFCEmu/app/build/intermediates/dex/release/minifyReleaseWithR8/classes.dex
 Marking string:m3c_snackbar_dismiss:2131427443 reachable: referenced from /home/timbobn/Data/vsc/NFCEmu/app/build/intermediates/dex/release/minifyReleaseWithR8/classes.dex
 Marking id:wrapped_composition_tag:2131165275 reachable: referenced from /home/timbobn/Data/vsc/NFCEmu/app/build/intermediates/dex/release/minifyReleaseWithR8/classes.dex
+Marking string:profile_pinned:2131427476 reachable: referenced from /home/timbobn/Data/vsc/NFCEmu/app/build/intermediates/dex/release/minifyReleaseWithR8/classes.dex
+Marking string:profile_active:2131427466 reachable: referenced from /home/timbobn/Data/vsc/NFCEmu/app/build/intermediates/dex/release/minifyReleaseWithR8/classes.dex
 Marking id:view_tree_saved_state_registry_owner:2131165272 reachable: referenced from /home/timbobn/Data/vsc/NFCEmu/app/build/intermediates/dex/release/minifyReleaseWithR8/classes.dex
 Marking string:profile_form_preview_title:2131427474 reachable: referenced from /home/timbobn/Data/vsc/NFCEmu/app/build/intermediates/dex/release/minifyReleaseWithR8/classes.dex
 Marking string:profile_form_preview_incomplete:2131427473 reachable: referenced from /home/timbobn/Data/vsc/NFCEmu/app/build/intermediates/dex/release/minifyReleaseWithR8/classes.dex
@@ -48,8 +50,6 @@ Marking string:profile_form_estimated_size:2131427470 reachable: referenced from
 Marking string:androidx_startup:2131427343 reachable: referenced from /home/timbobn/Data/vsc/NFCEmu/app/build/intermediates/dex/release/minifyReleaseWithR8/classes.dex
 Marking style:DialogWindowTheme:2131492871 reachable: referenced from /home/timbobn/Data/vsc/NFCEmu/app/build/intermediates/dex/release/minifyReleaseWithR8/classes.dex
 Marking id:view_tree_on_back_pressed_dispatcher_owner:2131165271 reachable: referenced from /home/timbobn/Data/vsc/NFCEmu/app/build/intermediates/dex/release/minifyReleaseWithR8/classes.dex
-Marking string:profile_pinned:2131427476 reachable: referenced from /home/timbobn/Data/vsc/NFCEmu/app/build/intermediates/dex/release/minifyReleaseWithR8/classes.dex
-Marking string:profile_active:2131427466 reachable: referenced from /home/timbobn/Data/vsc/NFCEmu/app/build/intermediates/dex/release/minifyReleaseWithR8/classes.dex
 Marking string:onboarding_confirm:2131427464 reachable: referenced from /home/timbobn/Data/vsc/NFCEmu/app/build/intermediates/dex/release/minifyReleaseWithR8/classes.dex
 Marking id:accessibility_custom_action_0:2131165185 reachable: referenced from /home/timbobn/Data/vsc/NFCEmu/app/build/intermediates/dex/release/minifyReleaseWithR8/classes.dex
 Marking id:accessibility_custom_action_1:2131165186 reachable: referenced from /home/timbobn/Data/vsc/NFCEmu/app/build/intermediates/dex/release/minifyReleaseWithR8/classes.dex

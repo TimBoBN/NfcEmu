@@ -43,22 +43,22 @@ object NfcEmuFileCodec {
         val file = try {
             json.decodeFromString<NfcEmuFile>(content)
         } catch (e: SerializationException) {
-            throw NfcEmuFileException.Corrupt(e.message ?: "JSON konnte nicht gelesen werden")
+            throw NfcEmuFileException.Corrupt(e.message ?: "Could not parse JSON")
         } catch (e: IllegalArgumentException) {
-            throw NfcEmuFileException.Corrupt(e.message ?: "Ungültige Feldwerte")
+            throw NfcEmuFileException.Corrupt(e.message ?: "Invalid field values")
         }
 
         if (file.formatVersion > NfcEmuFile.CURRENT_FORMAT_VERSION) {
             throw NfcEmuFileException.UnsupportedVersion(file.formatVersion, NfcEmuFile.CURRENT_FORMAT_VERSION)
         }
         if (file.profile.name.isBlank()) {
-            throw NfcEmuFileException.Corrupt("Profilname fehlt")
+            throw NfcEmuFileException.Corrupt("Profile name is missing")
         }
 
         val ndefBytes = try {
             Base64.Default.decode(file.ndefBase64)
         } catch (e: IllegalArgumentException) {
-            throw NfcEmuFileException.Corrupt("NDEF-Daten sind nicht gültig Base64-kodiert")
+            throw NfcEmuFileException.Corrupt("NDEF data is not valid Base64")
         }
 
         val profile = Profile(

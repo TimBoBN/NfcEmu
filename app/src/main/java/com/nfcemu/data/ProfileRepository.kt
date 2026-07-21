@@ -88,7 +88,7 @@ class ProfileRepository @Inject constructor(
         val original = currentProfiles().find { it.id == id } ?: return null
         val copy = original.copy(
             id = UUID.randomUUID().toString(),
-            name = "${original.name} (Kopie)",
+            name = "${original.name} (Copy)",
             pinned = false,
             createdAt = System.currentTimeMillis(),
             lastUsedAt = null,

@@ -141,51 +141,51 @@ object ProfileFormCodec {
     // --- validation ---
 
     private fun validateWebsite(fields: ProfileFormFields.Website): FormValidationResult =
-        errorsOf("url" to "Bitte eine Website-Adresse eingeben".takeIf { fields.url.isBlank() })
+        errorsOf("url" to "Please enter a website address".takeIf { fields.url.isBlank() })
 
     private fun validatePhone(fields: ProfileFormFields.Phone): FormValidationResult {
         val digits = fields.number.filterNot { it.isWhitespace() }
         val valid = digits.isNotEmpty() && digits.all { it.isDigit() || it == '+' || it == '-' || it == '(' || it == ')' }
-        return errorsOf("number" to "Bitte eine gültige Telefonnummer eingeben".takeIf { !valid })
+        return errorsOf("number" to "Please enter a valid phone number".takeIf { !valid })
     }
 
     private fun validateEmail(fields: ProfileFormFields.Email): FormValidationResult {
         val address = fields.address.trim()
         val valid = address.contains("@") && address.substringAfter("@").contains(".") && !address.startsWith("@")
-        return errorsOf("address" to "Bitte eine gültige E-Mail-Adresse eingeben".takeIf { !valid })
+        return errorsOf("address" to "Please enter a valid email address".takeIf { !valid })
     }
 
     private fun validateSms(fields: ProfileFormFields.Sms): FormValidationResult {
         val digits = fields.number.filterNot { it.isWhitespace() }
         val valid = digits.isNotEmpty() && digits.all { it.isDigit() || it == '+' }
-        return errorsOf("number" to "Bitte eine gültige Telefonnummer eingeben".takeIf { !valid })
+        return errorsOf("number" to "Please enter a valid phone number".takeIf { !valid })
     }
 
     private fun validateLocation(fields: ProfileFormFields.Location): FormValidationResult {
         val lat = fields.latitude.trim().toDoubleOrNull()
         val lng = fields.longitude.trim().toDoubleOrNull()
         val errors = mutableMapOf<String, String>()
-        if (lat == null || lat < -90.0 || lat > 90.0) errors["latitude"] = "Breitengrad muss zwischen -90 und 90 liegen"
-        if (lng == null || lng < -180.0 || lng > 180.0) errors["longitude"] = "Längengrad muss zwischen -180 und 180 liegen"
+        if (lat == null || lat < -90.0 || lat > 90.0) errors["latitude"] = "Latitude must be between -90 and 90"
+        if (lng == null || lng < -180.0 || lng > 180.0) errors["longitude"] = "Longitude must be between -180 and 180"
         return FormValidationResult(errors)
     }
 
     private fun validatePlayStore(fields: ProfileFormFields.PlayStore): FormValidationResult {
         val id = fields.appId.trim()
         val valid = id.isNotEmpty() && id.matches(Regex("^[a-zA-Z][a-zA-Z0-9_]*(\\.[a-zA-Z][a-zA-Z0-9_]*)+$"))
-        return errorsOf("appId" to "Bitte eine gültige App-ID eingeben (z. B. com.example.app)".takeIf { !valid })
+        return errorsOf("appId" to "Please enter a valid app ID (e.g. com.example.app)".takeIf { !valid })
     }
 
     private fun validateWifi(fields: ProfileFormFields.Wifi): FormValidationResult {
         val errors = mutableMapOf<String, String>()
         if (fields.ssid.isBlank()) {
-            errors["ssid"] = "Bitte einen Netzwerknamen (SSID) eingeben"
+            errors["ssid"] = "Please enter a network name (SSID)"
         }
         if (fields.authType != WifiAuthType.OPEN) {
             if (fields.password.isBlank()) {
-                errors["password"] = "Bitte ein Passwort eingeben"
+                errors["password"] = "Please enter a password"
             } else if (fields.authType != WifiAuthType.WEP && fields.password.length < 8) {
-                errors["password"] = "Das Passwort muss mindestens 8 Zeichen lang sein"
+                errors["password"] = "The password must be at least 8 characters long"
             }
         }
         return FormValidationResult(errors)
@@ -199,15 +199,15 @@ object ProfileFormCodec {
             fields.title.isNotBlank() ||
             fields.website.isNotBlank() ||
             fields.address.isNotBlank()
-        return errorsOf("general" to "Bitte mindestens ein Feld ausfüllen".takeIf { !hasAnyContent })
+        return errorsOf("general" to "Please fill in at least one field".takeIf { !hasAnyContent })
     }
 
     private fun validateText(fields: ProfileFormFields.Text): FormValidationResult =
-        errorsOf("text" to "Bitte einen Text eingeben".takeIf { fields.text.isBlank() })
+        errorsOf("text" to "Please enter some text".takeIf { fields.text.isBlank() })
 
     private fun validateCustomUri(fields: ProfileFormFields.CustomUri): FormValidationResult {
         val valid = fields.uri.isNotBlank() && fields.uri.contains(":")
-        return errorsOf("uri" to "Bitte eine vollständige URI mit Schema eingeben (z. B. myapp://...)".takeIf { !valid })
+        return errorsOf("uri" to "Please enter a complete URI with a scheme (e.g. myapp://...)".takeIf { !valid })
     }
 
     private fun errorsOf(vararg pairs: Pair<String, String?>): FormValidationResult =

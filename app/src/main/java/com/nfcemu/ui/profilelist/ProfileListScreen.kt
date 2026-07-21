@@ -38,8 +38,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.semantics.contentDescription
-import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.nfcemu.R
@@ -175,7 +173,6 @@ private fun ProfileRow(
                     Icons.Filled.CheckCircle,
                     contentDescription = stringResource(R.string.profile_active),
                     tint = MaterialTheme.colorScheme.primary,
-                    modifier = Modifier.semantics { contentDescription = "Aktives Profil" },
                 )
                 Spacer(Modifier.size(8.dp))
             }

@@ -5,15 +5,15 @@ import com.nfcemu.ndefengine.NdefPayload
 /** Short, human-readable summary of what tapping this profile's tag would actually do. */
 fun NdefPayload.previewText(): String = when (this) {
     is NdefPayload.Uri -> when {
-        uri.startsWith("tel:") -> "Anruf bei ${uri.removePrefix("tel:")}"
-        uri.startsWith("mailto:") -> "E-Mail an ${uri.removePrefix("mailto:").substringBefore('?')}"
-        uri.startsWith("sms:") -> "SMS an ${uri.removePrefix("sms:").substringBefore('?')}"
-        uri.startsWith("geo:") -> "Standort ${uri.removePrefix("geo:").substringBefore('?')} öffnen"
+        uri.startsWith("tel:") -> "Call ${uri.removePrefix("tel:")}"
+        uri.startsWith("mailto:") -> "Email ${uri.removePrefix("mailto:").substringBefore('?')}"
+        uri.startsWith("sms:") -> "Text ${uri.removePrefix("sms:").substringBefore('?')}"
+        uri.startsWith("geo:") -> "Open location ${uri.removePrefix("geo:").substringBefore('?')}"
         uri.startsWith("market://details?id=") -> "Play Store: ${uri.removePrefix("market://details?id=")}"
-        uri.startsWith("http://") || uri.startsWith("https://") -> "Website öffnen: $uri"
-        else -> "Öffnet: $uri"
+        uri.startsWith("http://") || uri.startsWith("https://") -> "Open website: $uri"
+        else -> "Opens: $uri"
     }
-    is NdefPayload.VCard -> "Kontakt speichern: ${name ?: "(ohne Namen)"}"
+    is NdefPayload.VCard -> "Save contact: ${name ?: "(no name)"}"
     is NdefPayload.Text -> if (text.length > 60) text.take(57) + "…" else text
-    is NdefPayload.WifiHandover -> "Mit WLAN „$ssid“ verbinden"
+    is NdefPayload.WifiHandover -> "Connect to Wi-Fi “$ssid”"
 }
