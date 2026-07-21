@@ -1,602 +1,925 @@
-androidx.compose.ui.input.key.KeyInputElement
-androidx.compose.ui.platform.DragAndDropModifierOnDragListener$modifier$1
-androidx.compose.ui.input.rotary.RotaryInputElement
+androidx.core.app.RemoteActionCompatParcelizer
 android.support.v4.graphics.drawable.IconCompatParcelizer
+androidx.compose.ui.input.pointer.SuspendPointerInputElement
+androidx.compose.foundation.layout.AspectRatioElement
+androidx.compose.foundation.layout.PaddingElement
+androidx.compose.foundation.layout.WrapContentElement
+androidx.compose.foundation.layout.IntrinsicWidthElement
+androidx.compose.foundation.text.modifiers.SelectableTextAnnotatedStringElement
+dagger.hilt.android.internal.lifecycle.HiltWrapper_HiltViewModelFactory_ActivityCreatorEntryPoint
+androidx.navigation.NavGraphNavigator
+androidx.compose.ui.focus.FocusOwnerImpl$modifier$1
+androidx.compose.foundation.gestures.ScrollableElement
+androidx.compose.foundation.ScrollingLayoutElement
+androidx.compose.ui.graphics.BlockGraphicsLayerElement
+androidx.compose.ui.focus.FocusTargetNode$FocusTargetElement
+androidx.compose.ui.platform.DragAndDropModifierOnDragListener$modifier$1
+androidx.compose.ui.node.ForceUpdateElement
+androidx.compose.foundation.FocusableKt$FocusableInNonTouchModeElement$1
+androidx.core.graphics.drawable.IconCompat
 androidx.core.graphics.drawable.IconCompatParcelizer
 com.nfcemu.NfcEmuApplication
-androidx.core.app.CoreComponentFactory
+androidx.compose.foundation.relocation.BringIntoViewRequesterElement
+androidx.compose.ui.input.key.KeyInputElement
 androidx.compose.ui.input.pointer.PointerHoverIconModifierElement
-android.support.v4.app.RemoteActionCompatParcelizer
-androidx.compose.foundation.layout.FillElement
-androidx.startup.InitializationProvider
-dagger.hilt.android.internal.lifecycle.HiltWrapper_HiltViewModelFactory_ActivityCreatorEntryPoint
-androidx.emoji2.text.EmojiCompatInitializer
-com.nfcemu.ui.MainActivity
-dagger.hilt.android.internal.managers.ActivityComponentManager$ActivityComponentBuilderEntryPoint
-androidx.compose.ui.input.pointer.SuspendPointerInputElement
+androidx.navigation.compose.ComposeNavGraphNavigator
+androidx.compose.foundation.HoverableElement
+androidx.navigation.compose.ComposeNavigator
+androidx.compose.foundation.layout.HorizontalAlignElement
+androidx.compose.ui.draw.DrawWithCacheElement
 androidx.versionedparcelable.CustomVersionedParcelable
-androidx.compose.ui.graphics.GraphicsLayerElement
-androidx.profileinstaller.ProfileInstallerInitializer
-com.nfcemu.hce.NfcEmuHostApduService
-androidx.compose.ui.semantics.EmptySemanticsElement
-kotlinx.coroutines.internal.StackTraceRecoveryKt
-androidx.lifecycle.ProcessLifecycleInitializer
-dagger.hilt.android.internal.managers.ActivityRetainedComponentManager$ActivityRetainedLifecycleEntryPoint
-kotlin.coroutines.jvm.internal.BaseContinuationImpl
-dagger.hilt.android.internal.managers.ServiceComponentManager$ServiceComponentBuilderEntryPoint
-com.nfcemu.ui.MainActivity_GeneratedInjector
-androidx.compose.foundation.text.modifiers.TextStringSimpleElement
 com.nfcemu.NfcEmuApplication_GeneratedInjector
-androidx.compose.ui.focus.FocusOwnerImpl$modifier$1
-androidx.compose.foundation.layout.WrapContentElement
-androidx.compose.foundation.text.modifiers.TextAnnotatedStringElement
-androidx.compose.ui.node.ForceUpdateElement
-androidx.core.app.RemoteActionCompat
-androidx.core.app.RemoteActionCompatParcelizer
-androidx.profileinstaller.ProfileInstallReceiver
-androidx.versionedparcelable.ParcelImpl
-androidx.compose.foundation.BorderModifierNodeElement
-kotlinx.coroutines.android.AndroidDispatcherFactory
-dagger.hilt.android.internal.managers.ActivityRetainedComponentManager$ActivityRetainedComponentBuilderEntryPoint
+androidx.compose.foundation.MagnifierElement
+androidx.navigation.ActivityNavigator
+androidx.compose.ui.layout.LayoutElement
+androidx.compose.ui.draw.DrawBehindElement
 androidx.compose.foundation.BackgroundElement
-com.nfcemu.hce.NfcEmuHostApduService_GeneratedInjector
-androidx.annotation.Keep
+kotlinx.coroutines.android.AndroidDispatcherFactory
+dagger.hilt.android.internal.managers.ActivityComponentManager$ActivityComponentBuilderEntryPoint
+androidx.compose.foundation.text.modifiers.TextStringSimpleElement
+dagger.hilt.android.internal.lifecycle.HiltViewModelFactory$ActivityCreatorEntryPoint
+androidx.compose.ui.layout.OnGloballyPositionedElement
+com.nfcemu.hce.NfcEmuHostApduService
+androidx.compose.foundation.text.modifiers.TextAnnotatedStringElement
+androidx.compose.material3.MinimumInteractiveModifier
+androidx.emoji2.text.EmojiCompatInitializer
+dagger.hilt.android.internal.managers.ServiceComponentManager$ServiceComponentBuilderEntryPoint
+androidx.compose.foundation.layout.LayoutWeightElement
+androidx.compose.foundation.layout.UnspecifiedConstraintsElement
+androidx.compose.ui.draw.PainterElement
 androidx.compose.ui.semantics.AppendedSemanticsElement
-androidx.compose.foundation.text.modifiers.SelectableTextAnnotatedStringElement
-androidx.core.graphics.drawable.IconCompat
-kotlinx.coroutines.internal.LockFreeTaskQueue: java.lang.Object _cur$volatile
-kotlinx.coroutines.flow.StateFlowImpl: java.lang.Object _state$volatile
-androidx.datastore.preferences.PreferencesProto$Value: int BOOLEAN_FIELD_NUMBER
-kotlinx.coroutines.channels.BufferedChannel: java.lang.Object closeHandler$volatile
-androidx.lifecycle.Lifecycle$Event: androidx.lifecycle.Lifecycle$Event[] $VALUES
-kotlinx.coroutines.scheduling.WorkQueue: int consumerIndex$volatile
-kotlinx.coroutines.CancelledContinuation: int _resumed$volatile
-kotlinx.coroutines.sync.MutexImpl: java.lang.Object owner$volatile
-kotlinx.coroutines.android.HandlerDispatcherKt: android.view.Choreographer choreographer
-androidx.datastore.preferences.protobuf.GeneratedMessageLite: int MUTABLE_FLAG_MASK
-kotlinx.coroutines.JobSupport$Finishing: int _isCompleting$volatile
-androidx.compose.runtime.ParcelableSnapshotMutableState: android.os.Parcelable$Creator CREATOR
-kotlinx.coroutines.scheduling.WorkQueue: int producerIndex$volatile
-kotlinx.coroutines.sync.SemaphoreImpl: java.lang.Object head$volatile
-kotlinx.serialization.json.JsonArray: kotlinx.serialization.json.JsonArray$Companion Companion
-kotlinx.coroutines.internal.LockFreeLinkedListNode: java.lang.Object _prev$volatile
-kotlinx.coroutines.EventLoopImplBase: int _isCompleted$volatile
-androidx.lifecycle.ProcessLifecycleOwner$attach$1$onActivityPreCreated$1: androidx.lifecycle.ProcessLifecycleOwner this$0
-androidx.lifecycle.ProcessLifecycleOwner$attach$1: androidx.lifecycle.ProcessLifecycleOwner this$0
-kotlinx.coroutines.channels.BufferedChannel: java.lang.Object sendSegment$volatile
-androidx.datastore.preferences.PreferencesProto$StringSet: androidx.datastore.preferences.PreferencesProto$StringSet DEFAULT_INSTANCE
-androidx.lifecycle.Lifecycle$Event: androidx.lifecycle.Lifecycle$Event ON_DESTROY
-kotlinx.coroutines.scheduling.WorkQueue: java.lang.Object lastScheduledTask$volatile
-kotlinx.coroutines.internal.AtomicOp: java.lang.Object _consensus$volatile
-kotlinx.coroutines.sync.SemaphoreImpl: long enqIdx$volatile
-kotlinx.coroutines.CancellableContinuationImpl: java.lang.Object _state$volatile
-androidx.datastore.preferences.protobuf.GeneratedMessageLite: int MEMOIZED_SERIALIZED_SIZE_MASK
-com.nfcemu.hce.NfcEmuHostApduService: com.nfcemu.ndefengine.hce.Type4TagApduProcessor processor
-kotlinx.coroutines.DefaultExecutor: int debugStatus
-kotlinx.coroutines.JobSupport: java.lang.Object _parentHandle$volatile
-kotlinx.coroutines.internal.ResizableAtomicArray: java.util.concurrent.atomic.AtomicReferenceArray array
-androidx.concurrent.futures.AbstractResolvableFuture$Waiter: java.lang.Thread thread
-androidx.concurrent.futures.AbstractResolvableFuture$Waiter: androidx.concurrent.futures.AbstractResolvableFuture$Waiter next
-androidx.datastore.preferences.protobuf.GeneratedMessageLite: java.util.Map defaultInstanceMap
-kotlinx.serialization.json.JsonPrimitive: kotlinx.serialization.json.JsonPrimitive$Companion Companion
-kotlinx.coroutines.scheduling.CoroutineScheduler: int _isTerminated$volatile
-kotlinx.coroutines.scheduling.CoroutineScheduler: long controlState$volatile
-androidx.datastore.preferences.PreferencesProto$Value: int INTEGER_FIELD_NUMBER
-kotlinx.coroutines.CompletedExceptionally: int _handled$volatile
+androidx.compose.foundation.FocusableElement
+androidx.profileinstaller.ProfileInstallReceiver
+androidx.navigation.compose.DialogNavigator
+androidx.compose.foundation.layout.AlignmentLineOffsetDpElement
+com.nfcemu.hce.NfcEmuHostApduService_GeneratedInjector
+com.nfcemu.ui.MainActivity
+kotlinx.coroutines.internal.StackTraceRecoveryKt
+androidx.profileinstaller.ProfileInstallerInitializer
+androidx.compose.ui.semantics.EmptySemanticsElement
+androidx.annotation.Keep
+androidx.compose.ui.focus.FocusRequesterElement
+androidx.compose.foundation.ClickableElement
+androidx.lifecycle.ProcessLifecycleInitializer
+androidx.compose.ui.input.rotary.RotaryInputElement
+dagger.hilt.android.internal.managers.ActivityRetainedComponentManager$ActivityRetainedLifecycleEntryPoint
+androidx.compose.ui.layout.LayoutIdElement
+androidx.compose.foundation.layout.SizeElement
+androidx.compose.ui.focus.FocusChangedElement
+androidx.compose.ui.draw.DrawWithContentElement
+android.support.v4.app.RemoteActionCompatParcelizer
+androidx.compose.foundation.layout.PaddingValuesElement
+com.nfcemu.ui.MainActivity_GeneratedInjector
+androidx.startup.InitializationProvider
+kotlin.coroutines.jvm.internal.BaseContinuationImpl
+androidx.compose.ui.semantics.ClearAndSetSemanticsElement
+androidx.core.app.RemoteActionCompat
+androidx.core.app.CoreComponentFactory
+androidx.compose.animation.EnterExitTransitionElement
+androidx.compose.foundation.layout.FillElement
+dagger.hilt.android.internal.lifecycle.DefaultViewModelFactories$ActivityEntryPoint
+androidx.compose.foundation.gestures.DraggableElement
+androidx.compose.ui.graphics.GraphicsLayerElement
+androidx.compose.foundation.BorderModifierNodeElement
+dagger.hilt.android.internal.managers.ActivityRetainedComponentManager$ActivityRetainedComponentBuilderEntryPoint
+androidx.versionedparcelable.ParcelImpl
+dagger.hilt.android.internal.lifecycle.HiltViewModelFactory$ViewModelFactoriesEntryPoint
+androidx.datastore.preferences.protobuf.GeneratedMessageLite: int memoizedSerializedSize
+kotlin.coroutines.SafeContinuation: java.lang.Object result
+com.nfcemu.ndefengine.NdefPayload$VCard: com.nfcemu.ndefengine.NdefPayload$VCard$Companion Companion
+kotlinx.coroutines.channels.BufferedChannel: long receivers$volatile
 androidx.datastore.preferences.PreferencesProto$Value: int STRING_SET_FIELD_NUMBER
-kotlinx.coroutines.scheduling.CoroutineScheduler$Worker: int workerCtl$volatile
-kotlinx.coroutines.internal.LockFreeLinkedListNode: java.lang.Object _next$volatile
-androidx.lifecycle.Lifecycle$Event: androidx.lifecycle.Lifecycle$Event$Companion Companion
-androidx.lifecycle.ReportFragment$LifecycleCallbacks: androidx.lifecycle.ReportFragment$LifecycleCallbacks$Companion Companion
-kotlinx.coroutines.CancellableContinuationImpl: java.lang.Object _parentHandle$volatile
-com.nfcemu.hce.NfcEmuHostApduService: int $stable
-kotlinx.coroutines.channels.BufferedChannel: java.lang.Object bufferEndSegment$volatile
-androidx.datastore.preferences.PreferencesProto$Value: androidx.datastore.preferences.protobuf.Parser PARSER
-com.nfcemu.ndefengine.NdefPayload$WifiHandover: com.nfcemu.ndefengine.NdefPayload$WifiHandover$Companion Companion
-androidx.lifecycle.Lifecycle$Event: androidx.lifecycle.Lifecycle$Event ON_RESUME
-kotlinx.coroutines.channels.BufferedChannel: long sendersAndCloseStatus$volatile
-kotlinx.coroutines.scheduling.WorkQueue: int blockingTasksInBuffer$volatile
-androidx.datastore.preferences.PreferencesProto$PreferenceMap: androidx.datastore.preferences.protobuf.MapFieldLite preferences_
-kotlinx.coroutines.internal.ConcurrentLinkedListNode: java.lang.Object _prev$volatile
-androidx.datastore.preferences.PreferencesProto$Value: int bitField0_
 kotlinx.coroutines.sync.SemaphoreImpl: int _availablePermits$volatile
-kotlinx.coroutines.UndispatchedCoroutine: boolean threadLocalIsSet
-kotlinx.serialization.json.JsonObject: kotlinx.serialization.json.JsonObject$Companion Companion
+androidx.lifecycle.Lifecycle$Event: androidx.lifecycle.Lifecycle$Event[] $VALUES
+kotlinx.coroutines.internal.LockFreeTaskQueue: java.lang.Object _cur$volatile
+kotlinx.coroutines.DispatchedCoroutine: int _decision$volatile
+androidx.datastore.preferences.PreferencesProto$Value: int LONG_FIELD_NUMBER
+com.nfcemu.hce.NfcEmuHostApduService: com.nfcemu.ndefengine.hce.Type4TagApduProcessor processor
+kotlinx.coroutines.JobSupport: java.lang.Object _parentHandle$volatile
+kotlinx.coroutines.scheduling.WorkQueue: int blockingTasksInBuffer$volatile
+kotlinx.coroutines.scheduling.CoroutineScheduler: int _isTerminated$volatile
+com.nfcemu.hce.NfcEmuHostApduService: com.nfcemu.domain.ActiveNdefSource activeNdefSource
+kotlinx.coroutines.scheduling.CoroutineScheduler: long parkedWorkersStack$volatile
+kotlinx.coroutines.sync.SemaphoreImpl: java.lang.Object tail$volatile
+androidx.compose.runtime.ParcelableSnapshotMutableFloatState: android.os.Parcelable$Creator CREATOR
+androidx.compose.runtime.ParcelableSnapshotMutableState: android.os.Parcelable$Creator CREATOR
+com.nfcemu.ndefengine.NdefPayload$Text: com.nfcemu.ndefengine.NdefPayload$Text$Companion Companion
+androidx.lifecycle.ProcessLifecycleOwner$attach$1$onActivityPreCreated$1: androidx.lifecycle.ProcessLifecycleOwner this$0
+androidx.navigation.NavBackStackEntryState: android.os.Parcelable$Creator CREATOR
+androidx.datastore.preferences.PreferencesProto$StringSet: int STRINGS_FIELD_NUMBER
+androidx.datastore.preferences.PreferencesProto$StringSet: androidx.datastore.preferences.protobuf.Internal$ProtobufList strings_
+kotlinx.coroutines.JobSupport$Finishing: java.lang.Object _rootCause$volatile
+kotlinx.coroutines.flow.StateFlowImpl: java.lang.Object _state$volatile
+kotlinx.coroutines.internal.LockFreeTaskQueueCore: long _state$volatile
+kotlinx.coroutines.InvokeOnCancelling: int _invoked$volatile
 kotlinx.coroutines.channels.BufferedChannel: java.lang.Object _closeCause$volatile
-androidx.lifecycle.Lifecycle$Event: androidx.lifecycle.Lifecycle$Event ON_PAUSE
-kotlinx.coroutines.android.AndroidExceptionPreHandler: java.lang.Object _preHandler
+kotlinx.coroutines.JobSupport: java.lang.Object _state$volatile
+com.nfcemu.data.library.LibraryEntryDirection: com.nfcemu.data.library.LibraryEntryDirection$Companion Companion
+androidx.datastore.preferences.PreferencesProto$PreferenceMap: androidx.datastore.preferences.PreferencesProto$PreferenceMap DEFAULT_INSTANCE
+androidx.datastore.preferences.PreferencesProto$Value: int valueCase_
+kotlinx.coroutines.sync.SemaphoreImpl: long deqIdx$volatile
+kotlinx.coroutines.internal.Segment: int cleanedAndPointers$volatile
+androidx.datastore.preferences.protobuf.GeneratedMessageLite: int UNINITIALIZED_HASH_CODE
+kotlinx.coroutines.channels.BufferedChannel: java.lang.Object sendSegment$volatile
+kotlinx.coroutines.internal.LockFreeLinkedListNode: java.lang.Object _prev$volatile
+androidx.lifecycle.Lifecycle$Event: androidx.lifecycle.Lifecycle$Event$Companion Companion
+kotlinx.coroutines.JobSupport$Finishing: java.lang.Object _exceptionsHolder$volatile
+androidx.compose.foundation.lazy.layout.DefaultLazyKey: android.os.Parcelable$Creator CREATOR
+androidx.lifecycle.Lifecycle$Event: androidx.lifecycle.Lifecycle$Event ON_START
+androidx.concurrent.futures.AbstractResolvableFuture: androidx.concurrent.futures.AbstractResolvableFuture$Listener listeners
+kotlinx.serialization.json.JsonObject: kotlinx.serialization.json.JsonObject$Companion Companion
+kotlinx.coroutines.internal.ConcurrentLinkedListNode: java.lang.Object _prev$volatile
+com.nfcemu.hce.NfcEmuHostApduService: com.nfcemu.hce.NfcEmuHostApduService$Companion Companion
+androidx.lifecycle.Lifecycle$Event: androidx.lifecycle.Lifecycle$Event ON_DESTROY
+kotlinx.coroutines.scheduling.CoroutineScheduler$Worker: int indexInArray
+com.nfcemu.hce.NfcEmuHostApduService: java.lang.String TAG
+kotlinx.coroutines.scheduling.CoroutineScheduler: long controlState$volatile
+kotlinx.coroutines.scheduling.WorkQueue: java.lang.Object lastScheduledTask$volatile
+androidx.concurrent.futures.AbstractResolvableFuture: androidx.concurrent.futures.AbstractResolvableFuture$Waiter waiters
+kotlinx.coroutines.CancellableContinuationImpl: int _decisionAndIndex$volatile
+kotlinx.serialization.json.JsonElement: kotlinx.serialization.json.JsonElement$Companion Companion
+androidx.activity.result.IntentSenderRequest: android.os.Parcelable$Creator CREATOR
+kotlinx.coroutines.channels.BufferedChannel: long sendersAndCloseStatus$volatile
+com.nfcemu.data.library.LibraryEntry: com.nfcemu.data.library.LibraryEntry$Companion Companion
+androidx.datastore.preferences.PreferencesProto$Value: int STRING_FIELD_NUMBER
+androidx.datastore.preferences.protobuf.GeneratedMessageLite: java.util.Map defaultInstanceMap
+androidx.compose.runtime.ParcelableSnapshotMutableIntState: android.os.Parcelable$Creator CREATOR
+androidx.datastore.preferences.protobuf.AbstractMessageLite: int memoizedHashCode
+com.nfcemu.ndefengine.WifiAuthType: com.nfcemu.ndefengine.WifiAuthType$Companion Companion
+com.nfcemu.hce.NfcEmuHostApduService: kotlinx.coroutines.CoroutineScope serviceScope
+kotlinx.coroutines.EventLoopImplBase: java.lang.Object _delayed$volatile
+androidx.concurrent.futures.AbstractResolvableFuture$Waiter: java.lang.Thread thread
+com.nfcemu.ndefengine.NdefPayload$Uri: com.nfcemu.ndefengine.NdefPayload$Uri$Companion Companion
+androidx.lifecycle.Lifecycle$Event: androidx.lifecycle.Lifecycle$Event ON_CREATE
+kotlinx.coroutines.EventLoopImplBase: int _isCompleted$volatile
+androidx.datastore.preferences.PreferencesProto$PreferenceMap: int PREFERENCES_FIELD_NUMBER
+kotlinx.coroutines.internal.ThreadSafeHeap: int _size$volatile
+com.nfcemu.hce.Hilt_NfcEmuHostApduService: dagger.hilt.android.internal.managers.ServiceComponentManager componentManager
+kotlinx.coroutines.internal.ConcurrentLinkedListNode: java.lang.Object _next$volatile
+kotlinx.coroutines.DefaultExecutor: int debugStatus
+com.nfcemu.data.export.NfcEmuFile: com.nfcemu.data.export.NfcEmuFile$Companion Companion
+kotlin.SafePublicationLazyImpl: java.lang.Object _value
+kotlinx.serialization.json.JsonArray: kotlinx.serialization.json.JsonArray$Companion Companion
 com.nfcemu.hce.Hilt_NfcEmuHostApduService: boolean injected
+kotlinx.coroutines.scheduling.CoroutineScheduler$Worker: int workerCtl$volatile
+kotlinx.coroutines.internal.LockFreeLinkedListNode: java.lang.Object _removedRef$volatile
+kotlinx.coroutines.UndispatchedCoroutine: boolean threadLocalIsSet
+kotlinx.serialization.json.JsonNull: kotlinx.serialization.json.JsonNull INSTANCE
+kotlinx.coroutines.CompletedExceptionally: int _handled$volatile
+androidx.datastore.preferences.protobuf.GeneratedMessageLite: androidx.datastore.preferences.protobuf.UnknownFieldSetLite unknownFields
+com.nfcemu.hce.NfcEmuHostApduService: int $stable
+kotlinx.coroutines.channels.BufferedChannel: long bufferEnd$volatile
+kotlinx.coroutines.android.HandlerDispatcherKt: android.view.Choreographer choreographer
+androidx.datastore.preferences.PreferencesProto$Value: int INTEGER_FIELD_NUMBER
+kotlinx.coroutines.channels.BufferedChannel: java.lang.Object closeHandler$volatile
+androidx.compose.runtime.ParcelableSnapshotMutableLongState: android.os.Parcelable$Creator CREATOR
+androidx.activity.result.ActivityResult: android.os.Parcelable$Creator CREATOR
+kotlinx.coroutines.scheduling.WorkQueue: int consumerIndex$volatile
+kotlinx.coroutines.sync.SemaphoreImpl: long enqIdx$volatile
+com.nfcemu.ndefengine.NdefPayload$WifiHandover: com.nfcemu.ndefengine.NdefPayload$WifiHandover$Companion Companion
+kotlinx.coroutines.EventLoopImplBase$DelayedTask: java.lang.Object _heap
+androidx.datastore.preferences.protobuf.GeneratedMessageLite: int UNINITIALIZED_SERIALIZED_SIZE
+androidx.concurrent.futures.AbstractResolvableFuture$Waiter: androidx.concurrent.futures.AbstractResolvableFuture$Waiter next
+androidx.datastore.preferences.PreferencesProto$StringSet: androidx.datastore.preferences.PreferencesProto$StringSet DEFAULT_INSTANCE
+kotlinx.coroutines.EventLoopImplBase: java.lang.Object _queue$volatile
+androidx.datastore.preferences.PreferencesProto$PreferenceMap: androidx.datastore.preferences.protobuf.MapFieldLite preferences_
+kotlinx.coroutines.internal.DispatchedContinuation: java.lang.Object _reusableCancellableContinuation$volatile
+androidx.datastore.preferences.protobuf.GeneratedMessageLite: int MUTABLE_FLAG_MASK
+kotlinx.coroutines.internal.LimitedDispatcher: int runningWorkers$volatile
+androidx.concurrent.futures.AbstractResolvableFuture: java.lang.Object value
+com.nfcemu.ndefengine.NdefPayload: com.nfcemu.ndefengine.NdefPayload$Companion Companion
+kotlinx.coroutines.CancelledContinuation: int _resumed$volatile
+com.nfcemu.data.export.ExportedProfile: com.nfcemu.data.export.ExportedProfile$Companion Companion
+kotlinx.coroutines.channels.BufferedChannel: java.lang.Object bufferEndSegment$volatile
+kotlinx.coroutines.CancellableContinuationImpl: java.lang.Object _parentHandle$volatile
+kotlinx.coroutines.CancellableContinuationImpl: java.lang.Object _state$volatile
+kotlinx.coroutines.channels.BufferedChannel: java.lang.Object receiveSegment$volatile
+kotlinx.coroutines.scheduling.WorkQueue: int producerIndex$volatile
+androidx.datastore.preferences.PreferencesProto$Value: int FLOAT_FIELD_NUMBER
+androidx.datastore.preferences.PreferencesProto$Value: int bitField0_
+kotlinx.coroutines.internal.LockFreeLinkedListNode: java.lang.Object _next$volatile
 kotlinx.coroutines.DefaultExecutor: java.lang.Thread _thread
 androidx.datastore.preferences.PreferencesProto$Value: androidx.datastore.preferences.PreferencesProto$Value DEFAULT_INSTANCE
-com.nfcemu.ndefengine.NdefPayload$VCard: com.nfcemu.ndefengine.NdefPayload$VCard$Companion Companion
-com.nfcemu.hce.NfcEmuHostApduService: com.nfcemu.hce.NfcEmuHostApduService$Companion Companion
-androidx.concurrent.futures.AbstractResolvableFuture: java.lang.Object value
-kotlinx.coroutines.scheduling.CoroutineScheduler: long parkedWorkersStack$volatile
-androidx.datastore.preferences.PreferencesProto$PreferenceMap: int PREFERENCES_FIELD_NUMBER
-com.nfcemu.hce.NfcEmuHostApduService: kotlinx.coroutines.CoroutineScope serviceScope
-kotlinx.coroutines.internal.ConcurrentLinkedListNode: java.lang.Object _next$volatile
-kotlinx.coroutines.internal.ThreadSafeHeap: int _size$volatile
-androidx.datastore.preferences.PreferencesProto$StringSet: androidx.datastore.preferences.protobuf.Parser PARSER
-androidx.datastore.preferences.PreferencesProto$StringSet: int STRINGS_FIELD_NUMBER
-androidx.datastore.preferences.PreferencesProto$Value: int FLOAT_FIELD_NUMBER
-kotlinx.coroutines.internal.LockFreeTaskQueueCore: long _state$volatile
-kotlinx.coroutines.scheduling.CoroutineScheduler$Worker: int indexInArray
-kotlinx.coroutines.channels.BufferedChannel: long bufferEnd$volatile
-kotlinx.serialization.json.JsonElement: kotlinx.serialization.json.JsonElement$Companion Companion
-androidx.lifecycle.Lifecycle$Event: androidx.lifecycle.Lifecycle$Event ON_STOP
-kotlinx.coroutines.channels.BufferedChannel: long receivers$volatile
-com.nfcemu.hce.Hilt_NfcEmuHostApduService: dagger.hilt.android.internal.managers.ServiceComponentManager componentManager
-kotlinx.coroutines.EventLoopImplBase: java.lang.Object _delayed$volatile
-androidx.datastore.preferences.PreferencesProto$Value: int LONG_FIELD_NUMBER
-com.nfcemu.hce.NfcEmuHostApduService: com.nfcemu.domain.ActiveNdefSource activeNdefSource
-kotlinx.coroutines.JobSupport: java.lang.Object _state$volatile
-androidx.datastore.preferences.PreferencesProto$PreferenceMap: androidx.datastore.preferences.protobuf.Parser PARSER
 kotlinx.coroutines.scheduling.CoroutineScheduler$Worker: java.lang.Object nextParkedWorker
-kotlinx.coroutines.JobSupport$Finishing: java.lang.Object _rootCause$volatile
-kotlinx.coroutines.DispatchedCoroutine: int _decision$volatile
-androidx.datastore.preferences.protobuf.GeneratedMessageLite: int UNINITIALIZED_HASH_CODE
-androidx.versionedparcelable.ParcelImpl: android.os.Parcelable$Creator CREATOR
-androidx.compose.runtime.ParcelableSnapshotMutableFloatState: android.os.Parcelable$Creator CREATOR
-androidx.datastore.preferences.protobuf.GeneratedMessageLite: int UNINITIALIZED_SERIALIZED_SIZE
-kotlinx.coroutines.sync.SemaphoreImpl: java.lang.Object tail$volatile
-kotlinx.coroutines.internal.LimitedDispatcher: int runningWorkers$volatile
-kotlinx.coroutines.EventLoopImplBase: java.lang.Object _queue$volatile
-androidx.concurrent.futures.AbstractResolvableFuture: androidx.concurrent.futures.AbstractResolvableFuture$Listener listeners
-androidx.datastore.preferences.PreferencesProto$PreferenceMap: androidx.datastore.preferences.PreferencesProto$PreferenceMap DEFAULT_INSTANCE
-com.nfcemu.ndefengine.WifiAuthType: com.nfcemu.ndefengine.WifiAuthType$Companion Companion
-androidx.lifecycle.Lifecycle$Event: androidx.lifecycle.Lifecycle$Event ON_START
-com.nfcemu.data.Profile: com.nfcemu.data.Profile$Companion Companion
-kotlinx.coroutines.internal.LockFreeLinkedListNode: java.lang.Object _removedRef$volatile
-androidx.datastore.preferences.PreferencesProto$Value: int DOUBLE_FIELD_NUMBER
-androidx.datastore.preferences.protobuf.GeneratedMessageLite: int memoizedSerializedSize
-androidx.datastore.preferences.PreferencesProto$Value: java.lang.Object value_
-androidx.datastore.preferences.protobuf.GeneratedMessageLite: androidx.datastore.preferences.protobuf.UnknownFieldSetLite unknownFields
-androidx.concurrent.futures.AbstractResolvableFuture: androidx.concurrent.futures.AbstractResolvableFuture$Waiter waiters
-androidx.datastore.preferences.PreferencesProto$Value: int BYTES_FIELD_NUMBER
-com.nfcemu.ndefengine.NdefPayload$Uri: com.nfcemu.ndefengine.NdefPayload$Uri$Companion Companion
-kotlinx.coroutines.EventLoopImplBase$DelayedTask: java.lang.Object _heap
-com.nfcemu.ndefengine.AarConfig: com.nfcemu.ndefengine.AarConfig$Companion Companion
-kotlin.coroutines.SafeContinuation: java.lang.Object result
-kotlinx.coroutines.internal.DispatchedContinuation: java.lang.Object _reusableCancellableContinuation$volatile
-kotlinx.coroutines.internal.Segment: int cleanedAndPointers$volatile
-androidx.activity.result.ActivityResult: android.os.Parcelable$Creator CREATOR
-kotlinx.coroutines.channels.BufferedChannel: long completedExpandBuffersAndPauseFlag$volatile
-kotlinx.serialization.json.JsonNull: kotlinx.serialization.json.JsonNull INSTANCE
-com.nfcemu.hce.NfcEmuHostApduService: java.lang.String TAG
+androidx.lifecycle.Lifecycle$Event: androidx.lifecycle.Lifecycle$Event ON_STOP
 com.nfcemu.hce.Hilt_NfcEmuHostApduService: java.lang.Object componentManagerLock
-com.nfcemu.ndefengine.NdefPayload: com.nfcemu.ndefengine.NdefPayload$Companion Companion
-kotlinx.coroutines.CancellableContinuationImpl: int _decisionAndIndex$volatile
-kotlin.SafePublicationLazyImpl: java.lang.Object _value
-androidx.lifecycle.Lifecycle$Event: androidx.lifecycle.Lifecycle$Event ON_CREATE
-androidx.datastore.preferences.PreferencesProto$StringSet: androidx.datastore.preferences.protobuf.Internal$ProtobufList strings_
-androidx.datastore.preferences.PreferencesProto$Value: int valueCase_
-androidx.datastore.preferences.PreferencesProto$Value: int STRING_FIELD_NUMBER
-kotlinx.coroutines.sync.SemaphoreImpl: long deqIdx$volatile
-com.nfcemu.ndefengine.NdefPayload$Text: com.nfcemu.ndefengine.NdefPayload$Text$Companion Companion
-kotlinx.coroutines.InvokeOnCancelling: int _invoked$volatile
-kotlinx.coroutines.internal.LockFreeTaskQueueCore: java.lang.Object _next$volatile
+androidx.versionedparcelable.ParcelImpl: android.os.Parcelable$Creator CREATOR
+androidx.lifecycle.Lifecycle$Event: androidx.lifecycle.Lifecycle$Event ON_RESUME
+androidx.lifecycle.ReportFragment$LifecycleCallbacks: androidx.lifecycle.ReportFragment$LifecycleCallbacks$Companion Companion
+kotlinx.coroutines.channels.BufferedChannel: long completedExpandBuffersAndPauseFlag$volatile
 androidx.lifecycle.Lifecycle$Event: androidx.lifecycle.Lifecycle$Event ON_ANY
-androidx.datastore.preferences.protobuf.AbstractMessageLite: int memoizedHashCode
-kotlinx.coroutines.channels.BufferedChannel: java.lang.Object receiveSegment$volatile
-kotlinx.coroutines.JobSupport$Finishing: java.lang.Object _exceptionsHolder$volatile
-com.nfcemu.hce.NfcEmuHostApduService: void onDestroy()
-androidx.compose.ui.platform.coreshims.ViewStructureCompat$Api23Impl: void setClassName(android.view.ViewStructure,java.lang.String)
-androidx.core.view.ViewCompat$Api28Impl: void addOnUnhandledKeyEventListener(android.view.View,androidx.core.view.ViewCompat$OnUnhandledKeyEventListenerCompat)
-androidx.core.view.accessibility.AccessibilityNodeInfoCompat$Api34Impl: boolean isAccessibilityDataSensitive(android.view.accessibility.AccessibilityNodeInfo)
-androidx.compose.ui.autofill.AutofillApi26Helper: boolean isText(android.view.autofill.AutofillValue)
-androidx.core.view.accessibility.AccessibilityNodeInfoCompat$Api34Impl: void setQueryFromAppProcessEnabled(android.view.accessibility.AccessibilityNodeInfo,android.view.View,boolean)
-androidx.core.view.accessibility.AccessibilityNodeInfoCompat$Api33Impl: void setUniqueId(android.view.accessibility.AccessibilityNodeInfo,java.lang.String)
-androidx.datastore.preferences.protobuf.JavaType: androidx.datastore.preferences.protobuf.JavaType[] values()
-androidx.core.graphics.PaintCompat$Api23Impl: boolean hasGlyph(android.graphics.Paint,java.lang.String)
-androidx.lifecycle.ReportFragment$LifecycleCallbacks: void onActivityStarted(android.app.Activity)
-androidx.lifecycle.ReportFragment$LifecycleCallbacks: void onActivityPreStopped(android.app.Activity)
-androidx.core.os.BundleApi21ImplKt: void putSizeF(android.os.Bundle,java.lang.String,android.util.SizeF)
-androidx.core.graphics.drawable.IconCompat$Api26Impl: android.graphics.drawable.Icon createWithAdaptiveBitmap(android.graphics.Bitmap)
-androidx.compose.ui.platform.AndroidComposeView: void setOnViewTreeOwnersAvailable(kotlin.jvm.functions.Function1)
-com.nfcemu.NfcEmuApplication: NfcEmuApplication()
-androidx.compose.ui.platform.ComposeView: void getShouldCreateCompositionOnAttachedToWindow$annotations()
-androidx.activity.Api34Impl: float progress(android.window.BackEvent)
-androidx.compose.ui.text.android.StaticLayoutFactory23: android.text.StaticLayout create(androidx.compose.ui.text.android.StaticLayoutParams)
-androidx.lifecycle.ReportFragment: ReportFragment()
-androidx.core.view.ViewCompat$Api30Impl: void setImportantForContentCapture(android.view.View,int)
-kotlin.coroutines.intrinsics.CoroutineSingletons: kotlin.coroutines.intrinsics.CoroutineSingletons valueOf(java.lang.String)
-kotlinx.serialization.json.JsonObject$Companion: kotlinx.serialization.KSerializer serializer()
-androidx.lifecycle.ReportFragment$LifecycleCallbacks: void onActivityPaused(android.app.Activity)
-androidx.emoji2.text.EmojiCompatInitializer: EmojiCompatInitializer()
-kotlin.time.DurationUnit: kotlin.time.DurationUnit valueOf(java.lang.String)
-androidx.compose.ui.graphics.CanvasZHelper: void enableZ(android.graphics.Canvas,boolean)
-androidx.compose.ui.unit.LayoutDirection: androidx.compose.ui.unit.LayoutDirection valueOf(java.lang.String)
-com.nfcemu.hce.NfcEmuHostApduService: byte[] processCommandApdu(byte[],android.os.Bundle)
-androidx.activity.Api34Impl: android.window.BackEvent createOnBackEvent(float,float,float,int)
-androidx.compose.ui.platform.ViewLayer: void setInvalidated(boolean)
-androidx.compose.ui.text.platform.extensions.LocaleListHelperMethods: java.lang.Object localeSpan(androidx.compose.ui.text.intl.LocaleList)
-androidx.core.view.ViewCompat$Api28Impl: void setAutofillId(android.view.View,androidx.core.view.autofill.AutofillIdCompat)
-androidx.compose.ui.platform.AndroidComposeView: androidx.compose.ui.unit.Density getDensity()
-androidx.activity.Api34Impl: int swipeEdge(android.window.BackEvent)
-androidx.compose.ui.platform.AndroidComposeView: android.view.View getView()
-kotlinx.coroutines.android.AndroidDispatcherFactory: AndroidDispatcherFactory()
-androidx.activity.EdgeToEdgeApi30: void adjustLayoutInDisplayCutoutMode(android.view.Window)
-androidx.compose.ui.platform.AndroidComposeViewVerificationHelperMethodsO: void focusable(android.view.View,int,boolean)
-androidx.compose.ui.platform.AndroidComposeView: void getShowLayoutBounds$annotations()
-com.nfcemu.ndefengine.hce.Type4TagApduProcessor$SelectedFile: com.nfcemu.ndefengine.hce.Type4TagApduProcessor$SelectedFile[] values()
-androidx.core.view.accessibility.AccessibilityNodeInfoCompat$Api34Impl: boolean hasRequestInitialAccessibilityFocus(android.view.accessibility.AccessibilityNodeInfo)
-androidx.compose.ui.platform.AndroidComposeView: androidx.compose.ui.platform.AndroidComposeView$ViewTreeOwners get_viewTreeOwners()
-androidx.compose.ui.platform.AndroidComposeView: androidx.compose.ui.platform.TextToolbar getTextToolbar()
-androidx.core.graphics.drawable.IconCompat: IconCompat()
-androidx.compose.ui.text.style.ResolvedTextDirection: androidx.compose.ui.text.style.ResolvedTextDirection[] values()
-androidx.compose.ui.platform.AndroidComposeViewAccessibilityDelegateCompat$Api24Impl: void addSetProgressAction(androidx.core.view.accessibility.AccessibilityNodeInfoCompat,androidx.compose.ui.semantics.SemanticsNode)
-androidx.core.app.RemoteActionCompatParcelizer: void write(androidx.core.app.RemoteActionCompat,androidx.versionedparcelable.VersionedParcel)
-kotlinx.serialization.json.JsonArray$Companion: kotlinx.serialization.KSerializer serializer()
-androidx.compose.ui.autofill.AutofillApi26Helper: boolean isToggle(android.view.autofill.AutofillValue)
-androidx.datastore.preferences.PreferencesProto$Value$ValueCase: androidx.datastore.preferences.PreferencesProto$Value$ValueCase[] values()
-com.nfcemu.hce.NfcEmuHostApduService: com.nfcemu.ndefengine.hce.Type4TagApduProcessor access$getProcessor$p(com.nfcemu.hce.NfcEmuHostApduService)
-com.nfcemu.ndefengine.WifiAuthType: com.nfcemu.ndefengine.WifiAuthType valueOf(java.lang.String)
-androidx.compose.ui.autofill.AutofillType: androidx.compose.ui.autofill.AutofillType valueOf(java.lang.String)
-androidx.compose.ui.input.pointer.PointerEventPass: androidx.compose.ui.input.pointer.PointerEventPass[] values()
-androidx.activity.Api34Impl: float touchX(android.window.BackEvent)
-androidx.lifecycle.EmptyActivityLifecycleCallbacks: void onActivityDestroyed(android.app.Activity)
-androidx.core.view.accessibility.AccessibilityNodeInfoCompat$Api34Impl: void setRequestInitialAccessibilityFocus(android.view.accessibility.AccessibilityNodeInfo,boolean)
-androidx.compose.ui.platform.coreshims.ViewStructureCompat$Api23Impl: void setContentDescription(android.view.ViewStructure,java.lang.CharSequence)
-androidx.compose.ui.node.LayoutNode$LayoutState: androidx.compose.ui.node.LayoutNode$LayoutState valueOf(java.lang.String)
-androidx.compose.ui.platform.AndroidComposeView: void setShowLayoutBounds(boolean)
-androidx.compose.ui.platform.AndroidComposeView: boolean getHasPendingMeasureOrLayout()
-androidx.compose.ui.node.TraversableNode$Companion$TraverseDescendantsAction: androidx.compose.ui.node.TraversableNode$Companion$TraverseDescendantsAction[] values()
-kotlin.LazyThreadSafetyMode: kotlin.LazyThreadSafetyMode[] values()
-androidx.compose.ui.platform.ViewLayer: long getOwnerViewId()
-com.nfcemu.hce.NfcEmuHostApduService: NfcEmuHostApduService()
-com.nfcemu.hce.Hilt_NfcEmuHostApduService: void inject()
-androidx.core.view.ViewCompat$Api29Impl: void setContentCaptureSession(android.view.View,androidx.core.view.contentcapture.ContentCaptureSessionCompat)
-androidx.datastore.preferences.protobuf.GeneratedMessageLite$MethodToInvoke: androidx.datastore.preferences.protobuf.GeneratedMessageLite$MethodToInvoke valueOf(java.lang.String)
-androidx.datastore.preferences.protobuf.FieldType: androidx.datastore.preferences.protobuf.FieldType[] values()
-androidx.compose.ui.platform.MotionEventVerifierApi29: boolean isValidMotionEvent(android.view.MotionEvent,int)
-androidx.profileinstaller.FileSectionType: androidx.profileinstaller.FileSectionType[] values()
-androidx.compose.ui.platform.AndroidComposeView: androidx.compose.ui.focus.FocusOwner getFocusOwner()
-androidx.compose.ui.autofill.AutofillApi23Helper: void setId(android.view.ViewStructure,int,java.lang.String,java.lang.String,java.lang.String)
-kotlinx.coroutines.CoroutineStart: kotlinx.coroutines.CoroutineStart[] values()
-androidx.core.view.accessibility.AccessibilityNodeInfoCompat$Api33Impl: androidx.core.view.accessibility.AccessibilityNodeInfoCompat getChild(android.view.accessibility.AccessibilityNodeInfo,int,int)
-androidx.core.view.ViewCompat$Api29Impl: java.util.List getSystemGestureExclusionRects(android.view.View)
-androidx.activity.OnBackPressedDispatcher$Api34Impl: android.window.OnBackInvokedCallback createOnBackAnimationCallback(kotlin.jvm.functions.Function1,kotlin.jvm.functions.Function1,kotlin.jvm.functions.Function0,kotlin.jvm.functions.Function0)
-androidx.compose.ui.text.android.StaticLayoutFactoryDefault: android.text.StaticLayout create(androidx.compose.ui.text.android.StaticLayoutParams)
-androidx.core.view.accessibility.AccessibilityNodeInfoCompat$Api30Impl: java.lang.Object createRangeInfo(int,float,float,float)
-androidx.compose.ui.autofill.AutofillApi26Helper: void setAutofillId(android.view.ViewStructure,android.view.autofill.AutofillId,int)
-androidx.compose.ui.platform.coreshims.ViewStructureCompat$Api23Impl: void setText(android.view.ViewStructure,java.lang.CharSequence)
-androidx.compose.ui.platform.AndroidComposeView: void setFontFamilyResolver(androidx.compose.ui.text.font.FontFamily$Resolver)
-androidx.compose.ui.node.LayoutNode$UsageByParent: androidx.compose.ui.node.LayoutNode$UsageByParent valueOf(java.lang.String)
-androidx.datastore.preferences.protobuf.Writer$FieldOrder: androidx.datastore.preferences.protobuf.Writer$FieldOrder[] values()
-androidx.activity.EdgeToEdgeApi28: void adjustLayoutInDisplayCutoutMode(android.view.Window)
-androidx.core.view.accessibility.AccessibilityNodeInfoCompat$Api34Impl: void getBoundsInWindow(android.view.accessibility.AccessibilityNodeInfo,android.graphics.Rect)
-kotlinx.coroutines.android.AndroidExceptionPreHandler: void handleException(kotlin.coroutines.CoroutineContext,java.lang.Throwable)
-androidx.compose.ui.platform.AndroidComposeView: androidx.compose.ui.platform.AndroidAccessibilityManager getAccessibilityManager()
-androidx.compose.ui.focus.CustomDestinationResult: androidx.compose.ui.focus.CustomDestinationResult[] values()
-androidx.lifecycle.EmptyActivityLifecycleCallbacks: void onActivityCreated(android.app.Activity,android.os.Bundle)
-androidx.compose.ui.platform.AndroidComposeView: androidx.compose.ui.text.font.FontFamily$Resolver getFontFamilyResolver()
-androidx.compose.ui.node.TraversableNode$Companion$TraverseDescendantsAction: androidx.compose.ui.node.TraversableNode$Companion$TraverseDescendantsAction valueOf(java.lang.String)
-androidx.core.graphics.drawable.IconCompat$Api28Impl: android.net.Uri getUri(java.lang.Object)
-androidx.compose.ui.text.input.TextInputServiceAndroid$TextInputCommand: androidx.compose.ui.text.input.TextInputServiceAndroid$TextInputCommand[] values()
-androidx.lifecycle.ReportFragment$LifecycleCallbacks: void onActivityResumed(android.app.Activity)
-androidx.compose.ui.platform.AndroidComposeView: long getLastMatrixRecalculationAnimationTime$ui_release()
-androidx.compose.ui.input.pointer.PointerEventPass: androidx.compose.ui.input.pointer.PointerEventPass valueOf(java.lang.String)
-androidx.activity.OnBackPressedDispatcher$Api33Impl: void unregisterOnBackInvokedCallback(java.lang.Object,java.lang.Object)
-androidx.activity.OnBackPressedDispatcher$Api33Impl: android.window.OnBackInvokedCallback createOnBackInvokedCallback(kotlin.jvm.functions.Function0)
-androidx.core.view.accessibility.AccessibilityNodeInfoCompat$Api34Impl: void setContainerTitle(android.view.accessibility.AccessibilityNodeInfo,java.lang.CharSequence)
-androidx.lifecycle.LegacySavedStateHandleController$OnRecreation: LegacySavedStateHandleController$OnRecreation()
-androidx.compose.ui.platform.TextToolbarStatus: androidx.compose.ui.platform.TextToolbarStatus[] values()
-androidx.datastore.preferences.protobuf.FieldType$Collection: androidx.datastore.preferences.protobuf.FieldType$Collection[] values()
-androidx.compose.ui.text.android.StaticLayoutFactoryImpl: android.text.StaticLayout create(androidx.compose.ui.text.android.StaticLayoutParams)
-androidx.lifecycle.ProcessLifecycleOwner$attach$1$onActivityPreCreated$1: void onActivityPostResumed(android.app.Activity)
-androidx.compose.ui.platform.AndroidComposeView: androidx.compose.ui.text.font.Font$ResourceLoader getFontLoader()
-com.nfcemu.data.Profile$Companion: kotlinx.serialization.KSerializer serializer()
-androidx.compose.ui.platform.AndroidComposeView: androidx.compose.ui.platform.AndroidComposeView$ViewTreeOwners getViewTreeOwners()
-androidx.compose.ui.platform.AndroidComposeView: void set_viewTreeOwners(androidx.compose.ui.platform.AndroidComposeView$ViewTreeOwners)
-androidx.compose.ui.platform.coreshims.ContentCaptureSessionCompat$Api29Impl: void notifyViewsDisappeared(android.view.contentcapture.ContentCaptureSession,android.view.autofill.AutofillId,long[])
-androidx.compose.ui.platform.ComposeView: boolean getShouldCreateCompositionOnAttachedToWindow()
-androidx.emoji2.text.ConcurrencyHelpers$Handler28Impl: android.os.Handler createAsync(android.os.Looper)
-androidx.activity.EdgeToEdgeApi26: void setUp(androidx.activity.SystemBarStyle,androidx.activity.SystemBarStyle,android.view.Window,android.view.View,boolean,boolean)
-androidx.lifecycle.EmptyActivityLifecycleCallbacks: void onActivityStopped(android.app.Activity)
-androidx.compose.ui.platform.AndroidComposeView: androidx.compose.ui.input.InputModeManager getInputModeManager()
-androidx.compose.ui.platform.AndroidComposeView: kotlin.jvm.functions.Function1 getConfigurationChangeObserver()
-kotlinx.coroutines.flow.SharingCommand: kotlinx.coroutines.flow.SharingCommand valueOf(java.lang.String)
-android.support.v4.app.RemoteActionCompatParcelizer: androidx.core.app.RemoteActionCompat read(androidx.versionedparcelable.VersionedParcel)
-androidx.compose.ui.autofill.AutofillApi23Helper: void setDimens(android.view.ViewStructure,int,int,int,int,int,int)
-androidx.compose.ui.autofill.AutofillApi26Helper: void setAutofillType(android.view.ViewStructure,int)
-androidx.compose.ui.unit.LayoutDirection: androidx.compose.ui.unit.LayoutDirection[] values()
-androidx.compose.ui.platform.AndroidComposeView: androidx.compose.ui.modifier.ModifierLocalManager getModifierLocalManager()
-kotlinx.serialization.json.ClassDiscriminatorMode: kotlinx.serialization.json.ClassDiscriminatorMode[] values()
-androidx.compose.ui.platform.RenderNodeVerificationHelper23: void destroyDisplayListData(android.view.RenderNode)
-com.nfcemu.ndefengine.NdefPayload$WifiHandover$Companion: kotlinx.serialization.KSerializer serializer()
-androidx.core.graphics.drawable.IconCompat$Api23Impl: android.graphics.drawable.Drawable loadDrawable(android.graphics.drawable.Icon,android.content.Context)
-androidx.compose.ui.platform.coreshims.ContentCaptureSessionCompat$Api29Impl: android.view.autofill.AutofillId newAutofillId(android.view.contentcapture.ContentCaptureSession,android.view.autofill.AutofillId,long)
-androidx.compose.ui.platform.AndroidComposeView: void setLastMatrixRecalculationAnimationTime$ui_release(long)
-androidx.lifecycle.ReportFragment$LifecycleCallbacks: void onActivityPostResumed(android.app.Activity)
-androidx.compose.ui.text.android.StaticLayoutFactory33: void setLineBreakConfig(android.text.StaticLayout$Builder,int,int)
-com.nfcemu.hce.NfcEmuHostApduService: void onDeactivated(int)
-androidx.compose.ui.platform.AndroidComposeView: androidx.compose.ui.input.pointer.PointerIconService getPointerIconService()
-androidx.core.graphics.drawable.IconCompat$Api28Impl: java.lang.String getResPackage(java.lang.Object)
-androidx.compose.ui.platform.AndroidComposeView: androidx.compose.ui.autofill.Autofill getAutofill()
-androidx.compose.ui.text.AnnotationType: androidx.compose.ui.text.AnnotationType valueOf(java.lang.String)
-androidx.core.view.ViewCompat$Api29Impl: void saveAttributeDataForStyleable(android.view.View,android.content.Context,int[],android.util.AttributeSet,android.content.res.TypedArray,int,int)
-androidx.core.view.accessibility.AccessibilityNodeInfoCompat$Api33Impl: java.lang.String getCollectionItemColumnTitle(java.lang.Object)
-androidx.compose.ui.platform.AndroidComposeViewAccessibilityDelegateCompat$TranslateStatus: androidx.compose.ui.platform.AndroidComposeViewAccessibilityDelegateCompat$TranslateStatus valueOf(java.lang.String)
-androidx.compose.ui.platform.AbstractComposeView: void setShowLayoutBounds(boolean)
-androidx.compose.ui.platform.ViewLayer: long getLayerId()
-androidx.compose.ui.platform.TextToolbarStatus: androidx.compose.ui.platform.TextToolbarStatus valueOf(java.lang.String)
-kotlinx.coroutines.scheduling.CoroutineScheduler$WorkerState: kotlinx.coroutines.scheduling.CoroutineScheduler$WorkerState[] values()
-androidx.compose.ui.platform.AbstractComposeView: void setParentContext(androidx.compose.runtime.CompositionContext)
-androidx.compose.ui.platform.AndroidComposeView: androidx.compose.ui.platform.AccessibilityManager getAccessibilityManager()
-androidx.compose.ui.platform.coreshims.ContentCaptureSessionCompat$Api29Impl: android.view.ViewStructure newViewStructure(android.view.contentcapture.ContentCaptureSession,android.view.View)
-androidx.core.view.ViewCompat$Api28Impl: void setAccessibilityHeading(android.view.View,boolean)
-androidx.compose.ui.platform.coreshims.ContentCaptureSessionCompat$Api23Impl: android.os.Bundle getExtras(android.view.ViewStructure)
-androidx.compose.foundation.layout.Direction: androidx.compose.foundation.layout.Direction[] values()
-androidx.datastore.preferences.protobuf.FieldType$Collection: androidx.datastore.preferences.protobuf.FieldType$Collection valueOf(java.lang.String)
-androidx.lifecycle.ReportFragment$LifecycleCallbacks: void onActivityPostStarted(android.app.Activity)
-kotlinx.coroutines.selects.TrySelectDetailedResult: kotlinx.coroutines.selects.TrySelectDetailedResult valueOf(java.lang.String)
-androidx.compose.ui.platform.RenderNodeVerificationHelper28: void setSpotShadowColor(android.view.RenderNode,int)
-androidx.compose.ui.platform.ViewLayerVerificationHelper28: void setOutlineSpotShadowColor(android.view.View,int)
-androidx.compose.ui.graphics.ColorSpaceVerificationHelper: androidx.compose.ui.graphics.colorspace.ColorSpace composeColorSpace(android.graphics.ColorSpace)
-androidx.core.content.res.FontResourcesParserCompat$Api21Impl: int getType(android.content.res.TypedArray,int)
-androidx.core.view.ViewCompat$Api28Impl: boolean isAccessibilityHeading(android.view.View)
-android.support.v4.graphics.drawable.IconCompatParcelizer: androidx.core.graphics.drawable.IconCompat read(androidx.versionedparcelable.VersionedParcel)
-androidx.compose.ui.autofill.AutofillApi26Helper: android.view.autofill.AutofillId getAutofillId(android.view.ViewStructure)
-androidx.compose.ui.platform.AndroidComposeView: androidx.compose.ui.hapticfeedback.HapticFeedback getHapticFeedBack()
-androidx.core.view.accessibility.AccessibilityNodeInfoCompat$Api34Impl: void setAccessibilityDataSensitive(android.view.accessibility.AccessibilityNodeInfo,boolean)
-androidx.compose.ui.platform.AbstractComposeView: boolean getShouldCreateCompositionOnAttachedToWindow()
-androidx.core.view.accessibility.AccessibilityNodeInfoCompat$Api34Impl: long getMinDurationBetweenContentChangeMillis(android.view.accessibility.AccessibilityNodeInfo)
-androidx.core.view.accessibility.AccessibilityNodeInfoCompat$Api34Impl: android.view.accessibility.AccessibilityNodeInfo$AccessibilityAction getActionScrollInDirection()
-androidx.compose.ui.platform.ViewLayer: void setCameraDistancePx(float)
-androidx.compose.ui.text.android.BoringLayoutFactoryDefault: android.text.BoringLayout create(java.lang.CharSequence,android.text.TextPaint,int,android.text.Layout$Alignment,float,float,android.text.BoringLayout$Metrics,boolean,android.text.TextUtils$TruncateAt,int)
-androidx.compose.ui.platform.coreshims.ViewCompatShims$Api26Impl: android.view.autofill.AutofillId getAutofillId(android.view.View)
-androidx.compose.ui.text.android.Paint29: void getTextBounds(android.graphics.Paint,java.lang.CharSequence,int,int,android.graphics.Rect)
-kotlinx.coroutines.android.AndroidDispatcherFactory: kotlinx.coroutines.MainCoroutineDispatcher createDispatcher(java.util.List)
-androidx.compose.ui.text.android.BoringLayoutFactoryDefault: android.text.BoringLayout$Metrics isBoring(java.lang.CharSequence,android.text.TextPaint,android.text.TextDirectionHeuristic)
-com.nfcemu.hce.NfcEmuHostApduService: com.nfcemu.domain.ActiveNdefSource getActiveNdefSource()
-androidx.compose.ui.platform.AndroidViewsHandler: java.util.HashMap getLayoutNodeToHolder()
-androidx.profileinstaller.FileSectionType: androidx.profileinstaller.FileSectionType valueOf(java.lang.String)
-kotlin.collections.AbstractList: AbstractList()
-androidx.compose.ui.platform.ViewLayer: androidx.compose.ui.platform.AndroidComposeView getOwnerView()
-com.nfcemu.ndefengine.NdefPayload$Companion: kotlinx.serialization.KSerializer serializer()
-androidx.core.view.ViewCompat$Api28Impl: boolean isScreenReaderFocusable(android.view.View)
-androidx.compose.ui.text.android.StaticLayoutFactory33: boolean isFallbackLineSpacingEnabled(android.text.StaticLayout)
-androidx.lifecycle.EmptyActivityLifecycleCallbacks: void onActivitySaveInstanceState(android.app.Activity,android.os.Bundle)
-androidx.compose.ui.platform.AndroidComposeView: androidx.compose.ui.platform.SoftwareKeyboardController getSoftwareKeyboardController()
-androidx.emoji2.text.EmojiExclusions$EmojiExclusions_Api34: java.util.Set getExclusions()
-androidx.core.view.ViewCompat$Api28Impl: void setScreenReaderFocusable(android.view.View,boolean)
-androidx.compose.ui.platform.AbstractComposeView: void setPreviousAttachedWindowToken(android.os.IBinder)
-androidx.lifecycle.EmptyActivityLifecycleCallbacks: void onActivityResumed(android.app.Activity)
-androidx.compose.ui.text.android.BoringLayoutFactory33: android.text.BoringLayout create(java.lang.CharSequence,android.text.TextPaint,int,android.text.Layout$Alignment,float,float,android.text.BoringLayout$Metrics,boolean,boolean,android.text.TextUtils$TruncateAt,int)
-androidx.compose.ui.autofill.AutofillApi26Helper: void setAutofillHints(android.view.ViewStructure,java.lang.String[])
-androidx.compose.ui.platform.ComposeView: java.lang.CharSequence getAccessibilityClassName()
-android.support.v4.app.RemoteActionCompatParcelizer: void write(androidx.core.app.RemoteActionCompat,androidx.versionedparcelable.VersionedParcel)
-kotlin.time.DurationUnit: kotlin.time.DurationUnit[] values()
-androidx.datastore.preferences.protobuf.GeneratedMessageLite$MethodToInvoke: androidx.datastore.preferences.protobuf.GeneratedMessageLite$MethodToInvoke[] values()
-androidx.datastore.preferences.protobuf.ProtoSyntax: androidx.datastore.preferences.protobuf.ProtoSyntax[] values()
-com.nfcemu.ndefengine.NdefPayload$Uri$Companion: kotlinx.serialization.KSerializer serializer()
-androidx.compose.ui.platform.AndroidComposeViewAccessibilityDelegateCompat$ViewTranslationHelperMethodsS: void onVirtualViewTranslationResponses(androidx.compose.ui.platform.AndroidComposeViewAccessibilityDelegateCompat,android.util.LongSparseArray)
-androidx.core.view.ViewCompat$Api29Impl: void setSystemGestureExclusionRects(android.view.View,java.util.List)
-androidx.compose.ui.input.pointer.MotionEventHelper: long toRawOffset-dBAh8RU(android.view.MotionEvent,int)
-androidx.core.app.NotificationManagerCompat$Api24Impl: int getImportance(android.app.NotificationManager)
-androidx.compose.ui.platform.AndroidComposeView: void getLastMatrixRecalculationAnimationTime$ui_release$annotations()
-androidx.compose.ui.platform.coreshims.ContentCaptureSessionCompat$Api29Impl: void notifyViewTextChanged(android.view.contentcapture.ContentCaptureSession,android.view.autofill.AutofillId,java.lang.CharSequence)
-androidx.compose.ui.platform.coreshims.ContentCaptureSessionCompat$Api34Impl: void notifyViewsAppeared(android.view.contentcapture.ContentCaptureSession,java.util.List)
-androidx.compose.ui.platform.AndroidComposeView: androidx.compose.ui.platform.ViewConfiguration getViewConfiguration()
-androidx.core.view.accessibility.AccessibilityNodeInfoCompat$Api33Impl: void setTextSelectable(android.view.accessibility.AccessibilityNodeInfo,boolean)
-androidx.compose.ui.platform.AndroidComposeView: androidx.compose.ui.node.OwnerSnapshotObserver getSnapshotObserver()
-androidx.compose.ui.platform.AbstractComposeView: void setTransitionGroup(boolean)
-androidx.compose.ui.focus.CustomDestinationResult: androidx.compose.ui.focus.CustomDestinationResult valueOf(java.lang.String)
-androidx.compose.ui.text.platform.Api28Impl: android.text.style.TypefaceSpan createTypefaceSpan(android.graphics.Typeface)
-androidx.compose.ui.text.android.StaticLayoutFactory26: void setJustificationMode(android.text.StaticLayout$Builder,int)
-com.nfcemu.hce.Hilt_NfcEmuHostApduService: dagger.hilt.android.internal.managers.ServiceComponentManager componentManager()
-androidx.datastore.preferences.protobuf.FieldType: androidx.datastore.preferences.protobuf.FieldType valueOf(java.lang.String)
-androidx.compose.ui.platform.RenderNodeVerificationHelper28: int getSpotShadowColor(android.view.RenderNode)
-kotlinx.coroutines.channels.BufferOverflow: kotlinx.coroutines.channels.BufferOverflow valueOf(java.lang.String)
-androidx.core.view.accessibility.AccessibilityNodeInfoCompat$Api33Impl: androidx.core.view.accessibility.AccessibilityNodeInfoCompat getParent(android.view.accessibility.AccessibilityNodeInfo,int)
-androidx.core.view.accessibility.AccessibilityNodeInfoCompat$Api33Impl: boolean isTextSelectable(android.view.accessibility.AccessibilityNodeInfo)
-androidx.core.graphics.drawable.IconCompat$Api23Impl: android.graphics.drawable.Icon toIcon(androidx.core.graphics.drawable.IconCompat,android.content.Context)
-com.nfcemu.ndefengine.WifiAuthType: com.nfcemu.ndefengine.WifiAuthType[] values()
-androidx.core.app.NotificationManagerCompat$Api24Impl: boolean areNotificationsEnabled(android.app.NotificationManager)
-androidx.versionedparcelable.CustomVersionedParcelable: CustomVersionedParcelable()
-androidx.compose.ui.platform.ViewLayerVerificationHelper28: void setOutlineAmbientShadowColor(android.view.View,int)
-androidx.core.view.ViewCompat$Api30Impl: java.lang.CharSequence getStateDescription(android.view.View)
-androidx.core.view.accessibility.AccessibilityNodeInfoCompat$Api34Impl: void setBoundsInWindow(android.view.accessibility.AccessibilityNodeInfo,android.graphics.Rect)
-com.nfcemu.hce.NfcEmuHostApduService: void onCreate()
-androidx.core.view.ViewCompat$Api28Impl: java.lang.CharSequence getAccessibilityPaneTitle(android.view.View)
-androidx.compose.ui.platform.ComposeView: void setContent(kotlin.jvm.functions.Function2)
-androidx.compose.ui.platform.AndroidComposeView: androidx.compose.ui.node.LayoutNode getRoot()
-androidx.core.app.CoreComponentFactory: CoreComponentFactory()
-androidx.compose.ui.platform.AccessibilityNodeInfoVerificationHelperMethods: void setAvailableExtraData(android.view.accessibility.AccessibilityNodeInfo,java.util.List)
-androidx.core.view.ViewCompat$Api29Impl: android.view.contentcapture.ContentCaptureSession getContentCaptureSession(android.view.View)
-androidx.lifecycle.ReportFragment$LifecycleCallbacks: void onActivityCreated(android.app.Activity,android.os.Bundle)
-androidx.compose.ui.platform.AndroidViewsHandler: java.util.HashMap getHolderToLayoutNode()
-androidx.compose.ui.platform.coreshims.ContentCaptureSessionCompat$Api29Impl: void notifyViewAppeared(android.view.contentcapture.ContentCaptureSession,android.view.ViewStructure)
-kotlinx.coroutines.channels.BufferOverflow: kotlinx.coroutines.channels.BufferOverflow[] values()
-androidx.datastore.preferences.PreferencesProto$Value$ValueCase: androidx.datastore.preferences.PreferencesProto$Value$ValueCase valueOf(java.lang.String)
-androidx.lifecycle.ReportFragment$LifecycleCallbacks: void onActivityPostCreated(android.app.Activity,android.os.Bundle)
-androidx.core.graphics.drawable.IconCompatParcelizer: IconCompatParcelizer()
-androidx.lifecycle.ReportFragment$LifecycleCallbacks: void registerIn(android.app.Activity)
-androidx.lifecycle.ProcessLifecycleOwner$attach$1: void onActivityCreated(android.app.Activity,android.os.Bundle)
-androidx.lifecycle.SavedStateHandlesVM: SavedStateHandlesVM()
-androidx.compose.foundation.layout.Direction: androidx.compose.foundation.layout.Direction valueOf(java.lang.String)
-androidx.compose.ui.state.ToggleableState: androidx.compose.ui.state.ToggleableState[] values()
-androidx.core.view.ViewCompat$Api30Impl: void setStateDescription(android.view.View,java.lang.CharSequence)
-androidx.compose.ui.text.android.BoringLayoutFactory33: android.text.BoringLayout$Metrics isBoring(java.lang.CharSequence,android.text.TextPaint,android.text.TextDirectionHeuristic)
-androidx.core.view.accessibility.AccessibilityNodeInfoCompat$Api30Impl: void setStateDescription(android.view.accessibility.AccessibilityNodeInfo,java.lang.CharSequence)
-androidx.core.view.ViewCompat$Api28Impl: java.lang.Object requireViewById(android.view.View,int)
-androidx.datastore.preferences.protobuf.WireFormat$FieldType: androidx.datastore.preferences.protobuf.WireFormat$FieldType[] values()
-androidx.core.graphics.drawable.IconCompat$Api23Impl: android.net.Uri getUri(java.lang.Object)
-androidx.profileinstaller.ProfileInstallerInitializer: ProfileInstallerInitializer()
-androidx.compose.ui.platform.WrapperRenderNodeLayerHelperMethods: void onDescendantInvalidated(androidx.compose.ui.platform.AndroidComposeView)
-androidx.compose.ui.platform.AbstractComposeView: boolean getHasComposition()
-androidx.compose.ui.platform.AndroidComposeViewAccessibilityDelegateCompat$ViewTranslationHelperMethodsS: void onCreateVirtualViewTranslationRequests(androidx.compose.ui.platform.AndroidComposeViewAccessibilityDelegateCompat,long[],int[],java.util.function.Consumer)
-androidx.core.os.BundleApi21ImplKt: void putSize(android.os.Bundle,java.lang.String,android.util.Size)
-androidx.lifecycle.LifecycleDispatcher$DispatcherActivityCallback: LifecycleDispatcher$DispatcherActivityCallback()
-androidx.compose.ui.platform.AndroidComposeView: androidx.compose.ui.draganddrop.DragAndDropManager getDragAndDropManager()
-androidx.compose.ui.platform.AndroidComposeView: androidx.compose.ui.platform.AndroidViewsHandler getAndroidViewsHandler$ui_release()
-androidx.compose.ui.platform.ViewLayerVerificationHelper31: void setRenderEffect(android.view.View,androidx.compose.ui.graphics.RenderEffect)
-kotlinx.serialization.json.JsonElement$Companion: kotlinx.serialization.KSerializer serializer()
-androidx.profileinstaller.ProfileVerifier$Api33Impl: android.content.pm.PackageInfo getPackageInfo(android.content.pm.PackageManager,android.content.Context)
-androidx.compose.ui.text.input.TextInputServiceAndroid$TextInputCommand: androidx.compose.ui.text.input.TextInputServiceAndroid$TextInputCommand valueOf(java.lang.String)
-androidx.compose.ui.platform.AndroidComposeView: androidx.compose.ui.node.LayoutNodeDrawScope getSharedDrawScope()
-androidx.core.view.ViewConfigurationCompat$Api26Impl: float getScaledVerticalScrollFactor(android.view.ViewConfiguration)
-androidx.activity.EdgeToEdgeApi29: void setUp(androidx.activity.SystemBarStyle,androidx.activity.SystemBarStyle,android.view.Window,android.view.View,boolean,boolean)
-kotlinx.coroutines.CoroutineStart: kotlinx.coroutines.CoroutineStart valueOf(java.lang.String)
-androidx.compose.ui.platform.AndroidComposeView: androidx.compose.ui.text.input.TextInputService getTextInputService()
-androidx.compose.ui.platform.AndroidComposeView: void setConfigurationChangeObserver(kotlin.jvm.functions.Function1)
-androidx.core.view.ViewCompat$Api29Impl: android.view.View$AccessibilityDelegate getAccessibilityDelegate(android.view.View)
-androidx.core.view.accessibility.AccessibilityNodeInfoCompat$Api33Impl: java.lang.String getCollectionItemRowTitle(java.lang.Object)
-androidx.compose.ui.platform.AndroidComposeView: androidx.compose.ui.node.RootForTest getRootForTest()
-kotlin.collections.AbstractMutableList: AbstractMutableList()
-androidx.compose.ui.platform.AndroidComposeView: androidx.compose.ui.platform.AndroidClipboardManager getClipboardManager()
-androidx.lifecycle.Lifecycle$State: androidx.lifecycle.Lifecycle$State valueOf(java.lang.String)
-androidx.lifecycle.ProcessLifecycleOwner$attach$1: void onActivityPaused(android.app.Activity)
-androidx.compose.ui.graphics.WrapperVerificationHelperMethods: void setBlendMode-GB0RdKg(android.graphics.Paint,int)
-androidx.compose.ui.platform.ViewLayer: androidx.compose.ui.platform.DrawChildContainer getContainer()
-androidx.core.view.ViewCompat$Api28Impl: void setAccessibilityPaneTitle(android.view.View,java.lang.CharSequence)
-androidx.datastore.preferences.protobuf.JavaType: androidx.datastore.preferences.protobuf.JavaType valueOf(java.lang.String)
-androidx.compose.ui.text.input.CursorAnchorInfoApi34Helper: android.view.inputmethod.CursorAnchorInfo$Builder addVisibleLineBounds(android.view.inputmethod.CursorAnchorInfo$Builder,androidx.compose.ui.text.TextLayoutResult,androidx.compose.ui.geometry.Rect)
-androidx.compose.ui.platform.CalculateMatrixToWindowApi29: void calculateMatrixToWindow-EL8BTi8(android.view.View,float[])
-androidx.lifecycle.EmptyActivityLifecycleCallbacks: void onActivityStarted(android.app.Activity)
-kotlinx.coroutines.android.AndroidExceptionPreHandler: AndroidExceptionPreHandler()
-android.support.v4.graphics.drawable.IconCompatParcelizer: IconCompatParcelizer()
-kotlinx.coroutines.scheduling.CoroutineScheduler$WorkerState: kotlinx.coroutines.scheduling.CoroutineScheduler$WorkerState valueOf(java.lang.String)
-androidx.core.view.accessibility.AccessibilityNodeInfoCompat$Api33Impl: androidx.core.view.accessibility.AccessibilityNodeInfoCompat$CollectionItemInfoCompat buildCollectionItemInfoCompat(boolean,int,int,int,int,boolean,java.lang.String,java.lang.String)
-androidx.compose.ui.graphics.BlendModeColorFilterHelper: android.graphics.BlendModeColorFilter BlendModeColorFilter-xETnrds(long,int)
-androidx.compose.ui.platform.AndroidComposeView: android.view.View findViewByAccessibilityIdTraversal(int)
-androidx.compose.runtime.InvalidationResult: androidx.compose.runtime.InvalidationResult valueOf(java.lang.String)
-androidx.compose.ui.platform.AbstractComposeView: boolean getShowLayoutBounds()
-androidx.activity.ComponentActivity$Api33Impl: android.window.OnBackInvokedDispatcher getOnBackInvokedDispatcher(android.app.Activity)
-androidx.profileinstaller.ProfileInstallerInitializer$Handler28Impl: android.os.Handler createAsync(android.os.Looper)
-androidx.compose.ui.platform.AndroidComposeViewStartDragAndDropN: boolean startDragAndDrop(android.view.View,androidx.compose.ui.draganddrop.DragAndDropTransferData,androidx.compose.ui.draganddrop.ComposeDragShadowBuilder)
-com.nfcemu.ndefengine.AarConfig$Companion: kotlinx.serialization.KSerializer serializer()
-androidx.datastore.preferences.protobuf.WireFormat$FieldType: androidx.datastore.preferences.protobuf.WireFormat$FieldType valueOf(java.lang.String)
-androidx.lifecycle.Lifecycle$State: androidx.lifecycle.Lifecycle$State[] values()
-androidx.compose.ui.platform.AndroidComposeView: boolean getShowLayoutBounds()
-com.nfcemu.ndefengine.hce.Type4TagApduProcessor$SelectedFile: com.nfcemu.ndefengine.hce.Type4TagApduProcessor$SelectedFile valueOf(java.lang.String)
-androidx.lifecycle.LifecycleDispatcher$DispatcherActivityCallback: void onActivityCreated(android.app.Activity,android.os.Bundle)
-kotlinx.coroutines.selects.TrySelectDetailedResult: kotlinx.coroutines.selects.TrySelectDetailedResult[] values()
-androidx.core.view.WindowCompat$Api30Impl: void setDecorFitsSystemWindows(android.view.Window,boolean)
-androidx.datastore.preferences.protobuf.WireFormat$JavaType: androidx.datastore.preferences.protobuf.WireFormat$JavaType valueOf(java.lang.String)
-androidx.core.graphics.drawable.IconCompatParcelizer: androidx.core.graphics.drawable.IconCompat read(androidx.versionedparcelable.VersionedParcel)
-androidx.lifecycle.ReportFragment$LifecycleCallbacks: void onActivityStopped(android.app.Activity)
-androidx.compose.ui.autofill.AutofillApi26Helper: boolean isDate(android.view.autofill.AutofillValue)
-androidx.compose.ui.text.font.TypefaceHelperMethodsApi28: android.graphics.Typeface create(android.graphics.Typeface,int,boolean)
-androidx.compose.ui.platform.coreshims.ViewStructureCompat$Api23Impl: void setDimens(android.view.ViewStructure,int,int,int,int,int,int)
-androidx.lifecycle.Lifecycle$Event: androidx.lifecycle.Lifecycle$Event valueOf(java.lang.String)
-androidx.compose.ui.platform.RenderNodeApi29VerificationHelper: void setRenderEffect(android.graphics.RenderNode,androidx.compose.ui.graphics.RenderEffect)
-kotlinx.serialization.json.internal.WriteMode: kotlinx.serialization.json.internal.WriteMode valueOf(java.lang.String)
-androidx.datastore.preferences.protobuf.ProtoSyntax: androidx.datastore.preferences.protobuf.ProtoSyntax valueOf(java.lang.String)
-androidx.core.app.RemoteActionCompatParcelizer: RemoteActionCompatParcelizer()
-androidx.lifecycle.ProcessLifecycleOwner$Api29Impl: void registerActivityLifecycleCallbacks(android.app.Activity,android.app.Application$ActivityLifecycleCallbacks)
-androidx.compose.runtime.Recomposer$State: androidx.compose.runtime.Recomposer$State valueOf(java.lang.String)
-androidx.compose.ui.text.style.ResolvedTextDirection: androidx.compose.ui.text.style.ResolvedTextDirection valueOf(java.lang.String)
-androidx.lifecycle.ReportFragment$LifecycleCallbacks: void onActivityDestroyed(android.app.Activity)
-kotlinx.coroutines.android.AndroidDispatcherFactory: java.lang.String hintOnError()
-androidx.compose.ui.autofill.AutofillApi23Helper: android.view.ViewStructure newChild(android.view.ViewStructure,int)
-androidx.compose.ui.platform.AndroidComposeViewAccessibilityDelegateCompat$TranslateStatus: androidx.compose.ui.platform.AndroidComposeViewAccessibilityDelegateCompat$TranslateStatus[] values()
-androidx.core.view.ViewCompat$Api30Impl: int getImportantForContentCapture(android.view.View)
-androidx.profileinstaller.ProfileInstallReceiver: ProfileInstallReceiver()
-androidx.compose.ui.graphics.BlendModeColorFilterHelper: androidx.compose.ui.graphics.BlendModeColorFilter createBlendModeColorFilter(android.graphics.BlendModeColorFilter)
-androidx.compose.ui.autofill.AutofillApi23Helper: int addChildCount(android.view.ViewStructure,int)
-androidx.compose.ui.platform.RenderNodeVerificationHelper28: int getAmbientShadowColor(android.view.RenderNode)
-android.support.v4.graphics.drawable.IconCompatParcelizer: void write(androidx.core.graphics.drawable.IconCompat,androidx.versionedparcelable.VersionedParcel)
-androidx.compose.ui.platform.AndroidComposeView: void getFontLoader$annotations()
-com.nfcemu.hce.Hilt_NfcEmuHostApduService: dagger.hilt.android.internal.managers.ServiceComponentManager createComponentManager()
-androidx.compose.ui.text.AnnotationType: androidx.compose.ui.text.AnnotationType[] values()
-androidx.compose.ui.platform.AbstractComposeView: void getShowLayoutBounds$annotations()
-androidx.compose.ui.graphics.ColorSpaceVerificationHelper: android.graphics.ColorSpace androidColorSpace(androidx.compose.ui.graphics.colorspace.ColorSpace)
-kotlinx.serialization.json.ClassDiscriminatorMode: kotlinx.serialization.json.ClassDiscriminatorMode valueOf(java.lang.String)
-androidx.core.app.RemoteActionCompat: RemoteActionCompat()
-androidx.compose.ui.semantics.EmptySemanticsElement: EmptySemanticsElement()
-com.nfcemu.hce.Hilt_NfcEmuHostApduService: dagger.hilt.internal.GeneratedComponentManager componentManager()
-kotlin.LazyThreadSafetyMode: kotlin.LazyThreadSafetyMode valueOf(java.lang.String)
-androidx.core.view.ViewCompat$Api28Impl: void removeOnUnhandledKeyEventListener(android.view.View,androidx.core.view.ViewCompat$OnUnhandledKeyEventListenerCompat)
-androidx.compose.ui.platform.AndroidComposeView: long getMeasureIteration()
-androidx.core.graphics.drawable.IconCompat$Api26Impl: android.graphics.drawable.Drawable createAdaptiveIconDrawable(android.graphics.drawable.Drawable,android.graphics.drawable.Drawable)
-androidx.compose.ui.platform.AndroidComposeView: void setLayoutDirection(androidx.compose.ui.unit.LayoutDirection)
-androidx.lifecycle.ProcessLifecycleOwner$attach$1: void onActivityPreCreated(android.app.Activity,android.os.Bundle)
-androidx.lifecycle.ProcessLifecycleOwner$attach$1$onActivityPreCreated$1: void onActivityPostStarted(android.app.Activity)
-com.nfcemu.ndefengine.NdefPayload$Text$Companion: kotlinx.serialization.KSerializer serializer()
-androidx.compose.ui.platform.AbstractComposeView: void setParentCompositionContext(androidx.compose.runtime.CompositionContext)
-androidx.compose.ui.platform.AndroidComposeView: androidx.compose.ui.platform.ClipboardManager getClipboardManager()
-androidx.compose.ui.node.LayoutNode$LayoutState: androidx.compose.ui.node.LayoutNode$LayoutState[] values()
-androidx.compose.ui.platform.RenderNodeVerificationHelper24: void discardDisplayList(android.view.RenderNode)
-androidx.core.view.accessibility.AccessibilityNodeInfoCompat$Api34Impl: java.lang.CharSequence getContainerTitle(android.view.accessibility.AccessibilityNodeInfo)
-kotlinx.serialization.json.JsonPrimitive$Companion: kotlinx.serialization.KSerializer serializer()
-androidx.compose.ui.platform.AndroidComposeView: androidx.compose.ui.semantics.SemanticsOwner getSemanticsOwner()
-com.nfcemu.ndefengine.NdefPayload$VCard$Companion: kotlinx.serialization.KSerializer serializer()
-androidx.datastore.preferences.protobuf.WireFormat$JavaType: androidx.datastore.preferences.protobuf.WireFormat$JavaType[] values()
-androidx.compose.ui.platform.ViewLayer: androidx.compose.ui.graphics.Path getManualClipPath()
-androidx.activity.EdgeToEdgeApi23: void setUp(androidx.activity.SystemBarStyle,androidx.activity.SystemBarStyle,android.view.Window,android.view.View,boolean,boolean)
-androidx.compose.ui.platform.AndroidComposeView: androidx.compose.ui.unit.LayoutDirection getLayoutDirection()
-androidx.compose.ui.autofill.AutofillCallback: void unregister(androidx.compose.ui.autofill.AndroidAutofill)
-androidx.compose.ui.autofill.AutofillApi26Helper: boolean isList(android.view.autofill.AutofillValue)
-kotlin.coroutines.intrinsics.CoroutineSingletons: kotlin.coroutines.intrinsics.CoroutineSingletons[] values()
-androidx.compose.ui.platform.DrawChildContainer: int getChildCount()
-androidx.compose.runtime.Recomposer$State: androidx.compose.runtime.Recomposer$State[] values()
-kotlinx.serialization.json.JsonNull: kotlinx.serialization.KSerializer serializer()
-androidx.compose.ui.platform.coreshims.ViewStructureCompat$Api23Impl: void setTextStyle(android.view.ViewStructure,float,int,int,int)
-androidx.core.view.ViewCompat$Api30Impl: boolean isImportantForContentCapture(android.view.View)
-androidx.activity.EdgeToEdgeApi21: void setUp(androidx.activity.SystemBarStyle,androidx.activity.SystemBarStyle,android.view.Window,android.view.View,boolean,boolean)
-androidx.lifecycle.ReportFragment$LifecycleCallbacks: ReportFragment$LifecycleCallbacks()
-androidx.compose.ui.platform.AndroidComposeView: androidx.compose.ui.layout.Placeable$PlacementScope getPlacementScope()
-androidx.lifecycle.ReportFragment$LifecycleCallbacks: void onActivityPrePaused(android.app.Activity)
-androidx.compose.ui.focus.FocusStateImpl: androidx.compose.ui.focus.FocusStateImpl valueOf(java.lang.String)
-androidx.compose.ui.platform.ViewLayer$UniqueDrawingIdApi29: long getUniqueDrawingId(android.view.View)
-androidx.core.graphics.drawable.IconCompat$Api28Impl: int getType(java.lang.Object)
-androidx.compose.ui.platform.AndroidComposeView: androidx.compose.ui.platform.WindowInfo getWindowInfo()
-androidx.activity.ComponentActivity: void setContentView(android.view.View)
-androidx.compose.ui.platform.AndroidComposeViewForceDarkModeQ: void disallowForceDark(android.view.View)
-androidx.compose.ui.platform.AbstractComposeView: void getDisposeViewCompositionStrategy$annotations()
-androidx.compose.ui.graphics.Api26Bitmap: android.graphics.Bitmap createBitmap-x__-hDU$ui_graphics_release(int,int,int,boolean,androidx.compose.ui.graphics.colorspace.ColorSpace)
-androidx.datastore.preferences.protobuf.Writer$FieldOrder: androidx.datastore.preferences.protobuf.Writer$FieldOrder valueOf(java.lang.String)
-androidx.core.view.accessibility.AccessibilityNodeInfoCompat$Api33Impl: android.view.accessibility.AccessibilityNodeInfo$ExtraRenderingInfo getExtraRenderingInfo(android.view.accessibility.AccessibilityNodeInfo)
-androidx.compose.ui.platform.AndroidComposeViewTranslationCallbackS: void setViewTranslationCallback(android.view.View,android.view.translation.ViewTranslationCallback)
-androidx.compose.ui.autofill.AutofillApi26Helper: java.lang.CharSequence textValue(android.view.autofill.AutofillValue)
-androidx.compose.runtime.InvalidationResult: androidx.compose.runtime.InvalidationResult[] values()
-androidx.compose.ui.graphics.Api26Bitmap: androidx.compose.ui.graphics.colorspace.ColorSpace composeColorSpace$ui_graphics_release(android.graphics.Bitmap)
-androidx.startup.InitializationProvider: InitializationProvider()
-androidx.compose.ui.platform.ViewLayerContainer: void dispatchGetDisplayList()
-androidx.core.app.RemoteActionCompatParcelizer: androidx.core.app.RemoteActionCompat read(androidx.versionedparcelable.VersionedParcel)
-kotlinx.coroutines.android.AndroidDispatcherFactory: int getLoadPriority()
-androidx.core.graphics.drawable.IconCompatParcelizer: void write(androidx.core.graphics.drawable.IconCompat,androidx.versionedparcelable.VersionedParcel)
+androidx.lifecycle.ProcessLifecycleOwner$attach$1: androidx.lifecycle.ProcessLifecycleOwner this$0
+kotlinx.coroutines.sync.MutexImpl: java.lang.Object owner$volatile
+kotlinx.coroutines.JobSupport$Finishing: int _isCompleting$volatile
+androidx.datastore.preferences.PreferencesProto$Value: java.lang.Object value_
+androidx.datastore.preferences.PreferencesProto$Value: int BYTES_FIELD_NUMBER
+com.nfcemu.data.Profile: com.nfcemu.data.Profile$Companion Companion
+kotlinx.coroutines.android.AndroidExceptionPreHandler: java.lang.Object _preHandler
+kotlinx.coroutines.internal.AtomicOp: java.lang.Object _consensus$volatile
+androidx.lifecycle.Lifecycle$Event: androidx.lifecycle.Lifecycle$Event ON_PAUSE
+androidx.datastore.preferences.PreferencesProto$PreferenceMap: androidx.datastore.preferences.protobuf.Parser PARSER
+androidx.datastore.preferences.PreferencesProto$Value: int BOOLEAN_FIELD_NUMBER
+androidx.datastore.preferences.PreferencesProto$StringSet: androidx.datastore.preferences.protobuf.Parser PARSER
+androidx.datastore.preferences.PreferencesProto$Value: int DOUBLE_FIELD_NUMBER
+androidx.datastore.preferences.PreferencesProto$Value: androidx.datastore.preferences.protobuf.Parser PARSER
+com.nfcemu.ndefengine.AarConfig: com.nfcemu.ndefengine.AarConfig$Companion Companion
+kotlinx.coroutines.sync.SemaphoreImpl: java.lang.Object head$volatile
+kotlinx.serialization.json.JsonPrimitive: kotlinx.serialization.json.JsonPrimitive$Companion Companion
+kotlinx.coroutines.internal.LockFreeTaskQueueCore: java.lang.Object _next$volatile
+androidx.datastore.preferences.protobuf.GeneratedMessageLite: int MEMOIZED_SERIALIZED_SIZE_MASK
+kotlinx.coroutines.internal.ResizableAtomicArray: java.util.concurrent.atomic.AtomicReferenceArray array
+androidx.core.view.DisplayCutoutCompat$Api30Impl: android.graphics.Insets getWaterfallInsets(android.view.DisplayCutout)
+androidx.core.app.AppOpsManagerCompat$Api23Impl: int noteProxyOpNoThrow(android.app.AppOpsManager,java.lang.String,java.lang.String)
 androidx.compose.ui.platform.AndroidComposeViewVerificationHelperMethodsN: void setPointerIcon(android.view.View,androidx.compose.ui.input.pointer.PointerIcon)
-com.nfcemu.ndefengine.WifiAuthType$Companion: kotlinx.serialization.KSerializer serializer()
-androidx.lifecycle.ReportFragment$LifecycleCallbacks: void onActivitySaveInstanceState(android.app.Activity,android.os.Bundle)
-com.nfcemu.hce.NfcEmuHostApduService: void setActiveNdefSource(com.nfcemu.domain.ActiveNdefSource)
-androidx.compose.ui.platform.AndroidComposeViewTranslationCallbackS: void clearViewTranslationCallback(android.view.View)
-androidx.lifecycle.EmptyActivityLifecycleCallbacks: void onActivityPaused(android.app.Activity)
-android.support.v4.app.RemoteActionCompatParcelizer: RemoteActionCompatParcelizer()
-androidx.compose.ui.node.LayoutNode$UsageByParent: androidx.compose.ui.node.LayoutNode$UsageByParent[] values()
-androidx.lifecycle.ProcessLifecycleOwner$attach$1: ProcessLifecycleOwner$attach$1(androidx.lifecycle.ProcessLifecycleOwner)
-androidx.compose.ui.state.ToggleableState: androidx.compose.ui.state.ToggleableState valueOf(java.lang.String)
-androidx.core.view.accessibility.AccessibilityNodeInfoCompat$Api33Impl: java.lang.String getUniqueId(android.view.accessibility.AccessibilityNodeInfo)
-androidx.activity.Api34Impl: float touchY(android.window.BackEvent)
-androidx.compose.ui.platform.RenderNodeVerificationHelper28: void setAmbientShadowColor(android.view.RenderNode,int)
-androidx.profileinstaller.ProfileInstallerInitializer$Choreographer16Impl: void postFrameCallback(java.lang.Runnable)
-androidx.compose.ui.platform.AndroidComposeView: kotlin.coroutines.CoroutineContext getCoroutineContext()
-androidx.lifecycle.ProcessLifecycleOwner$attach$1$onActivityPreCreated$1: ProcessLifecycleOwner$attach$1$onActivityPreCreated$1(androidx.lifecycle.ProcessLifecycleOwner)
-androidx.core.view.ViewConfigurationCompat$Api26Impl: float getScaledHorizontalScrollFactor(android.view.ViewConfiguration)
-androidx.lifecycle.Lifecycle$Event: androidx.lifecycle.Lifecycle$Event[] values()
-androidx.core.graphics.drawable.IconCompat$Api28Impl: int getResId(java.lang.Object)
-androidx.core.view.accessibility.AccessibilityNodeInfoCompat$Api30Impl: java.lang.CharSequence getStateDescription(android.view.accessibility.AccessibilityNodeInfo)
-androidx.compose.ui.platform.AbstractComposeView: void setViewCompositionStrategy(androidx.compose.ui.platform.ViewCompositionStrategy)
-androidx.lifecycle.ProcessLifecycleInitializer: ProcessLifecycleInitializer()
-kotlinx.coroutines.flow.SharingCommand: kotlinx.coroutines.flow.SharingCommand[] values()
-androidx.compose.ui.platform.AndroidComposeViewAccessibilityDelegateCompat$Api29Impl: void addPageActions(androidx.core.view.accessibility.AccessibilityNodeInfoCompat,androidx.compose.ui.semantics.SemanticsNode)
-com.nfcemu.ui.MainActivity: MainActivity()
-androidx.compose.ui.autofill.AutofillCallback: void register(androidx.compose.ui.autofill.AndroidAutofill)
+com.nfcemu.data.library.LibraryEntryDirection: com.nfcemu.data.library.LibraryEntryDirection[] values()
+androidx.compose.ui.text.AnnotationType: androidx.compose.ui.text.AnnotationType valueOf(java.lang.String)
+androidx.core.graphics.drawable.IconCompat$Api23Impl: android.graphics.drawable.Drawable loadDrawable(android.graphics.drawable.Icon,android.content.Context)
+com.nfcemu.ndefengine.WifiAuthType: com.nfcemu.ndefengine.WifiAuthType valueOf(java.lang.String)
+androidx.core.view.ViewCompat$Api28Impl: void addOnUnhandledKeyEventListener(android.view.View,androidx.core.view.ViewCompat$OnUnhandledKeyEventListenerCompat)
+androidx.lifecycle.ReportFragment: ReportFragment()
+androidx.core.view.WindowInsetsCompat$Impl30: androidx.core.graphics.Insets getInsets(int)
+androidx.compose.ui.platform.AndroidComposeView: androidx.compose.ui.semantics.SemanticsOwner getSemanticsOwner()
+androidx.compose.ui.platform.ViewLayer$UniqueDrawingIdApi29: long getUniqueDrawingId(android.view.View)
+android.support.v4.graphics.drawable.IconCompatParcelizer: IconCompatParcelizer()
 androidx.compose.ui.text.platform.extensions.LocaleListHelperMethods: void setTextLocales(androidx.compose.ui.text.platform.AndroidTextPaint,androidx.compose.ui.text.intl.LocaleList)
-androidx.compose.ui.platform.coreshims.ViewCompatShims$Api29Impl: android.view.contentcapture.ContentCaptureSession getContentCaptureSession(android.view.View)
-kotlinx.serialization.json.internal.WriteMode: kotlinx.serialization.json.internal.WriteMode[] values()
-androidx.activity.OnBackPressedDispatcher$Api33Impl: void registerOnBackInvokedCallback(java.lang.Object,int,java.lang.Object)
-androidx.compose.ui.text.android.StaticLayoutFactory28: void setUseLineSpacingFromFallbacks(android.text.StaticLayout$Builder,boolean)
-androidx.core.view.accessibility.AccessibilityNodeInfoCompat$Api34Impl: void setMinDurationBetweenContentChangeMillis(android.view.accessibility.AccessibilityNodeInfo,long)
-androidx.compose.ui.platform.AndroidComposeView: androidx.compose.ui.autofill.AutofillTree getAutofillTree()
-androidx.core.graphics.drawable.IconCompat$Api30Impl: android.graphics.drawable.Icon createWithAdaptiveBitmapContentUri(android.net.Uri)
-androidx.lifecycle.ProcessLifecycleOwner$attach$1: void onActivityStopped(android.app.Activity)
-androidx.compose.ui.platform.coreshims.ContentCaptureSessionCompat$Api29Impl: android.view.ViewStructure newVirtualViewStructure(android.view.contentcapture.ContentCaptureSession,android.view.autofill.AutofillId,long)
+androidx.compose.ui.platform.CalculateMatrixToWindowApi29: void calculateMatrixToWindow-EL8BTi8(android.view.View,float[])
+androidx.core.view.WindowInsetsCompat$Impl28: androidx.core.view.WindowInsetsCompat consumeDisplayCutout()
+androidx.core.view.ViewCompat$Api21Impl: boolean hasNestedScrollingParent(android.view.View)
+androidx.core.view.WindowInsetsCompat$Impl30: WindowInsetsCompat$Impl30(androidx.core.view.WindowInsetsCompat,androidx.core.view.WindowInsetsCompat$Impl30)
+androidx.core.view.ViewConfigurationCompat$Api26Impl: float getScaledHorizontalScrollFactor(android.view.ViewConfiguration)
+androidx.compose.ui.graphics.WrapperVerificationHelperMethods: void setBlendMode-GB0RdKg(android.graphics.Paint,int)
+androidx.core.view.WindowInsetsCompat$Impl21: boolean isConsumed()
+com.nfcemu.hce.NfcEmuHostApduService: byte[] processCommandApdu(byte[],android.os.Bundle)
+androidx.core.app.ActivityCompat$Api23Impl: boolean shouldShowRequestPermissionRationale(android.app.Activity,java.lang.String)
+androidx.core.os.BundleCompat$Api33Impl: java.util.ArrayList getParcelableArrayList(android.os.Bundle,java.lang.String,java.lang.Class)
+androidx.lifecycle.Lifecycle$Event: androidx.lifecycle.Lifecycle$Event valueOf(java.lang.String)
+androidx.core.view.WindowInsetsCompat$BuilderImpl: void setMandatorySystemGestureInsets(androidx.core.graphics.Insets)
+kotlinx.serialization.json.JsonObject$Companion: kotlinx.serialization.KSerializer serializer()
+androidx.core.view.ViewCompat$Api21Impl: boolean dispatchNestedScroll(android.view.View,int,int,int,int,int[])
+androidx.core.view.ViewCompat$Api21Impl: void setBackgroundTintList(android.view.View,android.content.res.ColorStateList)
+androidx.compose.ui.text.android.BoringLayoutFactoryDefault: android.text.BoringLayout create(java.lang.CharSequence,android.text.TextPaint,int,android.text.Layout$Alignment,float,float,android.text.BoringLayout$Metrics,boolean,android.text.TextUtils$TruncateAt,int)
+com.nfcemu.ndefengine.NdefPayload$Text$Companion: kotlinx.serialization.KSerializer serializer()
+androidx.lifecycle.ProcessLifecycleOwner$Api29Impl: void registerActivityLifecycleCallbacks(android.app.Activity,android.app.Application$ActivityLifecycleCallbacks)
+androidx.compose.ui.platform.AndroidComposeViewAccessibilityDelegateCompat$Api29Impl: void addPageActions(androidx.core.view.accessibility.AccessibilityNodeInfoCompat,androidx.compose.ui.semantics.SemanticsNode)
+androidx.compose.ui.text.android.StaticLayoutFactory33: void setLineBreakConfig(android.text.StaticLayout$Builder,int,int)
+androidx.compose.ui.platform.AndroidComposeView: androidx.compose.ui.text.font.Font$ResourceLoader getFontLoader()
+com.nfcemu.hce.NfcEmuHostApduService: com.nfcemu.ndefengine.hce.Type4TagApduProcessor access$getProcessor$p(com.nfcemu.hce.NfcEmuHostApduService)
+androidx.activity.Api34Impl: int swipeEdge(android.window.BackEvent)
+kotlinx.coroutines.scheduling.CoroutineScheduler$WorkerState: kotlinx.coroutines.scheduling.CoroutineScheduler$WorkerState[] values()
+androidx.core.os.BundleApi21ImplKt: void putSizeF(android.os.Bundle,java.lang.String,android.util.SizeF)
+androidx.compose.ui.platform.coreshims.ViewStructureCompat$Api23Impl: void setClassName(android.view.ViewStructure,java.lang.String)
+com.nfcemu.ui.profileform.ProfileTypeTemplate: com.nfcemu.ui.profileform.ProfileTypeTemplate valueOf(java.lang.String)
+androidx.compose.runtime.Recomposer$State: androidx.compose.runtime.Recomposer$State valueOf(java.lang.String)
+androidx.compose.ui.text.android.StaticLayoutFactory23: android.text.StaticLayout create(androidx.compose.ui.text.android.StaticLayoutParams)
+kotlin.random.Random: Random()
+androidx.core.view.WindowInsetsCompat$Impl21: void setStableInsets(androidx.core.graphics.Insets)
+androidx.core.graphics.drawable.IconCompatParcelizer: androidx.core.graphics.drawable.IconCompat read(androidx.versionedparcelable.VersionedParcel)
+androidx.compose.ui.platform.AndroidComposeView: androidx.compose.ui.node.LayoutNode getRoot()
+androidx.compose.animation.EnterExitState: androidx.compose.animation.EnterExitState[] values()
+androidx.compose.ui.graphics.ColorSpaceVerificationHelper: androidx.compose.ui.graphics.colorspace.ColorSpace composeColorSpace(android.graphics.ColorSpace)
+com.nfcemu.ndefengine.hce.Type4TagApduProcessor$SelectedFile: com.nfcemu.ndefengine.hce.Type4TagApduProcessor$SelectedFile valueOf(java.lang.String)
+androidx.compose.ui.unit.LayoutDirection: androidx.compose.ui.unit.LayoutDirection[] values()
+androidx.compose.ui.window.PopupLayout: boolean getShouldCreateCompositionOnAttachedToWindow()
+androidx.activity.EdgeToEdgeApi23: void setUp(androidx.activity.SystemBarStyle,androidx.activity.SystemBarStyle,android.view.Window,android.view.View,boolean,boolean)
+androidx.compose.ui.platform.AbstractComposeView: void setParentCompositionContext(androidx.compose.runtime.CompositionContext)
+androidx.lifecycle.EmptyActivityLifecycleCallbacks: void onActivityResumed(android.app.Activity)
+androidx.core.view.accessibility.AccessibilityNodeInfoCompat$Api33Impl: androidx.core.view.accessibility.AccessibilityNodeInfoCompat getChild(android.view.accessibility.AccessibilityNodeInfo,int,int)
+androidx.core.view.accessibility.AccessibilityNodeInfoCompat$Api34Impl: void setBoundsInWindow(android.view.accessibility.AccessibilityNodeInfo,android.graphics.Rect)
+androidx.core.view.WindowInsetsCompat$BuilderImpl: void applyInsetTypes()
+androidx.core.view.DisplayCutoutCompat$Api28Impl: android.view.DisplayCutout createDisplayCutout(android.graphics.Rect,java.util.List)
+androidx.core.view.ViewCompat$Api21Impl: float getTranslationZ(android.view.View)
+androidx.datastore.preferences.protobuf.WireFormat$FieldType: androidx.datastore.preferences.protobuf.WireFormat$FieldType valueOf(java.lang.String)
+androidx.compose.ui.platform.AndroidComposeView: androidx.compose.ui.node.RootForTest getRootForTest()
+androidx.core.app.ActivityCompat$Api23Impl: void requestPermissions(android.app.Activity,java.lang.String[],int)
+androidx.compose.ui.platform.coreshims.ContentCaptureSessionCompat$Api29Impl: void notifyViewTextChanged(android.view.contentcapture.ContentCaptureSession,android.view.autofill.AutofillId,java.lang.CharSequence)
+androidx.core.view.accessibility.AccessibilityNodeInfoCompat$Api34Impl: java.lang.CharSequence getContainerTitle(android.view.accessibility.AccessibilityNodeInfo)
+androidx.core.graphics.drawable.IconCompat$Api23Impl: android.net.Uri getUri(java.lang.Object)
+androidx.core.view.WindowInsetsCompat$Impl21: androidx.core.graphics.Insets getStableInsets()
+androidx.compose.foundation.text.selection.CrossStatus: androidx.compose.foundation.text.selection.CrossStatus valueOf(java.lang.String)
+androidx.compose.ui.node.NodeMeasuringIntrinsics$IntrinsicMinMax: androidx.compose.ui.node.NodeMeasuringIntrinsics$IntrinsicMinMax valueOf(java.lang.String)
+androidx.core.app.NotificationManagerCompat$Api24Impl: int getImportance(android.app.NotificationManager)
+androidx.compose.ui.layout.MeasuringIntrinsics$IntrinsicMinMax: androidx.compose.ui.layout.MeasuringIntrinsics$IntrinsicMinMax valueOf(java.lang.String)
+androidx.core.app.RemoteActionCompatParcelizer: androidx.core.app.RemoteActionCompat read(androidx.versionedparcelable.VersionedParcel)
+androidx.profileinstaller.ProfileInstallerInitializer$Handler28Impl: android.os.Handler createAsync(android.os.Looper)
+androidx.compose.ui.platform.ViewLayer: void setCameraDistancePx(float)
+androidx.compose.material3.TextFieldType: androidx.compose.material3.TextFieldType[] values()
+androidx.compose.foundation.MutatePriority: androidx.compose.foundation.MutatePriority[] values()
+androidx.core.os.BundleCompat$Api33Impl: java.lang.Object[] getParcelableArray(android.os.Bundle,java.lang.String,java.lang.Class)
+androidx.core.view.WindowInsetsCompat$Impl29: androidx.core.graphics.Insets getSystemGestureInsets()
+androidx.core.view.WindowInsetsCompat$Impl: androidx.core.graphics.Insets getInsetsIgnoringVisibility(int)
+androidx.core.view.DisplayCutoutCompat$Api28Impl: int getSafeInsetTop(android.view.DisplayCutout)
+androidx.core.graphics.drawable.IconCompat$Api28Impl: int getResId(java.lang.Object)
+androidx.compose.ui.text.android.StaticLayoutFactoryDefault: android.text.StaticLayout create(androidx.compose.ui.text.android.StaticLayoutParams)
+androidx.navigation.NavBackStackEntry$SavedStateViewModel: NavBackStackEntry$SavedStateViewModel(androidx.lifecycle.SavedStateHandle)
+com.nfcemu.data.library.LibraryEntryDirection: com.nfcemu.data.library.LibraryEntryDirection valueOf(java.lang.String)
+androidx.datastore.preferences.protobuf.Writer$FieldOrder: androidx.datastore.preferences.protobuf.Writer$FieldOrder valueOf(java.lang.String)
+androidx.compose.animation.EnterExitState: androidx.compose.animation.EnterExitState valueOf(java.lang.String)
+androidx.navigation.NavControllerViewModel: NavControllerViewModel()
+androidx.core.view.WindowInsetsCompat$Impl21: WindowInsetsCompat$Impl21(androidx.core.view.WindowInsetsCompat,android.view.WindowInsets)
+androidx.compose.material3.tokens.ColorSchemeKeyTokens: androidx.compose.material3.tokens.ColorSchemeKeyTokens[] values()
+androidx.compose.ui.autofill.AutofillApi26Helper: void setAutofillId(android.view.ViewStructure,android.view.autofill.AutofillId,int)
+androidx.compose.ui.graphics.BlendModeColorFilterHelper: androidx.compose.ui.graphics.BlendModeColorFilter createBlendModeColorFilter(android.graphics.BlendModeColorFilter)
+androidx.compose.ui.semantics.EmptySemanticsElement: EmptySemanticsElement()
+androidx.compose.ui.platform.TextToolbarStatus: androidx.compose.ui.platform.TextToolbarStatus valueOf(java.lang.String)
+androidx.compose.ui.window.SecureFlagPolicy: androidx.compose.ui.window.SecureFlagPolicy valueOf(java.lang.String)
+androidx.activity.OnBackPressedDispatcher$Api33Impl: void unregisterOnBackInvokedCallback(java.lang.Object,java.lang.Object)
+androidx.compose.ui.autofill.AutofillApi23Helper: int addChildCount(android.view.ViewStructure,int)
+androidx.core.app.AppOpsManagerCompat$Api29Impl: int checkOpNoThrow(android.app.AppOpsManager,java.lang.String,int,java.lang.String)
+com.nfcemu.nfc.NfcHardwareState: com.nfcemu.nfc.NfcHardwareState valueOf(java.lang.String)
+androidx.lifecycle.Lifecycle$State: androidx.lifecycle.Lifecycle$State valueOf(java.lang.String)
+androidx.compose.ui.text.input.TextInputServiceAndroid$TextInputCommand: androidx.compose.ui.text.input.TextInputServiceAndroid$TextInputCommand valueOf(java.lang.String)
+androidx.core.view.accessibility.AccessibilityNodeInfoCompat$Api34Impl: void getBoundsInWindow(android.view.accessibility.AccessibilityNodeInfo,android.graphics.Rect)
+androidx.lifecycle.ReportFragment$LifecycleCallbacks: void onActivityStarted(android.app.Activity)
+androidx.core.view.ViewCompat$Api23Impl: androidx.core.view.WindowInsetsCompat getRootWindowInsets(android.view.View)
+androidx.compose.ui.platform.AndroidComposeView: androidx.compose.ui.layout.Placeable$PlacementScope getPlacementScope()
+androidx.compose.ui.window.PopupLayout: void setParentLayoutCoordinates(androidx.compose.ui.layout.LayoutCoordinates)
+androidx.compose.ui.platform.coreshims.ViewStructureCompat$Api23Impl: void setTextStyle(android.view.ViewStructure,float,int,int,int)
+androidx.compose.material3.ScaffoldLayoutContent: androidx.compose.material3.ScaffoldLayoutContent valueOf(java.lang.String)
+androidx.core.view.WindowInsetsCompat$Impl28: int hashCode()
+androidx.core.view.accessibility.AccessibilityNodeInfoCompat$Api33Impl: void setUniqueId(android.view.accessibility.AccessibilityNodeInfo,java.lang.String)
+androidx.compose.ui.autofill.AutofillApi26Helper: java.lang.CharSequence textValue(android.view.autofill.AutofillValue)
+androidx.compose.ui.state.ToggleableState: androidx.compose.ui.state.ToggleableState[] values()
+androidx.compose.ui.platform.AndroidComposeView: androidx.compose.ui.hapticfeedback.HapticFeedback getHapticFeedBack()
+androidx.core.app.RemoteActionCompatParcelizer: RemoteActionCompatParcelizer()
+androidx.core.view.WindowInsetsCompat$Impl20: void copyRootViewBounds(android.view.View)
+androidx.lifecycle.ProcessLifecycleOwner$attach$1: ProcessLifecycleOwner$attach$1(androidx.lifecycle.ProcessLifecycleOwner)
+androidx.compose.ui.platform.AndroidComposeView: android.view.View findViewByAccessibilityIdTraversal(int)
+kotlinx.serialization.json.JsonNull: kotlinx.serialization.KSerializer serializer()
+androidx.core.view.ViewCompat$Api21Impl: void stopNestedScroll(android.view.View)
 androidx.compose.ui.autofill.AutofillType: androidx.compose.ui.autofill.AutofillType[] values()
-com.nfcemu.hce.Hilt_NfcEmuHostApduService: java.lang.Object generatedComponent()
-androidx.compose.ui.text.input.CursorAnchorInfoApi33Helper: android.view.inputmethod.CursorAnchorInfo$Builder setEditorBoundsInfo(android.view.inputmethod.CursorAnchorInfo$Builder,androidx.compose.ui.geometry.Rect)
-androidx.compose.ui.platform.coreshims.ViewCompatShims$Api30Impl: void setImportantForContentCapture(android.view.View,int)
-androidx.compose.ui.focus.FocusStateImpl: androidx.compose.ui.focus.FocusStateImpl[] values()
+androidx.compose.ui.node.TraversableNode$Companion$TraverseDescendantsAction: androidx.compose.ui.node.TraversableNode$Companion$TraverseDescendantsAction[] values()
+androidx.core.view.ViewCompat$Api28Impl: java.lang.Object requireViewById(android.view.View,int)
+kotlin.collections.AbstractMutableList: AbstractMutableList()
+androidx.compose.ui.autofill.AutofillApi26Helper: boolean isList(android.view.autofill.AutofillValue)
+androidx.compose.ui.platform.AndroidComposeView: kotlin.coroutines.CoroutineContext getCoroutineContext()
+androidx.compose.ui.platform.coreshims.ContentCaptureSessionCompat$Api29Impl: android.view.ViewStructure newVirtualViewStructure(android.view.contentcapture.ContentCaptureSession,android.view.autofill.AutofillId,long)
+androidx.compose.ui.platform.AndroidComposeView: androidx.compose.ui.platform.AndroidAccessibilityManager getAccessibilityManager()
+androidx.compose.ui.platform.AndroidComposeViewAccessibilityDelegateCompat$Api24Impl: void addSetProgressAction(androidx.core.view.accessibility.AccessibilityNodeInfoCompat,androidx.compose.ui.semantics.SemanticsNode)
+androidx.core.view.ViewCompat$Api21Impl: void setElevation(android.view.View,float)
+androidx.compose.ui.input.pointer.MotionEventHelper: long toRawOffset-dBAh8RU(android.view.MotionEvent,int)
+androidx.compose.ui.text.style.ResolvedTextDirection: androidx.compose.ui.text.style.ResolvedTextDirection[] values()
+com.nfcemu.data.export.ExportedProfile$Companion: kotlinx.serialization.KSerializer serializer()
+androidx.core.view.ViewCompat$Api29Impl: void setSystemGestureExclusionRects(android.view.View,java.util.List)
+androidx.lifecycle.EmptyActivityLifecycleCallbacks: void onActivityPaused(android.app.Activity)
+androidx.compose.ui.platform.RenderNodeVerificationHelper24: void discardDisplayList(android.view.RenderNode)
+androidx.compose.ui.focus.CustomDestinationResult: androidx.compose.ui.focus.CustomDestinationResult valueOf(java.lang.String)
+kotlin.LazyThreadSafetyMode: kotlin.LazyThreadSafetyMode[] values()
+androidx.compose.ui.platform.AndroidComposeView: androidx.compose.ui.platform.AndroidClipboardManager getClipboardManager()
+androidx.compose.ui.platform.Api29Impl: int getRecommendedTimeoutMillis(android.view.accessibility.AccessibilityManager,int,int)
+androidx.activity.ComponentActivity$Api33Impl: android.window.OnBackInvokedDispatcher getOnBackInvokedDispatcher(android.app.Activity)
+androidx.compose.ui.platform.AndroidComposeView: androidx.compose.ui.node.OwnerSnapshotObserver getSnapshotObserver()
+androidx.core.view.ViewCompat$Api21Impl: boolean dispatchNestedPreFling(android.view.View,float,float)
+androidx.compose.ui.platform.AndroidComposeView: androidx.compose.ui.platform.AccessibilityManager getAccessibilityManager()
+androidx.compose.ui.platform.AndroidComposeViewVerificationHelperMethodsO: void focusable(android.view.View,int,boolean)
+androidx.lifecycle.ReportFragment$LifecycleCallbacks: void onActivityPostResumed(android.app.Activity)
+androidx.compose.foundation.layout.Direction: androidx.compose.foundation.layout.Direction valueOf(java.lang.String)
+androidx.profileinstaller.FileSectionType: androidx.profileinstaller.FileSectionType[] values()
+kotlinx.coroutines.android.AndroidDispatcherFactory: int getLoadPriority()
+androidx.core.app.AppOpsManagerCompat$Api23Impl: java.lang.Object getSystemService(android.content.Context,java.lang.Class)
+androidx.core.view.WindowInsetsCompat$Impl30: void copyRootViewBounds(android.view.View)
+androidx.compose.ui.graphics.BlendModeColorFilterHelper: android.graphics.BlendModeColorFilter BlendModeColorFilter-xETnrds(long,int)
+androidx.core.view.ViewCompat$Api28Impl: boolean isScreenReaderFocusable(android.view.View)
+androidx.core.graphics.drawable.IconCompatParcelizer: IconCompatParcelizer()
+kotlinx.serialization.json.JsonArray$Companion: kotlinx.serialization.KSerializer serializer()
+com.nfcemu.data.export.NfcEmuFile$Companion: kotlinx.serialization.KSerializer serializer()
+androidx.compose.material.ripple.RippleHostView: void setRippleState(boolean)
+androidx.core.view.WindowInsetsCompat$Impl28: WindowInsetsCompat$Impl28(androidx.core.view.WindowInsetsCompat,android.view.WindowInsets)
+androidx.compose.ui.platform.AndroidComposeViewForceDarkModeQ: void disallowForceDark(android.view.View)
+androidx.compose.ui.platform.AndroidComposeView: long getLastMatrixRecalculationAnimationTime$ui_release()
+androidx.lifecycle.EmptyActivityLifecycleCallbacks: void onActivityStarted(android.app.Activity)
+androidx.core.view.WindowInsetsCompat$BuilderImpl29: void setStableInsets(androidx.core.graphics.Insets)
+androidx.lifecycle.ReportFragment$LifecycleCallbacks: void onActivityDestroyed(android.app.Activity)
+androidx.core.view.WindowInsetsCompat$Impl29: WindowInsetsCompat$Impl29(androidx.core.view.WindowInsetsCompat,androidx.core.view.WindowInsetsCompat$Impl29)
+androidx.compose.ui.platform.AndroidComposeViewAccessibilityDelegateCompat$ViewTranslationHelperMethodsS: void onCreateVirtualViewTranslationRequests(androidx.compose.ui.platform.AndroidComposeViewAccessibilityDelegateCompat,long[],int[],java.util.function.Consumer)
+androidx.compose.foundation.Api31Impl: android.widget.EdgeEffect create(android.content.Context,android.util.AttributeSet)
+com.nfcemu.hce.NfcEmuHostApduService: void onCreate()
+androidx.compose.ui.platform.AbstractComposeView: void setPreviousAttachedWindowToken(android.os.IBinder)
+androidx.activity.ComponentActivity: void setContentView(android.view.View)
+androidx.core.view.WindowInsetsCompat$Impl30: androidx.core.graphics.Insets getInsetsIgnoringVisibility(int)
+androidx.datastore.preferences.protobuf.GeneratedMessageLite$MethodToInvoke: androidx.datastore.preferences.protobuf.GeneratedMessageLite$MethodToInvoke valueOf(java.lang.String)
+androidx.compose.ui.platform.AndroidComposeView: void getFontLoader$annotations()
+androidx.startup.InitializationProvider: InitializationProvider()
+androidx.compose.foundation.text.selection.HandleReferencePoint: androidx.compose.foundation.text.selection.HandleReferencePoint[] values()
+androidx.compose.ui.text.android.StaticLayoutFactory33: boolean isFallbackLineSpacingEnabled(android.text.StaticLayout)
+androidx.activity.Api34Impl: float progress(android.window.BackEvent)
+androidx.compose.ui.autofill.AutofillApi23Helper: android.view.ViewStructure newChild(android.view.ViewStructure,int)
+androidx.datastore.preferences.PreferencesProto$Value$ValueCase: androidx.datastore.preferences.PreferencesProto$Value$ValueCase[] values()
+androidx.core.view.WindowInsetsCompat$Impl20: void setOverriddenInsets(androidx.core.graphics.Insets[])
+androidx.compose.ui.platform.coreshims.ContentCaptureSessionCompat$Api29Impl: android.view.ViewStructure newViewStructure(android.view.contentcapture.ContentCaptureSession,android.view.View)
+android.support.v4.app.RemoteActionCompatParcelizer: androidx.core.app.RemoteActionCompat read(androidx.versionedparcelable.VersionedParcel)
+androidx.core.view.ViewCompat$Api21Impl: void setTranslationZ(android.view.View,float)
+androidx.activity.EdgeToEdgeApi29: void setUp(androidx.activity.SystemBarStyle,androidx.activity.SystemBarStyle,android.view.Window,android.view.View,boolean,boolean)
+androidx.core.view.WindowInsetsCompat$Impl: androidx.core.graphics.Insets getInsets(int)
+androidx.compose.ui.node.NodeMeasuringIntrinsics$IntrinsicMinMax: androidx.compose.ui.node.NodeMeasuringIntrinsics$IntrinsicMinMax[] values()
+androidx.compose.ui.platform.AbstractComposeView: boolean getHasComposition()
+androidx.compose.ui.autofill.AutofillCallback: void unregister(androidx.compose.ui.autofill.AndroidAutofill)
+androidx.activity.OnBackPressedDispatcher$Api33Impl: android.window.OnBackInvokedCallback createOnBackInvokedCallback(kotlin.jvm.functions.Function0)
+androidx.lifecycle.ProcessLifecycleOwner$attach$1$onActivityPreCreated$1: ProcessLifecycleOwner$attach$1$onActivityPreCreated$1(androidx.lifecycle.ProcessLifecycleOwner)
+androidx.compose.ui.platform.ViewLayerVerificationHelper28: void setOutlineAmbientShadowColor(android.view.View,int)
+androidx.compose.material3.tokens.ShapeKeyTokens: androidx.compose.material3.tokens.ShapeKeyTokens[] values()
+androidx.compose.ui.graphics.ColorSpaceVerificationHelper: android.graphics.ColorSpace androidColorSpace(androidx.compose.ui.graphics.colorspace.ColorSpace)
+androidx.core.view.WindowInsetsCompat$Impl20: boolean equals(java.lang.Object)
+androidx.compose.animation.core.MutatePriority: androidx.compose.animation.core.MutatePriority[] values()
+androidx.core.view.WindowInsetsCompat$BuilderImpl20: void setStableInsets(androidx.core.graphics.Insets)
+androidx.core.view.ViewCompat$Api28Impl: void setAutofillId(android.view.View,androidx.core.view.autofill.AutofillIdCompat)
+androidx.core.view.accessibility.AccessibilityNodeInfoCompat$Api33Impl: void setTextSelectable(android.view.accessibility.AccessibilityNodeInfo,boolean)
+androidx.core.view.WindowInsetsCompat$Impl20: androidx.core.graphics.Insets getInsetsForType(int,boolean)
+androidx.core.view.WindowInsetsCompat$BuilderImpl29: WindowInsetsCompat$BuilderImpl29()
+androidx.datastore.preferences.protobuf.FieldType$Collection: androidx.datastore.preferences.protobuf.FieldType$Collection[] values()
+androidx.core.app.AppOpsManagerCompat$Api29Impl: java.lang.String getOpPackageName(android.content.Context)
+androidx.compose.ui.unit.LayoutDirection: androidx.compose.ui.unit.LayoutDirection valueOf(java.lang.String)
+androidx.compose.runtime.Recomposer$State: androidx.compose.runtime.Recomposer$State[] values()
+androidx.compose.animation.core.RepeatMode: androidx.compose.animation.core.RepeatMode[] values()
+androidx.core.view.ViewCompat$Api29Impl: void saveAttributeDataForStyleable(android.view.View,android.content.Context,int[],android.util.AttributeSet,android.content.res.TypedArray,int,int)
+com.nfcemu.ui.profileform.ProfileTypeTemplate: com.nfcemu.ui.profileform.ProfileTypeTemplate[] values()
+androidx.lifecycle.ReportFragment$LifecycleCallbacks: void onActivityPaused(android.app.Activity)
+androidx.compose.material3.ColorResourceHelper: long getColor-WaAFU9c(android.content.Context,int)
+androidx.core.view.WindowInsetsCompat$Impl20: androidx.core.graphics.Insets getRootStableInsets()
+androidx.compose.ui.window.PopupLayout: android.view.View getViewRoot()
+com.nfcemu.hce.NfcEmuHostApduService: com.nfcemu.domain.ActiveNdefSource getActiveNdefSource()
+androidx.compose.ui.node.LayoutNode$LayoutState: androidx.compose.ui.node.LayoutNode$LayoutState valueOf(java.lang.String)
+androidx.core.graphics.drawable.IconCompat$Api28Impl: android.net.Uri getUri(java.lang.Object)
+androidx.lifecycle.EmptyActivityLifecycleCallbacks: void onActivityCreated(android.app.Activity,android.os.Bundle)
+androidx.compose.ui.platform.AndroidComposeView: long getMeasureIteration()
+androidx.compose.ui.platform.DrawChildContainer: int getChildCount()
+androidx.compose.animation.core.MutatePriority: androidx.compose.animation.core.MutatePriority valueOf(java.lang.String)
+androidx.compose.ui.text.style.ResolvedTextDirection: androidx.compose.ui.text.style.ResolvedTextDirection valueOf(java.lang.String)
+androidx.core.view.WindowInsetsCompat$Impl20: boolean isRound()
+androidx.core.view.WindowInsetsCompat$Impl20: WindowInsetsCompat$Impl20(androidx.core.view.WindowInsetsCompat,android.view.WindowInsets)
+androidx.lifecycle.ReportFragment$LifecycleCallbacks: void onActivityCreated(android.app.Activity,android.os.Bundle)
+androidx.compose.ui.graphics.Api26Bitmap: androidx.compose.ui.graphics.colorspace.ColorSpace composeColorSpace$ui_graphics_release(android.graphics.Bitmap)
+androidx.compose.ui.autofill.AutofillApi26Helper: android.view.autofill.AutofillId getAutofillId(android.view.ViewStructure)
+androidx.core.view.WindowInsetsCompat$Impl20: void setRootViewData(androidx.core.graphics.Insets)
+androidx.compose.ui.text.android.StaticLayoutFactory26: void setJustificationMode(android.text.StaticLayout$Builder,int)
+kotlinx.coroutines.android.AndroidDispatcherFactory: java.lang.String hintOnError()
+androidx.core.view.accessibility.AccessibilityNodeInfoCompat$Api30Impl: java.lang.Object createRangeInfo(int,float,float,float)
+androidx.lifecycle.EmptyActivityLifecycleCallbacks: void onActivitySaveInstanceState(android.app.Activity,android.os.Bundle)
+com.nfcemu.hce.Hilt_NfcEmuHostApduService: dagger.hilt.android.internal.managers.ServiceComponentManager componentManager()
+androidx.datastore.preferences.protobuf.FieldType: androidx.datastore.preferences.protobuf.FieldType[] values()
+androidx.compose.runtime.InvalidationResult: androidx.compose.runtime.InvalidationResult[] values()
+androidx.compose.ui.platform.AndroidComposeView: void set_viewTreeOwners(androidx.compose.ui.platform.AndroidComposeView$ViewTreeOwners)
+androidx.core.view.ViewCompat$Api21Impl: boolean isNestedScrollingEnabled(android.view.View)
+androidx.lifecycle.Lifecycle$Event: androidx.lifecycle.Lifecycle$Event[] values()
+androidx.core.view.ViewCompat$Api29Impl: android.view.View$AccessibilityDelegate getAccessibilityDelegate(android.view.View)
+androidx.activity.OnBackPressedDispatcher$Api34Impl: android.window.OnBackInvokedCallback createOnBackAnimationCallback(kotlin.jvm.functions.Function1,kotlin.jvm.functions.Function1,kotlin.jvm.functions.Function0,kotlin.jvm.functions.Function0)
+androidx.lifecycle.ProcessLifecycleOwner$attach$1$onActivityPreCreated$1: void onActivityPostStarted(android.app.Activity)
+androidx.core.app.ActivityCompat$Api23Impl: void onSharedElementsReady(java.lang.Object)
+androidx.core.content.ContextCompat$Api26Impl: android.content.ComponentName startForegroundService(android.content.Context,android.content.Intent)
+com.nfcemu.hce.Hilt_NfcEmuHostApduService: dagger.hilt.android.internal.managers.ServiceComponentManager createComponentManager()
+androidx.activity.EdgeToEdgeApi21: void setUp(androidx.activity.SystemBarStyle,androidx.activity.SystemBarStyle,android.view.Window,android.view.View,boolean,boolean)
+com.nfcemu.ui.MainActivity: MainActivity()
+androidx.compose.ui.platform.actionmodecallback.MenuItemOption: androidx.compose.ui.platform.actionmodecallback.MenuItemOption valueOf(java.lang.String)
+androidx.core.graphics.drawable.IconCompatParcelizer: void write(androidx.core.graphics.drawable.IconCompat,androidx.versionedparcelable.VersionedParcel)
+androidx.compose.ui.platform.ComposeView: void setContent(kotlin.jvm.functions.Function2)
+androidx.core.view.DisplayCutoutCompat$Api28Impl: int getSafeInsetRight(android.view.DisplayCutout)
+androidx.core.view.WindowInsetsCompat$BuilderImpl: WindowInsetsCompat$BuilderImpl(androidx.core.view.WindowInsetsCompat)
+androidx.compose.ui.platform.AndroidComposeView: void setFontFamilyResolver(androidx.compose.ui.text.font.FontFamily$Resolver)
+androidx.core.graphics.drawable.IconCompat$Api30Impl: android.graphics.drawable.Icon createWithAdaptiveBitmapContentUri(android.net.Uri)
+androidx.core.view.WindowInsetsCompat$BuilderImpl: WindowInsetsCompat$BuilderImpl()
+androidx.lifecycle.ProcessLifecycleOwner$attach$1: void onActivityPaused(android.app.Activity)
+androidx.core.view.DisplayCutoutCompat$Api30Impl: android.view.DisplayCutout createDisplayCutout(android.graphics.Insets,android.graphics.Rect,android.graphics.Rect,android.graphics.Rect,android.graphics.Rect,android.graphics.Insets)
+androidx.compose.ui.platform.coreshims.ContentCaptureSessionCompat$Api29Impl: android.view.autofill.AutofillId newAutofillId(android.view.contentcapture.ContentCaptureSession,android.view.autofill.AutofillId,long)
+androidx.compose.ui.platform.AndroidViewsHandler: java.util.HashMap getLayoutNodeToHolder()
+androidx.core.app.CoreComponentFactory: CoreComponentFactory()
+androidx.compose.ui.platform.AndroidComposeView: void setLastMatrixRecalculationAnimationTime$ui_release(long)
+androidx.compose.foundation.text.Handle: androidx.compose.foundation.text.Handle valueOf(java.lang.String)
+androidx.core.view.WindowInsetsCompat$Impl20: void copyWindowDataInto(androidx.core.view.WindowInsetsCompat)
+com.nfcemu.ndefengine.WifiAuthType$Companion: kotlinx.serialization.KSerializer serializer()
+androidx.core.view.WindowInsetsCompat$Impl20: androidx.core.graphics.Insets getInsetsIgnoringVisibility(int)
+androidx.core.view.ViewCompat$Api30Impl: void setStateDescription(android.view.View,java.lang.CharSequence)
+androidx.datastore.preferences.protobuf.JavaType: androidx.datastore.preferences.protobuf.JavaType[] values()
+androidx.compose.ui.text.font.TypefaceHelperMethodsApi28: android.graphics.Typeface create(android.graphics.Typeface,int,boolean)
+androidx.compose.foundation.layout.SizeMode: androidx.compose.foundation.layout.SizeMode valueOf(java.lang.String)
+androidx.core.view.accessibility.AccessibilityNodeInfoCompat$Api33Impl: java.lang.String getCollectionItemColumnTitle(java.lang.Object)
+androidx.core.view.WindowInsetsCompat$Impl20: androidx.core.graphics.Insets getVisibleInsets(android.view.View)
+androidx.compose.material3.MinimumInteractiveModifier: MinimumInteractiveModifier()
+androidx.compose.material.ripple.RippleHostView: void setRippleState$lambda$2(androidx.compose.material.ripple.RippleHostView)
+androidx.compose.ui.text.android.BoringLayoutFactory33: android.text.BoringLayout create(java.lang.CharSequence,android.text.TextPaint,int,android.text.Layout$Alignment,float,float,android.text.BoringLayout$Metrics,boolean,boolean,android.text.TextUtils$TruncateAt,int)
+androidx.core.view.WindowInsetsCompat$Impl: boolean isConsumed()
+com.nfcemu.hce.NfcEmuHostApduService: void onDeactivated(int)
+androidx.lifecycle.ReportFragment$LifecycleCallbacks: void onActivityPrePaused(android.app.Activity)
+androidx.compose.ui.platform.AndroidComposeView: androidx.compose.ui.unit.LayoutDirection getLayoutDirection()
+androidx.compose.foundation.text.selection.CrossStatus: androidx.compose.foundation.text.selection.CrossStatus[] values()
+androidx.compose.ui.graphics.CanvasZHelper: void enableZ(android.graphics.Canvas,boolean)
+androidx.compose.ui.autofill.AutofillApi23Helper: void setId(android.view.ViewStructure,int,java.lang.String,java.lang.String,java.lang.String)
+androidx.core.graphics.drawable.IconCompat$Api28Impl: java.lang.String getResPackage(java.lang.Object)
+androidx.compose.material3.SnackbarDuration: androidx.compose.material3.SnackbarDuration[] values()
+androidx.core.view.accessibility.AccessibilityNodeInfoCompat$Api34Impl: boolean hasRequestInitialAccessibilityFocus(android.view.accessibility.AccessibilityNodeInfo)
+androidx.core.view.accessibility.AccessibilityNodeInfoCompat$Api33Impl: androidx.core.view.accessibility.AccessibilityNodeInfoCompat getParent(android.view.accessibility.AccessibilityNodeInfo,int)
+androidx.core.view.ViewCompat$Api21Impl: boolean dispatchNestedFling(android.view.View,float,float,boolean)
+androidx.compose.ui.window.PopupLayout: kotlin.jvm.functions.Function2 getContent()
+androidx.core.view.accessibility.AccessibilityNodeInfoCompat$Api33Impl: boolean isTextSelectable(android.view.accessibility.AccessibilityNodeInfo)
+androidx.compose.foundation.layout.LayoutOrientation: androidx.compose.foundation.layout.LayoutOrientation valueOf(java.lang.String)
+androidx.activity.Api34Impl: android.window.BackEvent createOnBackEvent(float,float,float,int)
+androidx.core.view.WindowInsetsCompat$Impl: androidx.core.graphics.Insets getSystemGestureInsets()
+androidx.core.view.WindowInsetsCompat$Impl20: void loadReflectionField()
+androidx.lifecycle.ProcessLifecycleOwner$attach$1: void onActivityStopped(android.app.Activity)
+kotlinx.coroutines.channels.BufferOverflow: kotlinx.coroutines.channels.BufferOverflow[] values()
+androidx.core.view.WindowInsetsCompat$Impl28: boolean equals(java.lang.Object)
+androidx.compose.ui.node.NodeMeasuringIntrinsics$IntrinsicWidthHeight: androidx.compose.ui.node.NodeMeasuringIntrinsics$IntrinsicWidthHeight[] values()
+androidx.core.view.ViewCompat$Api21Impl: boolean isImportantForAccessibility(android.view.View)
+androidx.compose.ui.window.PopupLayout: androidx.compose.ui.platform.AbstractComposeView getSubCompositionView()
+androidx.compose.ui.window.PopupLayout: void getParams$ui_release$annotations()
+androidx.compose.ui.autofill.AutofillApi26Helper: void setAutofillType(android.view.ViewStructure,int)
+androidx.compose.ui.layout.IntrinsicWidthHeight: androidx.compose.ui.layout.IntrinsicWidthHeight[] values()
+androidx.core.view.accessibility.AccessibilityNodeInfoCompat$Api30Impl: java.lang.CharSequence getStateDescription(android.view.accessibility.AccessibilityNodeInfo)
+androidx.datastore.preferences.PreferencesProto$Value$ValueCase: androidx.datastore.preferences.PreferencesProto$Value$ValueCase valueOf(java.lang.String)
+androidx.compose.animation.core.RepeatMode: androidx.compose.animation.core.RepeatMode valueOf(java.lang.String)
+androidx.compose.ui.platform.TextToolbarHelperMethods: void invalidateContentRect(android.view.ActionMode)
+androidx.compose.ui.window.PopupLayout: void setClippingEnabled(boolean)
+kotlin.coroutines.intrinsics.CoroutineSingletons: kotlin.coroutines.intrinsics.CoroutineSingletons[] values()
+androidx.compose.ui.text.android.BoringLayoutFactory33: android.text.BoringLayout$Metrics isBoring(java.lang.CharSequence,android.text.TextPaint,android.text.TextDirectionHeuristic)
+androidx.compose.ui.platform.ViewLayer: androidx.compose.ui.graphics.Path getManualClipPath()
+androidx.compose.ui.autofill.AutofillApi23Helper: void setDimens(android.view.ViewStructure,int,int,int,int,int,int)
+androidx.lifecycle.EmptyActivityLifecycleCallbacks: void onActivityStopped(android.app.Activity)
+kotlinx.coroutines.channels.BufferOverflow: kotlinx.coroutines.channels.BufferOverflow valueOf(java.lang.String)
+androidx.compose.ui.platform.AndroidComposeView: androidx.compose.ui.autofill.AutofillTree getAutofillTree()
+androidx.compose.ui.platform.coreshims.ViewCompatShims$Api26Impl: android.view.autofill.AutofillId getAutofillId(android.view.View)
+androidx.core.view.ViewCompat$Api28Impl: void setAccessibilityHeading(android.view.View,boolean)
+androidx.lifecycle.ProcessLifecycleOwner$attach$1: void onActivityPreCreated(android.app.Activity,android.os.Bundle)
+androidx.emoji2.text.EmojiExclusions$EmojiExclusions_Api34: java.util.Set getExclusions()
 androidx.lifecycle.ReportFragment$LifecycleCallbacks: void onActivityPreDestroyed(android.app.Activity)
+androidx.compose.foundation.gestures.Orientation: androidx.compose.foundation.gestures.Orientation[] values()
+androidx.core.view.DisplayCutoutCompat$Api28Impl: int getSafeInsetBottom(android.view.DisplayCutout)
+androidx.core.view.ViewCompat$Api21Impl: void callCompatInsetAnimationCallback(android.view.WindowInsets,android.view.View)
+androidx.compose.ui.platform.AndroidComposeView: androidx.compose.ui.unit.Density getDensity()
+androidx.compose.ui.platform.ViewLayer: androidx.compose.ui.platform.AndroidComposeView getOwnerView()
+androidx.core.app.RemoteActionCompat: RemoteActionCompat()
+androidx.compose.ui.window.PopupLayout: androidx.compose.ui.unit.LayoutDirection getParentLayoutDirection()
+androidx.compose.ui.platform.AndroidComposeView: androidx.compose.ui.platform.AndroidComposeView$ViewTreeOwners get_viewTreeOwners()
+androidx.activity.OnBackPressedDispatcher$Api33Impl: void registerOnBackInvokedCallback(java.lang.Object,int,java.lang.Object)
+androidx.core.app.AppOpsManagerCompat$Api23Impl: java.lang.String permissionToOp(java.lang.String)
+androidx.compose.ui.platform.AndroidComposeView: androidx.compose.ui.input.pointer.PointerIconService getPointerIconService()
+androidx.compose.ui.platform.TextToolbarHelperMethods: android.view.ActionMode startActionMode(android.view.View,android.view.ActionMode$Callback,int)
+androidx.lifecycle.ReportFragment$LifecycleCallbacks: void onActivitySaveInstanceState(android.app.Activity,android.os.Bundle)
+androidx.compose.ui.platform.AbstractComposeView: void getShowLayoutBounds$annotations()
+androidx.compose.ui.node.TraversableNode$Companion$TraverseDescendantsAction: androidx.compose.ui.node.TraversableNode$Companion$TraverseDescendantsAction valueOf(java.lang.String)
+androidx.core.view.accessibility.AccessibilityNodeInfoCompat$Api34Impl: void setContainerTitle(android.view.accessibility.AccessibilityNodeInfo,java.lang.CharSequence)
+androidx.compose.ui.platform.AndroidComposeView: boolean getHasPendingMeasureOrLayout()
+androidx.emoji2.text.EmojiCompatInitializer: EmojiCompatInitializer()
+androidx.datastore.preferences.protobuf.Writer$FieldOrder: androidx.datastore.preferences.protobuf.Writer$FieldOrder[] values()
+kotlin.coroutines.intrinsics.CoroutineSingletons: kotlin.coroutines.intrinsics.CoroutineSingletons valueOf(java.lang.String)
+androidx.core.view.WindowInsetsCompat$Impl29: void setStableInsets(androidx.core.graphics.Insets)
+androidx.datastore.preferences.protobuf.GeneratedMessageLite$MethodToInvoke: androidx.datastore.preferences.protobuf.GeneratedMessageLite$MethodToInvoke[] values()
+androidx.compose.ui.platform.AndroidComposeView: androidx.compose.ui.platform.AndroidViewsHandler getAndroidViewsHandler$ui_release()
+androidx.compose.ui.platform.coreshims.ViewStructureCompat$Api23Impl: void setContentDescription(android.view.ViewStructure,java.lang.CharSequence)
+androidx.compose.ui.platform.ComposeView: java.lang.CharSequence getAccessibilityClassName()
+kotlinx.serialization.json.ClassDiscriminatorMode: kotlinx.serialization.json.ClassDiscriminatorMode[] values()
+androidx.compose.ui.platform.AndroidComposeView: androidx.compose.ui.platform.SoftwareKeyboardController getSoftwareKeyboardController()
+androidx.compose.ui.layout.MeasuringIntrinsics$IntrinsicWidthHeight: androidx.compose.ui.layout.MeasuringIntrinsics$IntrinsicWidthHeight[] values()
+androidx.core.graphics.drawable.IconCompat: IconCompat()
+com.nfcemu.ndefengine.NdefPayload$Companion: kotlinx.serialization.KSerializer serializer()
+androidx.compose.material3.tokens.TypographyKeyTokens: androidx.compose.material3.tokens.TypographyKeyTokens[] values()
+androidx.core.view.ViewConfigurationCompat$Api26Impl: float getScaledVerticalScrollFactor(android.view.ViewConfiguration)
+androidx.compose.ui.platform.actionmodecallback.MenuItemOption: androidx.compose.ui.platform.actionmodecallback.MenuItemOption[] values()
+androidx.core.view.ViewCompat$Api21Impl: void setTransitionName(android.view.View,java.lang.String)
+androidx.core.view.WindowInsetsCompat$BuilderImpl20: WindowInsetsCompat$BuilderImpl20(androidx.core.view.WindowInsetsCompat)
+com.nfcemu.hce.Hilt_NfcEmuHostApduService: dagger.hilt.internal.GeneratedComponentManager componentManager()
+androidx.lifecycle.EmptyActivityLifecycleCallbacks: void onActivityDestroyed(android.app.Activity)
+androidx.compose.ui.platform.coreshims.ViewCompatShims$Api30Impl: void setImportantForContentCapture(android.view.View,int)
+androidx.compose.ui.focus.FocusTargetNode$FocusTargetElement: FocusTargetNode$FocusTargetElement()
+androidx.core.graphics.Insets$Api29Impl: android.graphics.Insets of(int,int,int,int)
+androidx.datastore.preferences.protobuf.FieldType$Collection: androidx.datastore.preferences.protobuf.FieldType$Collection valueOf(java.lang.String)
+androidx.activity.Api34Impl: float touchY(android.window.BackEvent)
+androidx.compose.material3.SnackbarResult: androidx.compose.material3.SnackbarResult[] values()
+androidx.compose.foundation.text.selection.SelectionHandleAnchor: androidx.compose.foundation.text.selection.SelectionHandleAnchor[] values()
+androidx.datastore.preferences.protobuf.WireFormat$JavaType: androidx.datastore.preferences.protobuf.WireFormat$JavaType[] values()
+androidx.core.view.accessibility.AccessibilityNodeInfoCompat$Api34Impl: long getMinDurationBetweenContentChangeMillis(android.view.accessibility.AccessibilityNodeInfo)
+androidx.core.app.RemoteActionCompatParcelizer: void write(androidx.core.app.RemoteActionCompat,androidx.versionedparcelable.VersionedParcel)
+androidx.core.view.DisplayCutoutCompat$Api28Impl: java.util.List getBoundingRects(android.view.DisplayCutout)
+androidx.compose.ui.input.pointer.util.VelocityTracker1D$Strategy: androidx.compose.ui.input.pointer.util.VelocityTracker1D$Strategy[] values()
+androidx.datastore.preferences.protobuf.JavaType: androidx.datastore.preferences.protobuf.JavaType valueOf(java.lang.String)
+androidx.lifecycle.ReportFragment$LifecycleCallbacks: void onActivityPostStarted(android.app.Activity)
+androidx.core.view.ViewCompat$Api21Impl: void setBackgroundTintMode(android.view.View,android.graphics.PorterDuff$Mode)
+androidx.core.content.ContextCompat$Api26Impl: android.content.Intent registerReceiver(android.content.Context,android.content.BroadcastReceiver,android.content.IntentFilter,java.lang.String,android.os.Handler,int)
+kotlinx.coroutines.flow.SharingCommand: kotlinx.coroutines.flow.SharingCommand valueOf(java.lang.String)
+kotlinx.coroutines.CoroutineStart: kotlinx.coroutines.CoroutineStart valueOf(java.lang.String)
+kotlinx.coroutines.scheduling.CoroutineScheduler$WorkerState: kotlinx.coroutines.scheduling.CoroutineScheduler$WorkerState valueOf(java.lang.String)
+androidx.core.view.WindowInsetsCompat$Impl20: WindowInsetsCompat$Impl20(androidx.core.view.WindowInsetsCompat,androidx.core.view.WindowInsetsCompat$Impl20)
+androidx.compose.animation.core.AnimationEndReason: androidx.compose.animation.core.AnimationEndReason[] values()
+androidx.core.view.WindowInsetsCompat$BuilderImpl29: void setSystemGestureInsets(androidx.core.graphics.Insets)
+androidx.compose.ui.platform.AbstractComposeView: void getDisposeViewCompositionStrategy$annotations()
+androidx.compose.ui.platform.AndroidComposeView: void setLayoutDirection(androidx.compose.ui.unit.LayoutDirection)
+androidx.compose.ui.window.PopupLayout: java.lang.String getTestTag()
+androidx.core.view.ViewCompat$Api20Impl: android.view.WindowInsets dispatchApplyWindowInsets(android.view.View,android.view.WindowInsets)
+androidx.activity.Api34Impl: float touchX(android.window.BackEvent)
+androidx.compose.foundation.text.selection.SelectionHandleAnchor: androidx.compose.foundation.text.selection.SelectionHandleAnchor valueOf(java.lang.String)
+androidx.compose.ui.window.PopupLayout: void setParentLayoutDirection(androidx.compose.ui.unit.LayoutDirection)
+androidx.compose.ui.platform.AndroidComposeView: androidx.compose.ui.platform.ClipboardManager getClipboardManager()
+androidx.compose.ui.platform.AndroidComposeViewTranslationCallbackS: void clearViewTranslationCallback(android.view.View)
+androidx.compose.material3.SnackbarResult: androidx.compose.material3.SnackbarResult valueOf(java.lang.String)
+android.support.v4.app.RemoteActionCompatParcelizer: RemoteActionCompatParcelizer()
+androidx.compose.material3.tokens.ShapeKeyTokens: androidx.compose.material3.tokens.ShapeKeyTokens valueOf(java.lang.String)
+androidx.core.view.WindowInsetsCompat$BuilderImpl: void setInsets(int,androidx.core.graphics.Insets)
+androidx.compose.ui.window.PopupLayout: androidx.compose.ui.layout.LayoutCoordinates getParentLayoutCoordinates()
+androidx.compose.ui.autofill.AutofillCallback: void register(androidx.compose.ui.autofill.AndroidAutofill)
+com.nfcemu.ndefengine.hce.Type4TagApduProcessor$SelectedFile: com.nfcemu.ndefengine.hce.Type4TagApduProcessor$SelectedFile[] values()
+com.nfcemu.hce.NfcEmuHostApduService: void setActiveNdefSource(com.nfcemu.domain.ActiveNdefSource)
+com.nfcemu.hce.Hilt_NfcEmuHostApduService: java.lang.Object generatedComponent()
+androidx.core.view.WindowInsetsCompat$Impl: boolean isRound()
+com.nfcemu.hce.NfcEmuHostApduService: void onDestroy()
+androidx.compose.ui.autofill.AutofillApi26Helper: boolean isDate(android.view.autofill.AutofillValue)
+androidx.compose.ui.focus.FocusStateImpl: androidx.compose.ui.focus.FocusStateImpl[] values()
+androidx.core.view.WindowInsetsCompat$Impl28: androidx.core.view.DisplayCutoutCompat getDisplayCutout()
+androidx.core.view.WindowInsetsCompat$Impl: androidx.core.graphics.Insets getStableInsets()
+kotlinx.serialization.json.JsonPrimitive$Companion: kotlinx.serialization.KSerializer serializer()
+androidx.datastore.preferences.protobuf.ProtoSyntax: androidx.datastore.preferences.protobuf.ProtoSyntax[] values()
+androidx.datastore.preferences.protobuf.FieldType: androidx.datastore.preferences.protobuf.FieldType valueOf(java.lang.String)
+androidx.compose.foundation.Api31Impl: float getDistance(android.widget.EdgeEffect)
+androidx.core.view.accessibility.AccessibilityNodeInfoCompat$Api33Impl: androidx.core.view.accessibility.AccessibilityNodeInfoCompat$CollectionItemInfoCompat buildCollectionItemInfoCompat(boolean,int,int,int,int,boolean,java.lang.String,java.lang.String)
+androidx.core.view.WindowInsetsCompat$Impl29: androidx.core.graphics.Insets getTappableElementInsets()
+androidx.compose.ui.platform.AndroidComposeView: void getShowLayoutBounds$annotations()
+kotlin.LazyThreadSafetyMode: kotlin.LazyThreadSafetyMode valueOf(java.lang.String)
+androidx.core.os.BundleCompat$Api33Impl: java.io.Serializable getSerializable(android.os.Bundle,java.lang.String,java.lang.Class)
+androidx.compose.ui.platform.ComposeView: boolean getShouldCreateCompositionOnAttachedToWindow()
+androidx.core.view.ViewCompat$Api21Impl: androidx.core.view.WindowInsetsCompat computeSystemWindowInsets(android.view.View,androidx.core.view.WindowInsetsCompat,android.graphics.Rect)
+kotlinx.coroutines.selects.TrySelectDetailedResult: kotlinx.coroutines.selects.TrySelectDetailedResult[] values()
+androidx.core.view.WindowInsetsCompat$BuilderImpl29: androidx.core.view.WindowInsetsCompat build()
+androidx.core.view.WindowInsetsCompat$Impl: void copyRootViewBounds(android.view.View)
+androidx.compose.foundation.layout.IntrinsicSize: androidx.compose.foundation.layout.IntrinsicSize valueOf(java.lang.String)
+androidx.compose.material3.tokens.TypographyKeyTokens: androidx.compose.material3.tokens.TypographyKeyTokens valueOf(java.lang.String)
+androidx.lifecycle.LifecycleDispatcher$DispatcherActivityCallback: LifecycleDispatcher$DispatcherActivityCallback()
+androidx.compose.ui.text.platform.extensions.LocaleListHelperMethods: java.lang.Object localeSpan(androidx.compose.ui.text.intl.LocaleList)
+androidx.core.view.ViewCompat$Api28Impl: boolean isAccessibilityHeading(android.view.View)
+androidx.compose.ui.platform.AndroidComposeViewAccessibilityDelegateCompat$ViewTranslationHelperMethodsS: void onVirtualViewTranslationResponses(androidx.compose.ui.platform.AndroidComposeViewAccessibilityDelegateCompat,android.util.LongSparseArray)
+androidx.compose.ui.platform.AndroidComposeView: androidx.compose.ui.autofill.Autofill getAutofill()
+androidx.compose.ui.text.input.CursorAnchorInfoApi34Helper: android.view.inputmethod.CursorAnchorInfo$Builder addVisibleLineBounds(android.view.inputmethod.CursorAnchorInfo$Builder,androidx.compose.ui.text.TextLayoutResult,androidx.compose.ui.geometry.Rect)
+androidx.compose.ui.platform.ViewLayerVerificationHelper31: void setRenderEffect(android.view.View,androidx.compose.ui.graphics.RenderEffect)
+kotlinx.coroutines.flow.SharingCommand: kotlinx.coroutines.flow.SharingCommand[] values()
+androidx.core.app.NotificationManagerCompat$Api24Impl: boolean areNotificationsEnabled(android.app.NotificationManager)
+androidx.compose.ui.node.LayoutNode$UsageByParent: androidx.compose.ui.node.LayoutNode$UsageByParent valueOf(java.lang.String)
+androidx.core.view.WindowInsetsCompat$BuilderImpl30: WindowInsetsCompat$BuilderImpl30()
+androidx.core.view.WindowInsetsCompat$BuilderImpl29: void setMandatorySystemGestureInsets(androidx.core.graphics.Insets)
+androidx.core.view.ViewCompat$Api28Impl: void removeOnUnhandledKeyEventListener(android.view.View,androidx.core.view.ViewCompat$OnUnhandledKeyEventListenerCompat)
+androidx.core.graphics.drawable.IconCompat$Api26Impl: android.graphics.drawable.Drawable createAdaptiveIconDrawable(android.graphics.drawable.Drawable,android.graphics.drawable.Drawable)
+androidx.compose.ui.layout.IntrinsicMinMax: androidx.compose.ui.layout.IntrinsicMinMax valueOf(java.lang.String)
+androidx.datastore.preferences.protobuf.WireFormat$JavaType: androidx.datastore.preferences.protobuf.WireFormat$JavaType valueOf(java.lang.String)
+androidx.core.view.WindowInsetsCompat$Impl20: boolean isVisible(int)
+androidx.compose.ui.platform.WrapperRenderNodeLayerHelperMethods: void onDescendantInvalidated(androidx.compose.ui.platform.AndroidComposeView)
+androidx.core.view.WindowCompat$Api30Impl: void setDecorFitsSystemWindows(android.view.Window,boolean)
+androidx.lifecycle.ReportFragment$LifecycleCallbacks: void onActivityPostCreated(android.app.Activity,android.os.Bundle)
+androidx.compose.material.ripple.UnprojectedRipple$MRadiusHelper: void setRadius(android.graphics.drawable.RippleDrawable,int)
+androidx.core.view.WindowInsetsCompat$Impl: androidx.core.view.DisplayCutoutCompat getDisplayCutout()
+androidx.profileinstaller.ProfileInstallerInitializer: ProfileInstallerInitializer()
+androidx.lifecycle.SavedStateHandlesVM: SavedStateHandlesVM()
+androidx.core.view.WindowInsetsCompat$Impl: void setStableInsets(androidx.core.graphics.Insets)
+androidx.core.view.WindowInsetsCompat$Impl: androidx.core.graphics.Insets getSystemWindowInsets()
+androidx.core.view.WindowInsetsCompat$Impl: void copyWindowDataInto(androidx.core.view.WindowInsetsCompat)
+androidx.core.view.ViewCompat$Api29Impl: android.view.contentcapture.ContentCaptureSession getContentCaptureSession(android.view.View)
+androidx.profileinstaller.ProfileInstallReceiver: ProfileInstallReceiver()
+kotlinx.coroutines.CoroutineStart: kotlinx.coroutines.CoroutineStart[] values()
+kotlinx.serialization.json.JsonElement$Companion: kotlinx.serialization.KSerializer serializer()
+androidx.core.view.WindowInsetsCompat$Impl: boolean equals(java.lang.Object)
+androidx.compose.ui.platform.AndroidComposeView: androidx.compose.ui.platform.AndroidComposeView$ViewTreeOwners getViewTreeOwners()
+androidx.compose.ui.platform.AndroidComposeView: androidx.compose.ui.platform.ViewConfiguration getViewConfiguration()
+androidx.core.view.accessibility.AccessibilityNodeInfoCompat$Api34Impl: void setQueryFromAppProcessEnabled(android.view.accessibility.AccessibilityNodeInfo,android.view.View,boolean)
+androidx.compose.material3.InputPhase: androidx.compose.material3.InputPhase[] values()
+androidx.compose.foundation.MutatePriority: androidx.compose.foundation.MutatePriority valueOf(java.lang.String)
+androidx.compose.foundation.text.HandleState: androidx.compose.foundation.text.HandleState valueOf(java.lang.String)
+androidx.core.view.ViewCompat$Api30Impl: java.lang.CharSequence getStateDescription(android.view.View)
+androidx.core.view.ViewCompat$Api23Impl: void setScrollIndicators(android.view.View,int)
+androidx.profileinstaller.ProfileInstallerInitializer$Choreographer16Impl: void postFrameCallback(java.lang.Runnable)
+androidx.core.view.WindowInsetsCompat$BuilderImpl: androidx.core.view.WindowInsetsCompat build()
+androidx.core.view.WindowInsetsCompat$Impl30: boolean isVisible(int)
+androidx.core.app.AppOpsManagerCompat$Api29Impl: android.app.AppOpsManager getSystemService(android.content.Context)
+androidx.navigation.compose.BackStackEntryIdViewModel: BackStackEntryIdViewModel(androidx.lifecycle.SavedStateHandle)
+androidx.compose.ui.window.PopupLayout: void setPopupContentSize-fhxjrPA(androidx.compose.ui.unit.IntSize)
+androidx.core.view.ViewCompat$Api21Impl: android.content.res.ColorStateList getBackgroundTintList(android.view.View)
+androidx.core.os.BundleApi21ImplKt: void putSize(android.os.Bundle,java.lang.String,android.util.Size)
+androidx.compose.ui.platform.RenderNodeVerificationHelper23: void destroyDisplayListData(android.view.RenderNode)
+androidx.compose.ui.platform.AndroidComposeView: androidx.compose.ui.input.InputModeManager getInputModeManager()
+com.nfcemu.hce.NfcEmuHostApduService: NfcEmuHostApduService()
+androidx.lifecycle.LifecycleDispatcher$DispatcherActivityCallback: void onActivityCreated(android.app.Activity,android.os.Bundle)
+androidx.core.view.WindowInsetsCompat$BuilderImpl30: WindowInsetsCompat$BuilderImpl30(androidx.core.view.WindowInsetsCompat)
+androidx.core.view.WindowInsetsCompat$BuilderImpl29: WindowInsetsCompat$BuilderImpl29(androidx.core.view.WindowInsetsCompat)
+androidx.core.view.ViewCompat$Api21Impl: android.graphics.PorterDuff$Mode getBackgroundTintMode(android.view.View)
+androidx.core.view.WindowInsetsCompat$BuilderImpl: void setStableInsets(androidx.core.graphics.Insets)
+com.nfcemu.hce.Hilt_NfcEmuHostApduService: void inject()
+androidx.core.view.WindowInsetsCompat$Impl: androidx.core.view.WindowInsetsCompat consumeStableInsets()
+androidx.compose.ui.platform.coreshims.ContentCaptureSessionCompat$Api23Impl: android.os.Bundle getExtras(android.view.ViewStructure)
+com.nfcemu.data.library.LibraryEntry$Companion: kotlinx.serialization.KSerializer serializer()
+androidx.core.view.ViewCompat$Api29Impl: java.util.List getSystemGestureExclusionRects(android.view.View)
+kotlinx.coroutines.android.AndroidExceptionPreHandler: AndroidExceptionPreHandler()
+androidx.compose.ui.platform.AbstractComposeView: void setParentContext(androidx.compose.runtime.CompositionContext)
+androidx.compose.ui.platform.RenderNodeVerificationHelper28: int getAmbientShadowColor(android.view.RenderNode)
+androidx.core.graphics.drawable.IconCompat$Api26Impl: android.graphics.drawable.Icon createWithAdaptiveBitmap(android.graphics.Bitmap)
+androidx.core.view.WindowInsetsCompat$Impl: int hashCode()
+androidx.core.view.WindowInsetsCompat$Impl: boolean isVisible(int)
+androidx.core.view.WindowInsetsCompat$Impl: androidx.core.view.WindowInsetsCompat consumeSystemWindowInsets()
+androidx.core.view.ViewCompat$Api30Impl: void setImportantForContentCapture(android.view.View,int)
+androidx.core.view.accessibility.AccessibilityNodeInfoCompat$Api33Impl: java.lang.String getUniqueId(android.view.accessibility.AccessibilityNodeInfo)
+androidx.compose.ui.platform.AndroidComposeView: void setShowLayoutBounds(boolean)
+androidx.activity.EdgeToEdgeApi26: void setUp(androidx.activity.SystemBarStyle,androidx.activity.SystemBarStyle,android.view.Window,android.view.View,boolean,boolean)
+com.nfcemu.ndefengine.WifiAuthType: com.nfcemu.ndefengine.WifiAuthType[] values()
+kotlinx.coroutines.android.AndroidDispatcherFactory: AndroidDispatcherFactory()
+android.support.v4.graphics.drawable.IconCompatParcelizer: androidx.core.graphics.drawable.IconCompat read(androidx.versionedparcelable.VersionedParcel)
+androidx.core.app.AppOpsManagerCompat$Api23Impl: int noteProxyOp(android.app.AppOpsManager,java.lang.String,java.lang.String)
+androidx.compose.ui.graphics.Api26Bitmap: android.graphics.Bitmap createBitmap-x__-hDU$ui_graphics_release(int,int,int,boolean,androidx.compose.ui.graphics.colorspace.ColorSpace)
+androidx.compose.ui.text.AnnotationType: androidx.compose.ui.text.AnnotationType[] values()
+androidx.compose.ui.autofill.AutofillApi26Helper: boolean isToggle(android.view.autofill.AutofillValue)
+androidx.compose.ui.platform.AndroidComposeView: androidx.compose.ui.focus.FocusOwner getFocusOwner()
+androidx.lifecycle.LegacySavedStateHandleController$OnRecreation: LegacySavedStateHandleController$OnRecreation()
+androidx.core.view.ViewCompat$Api21Impl: boolean dispatchNestedPreScroll(android.view.View,int,int,int[],int[])
+androidx.lifecycle.ReportFragment$LifecycleCallbacks: ReportFragment$LifecycleCallbacks()
+androidx.compose.ui.platform.AndroidComposeView: androidx.compose.ui.draganddrop.DragAndDropManager getDragAndDropManager()
+androidx.core.view.WindowInsetsCompat$Impl20: void setRootWindowInsets(androidx.core.view.WindowInsetsCompat)
+androidx.compose.ui.platform.AndroidComposeView: void getLastMatrixRecalculationAnimationTime$ui_release$annotations()
+kotlin.time.DurationUnit: kotlin.time.DurationUnit valueOf(java.lang.String)
+androidx.lifecycle.Lifecycle$State: androidx.lifecycle.Lifecycle$State[] values()
+androidx.core.view.ViewCompat$Api29Impl: void setContentCaptureSession(android.view.View,androidx.core.view.contentcapture.ContentCaptureSessionCompat)
+androidx.compose.ui.platform.AndroidComposeViewStartDragAndDropN: boolean startDragAndDrop(android.view.View,androidx.compose.ui.draganddrop.DragAndDropTransferData,androidx.compose.ui.draganddrop.ComposeDragShadowBuilder)
+androidx.core.view.accessibility.AccessibilityNodeInfoCompat$Api34Impl: void setMinDurationBetweenContentChangeMillis(android.view.accessibility.AccessibilityNodeInfo,long)
+androidx.lifecycle.ProcessLifecycleInitializer: ProcessLifecycleInitializer()
+androidx.core.view.WindowInsetsCompat$Impl20: boolean isTypeVisible(int)
+androidx.compose.ui.platform.coreshims.ViewStructureCompat$Api23Impl: void setText(android.view.ViewStructure,java.lang.CharSequence)
+androidx.core.view.ViewCompat$Api21Impl: void setOnApplyWindowInsetsListener(android.view.View,androidx.core.view.OnApplyWindowInsetsListener)
+androidx.compose.ui.window.SecureFlagPolicy: androidx.compose.ui.window.SecureFlagPolicy[] values()
+androidx.emoji2.text.ConcurrencyHelpers$Handler28Impl: android.os.Handler createAsync(android.os.Looper)
+androidx.compose.ui.platform.ViewLayerContainer: void dispatchGetDisplayList()
+androidx.compose.material3.SnackbarDuration: androidx.compose.material3.SnackbarDuration valueOf(java.lang.String)
+androidx.compose.runtime.InvalidationResult: androidx.compose.runtime.InvalidationResult valueOf(java.lang.String)
+kotlinx.serialization.json.ClassDiscriminatorMode: kotlinx.serialization.json.ClassDiscriminatorMode valueOf(java.lang.String)
+androidx.compose.ui.platform.RenderNodeVerificationHelper28: void setAmbientShadowColor(android.view.RenderNode,int)
+androidx.compose.ui.layout.MeasuringIntrinsics$IntrinsicWidthHeight: androidx.compose.ui.layout.MeasuringIntrinsics$IntrinsicWidthHeight valueOf(java.lang.String)
+androidx.compose.material3.TextFieldType: androidx.compose.material3.TextFieldType valueOf(java.lang.String)
+androidx.compose.material3.ScaffoldLayoutContent: androidx.compose.material3.ScaffoldLayoutContent[] values()
+androidx.compose.ui.text.android.StaticLayoutFactory28: void setUseLineSpacingFromFallbacks(android.text.StaticLayout$Builder,boolean)
+androidx.core.view.ViewCompat$Api21Impl: void setNestedScrollingEnabled(android.view.View,boolean)
+kotlinx.coroutines.android.AndroidExceptionPreHandler: void handleException(kotlin.coroutines.CoroutineContext,java.lang.Throwable)
+androidx.compose.ui.platform.coreshims.ContentCaptureSessionCompat$Api29Impl: void notifyViewAppeared(android.view.contentcapture.ContentCaptureSession,android.view.ViewStructure)
+androidx.core.view.WindowInsetsCompat$BuilderImpl: void setSystemWindowInsets(androidx.core.graphics.Insets)
+androidx.compose.ui.input.pointer.PointerEventPass: androidx.compose.ui.input.pointer.PointerEventPass[] values()
+androidx.core.view.ViewCompat$Api28Impl: java.lang.CharSequence getAccessibilityPaneTitle(android.view.View)
+androidx.core.view.WindowInsetsCompat$BuilderImpl20: android.view.WindowInsets createWindowInsetsInstance()
+androidx.core.view.ViewCompat$Api20Impl: void requestApplyInsets(android.view.View)
+androidx.core.view.WindowInsetsCompat$BuilderImpl: void setTappableElementInsets(androidx.core.graphics.Insets)
+androidx.compose.ui.platform.AndroidComposeViewTranslationCallbackS: void setViewTranslationCallback(android.view.View,android.view.translation.ViewTranslationCallback)
+androidx.compose.ui.layout.IntrinsicMinMax: androidx.compose.ui.layout.IntrinsicMinMax[] values()
+androidx.core.view.WindowInsetsCompat$TypeImpl30: int toPlatformType(int)
+com.nfcemu.ndefengine.NdefPayload$Uri$Companion: kotlinx.serialization.KSerializer serializer()
+com.nfcemu.ndefengine.NdefPayload$VCard$Companion: kotlinx.serialization.KSerializer serializer()
+androidx.versionedparcelable.CustomVersionedParcelable: CustomVersionedParcelable()
+androidx.lifecycle.ReportFragment$LifecycleCallbacks: void onActivityPreStopped(android.app.Activity)
+androidx.core.content.res.FontResourcesParserCompat$Api21Impl: int getType(android.content.res.TypedArray,int)
+androidx.core.os.BundleCompat$Api33Impl: java.lang.Object getParcelable(android.os.Bundle,java.lang.String,java.lang.Class)
+androidx.compose.ui.platform.MotionEventVerifierApi29: boolean isValidMotionEvent(android.view.MotionEvent,int)
+androidx.compose.foundation.layout.SizeMode: androidx.compose.foundation.layout.SizeMode[] values()
+androidx.core.view.accessibility.AccessibilityNodeInfoCompat$Api30Impl: void setStateDescription(android.view.accessibility.AccessibilityNodeInfo,java.lang.CharSequence)
+androidx.compose.ui.platform.AndroidComposeView: androidx.compose.ui.text.input.TextInputService getTextInputService()
+androidx.compose.ui.focus.FocusStateImpl: androidx.compose.ui.focus.FocusStateImpl valueOf(java.lang.String)
+androidx.compose.ui.platform.AbstractComposeView: void setTransitionGroup(boolean)
+androidx.compose.ui.platform.coreshims.ContentCaptureSessionCompat$Api34Impl: void notifyViewsAppeared(android.view.contentcapture.ContentCaptureSession,java.util.List)
+androidx.core.view.WindowInsetsCompat$BuilderImpl29: void setTappableElementInsets(androidx.core.graphics.Insets)
+android.support.v4.app.RemoteActionCompatParcelizer: void write(androidx.core.app.RemoteActionCompat,androidx.versionedparcelable.VersionedParcel)
+androidx.compose.ui.window.PopupLayout: void setPositionProvider(androidx.compose.ui.window.PopupPositionProvider)
+androidx.compose.ui.node.NodeMeasuringIntrinsics$IntrinsicWidthHeight: androidx.compose.ui.node.NodeMeasuringIntrinsics$IntrinsicWidthHeight valueOf(java.lang.String)
+kotlin.time.DurationUnit: kotlin.time.DurationUnit[] values()
+androidx.core.view.ViewCompat$Api21Impl: float getElevation(android.view.View)
+androidx.core.view.WindowInsetsCompat$Impl21: WindowInsetsCompat$Impl21(androidx.core.view.WindowInsetsCompat,androidx.core.view.WindowInsetsCompat$Impl21)
+androidx.compose.ui.platform.RenderNodeApi29VerificationHelper: void setRenderEffect(android.graphics.RenderNode,androidx.compose.ui.graphics.RenderEffect)
+kotlin.collections.AbstractList: AbstractList()
+androidx.activity.EdgeToEdgeApi28: void adjustLayoutInDisplayCutoutMode(android.view.Window)
+androidx.lifecycle.ReportFragment$LifecycleCallbacks: void registerIn(android.app.Activity)
+androidx.compose.ui.platform.coreshims.ContentCaptureSessionCompat$Api29Impl: void notifyViewsDisappeared(android.view.contentcapture.ContentCaptureSession,android.view.autofill.AutofillId,long[])
+androidx.compose.foundation.layout.LayoutOrientation: androidx.compose.foundation.layout.LayoutOrientation[] values()
+androidx.core.view.ViewCompat$Api20Impl: android.view.WindowInsets onApplyWindowInsets(android.view.View,android.view.WindowInsets)
+androidx.core.view.WindowInsetsCompat$Impl: androidx.core.graphics.Insets getTappableElementInsets()
+androidx.compose.ui.platform.AndroidComposeView: boolean getShowLayoutBounds()
+androidx.compose.ui.platform.AbstractComposeView: void setViewCompositionStrategy(androidx.compose.ui.platform.ViewCompositionStrategy)
+androidx.core.view.ViewCompat$Api21Impl: androidx.core.view.WindowInsetsCompat getRootWindowInsets(android.view.View)
+androidx.compose.ui.platform.AndroidViewsHandler: java.util.HashMap getHolderToLayoutNode()
+androidx.compose.ui.platform.AndroidComposeView: androidx.compose.ui.text.font.FontFamily$Resolver getFontFamilyResolver()
+androidx.datastore.preferences.protobuf.ProtoSyntax: androidx.datastore.preferences.protobuf.ProtoSyntax valueOf(java.lang.String)
+androidx.core.view.ViewCompat$Api21Impl: float getZ(android.view.View)
+androidx.compose.ui.platform.AndroidComposeViewAccessibilityDelegateCompat$TranslateStatus: androidx.compose.ui.platform.AndroidComposeViewAccessibilityDelegateCompat$TranslateStatus[] values()
+androidx.core.view.WindowInsetsCompat$BuilderImpl30: void setInsets(int,androidx.core.graphics.Insets)
+androidx.core.view.WindowInsetsCompat$BuilderImpl20: androidx.core.view.WindowInsetsCompat build()
+androidx.core.view.accessibility.AccessibilityNodeInfoCompat$Api34Impl: boolean isAccessibilityDataSensitive(android.view.accessibility.AccessibilityNodeInfo)
+androidx.core.view.accessibility.AccessibilityNodeInfoCompat$Api34Impl: void setAccessibilityDataSensitive(android.view.accessibility.AccessibilityNodeInfo,boolean)
+androidx.core.view.WindowInsetsCompat$Impl20: androidx.core.graphics.Insets getInsets(int,boolean)
+com.nfcemu.data.Profile$Companion: kotlinx.serialization.KSerializer serializer()
+androidx.compose.ui.platform.AndroidComposeView: androidx.compose.ui.platform.WindowInfo getWindowInfo()
+com.nfcemu.NfcEmuApplication: NfcEmuApplication()
+androidx.compose.ui.platform.RenderNodeVerificationHelper28: void setSpotShadowColor(android.view.RenderNode,int)
+androidx.core.view.ViewCompat$Api23Impl: int getScrollIndicators(android.view.View)
+androidx.core.graphics.PaintCompat$Api23Impl: boolean hasGlyph(android.graphics.Paint,java.lang.String)
+androidx.core.content.ContextCompat$Api33Impl: android.content.Intent registerReceiver(android.content.Context,android.content.BroadcastReceiver,android.content.IntentFilter,java.lang.String,android.os.Handler,int)
+androidx.compose.foundation.layout.IntrinsicSize: androidx.compose.foundation.layout.IntrinsicSize[] values()
+androidx.compose.ui.autofill.AutofillType: androidx.compose.ui.autofill.AutofillType valueOf(java.lang.String)
+androidx.compose.ui.window.PopupLayout: void setIsFocusable(boolean)
+com.nfcemu.data.library.LibraryEntryDirection$Companion: kotlinx.serialization.KSerializer serializer()
+androidx.compose.ui.platform.AndroidComposeViewAccessibilityDelegateCompat$TranslateStatus: androidx.compose.ui.platform.AndroidComposeViewAccessibilityDelegateCompat$TranslateStatus valueOf(java.lang.String)
+androidx.core.view.ViewCompat$Api30Impl: int getImportantForContentCapture(android.view.View)
+androidx.core.view.accessibility.AccessibilityNodeInfoCompat$Api34Impl: void setRequestInitialAccessibilityFocus(android.view.accessibility.AccessibilityNodeInfo,boolean)
+androidx.compose.ui.window.PopupLayout: void setTestTag(java.lang.String)
+androidx.navigation.compose.ComposeNavigator: ComposeNavigator()
+androidx.core.view.ViewCompat$Api28Impl: void setAccessibilityPaneTitle(android.view.View,java.lang.CharSequence)
+androidx.compose.foundation.gestures.Orientation: androidx.compose.foundation.gestures.Orientation valueOf(java.lang.String)
+androidx.compose.ui.autofill.AutofillApi26Helper: boolean isText(android.view.autofill.AutofillValue)
+androidx.core.view.WindowInsetsCompat$Impl: androidx.core.view.WindowInsetsCompat consumeDisplayCutout()
+androidx.core.view.ViewCompat$Api30Impl: boolean isImportantForContentCapture(android.view.View)
+androidx.core.view.WindowInsetsCompat$Impl: void setOverriddenInsets(androidx.core.graphics.Insets[])
+androidx.lifecycle.ProcessLifecycleOwner$attach$1: void onActivityCreated(android.app.Activity,android.os.Bundle)
+androidx.compose.ui.text.android.StaticLayoutFactoryImpl: android.text.StaticLayout create(androidx.compose.ui.text.android.StaticLayoutParams)
+androidx.core.view.WindowInsetsCompat$Impl: void setRootViewData(androidx.core.graphics.Insets)
+androidx.compose.foundation.text.selection.HandleReferencePoint: androidx.compose.foundation.text.selection.HandleReferencePoint valueOf(java.lang.String)
+androidx.core.view.ViewCompat$Api21Impl$1: android.view.WindowInsets onApplyWindowInsets(android.view.View,android.view.WindowInsets)
+androidx.compose.ui.platform.ViewLayer: long getOwnerViewId()
+androidx.compose.foundation.layout.Direction: androidx.compose.foundation.layout.Direction[] values()
+androidx.core.view.WindowInsetsCompat$BuilderImpl29: void setSystemWindowInsets(androidx.core.graphics.Insets)
+androidx.compose.ui.text.input.TextInputServiceAndroid$TextInputCommand: androidx.compose.ui.text.input.TextInputServiceAndroid$TextInputCommand[] values()
+androidx.compose.ui.platform.RenderNodeVerificationHelper28: int getSpotShadowColor(android.view.RenderNode)
+androidx.compose.animation.core.AnimationEndReason: androidx.compose.animation.core.AnimationEndReason valueOf(java.lang.String)
+androidx.core.view.WindowInsetsCompat$Impl29: WindowInsetsCompat$Impl29(androidx.core.view.WindowInsetsCompat,android.view.WindowInsets)
+androidx.core.view.WindowInsetsCompat$Impl: WindowInsetsCompat$Impl(androidx.core.view.WindowInsetsCompat)
+androidx.core.view.WindowInsetsCompat$Impl21: androidx.core.view.WindowInsetsCompat consumeStableInsets()
+androidx.compose.ui.platform.ViewLayer: void setInvalidated(boolean)
+androidx.compose.ui.text.input.CursorAnchorInfoApi33Helper: android.view.inputmethod.CursorAnchorInfo$Builder setEditorBoundsInfo(android.view.inputmethod.CursorAnchorInfo$Builder,androidx.compose.ui.geometry.Rect)
+androidx.core.view.WindowInsetsCompat$Impl20: androidx.core.graphics.Insets getInsets(int)
+androidx.compose.foundation.FocusableKt$FocusableInNonTouchModeElement$1: FocusableKt$FocusableInNonTouchModeElement$1()
+com.nfcemu.ndefengine.NdefPayload$WifiHandover$Companion: kotlinx.serialization.KSerializer serializer()
+android.support.v4.graphics.drawable.IconCompatParcelizer: void write(androidx.core.graphics.drawable.IconCompat,androidx.versionedparcelable.VersionedParcel)
+androidx.core.graphics.drawable.IconCompat$Api23Impl: android.graphics.drawable.Icon toIcon(androidx.core.graphics.drawable.IconCompat,android.content.Context)
+androidx.navigation.compose.DialogNavigator: DialogNavigator()
+androidx.compose.ui.platform.ViewLayer: long getLayerId()
+androidx.core.view.WindowInsetsCompat$Impl20: androidx.core.graphics.Insets getSystemWindowInsets()
+androidx.core.view.accessibility.AccessibilityNodeInfoCompat$Api34Impl: android.view.accessibility.AccessibilityNodeInfo$AccessibilityAction getActionScrollInDirection()
+androidx.lifecycle.ReportFragment$LifecycleCallbacks: void onActivityStopped(android.app.Activity)
+androidx.core.view.ViewCompat$Api21Impl: void setZ(android.view.View,float)
+androidx.compose.ui.platform.ComposeView: void getShouldCreateCompositionOnAttachedToWindow$annotations()
+androidx.core.view.WindowInsetsCompat$Impl: void setRootWindowInsets(androidx.core.view.WindowInsetsCompat)
+androidx.compose.ui.text.android.Paint29: void getTextBounds(android.graphics.Paint,java.lang.CharSequence,int,int,android.graphics.Rect)
+androidx.compose.ui.node.LayoutNode$UsageByParent: androidx.compose.ui.node.LayoutNode$UsageByParent[] values()
+androidx.compose.ui.input.pointer.util.VelocityTracker1D$Strategy: androidx.compose.ui.input.pointer.util.VelocityTracker1D$Strategy valueOf(java.lang.String)
+androidx.core.view.WindowInsetsCompat$Impl21: androidx.core.view.WindowInsetsCompat consumeSystemWindowInsets()
+androidx.datastore.preferences.protobuf.WireFormat$FieldType: androidx.datastore.preferences.protobuf.WireFormat$FieldType[] values()
+androidx.compose.ui.platform.AccessibilityNodeInfoVerificationHelperMethods: void setAvailableExtraData(android.view.accessibility.AccessibilityNodeInfo,java.util.List)
+androidx.compose.ui.platform.coreshims.ViewStructureCompat$Api23Impl: void setDimens(android.view.ViewStructure,int,int,int,int,int,int)
+androidx.core.view.WindowInsetsCompat$Impl30: WindowInsetsCompat$Impl30(androidx.core.view.WindowInsetsCompat,android.view.WindowInsets)
+androidx.compose.ui.platform.coreshims.ViewCompatShims$Api29Impl: android.view.contentcapture.ContentCaptureSession getContentCaptureSession(android.view.View)
+androidx.compose.ui.platform.AndroidComposeView: android.view.View getView()
+androidx.core.view.accessibility.AccessibilityNodeInfoCompat$Api33Impl: android.view.accessibility.AccessibilityNodeInfo$ExtraRenderingInfo getExtraRenderingInfo(android.view.accessibility.AccessibilityNodeInfo)
+androidx.compose.foundation.text.Handle: androidx.compose.foundation.text.Handle[] values()
+androidx.compose.ui.platform.ViewLayer: androidx.compose.ui.platform.DrawChildContainer getContainer()
+androidx.core.view.ViewCompat$Api21Impl: boolean startNestedScroll(android.view.View,int)
+androidx.compose.ui.window.PopupLayout: androidx.compose.ui.unit.IntSize getPopupContentSize-bOM6tXw()
+androidx.compose.ui.platform.TextToolbarStatus: androidx.compose.ui.platform.TextToolbarStatus[] values()
+kotlinx.serialization.json.internal.WriteMode: kotlinx.serialization.json.internal.WriteMode valueOf(java.lang.String)
+androidx.compose.foundation.text.KeyCommand: androidx.compose.foundation.text.KeyCommand valueOf(java.lang.String)
+androidx.compose.ui.window.PopupLayout: android.view.WindowManager$LayoutParams getParams$ui_release()
+androidx.lifecycle.ReportFragment$LifecycleCallbacks: void onActivityResumed(android.app.Activity)
+androidx.activity.EdgeToEdgeApi30: void adjustLayoutInDisplayCutoutMode(android.view.Window)
 androidx.compose.ui.platform.ViewLayer: float getCameraDistancePx()
+androidx.compose.foundation.text.KeyCommand: androidx.compose.foundation.text.KeyCommand[] values()
+androidx.core.view.WindowInsetsCompat$Impl29: androidx.core.graphics.Insets getMandatorySystemGestureInsets()
+androidx.compose.ui.platform.ViewLayerVerificationHelper28: void setOutlineSpotShadowColor(android.view.View,int)
+androidx.compose.material3.InputPhase: androidx.compose.material3.InputPhase valueOf(java.lang.String)
+androidx.compose.ui.window.PopupLayout: androidx.compose.ui.window.PopupPositionProvider getPositionProvider()
+androidx.compose.ui.window.PopupLayout: boolean getCanCalculatePosition()
+androidx.core.view.ViewCompat$Api28Impl: void setScreenReaderFocusable(android.view.View,boolean)
+androidx.compose.ui.state.ToggleableState: androidx.compose.ui.state.ToggleableState valueOf(java.lang.String)
+androidx.compose.ui.text.platform.Api28Impl: android.text.style.TypefaceSpan createTypefaceSpan(android.graphics.Typeface)
+androidx.compose.ui.window.PopupLayout: void setLayoutDirection(int)
+androidx.compose.ui.platform.AndroidComposeView: androidx.compose.ui.modifier.ModifierLocalManager getModifierLocalManager()
+kotlinx.coroutines.android.AndroidDispatcherFactory: kotlinx.coroutines.MainCoroutineDispatcher createDispatcher(java.util.List)
+androidx.compose.ui.platform.AndroidComposeView: void setOnViewTreeOwnersAvailable(kotlin.jvm.functions.Function1)
+androidx.core.view.WindowInsetsCompat$Impl28: WindowInsetsCompat$Impl28(androidx.core.view.WindowInsetsCompat,androidx.core.view.WindowInsetsCompat$Impl28)
+androidx.compose.ui.platform.AndroidComposeView: void setConfigurationChangeObserver(kotlin.jvm.functions.Function1)
+androidx.compose.ui.platform.AndroidComposeView: kotlin.jvm.functions.Function1 getConfigurationChangeObserver()
+androidx.compose.ui.node.LayoutNode$LayoutState: androidx.compose.ui.node.LayoutNode$LayoutState[] values()
+androidx.compose.ui.input.pointer.PointerEventPass: androidx.compose.ui.input.pointer.PointerEventPass valueOf(java.lang.String)
+androidx.compose.foundation.text.HandleState: androidx.compose.foundation.text.HandleState[] values()
+androidx.core.view.accessibility.AccessibilityNodeInfoCompat$Api33Impl: java.lang.String getCollectionItemRowTitle(java.lang.Object)
+androidx.compose.ui.window.PopupLayout: void setContent(kotlin.jvm.functions.Function2)
+androidx.core.view.WindowInsetsCompat$BuilderImpl20: WindowInsetsCompat$BuilderImpl20()
+androidx.compose.ui.window.PopupLayout: void setSecurePolicy(androidx.compose.ui.window.SecureFlagPolicy)
+androidx.core.view.WindowInsetsCompat$Impl: androidx.core.graphics.Insets getMandatorySystemGestureInsets()
+androidx.core.os.BundleCompat$Api33Impl: android.util.SparseArray getSparseParcelableArray(android.os.Bundle,java.lang.String,java.lang.Class)
+androidx.compose.ui.platform.AbstractComposeView: void setShowLayoutBounds(boolean)
+androidx.compose.ui.platform.AndroidComposeView: androidx.compose.ui.node.LayoutNodeDrawScope getSharedDrawScope()
+androidx.profileinstaller.ProfileVerifier$Api33Impl: android.content.pm.PackageInfo getPackageInfo(android.content.pm.PackageManager,android.content.Context)
+kotlinx.serialization.json.internal.WriteMode: kotlinx.serialization.json.internal.WriteMode[] values()
+androidx.profileinstaller.FileSectionType: androidx.profileinstaller.FileSectionType valueOf(java.lang.String)
+androidx.compose.ui.platform.AbstractComposeView: boolean getShouldCreateCompositionOnAttachedToWindow()
+androidx.compose.ui.focus.CustomDestinationResult: androidx.compose.ui.focus.CustomDestinationResult[] values()
+androidx.compose.ui.platform.AbstractComposeView: boolean getShowLayoutBounds()
+androidx.compose.ui.autofill.AutofillApi26Helper: void setAutofillHints(android.view.ViewStructure,java.lang.String[])
+androidx.core.view.ViewCompat$Api21Impl$1: ViewCompat$Api21Impl$1(android.view.View,androidx.core.view.OnApplyWindowInsetsListener)
+androidx.compose.ui.window.PopupLayout: int getDisplayWidth()
+androidx.compose.ui.window.PopupLayout: int getDisplayHeight()
+androidx.core.view.WindowInsetsCompat$BuilderImpl: void setSystemGestureInsets(androidx.core.graphics.Insets)
+androidx.core.view.WindowInsetsCompat$BuilderImpl20: void setSystemWindowInsets(androidx.core.graphics.Insets)
+androidx.core.view.ViewCompat$Api23Impl: void setScrollIndicators(android.view.View,int,int)
+com.nfcemu.nfc.NfcHardwareState: com.nfcemu.nfc.NfcHardwareState[] values()
+androidx.core.view.DisplayCutoutCompat$Api28Impl: int getSafeInsetLeft(android.view.DisplayCutout)
+androidx.compose.ui.platform.AndroidComposeView: androidx.compose.ui.platform.TextToolbar getTextToolbar()
+androidx.compose.ui.layout.IntrinsicWidthHeight: androidx.compose.ui.layout.IntrinsicWidthHeight valueOf(java.lang.String)
+androidx.compose.material3.tokens.ColorSchemeKeyTokens: androidx.compose.material3.tokens.ColorSchemeKeyTokens valueOf(java.lang.String)
+androidx.core.graphics.drawable.IconCompat$Api28Impl: int getType(java.lang.Object)
+androidx.compose.ui.text.android.BoringLayoutFactoryDefault: android.text.BoringLayout$Metrics isBoring(java.lang.CharSequence,android.text.TextPaint,android.text.TextDirectionHeuristic)
+androidx.compose.ui.layout.MeasuringIntrinsics$IntrinsicMinMax: androidx.compose.ui.layout.MeasuringIntrinsics$IntrinsicMinMax[] values()
+com.nfcemu.ndefengine.AarConfig$Companion: kotlinx.serialization.KSerializer serializer()
+androidx.compose.foundation.Api31Impl: float onPullDistance(android.widget.EdgeEffect,float,float)
+androidx.lifecycle.ProcessLifecycleOwner$attach$1$onActivityPreCreated$1: void onActivityPostResumed(android.app.Activity)
+androidx.core.view.ViewCompat$Api21Impl: java.lang.String getTransitionName(android.view.View)
+kotlinx.coroutines.selects.TrySelectDetailedResult: kotlinx.coroutines.selects.TrySelectDetailedResult valueOf(java.lang.String)

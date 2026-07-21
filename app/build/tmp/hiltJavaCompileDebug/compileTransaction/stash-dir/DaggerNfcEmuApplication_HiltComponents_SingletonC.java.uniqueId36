@@ -8,13 +8,29 @@ import androidx.datastore.preferences.core.Preferences;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.SavedStateHandle;
 import androidx.lifecycle.ViewModel;
+import com.nfcemu.data.FileRepository;
 import com.nfcemu.data.ProfileRepository;
+import com.nfcemu.data.library.LibraryDataStore;
 import com.nfcemu.data.local.ProfileDataStore;
+import com.nfcemu.data.local.SettingsDataStore;
 import com.nfcemu.di.CoroutineModule_ProvideApplicationScopeFactory;
+import com.nfcemu.di.DataStoreModule_ProvideLibraryDataStoreFactory;
 import com.nfcemu.di.DataStoreModule_ProvideProfileDataStoreFactory;
+import com.nfcemu.di.DataStoreModule_ProvideSettingsDataStoreFactory;
 import com.nfcemu.hce.NfcEmuHostApduService;
 import com.nfcemu.hce.NfcEmuHostApduService_MembersInjector;
+import com.nfcemu.nfc.NfcStateObserver;
 import com.nfcemu.ui.MainActivity;
+import com.nfcemu.ui.home.HomeViewModel;
+import com.nfcemu.ui.home.HomeViewModel_HiltModules;
+import com.nfcemu.ui.library.LibraryViewModel;
+import com.nfcemu.ui.library.LibraryViewModel_HiltModules;
+import com.nfcemu.ui.onboarding.OnboardingViewModel;
+import com.nfcemu.ui.onboarding.OnboardingViewModel_HiltModules;
+import com.nfcemu.ui.profileform.ProfileFormViewModel;
+import com.nfcemu.ui.profileform.ProfileFormViewModel_HiltModules;
+import com.nfcemu.ui.profilelist.ProfileListViewModel;
+import com.nfcemu.ui.profilelist.ProfileListViewModel_HiltModules;
 import dagger.hilt.android.ActivityRetainedLifecycle;
 import dagger.hilt.android.ViewModelLifecycle;
 import dagger.hilt.android.internal.builders.ActivityComponentBuilder;
@@ -32,12 +48,16 @@ import dagger.hilt.android.internal.modules.ApplicationContextModule;
 import dagger.hilt.android.internal.modules.ApplicationContextModule_ProvideContextFactory;
 import dagger.internal.DaggerGenerated;
 import dagger.internal.DoubleCheck;
+import dagger.internal.IdentifierNameString;
+import dagger.internal.KeepFieldType;
+import dagger.internal.LazyClassKeyMap;
+import dagger.internal.MapBuilder;
 import dagger.internal.Preconditions;
+import dagger.internal.Provider;
 import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
 import javax.annotation.processing.Generated;
-import javax.inject.Provider;
 import kotlinx.coroutines.CoroutineScope;
 
 @DaggerGenerated
@@ -367,12 +387,12 @@ public final class DaggerNfcEmuApplication_HiltComponents_SingletonC {
 
     @Override
     public DefaultViewModelFactories.InternalFactoryFactory getHiltInternalFactoryFactory() {
-      return DefaultViewModelFactories_InternalFactoryFactory_Factory.newInstance(Collections.<Class<?>, Boolean>emptyMap(), new ViewModelCBuilder(singletonCImpl, activityRetainedCImpl));
+      return DefaultViewModelFactories_InternalFactoryFactory_Factory.newInstance(getViewModelKeys(), new ViewModelCBuilder(singletonCImpl, activityRetainedCImpl));
     }
 
     @Override
     public Map<Class<?>, Boolean> getViewModelKeys() {
-      return Collections.<Class<?>, Boolean>emptyMap();
+      return LazyClassKeyMap.<Boolean>of(MapBuilder.<String, Boolean>newMapBuilder(5).put(LazyClassKeyProvider.com_nfcemu_ui_home_HomeViewModel, HomeViewModel_HiltModules.KeyModule.provide()).put(LazyClassKeyProvider.com_nfcemu_ui_library_LibraryViewModel, LibraryViewModel_HiltModules.KeyModule.provide()).put(LazyClassKeyProvider.com_nfcemu_ui_onboarding_OnboardingViewModel, OnboardingViewModel_HiltModules.KeyModule.provide()).put(LazyClassKeyProvider.com_nfcemu_ui_profileform_ProfileFormViewModel, ProfileFormViewModel_HiltModules.KeyModule.provide()).put(LazyClassKeyProvider.com_nfcemu_ui_profilelist_ProfileListViewModel, ProfileListViewModel_HiltModules.KeyModule.provide()).build());
     }
 
     @Override
@@ -389,32 +409,152 @@ public final class DaggerNfcEmuApplication_HiltComponents_SingletonC {
     public ViewComponentBuilder viewComponentBuilder() {
       return new ViewCBuilder(singletonCImpl, activityRetainedCImpl, activityCImpl);
     }
+
+    @IdentifierNameString
+    private static final class LazyClassKeyProvider {
+      static String com_nfcemu_ui_library_LibraryViewModel = "com.nfcemu.ui.library.LibraryViewModel";
+
+      static String com_nfcemu_ui_profilelist_ProfileListViewModel = "com.nfcemu.ui.profilelist.ProfileListViewModel";
+
+      static String com_nfcemu_ui_onboarding_OnboardingViewModel = "com.nfcemu.ui.onboarding.OnboardingViewModel";
+
+      static String com_nfcemu_ui_profileform_ProfileFormViewModel = "com.nfcemu.ui.profileform.ProfileFormViewModel";
+
+      static String com_nfcemu_ui_home_HomeViewModel = "com.nfcemu.ui.home.HomeViewModel";
+
+      @KeepFieldType
+      LibraryViewModel com_nfcemu_ui_library_LibraryViewModel2;
+
+      @KeepFieldType
+      ProfileListViewModel com_nfcemu_ui_profilelist_ProfileListViewModel2;
+
+      @KeepFieldType
+      OnboardingViewModel com_nfcemu_ui_onboarding_OnboardingViewModel2;
+
+      @KeepFieldType
+      ProfileFormViewModel com_nfcemu_ui_profileform_ProfileFormViewModel2;
+
+      @KeepFieldType
+      HomeViewModel com_nfcemu_ui_home_HomeViewModel2;
+    }
   }
 
   private static final class ViewModelCImpl extends NfcEmuApplication_HiltComponents.ViewModelC {
+    private final SavedStateHandle savedStateHandle;
+
     private final SingletonCImpl singletonCImpl;
 
     private final ActivityRetainedCImpl activityRetainedCImpl;
 
     private final ViewModelCImpl viewModelCImpl = this;
 
+    private Provider<HomeViewModel> homeViewModelProvider;
+
+    private Provider<LibraryViewModel> libraryViewModelProvider;
+
+    private Provider<OnboardingViewModel> onboardingViewModelProvider;
+
+    private Provider<ProfileFormViewModel> profileFormViewModelProvider;
+
+    private Provider<ProfileListViewModel> profileListViewModelProvider;
+
     private ViewModelCImpl(SingletonCImpl singletonCImpl,
         ActivityRetainedCImpl activityRetainedCImpl, SavedStateHandle savedStateHandleParam,
         ViewModelLifecycle viewModelLifecycleParam) {
       this.singletonCImpl = singletonCImpl;
       this.activityRetainedCImpl = activityRetainedCImpl;
-
+      this.savedStateHandle = savedStateHandleParam;
+      initialize(savedStateHandleParam, viewModelLifecycleParam);
 
     }
 
+    @SuppressWarnings("unchecked")
+    private void initialize(final SavedStateHandle savedStateHandleParam,
+        final ViewModelLifecycle viewModelLifecycleParam) {
+      this.homeViewModelProvider = new SwitchingProvider<>(singletonCImpl, activityRetainedCImpl, viewModelCImpl, 0);
+      this.libraryViewModelProvider = new SwitchingProvider<>(singletonCImpl, activityRetainedCImpl, viewModelCImpl, 1);
+      this.onboardingViewModelProvider = new SwitchingProvider<>(singletonCImpl, activityRetainedCImpl, viewModelCImpl, 2);
+      this.profileFormViewModelProvider = new SwitchingProvider<>(singletonCImpl, activityRetainedCImpl, viewModelCImpl, 3);
+      this.profileListViewModelProvider = new SwitchingProvider<>(singletonCImpl, activityRetainedCImpl, viewModelCImpl, 4);
+    }
+
     @Override
-    public Map<Class<?>, Provider<ViewModel>> getHiltViewModelMap() {
-      return Collections.<Class<?>, Provider<ViewModel>>emptyMap();
+    public Map<Class<?>, javax.inject.Provider<ViewModel>> getHiltViewModelMap() {
+      return LazyClassKeyMap.<javax.inject.Provider<ViewModel>>of(MapBuilder.<String, javax.inject.Provider<ViewModel>>newMapBuilder(5).put(LazyClassKeyProvider.com_nfcemu_ui_home_HomeViewModel, ((Provider) homeViewModelProvider)).put(LazyClassKeyProvider.com_nfcemu_ui_library_LibraryViewModel, ((Provider) libraryViewModelProvider)).put(LazyClassKeyProvider.com_nfcemu_ui_onboarding_OnboardingViewModel, ((Provider) onboardingViewModelProvider)).put(LazyClassKeyProvider.com_nfcemu_ui_profileform_ProfileFormViewModel, ((Provider) profileFormViewModelProvider)).put(LazyClassKeyProvider.com_nfcemu_ui_profilelist_ProfileListViewModel, ((Provider) profileListViewModelProvider)).build());
     }
 
     @Override
     public Map<Class<?>, Object> getHiltViewModelAssistedMap() {
       return Collections.<Class<?>, Object>emptyMap();
+    }
+
+    @IdentifierNameString
+    private static final class LazyClassKeyProvider {
+      static String com_nfcemu_ui_onboarding_OnboardingViewModel = "com.nfcemu.ui.onboarding.OnboardingViewModel";
+
+      static String com_nfcemu_ui_library_LibraryViewModel = "com.nfcemu.ui.library.LibraryViewModel";
+
+      static String com_nfcemu_ui_profilelist_ProfileListViewModel = "com.nfcemu.ui.profilelist.ProfileListViewModel";
+
+      static String com_nfcemu_ui_home_HomeViewModel = "com.nfcemu.ui.home.HomeViewModel";
+
+      static String com_nfcemu_ui_profileform_ProfileFormViewModel = "com.nfcemu.ui.profileform.ProfileFormViewModel";
+
+      @KeepFieldType
+      OnboardingViewModel com_nfcemu_ui_onboarding_OnboardingViewModel2;
+
+      @KeepFieldType
+      LibraryViewModel com_nfcemu_ui_library_LibraryViewModel2;
+
+      @KeepFieldType
+      ProfileListViewModel com_nfcemu_ui_profilelist_ProfileListViewModel2;
+
+      @KeepFieldType
+      HomeViewModel com_nfcemu_ui_home_HomeViewModel2;
+
+      @KeepFieldType
+      ProfileFormViewModel com_nfcemu_ui_profileform_ProfileFormViewModel2;
+    }
+
+    private static final class SwitchingProvider<T> implements Provider<T> {
+      private final SingletonCImpl singletonCImpl;
+
+      private final ActivityRetainedCImpl activityRetainedCImpl;
+
+      private final ViewModelCImpl viewModelCImpl;
+
+      private final int id;
+
+      SwitchingProvider(SingletonCImpl singletonCImpl, ActivityRetainedCImpl activityRetainedCImpl,
+          ViewModelCImpl viewModelCImpl, int id) {
+        this.singletonCImpl = singletonCImpl;
+        this.activityRetainedCImpl = activityRetainedCImpl;
+        this.viewModelCImpl = viewModelCImpl;
+        this.id = id;
+      }
+
+      @SuppressWarnings("unchecked")
+      @Override
+      public T get() {
+        switch (id) {
+          case 0: // com.nfcemu.ui.home.HomeViewModel 
+          return (T) new HomeViewModel(singletonCImpl.profileRepositoryProvider.get(), singletonCImpl.nfcStateObserverProvider.get());
+
+          case 1: // com.nfcemu.ui.library.LibraryViewModel 
+          return (T) new LibraryViewModel(singletonCImpl.fileRepositoryProvider.get());
+
+          case 2: // com.nfcemu.ui.onboarding.OnboardingViewModel 
+          return (T) new OnboardingViewModel(singletonCImpl.settingsDataStoreProvider.get());
+
+          case 3: // com.nfcemu.ui.profileform.ProfileFormViewModel 
+          return (T) new ProfileFormViewModel(singletonCImpl.profileRepositoryProvider.get(), viewModelCImpl.savedStateHandle);
+
+          case 4: // com.nfcemu.ui.profilelist.ProfileListViewModel 
+          return (T) new ProfileListViewModel(singletonCImpl.profileRepositoryProvider.get(), singletonCImpl.fileRepositoryProvider.get());
+
+          default: throw new AssertionError(id);
+        }
+      }
     }
   }
 
@@ -423,7 +563,7 @@ public final class DaggerNfcEmuApplication_HiltComponents_SingletonC {
 
     private final ActivityRetainedCImpl activityRetainedCImpl = this;
 
-    private dagger.internal.Provider<ActivityRetainedLifecycle> provideActivityRetainedLifecycleProvider;
+    private Provider<ActivityRetainedLifecycle> provideActivityRetainedLifecycleProvider;
 
     private ActivityRetainedCImpl(SingletonCImpl singletonCImpl,
         SavedStateHandleHolder savedStateHandleHolderParam) {
@@ -448,7 +588,7 @@ public final class DaggerNfcEmuApplication_HiltComponents_SingletonC {
       return provideActivityRetainedLifecycleProvider.get();
     }
 
-    private static final class SwitchingProvider<T> implements dagger.internal.Provider<T> {
+    private static final class SwitchingProvider<T> implements Provider<T> {
       private final SingletonCImpl singletonCImpl;
 
       private final ActivityRetainedCImpl activityRetainedCImpl;
@@ -502,13 +642,25 @@ public final class DaggerNfcEmuApplication_HiltComponents_SingletonC {
 
     private final SingletonCImpl singletonCImpl = this;
 
-    private dagger.internal.Provider<DataStore<Preferences>> provideProfileDataStoreProvider;
+    private Provider<DataStore<Preferences>> provideProfileDataStoreProvider;
 
-    private dagger.internal.Provider<ProfileDataStore> profileDataStoreProvider;
+    private Provider<ProfileDataStore> profileDataStoreProvider;
 
-    private dagger.internal.Provider<CoroutineScope> provideApplicationScopeProvider;
+    private Provider<CoroutineScope> provideApplicationScopeProvider;
 
-    private dagger.internal.Provider<ProfileRepository> profileRepositoryProvider;
+    private Provider<ProfileRepository> profileRepositoryProvider;
+
+    private Provider<NfcStateObserver> nfcStateObserverProvider;
+
+    private Provider<DataStore<Preferences>> provideLibraryDataStoreProvider;
+
+    private Provider<LibraryDataStore> libraryDataStoreProvider;
+
+    private Provider<FileRepository> fileRepositoryProvider;
+
+    private Provider<DataStore<Preferences>> provideSettingsDataStoreProvider;
+
+    private Provider<SettingsDataStore> settingsDataStoreProvider;
 
     private SingletonCImpl(ApplicationContextModule applicationContextModuleParam) {
       this.applicationContextModule = applicationContextModuleParam;
@@ -522,6 +674,12 @@ public final class DaggerNfcEmuApplication_HiltComponents_SingletonC {
       this.profileDataStoreProvider = DoubleCheck.provider(new SwitchingProvider<ProfileDataStore>(singletonCImpl, 1));
       this.provideApplicationScopeProvider = DoubleCheck.provider(new SwitchingProvider<CoroutineScope>(singletonCImpl, 3));
       this.profileRepositoryProvider = DoubleCheck.provider(new SwitchingProvider<ProfileRepository>(singletonCImpl, 0));
+      this.nfcStateObserverProvider = DoubleCheck.provider(new SwitchingProvider<NfcStateObserver>(singletonCImpl, 4));
+      this.provideLibraryDataStoreProvider = DoubleCheck.provider(new SwitchingProvider<DataStore<Preferences>>(singletonCImpl, 7));
+      this.libraryDataStoreProvider = DoubleCheck.provider(new SwitchingProvider<LibraryDataStore>(singletonCImpl, 6));
+      this.fileRepositoryProvider = DoubleCheck.provider(new SwitchingProvider<FileRepository>(singletonCImpl, 5));
+      this.provideSettingsDataStoreProvider = DoubleCheck.provider(new SwitchingProvider<DataStore<Preferences>>(singletonCImpl, 9));
+      this.settingsDataStoreProvider = DoubleCheck.provider(new SwitchingProvider<SettingsDataStore>(singletonCImpl, 8));
     }
 
     @Override
@@ -549,7 +707,7 @@ public final class DaggerNfcEmuApplication_HiltComponents_SingletonC {
       return instance;
     }
 
-    private static final class SwitchingProvider<T> implements dagger.internal.Provider<T> {
+    private static final class SwitchingProvider<T> implements Provider<T> {
       private final SingletonCImpl singletonCImpl;
 
       private final int id;
@@ -574,6 +732,24 @@ public final class DaggerNfcEmuApplication_HiltComponents_SingletonC {
 
           case 3: // @com.nfcemu.di.ApplicationScope kotlinx.coroutines.CoroutineScope 
           return (T) CoroutineModule_ProvideApplicationScopeFactory.provideApplicationScope();
+
+          case 4: // com.nfcemu.nfc.NfcStateObserver 
+          return (T) new NfcStateObserver(ApplicationContextModule_ProvideContextFactory.provideContext(singletonCImpl.applicationContextModule));
+
+          case 5: // com.nfcemu.data.FileRepository 
+          return (T) new FileRepository(ApplicationContextModule_ProvideContextFactory.provideContext(singletonCImpl.applicationContextModule), singletonCImpl.profileRepositoryProvider.get(), singletonCImpl.libraryDataStoreProvider.get());
+
+          case 6: // com.nfcemu.data.library.LibraryDataStore 
+          return (T) new LibraryDataStore(singletonCImpl.provideLibraryDataStoreProvider.get());
+
+          case 7: // @com.nfcemu.di.LibraryStore androidx.datastore.core.DataStore<androidx.datastore.preferences.core.Preferences> 
+          return (T) DataStoreModule_ProvideLibraryDataStoreFactory.provideLibraryDataStore(ApplicationContextModule_ProvideContextFactory.provideContext(singletonCImpl.applicationContextModule));
+
+          case 8: // com.nfcemu.data.local.SettingsDataStore 
+          return (T) new SettingsDataStore(singletonCImpl.provideSettingsDataStoreProvider.get());
+
+          case 9: // @com.nfcemu.di.SettingsStore androidx.datastore.core.DataStore<androidx.datastore.preferences.core.Preferences> 
+          return (T) DataStoreModule_ProvideSettingsDataStoreFactory.provideSettingsDataStore(ApplicationContextModule_ProvideContextFactory.provideContext(singletonCImpl.applicationContextModule));
 
           default: throw new AssertionError(id);
         }

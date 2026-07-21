@@ -1,0 +1,87 @@
+package com.nfcemu.ui.navigation
+
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.navigation.NavType
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.nfcemu.ui.home.HomeScreen
+import com.nfcemu.ui.library.LibraryScreen
+import com.nfcemu.ui.onboarding.OnboardingScreen
+import com.nfcemu.ui.onboarding.OnboardingViewModel
+import com.nfcemu.ui.profileform.ProfileFormScreen
+import com.nfcemu.ui.profileform.TypePickerScreen
+import com.nfcemu.ui.profilelist.ProfileListScreen
+
+private object Routes {
+    const val HOME = "home"
+    const val PROFILE_LIST = "profileList"
+    const val TYPE_PICKER = "typePicker"
+    const val PROFILE_FORM_NEW = "profileForm/new/{template}"
+    const val PROFILE_FORM_EDIT = "profileForm/edit/{profileId}"
+    const val LIBRARY = "library"
+}
+
+@Composable
+fun NfcEmuNavGraph() {
+    val navController = rememberNavController()
+
+    NavHost(navController = navController, startDestination = Routes.HOME) {
+        composable(Routes.HOME) {
+            val onboardingViewModel: OnboardingViewModel = hiltViewModel()
+            val onboardingCompleted by onboardingViewModel.onboardingCompleted.collectAsState()
+
+            when (onboardingCompleted) {
+                null -> Unit // still loading persisted flag, avoid flashing either screen
+                false -> OnboardingScreen(onDone = { /* state flips reactively, no nav needed */ })
+                true -> HomeScreen(
+                    onNavigateToProfiles = { navController.navigate(Routes.PROFILE_LIST) },
+                    onNavigateToLibrary = { navController.navigate(Routes.LIBRARY) },
+                    onNavigateToNewProfile = { navController.navigate(Routes.TYPE_PICKER) },
+                )
+            }
+        }
+        composable(Routes.PROFILE_LIST) {
+            ProfileListScreen(
+                onBack = { navController.popBackStack() },
+                onNewProfile = { navController.navigate(Routes.TYPE_PICKER) },
+                onEditProfile = { profile -> navController.navigate("profileForm/edit/${profile.id}") },
+            )
+        }
+        composable(Routes.TYPE_PICKER) {
+            TypePickerScreen(
+                onBack = { navController.popBackStack() },
+                onTypeSelected = { template ->
+                    navController.navigate("profileForm/new/${template.name}") {
+                        popUpTo(Routes.TYPE_PICKER) { inclusive = true }
+                    }
+                },
+            )
+        }
+        composable(
+            route = Routes.PROFILE_FORM_NEW,
+            arguments = listOf(navArgument("template") { type = NavType.StringType }),
+        ) {
+            ProfileFormScreen(
+                onBack = { navController.popBackStack() },
+                onSaved = { navController.popBackStack(Routes.HOME, inclusive = false) },
+            )
+        }
+        composable(
+            route = Routes.PROFILE_FORM_EDIT,
+            arguments = listOf(navArgument("profileId") { type = NavType.StringType }),
+        ) {
+            ProfileFormScreen(
+                onBack = { navController.popBackStack() },
+                onSaved = { navController.popBackStack() },
+            )
+        }
+        composable(Routes.LIBRARY) {
+            LibraryScreen(onBack = { navController.popBackStack() })
+        }
+    }
+}

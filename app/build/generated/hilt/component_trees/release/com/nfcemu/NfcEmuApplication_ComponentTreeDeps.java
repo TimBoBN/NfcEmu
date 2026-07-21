@@ -23,6 +23,16 @@ import hilt_aggregated_deps._com_nfcemu_di_DataStoreModule;
 import hilt_aggregated_deps._com_nfcemu_di_DomainModule;
 import hilt_aggregated_deps._com_nfcemu_hce_NfcEmuHostApduService_GeneratedInjector;
 import hilt_aggregated_deps._com_nfcemu_ui_MainActivity_GeneratedInjector;
+import hilt_aggregated_deps._com_nfcemu_ui_home_HomeViewModel_HiltModules_BindsModule;
+import hilt_aggregated_deps._com_nfcemu_ui_home_HomeViewModel_HiltModules_KeyModule;
+import hilt_aggregated_deps._com_nfcemu_ui_library_LibraryViewModel_HiltModules_BindsModule;
+import hilt_aggregated_deps._com_nfcemu_ui_library_LibraryViewModel_HiltModules_KeyModule;
+import hilt_aggregated_deps._com_nfcemu_ui_onboarding_OnboardingViewModel_HiltModules_BindsModule;
+import hilt_aggregated_deps._com_nfcemu_ui_onboarding_OnboardingViewModel_HiltModules_KeyModule;
+import hilt_aggregated_deps._com_nfcemu_ui_profileform_ProfileFormViewModel_HiltModules_BindsModule;
+import hilt_aggregated_deps._com_nfcemu_ui_profileform_ProfileFormViewModel_HiltModules_KeyModule;
+import hilt_aggregated_deps._com_nfcemu_ui_profilelist_ProfileListViewModel_HiltModules_BindsModule;
+import hilt_aggregated_deps._com_nfcemu_ui_profilelist_ProfileListViewModel_HiltModules_KeyModule;
 import hilt_aggregated_deps._dagger_hilt_android_flags_FragmentGetContextFix_FragmentGetContextFixEntryPoint;
 import hilt_aggregated_deps._dagger_hilt_android_flags_HiltWrapper_FragmentGetContextFix_FragmentGetContextFixModule;
 import hilt_aggregated_deps._dagger_hilt_android_internal_lifecycle_DefaultViewModelFactories_ActivityEntryPoint;
@@ -69,6 +79,16 @@ import hilt_aggregated_deps._dagger_hilt_android_internal_modules_HiltWrapper_Ac
         _com_nfcemu_di_DomainModule.class,
         _com_nfcemu_hce_NfcEmuHostApduService_GeneratedInjector.class,
         _com_nfcemu_ui_MainActivity_GeneratedInjector.class,
+        _com_nfcemu_ui_home_HomeViewModel_HiltModules_BindsModule.class,
+        _com_nfcemu_ui_home_HomeViewModel_HiltModules_KeyModule.class,
+        _com_nfcemu_ui_library_LibraryViewModel_HiltModules_BindsModule.class,
+        _com_nfcemu_ui_library_LibraryViewModel_HiltModules_KeyModule.class,
+        _com_nfcemu_ui_onboarding_OnboardingViewModel_HiltModules_BindsModule.class,
+        _com_nfcemu_ui_onboarding_OnboardingViewModel_HiltModules_KeyModule.class,
+        _com_nfcemu_ui_profileform_ProfileFormViewModel_HiltModules_BindsModule.class,
+        _com_nfcemu_ui_profileform_ProfileFormViewModel_HiltModules_KeyModule.class,
+        _com_nfcemu_ui_profilelist_ProfileListViewModel_HiltModules_BindsModule.class,
+        _com_nfcemu_ui_profilelist_ProfileListViewModel_HiltModules_KeyModule.class,
         _dagger_hilt_android_flags_FragmentGetContextFix_FragmentGetContextFixEntryPoint.class,
         _dagger_hilt_android_flags_HiltWrapper_FragmentGetContextFix_FragmentGetContextFixModule.class,
         _dagger_hilt_android_internal_lifecycle_DefaultViewModelFactories_ActivityEntryPoint.class,

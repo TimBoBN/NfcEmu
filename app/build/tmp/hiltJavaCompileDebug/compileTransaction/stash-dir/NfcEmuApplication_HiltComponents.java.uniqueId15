@@ -5,6 +5,11 @@ import com.nfcemu.di.DataStoreModule;
 import com.nfcemu.di.DomainModule;
 import com.nfcemu.hce.NfcEmuHostApduService_GeneratedInjector;
 import com.nfcemu.ui.MainActivity_GeneratedInjector;
+import com.nfcemu.ui.home.HomeViewModel_HiltModules;
+import com.nfcemu.ui.library.LibraryViewModel_HiltModules;
+import com.nfcemu.ui.onboarding.OnboardingViewModel_HiltModules;
+import com.nfcemu.ui.profileform.ProfileFormViewModel_HiltModules;
+import com.nfcemu.ui.profilelist.ProfileListViewModel_HiltModules;
 import dagger.Binds;
 import dagger.Component;
 import dagger.Module;
@@ -161,8 +166,13 @@ public final class NfcEmuApplication_HiltComponents {
       modules = {
           HiltWrapper_ActivityRetainedComponentManager_LifecycleModule.class,
           HiltWrapper_SavedStateHandleModule.class,
+          HomeViewModel_HiltModules.KeyModule.class,
+          LibraryViewModel_HiltModules.KeyModule.class,
           ActivityCBuilderModule.class,
-          ViewModelCBuilderModule.class
+          ViewModelCBuilderModule.class,
+          OnboardingViewModel_HiltModules.KeyModule.class,
+          ProfileFormViewModel_HiltModules.KeyModule.class,
+          ProfileListViewModel_HiltModules.KeyModule.class
       }
   )
   @ActivityRetainedScoped
@@ -197,7 +207,14 @@ public final class NfcEmuApplication_HiltComponents {
   }
 
   @Subcomponent(
-      modules = HiltWrapper_HiltViewModelFactory_ViewModelModule.class
+      modules = {
+          HiltWrapper_HiltViewModelFactory_ViewModelModule.class,
+          HomeViewModel_HiltModules.BindsModule.class,
+          LibraryViewModel_HiltModules.BindsModule.class,
+          OnboardingViewModel_HiltModules.BindsModule.class,
+          ProfileFormViewModel_HiltModules.BindsModule.class,
+          ProfileListViewModel_HiltModules.BindsModule.class
+      }
   )
   @ViewModelScoped
   public abstract static class ViewModelC implements ViewModelComponent,
