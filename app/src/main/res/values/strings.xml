@@ -92,4 +92,15 @@
     <string name="onboarding_title">Welcome to NfcEmu</string>
     <string name="onboarding_body">Activate a profile and hold your phone against a reader or another NFC-capable device. The other device needs to be in read mode, just like it would with a physical NFC card.</string>
     <string name="onboarding_confirm">Get started</string>
+
+    <!-- Home screen widget -->
+    <string name="widget_description">Quickly switch your active NfcEmu profile</string>
+    <string name="widget_active_prefix">Active: %1$s</string>
+    <string name="widget_no_active">No active profile</string>
+    <string name="widget_empty">Pin a profile to see it here</string>
+
+    <!-- Quick Settings tile -->
+    <string name="tile_label">NfcEmu</string>
+    <string name="tile_no_active">No active profile</string>
+    <string name="tile_no_pinned_profiles">Pin a profile in NfcEmu to use this tile</string>
 </resources>
