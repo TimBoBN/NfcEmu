@@ -1,11 +1,31 @@
-*.iml
-.gradle/
-/local.properties
-.idea/
-.DS_Store
+# Gradle / build output (matches at any depth: app/build, ndefengine/build, ...)
 build/
+.gradle/
+.kotlin/
+
+# Local machine config, never shared (SDK path, signing overrides, etc.)
+local.properties
+
+# Signing material - never commit a real keystore or its credentials
+*.jks
+*.keystore
+keystore.properties
+
+# IDE
+*.iml
+.idea/
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Native build intermediates
 /captures
 .externalNativeBuild
 .cxx
+
+# Packaged output (built by CI, not something to track in source control)
 *.apk
 *.aab
+release-artifacts/

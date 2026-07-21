@@ -1,6 +1,0 @@
--keep class androidx.core.app.CoreComponentFactory { <init>(); }
--keep class androidx.profileinstaller.ProfileInstallReceiver { <init>(); }
--keep class androidx.startup.InitializationProvider { <init>(); }
--keep class com.nfcemu.NfcEmuApplication { <init>(); }
--keep class com.nfcemu.hce.NfcEmuHostApduService { <init>(); }
--keep class com.nfcemu.ui.MainActivity { <init>(); }
