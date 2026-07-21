@@ -14,10 +14,28 @@ android {
         applicationId = "com.nfcemu"
         minSdk = 24
         targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
+        // CI (release.yml) overrides these via env vars so a released APK's version
+        // matches the git tag; local builds fall back to a fixed default.
+        versionCode = System.getenv("VERSION_CODE")?.toIntOrNull() ?: 1
+        versionName = System.getenv("VERSION_NAME") ?: "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    // Populated from env vars (see release.yml) so CI can sign with a real upload
+    // key without ever committing a keystore. Local `assembleRelease` without those
+    // env vars set falls back to the debug keystore below - installable for manual
+    // testing, but never what you'd actually publish.
+    val hasReleaseSigningEnv = !System.getenv("KEYSTORE_PATH").isNullOrBlank()
+    signingConfigs {
+        if (hasReleaseSigningEnv) {
+            create("release") {
+                storeFile = file(System.getenv("KEYSTORE_PATH")!!)
+                storePassword = System.getenv("KEYSTORE_PASSWORD")
+                keyAlias = System.getenv("KEY_ALIAS")
+                keyPassword = System.getenv("KEY_PASSWORD")
+            }
+        }
     }
 
     buildTypes {
@@ -25,6 +43,11 @@ android {
             isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            signingConfig = if (hasReleaseSigningEnv) {
+                signingConfigs.getByName("release")
+            } else {
+                signingConfigs.getByName("debug")
+            }
         }
         debug {
             isMinifyEnabled = false

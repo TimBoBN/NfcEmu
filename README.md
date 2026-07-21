@@ -102,8 +102,51 @@ als auch die rohen NDEF-Bytes (Base64) für Interop mit Drittprogrammen:
   wurden lokal mit einem installierten Android SDK (Platform 34) erfolgreich gebaut
   und alle Unit-/Round-Trip-Tests ausgeführt, aber das tatsächliche Antippen eines
   Lesegeräts konnte nicht manuell verifiziert werden.
-- Kein Signing-Config für den Release-Build hinterlegt (App-Signing ist eine
-  Nutzerentscheidung); `assembleRelease` erzeugt daher eine unsignierte APK.
+- Ohne konfigurierte Signing-Secrets fällt der Release-Build auf den Debug-Keystore
+  zurück (installierbar zum Testen, aber kein echter Upload-Key) – siehe
+  "Release-Signing einrichten" unten.
+
+## CI/CD
+
+Zwei GitHub-Actions-Workflows unter `.github/workflows/`:
+
+- **`ci.yml`**: läuft bei jedem Push/PR auf `main`. Führt alle Unit-Tests
+  (`:ndefengine:test`, `:app:testDebugUnitTest`) aus, baut Debug- und minifizierte
+  Release-APK (um R8/ProGuard-Regressionen früh zu fangen) und lädt beide als
+  Workflow-Artefakte hoch.
+- **`release.yml`**: läuft bei einem Tag-Push (`v*.*.*`, z. B. `v1.0.0`) oder manuell
+  über "Run workflow" mit einem bestehenden Tag. Führt die Tests aus, baut die
+  signierte Release-APK, benennt sie in `NfcEmu-<tag>.apk` um und legt sie als Asset
+  an ein neu erstelltes GitHub Release. `versionCode`/`versionName` werden dabei aus
+  der CI-Run-Nummer bzw. dem Tag-Namen gesetzt (siehe `app/build.gradle.kts`).
+
+Ein Release auslösen:
+
+```
+git tag v1.0.0
+git push origin v1.0.0
+```
+
+### Release-Signing einrichten
+
+Ohne die folgenden Repository-Secrets baut `release.yml` trotzdem durch, signiert
+aber nur mit dem Debug-Keystore (Warnung erscheint im Workflow-Log). Für einen
+echten Upload-Key:
+
+1. Keystore erzeugen (falls noch nicht vorhanden):
+   ```
+   keytool -genkey -v -keystore release.keystore.jks -keyalg RSA -keysize 2048 \
+     -validity 10000 -alias nfcemu
+   ```
+2. Als Base64 kodieren: `base64 -w0 release.keystore.jks`
+3. In den Repository-Settings unter *Settings → Secrets and variables → Actions*
+   folgende Secrets anlegen:
+   - `KEYSTORE_BASE64` – Ausgabe aus Schritt 2
+   - `KEYSTORE_PASSWORD` – Keystore-Passwort
+   - `KEY_ALIAS` – z. B. `nfcemu`
+   - `KEY_PASSWORD` – Passwort des Alias (oft identisch mit dem Keystore-Passwort)
+
+Den Keystore selbst niemals ins Repository committen.
 
 ## Tests ausführen
 
