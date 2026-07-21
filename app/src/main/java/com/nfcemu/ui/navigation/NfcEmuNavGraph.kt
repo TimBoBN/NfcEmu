@@ -1,8 +1,13 @@
 package com.nfcemu.ui.navigation
 
+import androidx.compose.animation.AnimatedContentTransitionScope
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -16,6 +21,7 @@ import com.nfcemu.ui.onboarding.OnboardingViewModel
 import com.nfcemu.ui.profileform.ProfileFormScreen
 import com.nfcemu.ui.profileform.TypePickerScreen
 import com.nfcemu.ui.profilelist.ProfileListScreen
+import com.nfcemu.ui.theme.Motion
 
 private object Routes {
     const val HOME = "home"
@@ -26,11 +32,49 @@ private object Routes {
     const val LIBRARY = "library"
 }
 
+/**
+ * Shared-axis-style screen transitions (forward = slide in from the end + fade,
+ * back = slide in from the start + fade), applied once here as [NavHost] defaults
+ * rather than repeated on every `composable()` call. Distances are relative to the
+ * container (`AnimatedContentTransitionScope`), so this looks right on any screen
+ * size instead of using a fixed pixel offset.
+ */
+private fun AnimatedContentTransitionScope<NavBackStackEntry>.forwardEnter() =
+    slideIntoContainer(
+        AnimatedContentTransitionScope.SlideDirection.Start,
+        animationSpec = tween(Motion.DURATION_MEDIUM, easing = Motion.emphasizedEasing),
+    ) + fadeIn(tween(Motion.DURATION_MEDIUM))
+
+private fun AnimatedContentTransitionScope<NavBackStackEntry>.forwardExit() =
+    slideOutOfContainer(
+        AnimatedContentTransitionScope.SlideDirection.Start,
+        animationSpec = tween(Motion.DURATION_MEDIUM, easing = Motion.emphasizedEasing),
+    ) + fadeOut(tween(Motion.DURATION_SHORT))
+
+private fun AnimatedContentTransitionScope<NavBackStackEntry>.backEnter() =
+    slideIntoContainer(
+        AnimatedContentTransitionScope.SlideDirection.End,
+        animationSpec = tween(Motion.DURATION_MEDIUM, easing = Motion.emphasizedEasing),
+    ) + fadeIn(tween(Motion.DURATION_MEDIUM))
+
+private fun AnimatedContentTransitionScope<NavBackStackEntry>.backExit() =
+    slideOutOfContainer(
+        AnimatedContentTransitionScope.SlideDirection.End,
+        animationSpec = tween(Motion.DURATION_MEDIUM, easing = Motion.emphasizedEasing),
+    ) + fadeOut(tween(Motion.DURATION_SHORT))
+
 @Composable
 fun NfcEmuNavGraph() {
     val navController = rememberNavController()
 
-    NavHost(navController = navController, startDestination = Routes.HOME) {
+    NavHost(
+        navController = navController,
+        startDestination = Routes.HOME,
+        enterTransition = { forwardEnter() },
+        exitTransition = { forwardExit() },
+        popEnterTransition = { backEnter() },
+        popExitTransition = { backExit() },
+    ) {
         composable(Routes.HOME) {
             val onboardingViewModel: OnboardingViewModel = hiltViewModel()
             val onboardingCompleted by onboardingViewModel.onboardingCompleted.collectAsState()

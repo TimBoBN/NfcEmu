@@ -1,7 +1,8 @@
 package com.nfcemu.ui.profileform
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
@@ -11,9 +12,10 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -22,9 +24,13 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.semantics
@@ -32,7 +38,8 @@ import androidx.compose.ui.unit.dp
 import com.nfcemu.R
 import com.nfcemu.ui.components.icon
 import com.nfcemu.ui.components.label
-import androidx.compose.ui.semantics.Role
+import com.nfcemu.ui.theme.Motion
+import com.nfcemu.ui.theme.Spacing
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -54,9 +61,9 @@ fun TypePickerScreen(
     ) { padding ->
         LazyVerticalGrid(
             columns = GridCells.Fixed(3),
-            modifier = Modifier.fillMaxSize().padding(padding).padding(12.dp),
-            horizontalArrangement = Arrangement.spacedBy(12.dp),
-            verticalArrangement = Arrangement.spacedBy(12.dp),
+            modifier = Modifier.fillMaxSize().padding(padding).padding(Spacing.sm + Spacing.xs),
+            horizontalArrangement = Arrangement.spacedBy(Spacing.sm + Spacing.xs),
+            verticalArrangement = Arrangement.spacedBy(Spacing.sm + Spacing.xs),
         ) {
             items(ProfileTypeTemplate.entries) { template ->
                 TypeTile(template = template, onClick = { onTypeSelected(template) })
@@ -67,29 +74,43 @@ fun TypePickerScreen(
 
 @Composable
 private fun TypeTile(template: ProfileTypeTemplate, onClick: () -> Unit) {
-    Column(
+    val interactionSource = remember { MutableInteractionSource() }
+    val isPressed by interactionSource.collectIsPressedAsState()
+    val scale by animateFloatAsState(
+        targetValue = if (isPressed) 0.94f else 1f,
+        animationSpec = Motion.standard(Motion.DURATION_SHORT),
+        label = "tile-press-scale",
+    )
+
+    Card(
+        onClick = onClick,
+        interactionSource = interactionSource,
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.secondaryContainer),
+        elevation = CardDefaults.cardElevation(defaultElevation = 1.dp, pressedElevation = 0.dp),
         modifier = Modifier
             .aspectRatio(1f)
-            .background(MaterialTheme.colorScheme.secondaryContainer, RoundedCornerShape(16.dp))
-            .clickable(onClickLabel = template.label()) { onClick() }
+            .scale(scale)
             .semantics(mergeDescendants = true) {
                 contentDescription = template.label()
                 role = Role.Button
-            }
-            .padding(12.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center,
+            },
     ) {
-        Icon(
-            imageVector = template.icon(),
-            contentDescription = null,
-            modifier = Modifier.size(36.dp),
-            tint = MaterialTheme.colorScheme.onSecondaryContainer,
-        )
-        Text(
-            text = template.label(),
-            style = MaterialTheme.typography.labelMedium,
-            color = MaterialTheme.colorScheme.onSecondaryContainer,
-        )
+        Column(
+            modifier = Modifier.fillMaxSize().padding(Spacing.sm + Spacing.xs),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center,
+        ) {
+            Icon(
+                imageVector = template.icon(),
+                contentDescription = null,
+                modifier = Modifier.size(36.dp),
+                tint = MaterialTheme.colorScheme.onSecondaryContainer,
+            )
+            Text(
+                text = template.label(),
+                style = MaterialTheme.typography.labelMedium,
+                color = MaterialTheme.colorScheme.onSecondaryContainer,
+            )
+        }
     }
 }

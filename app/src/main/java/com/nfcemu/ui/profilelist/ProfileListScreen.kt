@@ -2,6 +2,9 @@ package com.nfcemu.ui.profilelist
 
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -11,13 +14,14 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.PushPin
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -27,6 +31,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -44,8 +49,10 @@ import com.nfcemu.R
 import com.nfcemu.data.Profile
 import com.nfcemu.ui.components.icon
 import com.nfcemu.ui.components.previewText
+import com.nfcemu.ui.theme.Motion
+import com.nfcemu.ui.theme.Spacing
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
 fun ProfileListScreen(
     onBack: () -> Unit,
@@ -83,7 +90,10 @@ fun ProfileListScreen(
             }
         },
     ) { padding ->
-        LazyColumn(modifier = Modifier.padding(padding).padding(horizontal = 16.dp)) {
+        LazyColumn(
+            modifier = Modifier.padding(padding).padding(horizontal = Spacing.md),
+            verticalArrangement = Arrangement.spacedBy(Spacing.sm),
+        ) {
             items(uiState.profiles, key = { it.id }) { profile ->
                 ProfileRow(
                     profile = profile,
@@ -99,8 +109,8 @@ fun ProfileListScreen(
                         val extension = if (raw) "ndef" else "nfcemu"
                         nfcemuLauncher.launch("${profile.name}.$extension")
                     },
+                    modifier = Modifier.animateItemPlacement(),
                 )
-                Spacer(Modifier.size(8.dp))
             }
         }
     }
@@ -111,13 +121,13 @@ fun ProfileListScreen(
             title = { Text(stringResource(R.string.profile_delete_title)) },
             text = { Text(stringResource(R.string.profile_delete_message, profile.name)) },
             confirmButton = {
-                androidx.compose.material3.TextButton(onClick = {
+                TextButton(onClick = {
                     viewModel.delete(profile.id)
                     profilePendingDelete = null
                 }) { Text(stringResource(R.string.action_delete)) }
             },
             dismissButton = {
-                androidx.compose.material3.TextButton(onClick = { profilePendingDelete = null }) {
+                TextButton(onClick = { profilePendingDelete = null }) {
                     Text(stringResource(R.string.action_cancel))
                 }
             },
@@ -135,12 +145,21 @@ private fun ProfileRow(
     onTogglePin: () -> Unit,
     onDelete: () -> Unit,
     onExport: (raw: Boolean) -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     var menuExpanded by remember { mutableStateOf(false) }
+    val containerColor by animateColorAsState(
+        targetValue = if (isActive) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.surfaceVariant,
+        animationSpec = Motion.standard(),
+        label = "profile-row-highlight",
+    )
 
-    Card(modifier = Modifier.fillMaxWidth()) {
+    Card(
+        modifier = modifier.fillMaxWidth(),
+        colors = CardDefaults.cardColors(containerColor = containerColor),
+    ) {
         Row(
-            modifier = Modifier.fillMaxWidth().padding(12.dp),
+            modifier = Modifier.fillMaxWidth().padding(Spacing.sm + Spacing.xs),
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Icon(
@@ -149,7 +168,7 @@ private fun ProfileRow(
                 tint = MaterialTheme.colorScheme.primary,
                 modifier = Modifier.size(32.dp),
             )
-            Spacer(Modifier.size(12.dp))
+            Spacer(Modifier.size(Spacing.sm + Spacing.xs))
             Column(modifier = Modifier.weight(1f)) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Text(profile.name, style = MaterialTheme.typography.titleMedium)
@@ -174,7 +193,7 @@ private fun ProfileRow(
                     contentDescription = stringResource(R.string.profile_active),
                     tint = MaterialTheme.colorScheme.primary,
                 )
-                Spacer(Modifier.size(8.dp))
+                Spacer(Modifier.size(Spacing.sm))
             }
             Column {
                 IconButton(onClick = { menuExpanded = true }) {

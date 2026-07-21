@@ -1,14 +1,25 @@
 package com.nfcemu.ui.profileform
 
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.animateContentSize
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.expandVertically
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.shrinkVertically
+import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.DropdownMenuItem
@@ -30,13 +41,17 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.nfcemu.R
 import com.nfcemu.ndefengine.WifiAuthType
+import com.nfcemu.ui.theme.Motion
+import com.nfcemu.ui.theme.Spacing
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -70,8 +85,9 @@ fun ProfileFormScreen(
         Column(
             modifier = Modifier
                 .padding(padding)
-                .padding(16.dp)
-                .verticalScroll(rememberScrollState()),
+                .padding(Spacing.md)
+                .verticalScroll(rememberScrollState())
+                .animateContentSize(Motion.standard()),
         ) {
             OutlinedTextField(
                 value = uiState.name,
@@ -99,7 +115,7 @@ fun ProfileFormScreen(
             PreviewCard(previewText = uiState.previewText, estimatedSize = uiState.estimatedNdefSize, isValid = uiState.isValid)
 
             Spacer()
-            androidx.compose.material3.Button(
+            Button(
                 onClick = viewModel::save,
                 enabled = uiState.isValid,
                 modifier = Modifier.fillMaxWidth(),
@@ -111,7 +127,7 @@ fun ProfileFormScreen(
 }
 
 @Composable
-private fun Spacer() = androidx.compose.foundation.layout.Spacer(Modifier.padding(top = 12.dp))
+private fun Spacer() = androidx.compose.foundation.layout.Spacer(Modifier.padding(top = Spacing.sm + Spacing.xs))
 
 @Composable
 private fun TemplateFormBody(
@@ -244,12 +260,8 @@ private fun LabeledField(
         label = { Text(label) },
         isError = error != null,
         supportingText = { error?.let { Text(it) } },
-        keyboardOptions = androidx.compose.foundation.text.KeyboardOptions(keyboardType = keyboardType),
-        visualTransformation = if (isPassword) {
-            androidx.compose.ui.text.input.PasswordVisualTransformation()
-        } else {
-            androidx.compose.ui.text.input.VisualTransformation.None
-        },
+        keyboardOptions = KeyboardOptions(keyboardType = keyboardType),
+        visualTransformation = if (isPassword) PasswordVisualTransformation() else VisualTransformation.None,
         modifier = Modifier.fillMaxWidth(),
         singleLine = true,
     )
@@ -264,13 +276,19 @@ private fun AarSection(
     onPackageNameChange: (String) -> Unit,
 ) {
     Column {
-        Row(verticalAlignment = androidx.compose.ui.Alignment.CenterVertically) {
+        Row(verticalAlignment = Alignment.CenterVertically) {
             Checkbox(checked = enabled, onCheckedChange = onEnabledChange)
             Text(stringResource(R.string.field_aar_checkbox))
         }
-        if (enabled) {
-            Spacer()
-            LabeledField(packageName, stringResource(R.string.field_aar_package), error, onPackageNameChange)
+        AnimatedVisibility(
+            visible = enabled,
+            enter = expandVertically(Motion.standard()) + fadeIn(Motion.standard()),
+            exit = shrinkVertically(Motion.standard()) + fadeOut(Motion.standard()),
+        ) {
+            Column {
+                Spacer()
+                LabeledField(packageName, stringResource(R.string.field_aar_package), error, onPackageNameChange)
+            }
         }
     }
 }
@@ -278,13 +296,19 @@ private fun AarSection(
 @Composable
 private fun PreviewCard(previewText: String, estimatedSize: Int, isValid: Boolean) {
     Card(modifier = Modifier.fillMaxWidth()) {
-        Column(modifier = Modifier.padding(16.dp)) {
+        Column(modifier = Modifier.padding(Spacing.md).animateContentSize(Motion.standard())) {
             Text(stringResource(R.string.profile_form_preview_title), style = MaterialTheme.typography.labelLarge)
             Spacer()
-            Text(
-                if (isValid) previewText else stringResource(R.string.profile_form_preview_incomplete),
-                style = MaterialTheme.typography.bodyMedium,
-            )
+            AnimatedContent(
+                targetState = if (isValid) previewText else null,
+                transitionSpec = { fadeIn(Motion.standard()) togetherWith fadeOut(tween(Motion.DURATION_SHORT)) },
+                label = "form-preview-text",
+            ) { text ->
+                Text(
+                    text ?: stringResource(R.string.profile_form_preview_incomplete),
+                    style = MaterialTheme.typography.bodyMedium,
+                )
+            }
             if (isValid) {
                 Spacer()
                 Text(
