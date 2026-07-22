@@ -4,7 +4,10 @@ import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import com.nfcemu.data.local.SettingsDataStore
 import com.nfcemu.lock.BiometricAvailability
 import com.nfcemu.lock.BiometricAvailabilitySource
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.advanceUntilIdle
@@ -25,18 +28,27 @@ private class FakeBiometricAvailabilitySource(private val availability: Biometri
 class SettingsViewModelTest {
 
     private lateinit var tempDir: File
+    private lateinit var scope: CoroutineScope
     private lateinit var settingsDataStore: SettingsDataStore
 
     @BeforeTest
     fun setUp() {
         Dispatchers.setMain(UnconfinedTestDispatcher())
         tempDir = File.createTempFile("nfcemu-settings-vm-test", "").apply { delete(); mkdirs() }
-        val dataStore = PreferenceDataStoreFactory.create(produceFile = { File(tempDir, "settings.preferences_pb") })
+        scope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
+        // Passing our own `scope` (cancelled in tearDown) instead of letting the factory
+        // default to its own uncancelled Dispatchers.IO scope - otherwise DataStore's
+        // internal write-actor coroutine leaks for the rest of the test JVM's lifetime,
+        // one per test, which piles up across the whole suite and can starve
+        // Dispatchers.IO/Default badly enough on a constrained CI runner to hang later,
+        // unrelated tests for a full minute (UncompletedCoroutinesError).
+        val dataStore = PreferenceDataStoreFactory.create(scope = scope, produceFile = { File(tempDir, "settings.preferences_pb") })
         settingsDataStore = SettingsDataStore(dataStore)
     }
 
     @AfterTest
     fun tearDown() {
+        scope.cancel()
         tempDir.deleteRecursively()
         Dispatchers.resetMain()
     }

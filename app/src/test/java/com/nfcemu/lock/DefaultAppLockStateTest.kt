@@ -28,8 +28,14 @@ class DefaultAppLockStateTest {
     fun setUp() {
         Dispatchers.setMain(UnconfinedTestDispatcher())
         tempDir = File.createTempFile("nfcemu-app-lock-test", "").apply { delete(); mkdirs() }
-        val dataStore = PreferenceDataStoreFactory.create(produceFile = { File(tempDir, "settings.preferences_pb") })
         scope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
+        // Passing our own `scope` (cancelled in tearDown) instead of letting the factory
+        // default to its own uncancelled Dispatchers.IO scope - otherwise DataStore's
+        // internal write-actor coroutine leaks for the rest of the test JVM's lifetime,
+        // one per test, which piles up across the whole suite and can starve
+        // Dispatchers.IO/Default badly enough on a constrained CI runner to hang later,
+        // unrelated tests for a full minute (UncompletedCoroutinesError).
+        val dataStore = PreferenceDataStoreFactory.create(scope = scope, produceFile = { File(tempDir, "settings.preferences_pb") })
         settingsDataStore = SettingsDataStore(dataStore)
     }
 
