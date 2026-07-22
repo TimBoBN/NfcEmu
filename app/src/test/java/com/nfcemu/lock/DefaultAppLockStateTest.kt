@@ -7,6 +7,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.test.TestDispatcher
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runTest
@@ -21,7 +22,7 @@ import kotlin.test.assertEquals
 class DefaultAppLockStateTest {
 
     private lateinit var tempDir: File
-    private lateinit var dispatcher: UnconfinedTestDispatcher
+    private lateinit var dispatcher: TestDispatcher
     private lateinit var scope: CoroutineScope
     private lateinit var settingsDataStore: SettingsDataStore
 
