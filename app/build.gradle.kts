@@ -40,9 +40,13 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = true
-            isShrinkResources = true
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            // R8 minification + resource shrinking were disabled after confirming they're
+            // why Samsung's "My Files" installer (One UI, Android 13) rejected the release
+            // APK with a generic "problem parsing the package" error, while the unminified
+            // debug build - and `adb install` of either - installed fine. Reliable sideload
+            // installs matter more here than the APK size savings for this app's size.
+            isMinifyEnabled = false
+            isShrinkResources = false
             signingConfig = if (hasReleaseSigningEnv) {
                 signingConfigs.getByName("release")
             } else {

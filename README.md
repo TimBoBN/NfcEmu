@@ -161,7 +161,7 @@ raw NDEF bytes (Base64) for interop with third-party tools:
   deliberately isolated as a stretch goal; the structure follows the spec
   closely but hasn't been verified against real hardware.
 - This development environment had no access to a physical Android device or an
-  NFC-capable emulator - the debug and minified release builds were verified
+  NFC-capable emulator - the debug and release builds were verified
   locally with an installed Android SDK (Platform 34), all unit/round-trip tests
   were run, and a real release APK downloaded from a GitHub Release was verified
   byte-for-byte (zip integrity, signature, manifest). This also means physical
@@ -201,5 +201,5 @@ JAVA_HOME=<jdk17> ./gradlew :ndefengine:test :app:testDebugUnitTest
 
 ```
 JAVA_HOME=<jdk17> ./gradlew :app:assembleDebug
-JAVA_HOME=<jdk17> ./gradlew :app:assembleRelease   # minified, R8
+JAVA_HOME=<jdk17> ./gradlew :app:assembleRelease   # unminified - see Known limitations
 ```
