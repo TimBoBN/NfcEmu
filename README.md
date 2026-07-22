@@ -28,9 +28,13 @@ URI). Fully offline, no analytics, no network permission.
   ignores the phone's own tag-discovery dispatch while in the foreground, so
   holding two HCE-capable phones together doesn't trigger Android's default
   "empty tag" handling on either side.
-- Onboarding on first launch, dark/light theme (Material You dynamic color on
-  Android 12+), edge-to-edge, animated screen transitions, accessible (content
-  descriptions, TalkBack-friendly).
+- **Transmit screen**: tapping a profile opens a full-screen "ready to transmit"
+  confirmation (pulsing rings, floating profile card) instead of silently
+  activating it in the background - closing it (✕ or "Done") deactivates
+  emulation again.
+- Onboarding on first launch, a single fixed dark theme ("Nocturne" - no
+  Material You, no light variant), edge-to-edge, animated screen transitions,
+  accessible (content descriptions, TalkBack-friendly).
 
 ## Architecture
 
@@ -52,7 +56,7 @@ URI). Fully offline, no analytics, no network permission.
   tile/             Quick Settings TileService
   util/             InstalledAppsSource (AAR app picker)
   ui/               Compose screens + ViewModels: home, profilelist, profileform,
-                    library, onboarding, navigation, theme, components
+                    library, onboarding, navigation, transmit, theme, components
   di/               Hilt modules (DataStore instances, CoroutineScope, bindings)
 ```
 
@@ -80,6 +84,12 @@ recomputed on a profile switch.
   (`dataStore.profiles.first()`), never through the UI-facing cached StateFlow, to
   avoid a race where two calls back-to-back (e.g. create-then-activate) read a
   stale pre-write snapshot.
+- **The theme ("Nocturne") is a single fixed dark palette**, not Material You -
+  `ui/theme/Theme.kt` builds one hardcoded `darkColorScheme(...)`, no light
+  variant to maintain. Icons are hand-authored vector drawables
+  (`res/drawable/ic_nocturne_*.xml`) rather than `Icons.Filled.*`, and buttons/
+  cards go through `ui/components/Buttons.kt` (outlined-only, never filled, per
+  the design system's one hard rule).
 
 ## Adding a new NdefPayload type
 
