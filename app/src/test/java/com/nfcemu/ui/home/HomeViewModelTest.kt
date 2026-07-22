@@ -3,6 +3,8 @@ package com.nfcemu.ui.home
 import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import com.nfcemu.data.Profile
 import com.nfcemu.data.ProfileRepository
+import com.nfcemu.data.activity.RecentActivityDataStore
+import com.nfcemu.data.activity.RecentActivityRepository
 import com.nfcemu.data.local.ProfileDataStore
 import com.nfcemu.ndefengine.NdefPayload
 import com.nfcemu.nfc.NfcHardwareState
@@ -44,6 +46,7 @@ class HomeViewModelTest {
     private lateinit var dispatcher: TestDispatcher
     private lateinit var repositoryScope: CoroutineScope
     private lateinit var repository: ProfileRepository
+    private lateinit var recentActivityRepository: RecentActivityRepository
 
     @BeforeTest
     fun setUp() {
@@ -56,7 +59,9 @@ class HomeViewModelTest {
         // can race against runTest's own end-of-test bookkeeping under load.
         repositoryScope = CoroutineScope(SupervisorJob() + dispatcher)
         val dataStore = PreferenceDataStoreFactory.create(scope = repositoryScope, produceFile = { File(tempDir, "profiles.preferences_pb") })
-        repository = ProfileRepository(ProfileDataStore(dataStore), repositoryScope)
+        val activityDataStore = PreferenceDataStoreFactory.create(scope = repositoryScope, produceFile = { File(tempDir, "recent_activity.preferences_pb") })
+        recentActivityRepository = RecentActivityRepository(RecentActivityDataStore(activityDataStore), repositoryScope)
+        repository = ProfileRepository(ProfileDataStore(dataStore), recentActivityRepository, repositoryScope)
     }
 
     @AfterTest
@@ -78,7 +83,7 @@ class HomeViewModelTest {
         repository.setActive(active.id) // now active; recentlyUsed remains "recently used" but inactive
         repository.profiles.first { it.size == 3 }
 
-        val viewModel = HomeViewModel(repository, FakeNfcStateSource())
+        val viewModel = HomeViewModel(repository, FakeNfcStateSource(), recentActivityRepository)
         val state = viewModel.uiState.first { it.quickSelectProfiles.size == 2 }
 
         assertEquals(setOf("Pinned", "RecentlyUsed"), state.quickSelectProfiles.map { it.name }.toSet())
@@ -96,7 +101,7 @@ class HomeViewModelTest {
         repository.setActive(active.id)
         repository.activeProfileId.first { it == active.id }
 
-        val viewModel = HomeViewModel(repository, FakeNfcStateSource())
+        val viewModel = HomeViewModel(repository, FakeNfcStateSource(), recentActivityRepository)
         val state = viewModel.uiState.first { it.activeProfile != null }
 
         assertTrue(state.quickSelectProfiles.none { it.id == active.id })
@@ -107,7 +112,7 @@ class HomeViewModelTest {
     fun `selecting a profile from quick-select activates it`() = runTest {
         val profile = Profile(name = "Target", fields = NdefPayload.Text("t"))
         repository.createProfile(profile)
-        val viewModel = HomeViewModel(repository, FakeNfcStateSource())
+        val viewModel = HomeViewModel(repository, FakeNfcStateSource(), recentActivityRepository)
 
         viewModel.selectProfile(profile.id)
 
@@ -116,7 +121,7 @@ class HomeViewModelTest {
 
     @Test
     fun `nfc hardware state is surfaced from the nfc state source`() = runTest {
-        val viewModel = HomeViewModel(repository, FakeNfcStateSource(NfcHardwareState.DISABLED))
+        val viewModel = HomeViewModel(repository, FakeNfcStateSource(NfcHardwareState.DISABLED), recentActivityRepository)
         val state = viewModel.uiState.first { it.nfcState == NfcHardwareState.DISABLED }
         assertEquals(NfcHardwareState.DISABLED, state.nfcState)
     }

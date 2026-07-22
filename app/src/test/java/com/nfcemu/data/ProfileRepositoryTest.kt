@@ -1,6 +1,8 @@
 package com.nfcemu.data
 
 import androidx.datastore.preferences.core.PreferenceDataStoreFactory
+import com.nfcemu.data.activity.RecentActivityDataStore
+import com.nfcemu.data.activity.RecentActivityRepository
 import com.nfcemu.data.local.ProfileDataStore
 import com.nfcemu.ndefengine.NdefPayload
 import kotlinx.coroutines.CoroutineScope
@@ -52,7 +54,15 @@ class ProfileRepositoryTest {
             scope = repositoryScope,
             produceFile = { File(tempDir, "profiles.preferences_pb") },
         )
-        repository = ProfileRepository(ProfileDataStore(dataStore), repositoryScope)
+        val activityDataStore = PreferenceDataStoreFactory.create(
+            scope = repositoryScope,
+            produceFile = { File(tempDir, "recent_activity.preferences_pb") },
+        )
+        repository = ProfileRepository(
+            ProfileDataStore(dataStore),
+            RecentActivityRepository(RecentActivityDataStore(activityDataStore), repositoryScope),
+            repositoryScope,
+        )
     }
 
     @AfterTest

@@ -25,6 +25,14 @@ annotation class LibraryStore
 @Retention(AnnotationRetention.BINARY)
 annotation class SettingsStore
 
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class ContactsStore
+
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class ActivityStore
+
 /**
  * Provides the raw [DataStore] instances as separate bindings (rather than each
  * repository deriving its own from [Context] via the `preferencesDataStore` property
@@ -52,4 +60,16 @@ object DataStoreModule {
     @SettingsStore
     fun provideSettingsDataStore(@ApplicationContext context: Context): DataStore<Preferences> =
         PreferenceDataStoreFactory.create(produceFile = { context.preferencesDataStoreFile("settings") })
+
+    @Provides
+    @Singleton
+    @ContactsStore
+    fun provideContactsDataStore(@ApplicationContext context: Context): DataStore<Preferences> =
+        PreferenceDataStoreFactory.create(produceFile = { context.preferencesDataStoreFile("contacts") })
+
+    @Provides
+    @Singleton
+    @ActivityStore
+    fun provideActivityDataStore(@ApplicationContext context: Context): DataStore<Preferences> =
+        PreferenceDataStoreFactory.create(produceFile = { context.preferencesDataStoreFile("recent_activity") })
 }

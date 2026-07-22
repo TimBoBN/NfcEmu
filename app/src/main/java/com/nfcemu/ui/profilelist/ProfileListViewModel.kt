@@ -31,7 +31,8 @@ class ProfileListViewModel @Inject constructor(
         profileRepository.profiles,
         profileRepository.activeProfileId,
     ) { profiles, activeId ->
-        ProfileListUiState(profiles = profiles.sortedByDescending { it.pinned }, activeProfileId = activeId)
+        val visibleProfiles = profiles.filterNot { it.id == Profile.MY_PROFILE_ID }
+        ProfileListUiState(profiles = visibleProfiles.sortedByDescending { it.pinned }, activeProfileId = activeId)
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), ProfileListUiState())
 
     private val _exportError = MutableStateFlow<String?>(null)
@@ -70,7 +71,8 @@ class ProfileListViewModel @Inject constructor(
 
     fun exportAllAsZip(targetUri: Uri) {
         viewModelScope.launch {
-            fileRepository.exportLibraryAsZip(profileRepository.profiles.value, targetUri)
+            val exportable = profileRepository.profiles.value.filterNot { it.id == Profile.MY_PROFILE_ID }
+            fileRepository.exportLibraryAsZip(exportable, targetUri)
                 .onFailure { _exportError.value = it.message ?: "Export failed" }
         }
     }

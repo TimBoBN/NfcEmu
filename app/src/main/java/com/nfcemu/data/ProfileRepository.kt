@@ -1,10 +1,12 @@
 package com.nfcemu.data
 
+import com.nfcemu.data.activity.RecentActivityRepository
 import com.nfcemu.data.local.ProfileDataStore
 import com.nfcemu.di.ApplicationScope
 import com.nfcemu.domain.ActiveNdefSource
 import com.nfcemu.ndefengine.AarConfig
 import com.nfcemu.ndefengine.NdefMessageFactory
+import com.nfcemu.ndefengine.NdefPayload
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -43,6 +45,7 @@ import javax.inject.Singleton
 @Singleton
 class ProfileRepository @Inject constructor(
     private val dataStore: ProfileDataStore,
+    private val recentActivityRepository: RecentActivityRepository,
     @ApplicationScope private val scope: CoroutineScope,
 ) : ActiveNdefSource {
 
@@ -104,6 +107,7 @@ class ProfileRepository @Inject constructor(
             profiles.map { if (it.id == id) it.copy(lastUsedAt = System.currentTimeMillis()) else it },
         )
         dataStore.saveActiveProfileId(target.id)
+        recentActivityRepository.record(target.name, target.fields.typeLabel())
     }
 
     /** Deactivates whichever profile is currently active - the card then emulates nothing. */
@@ -125,5 +129,27 @@ class ProfileRepository @Inject constructor(
         val stored = profile.copy(id = UUID.randomUUID().toString(), pinned = false)
         dataStore.saveProfiles(currentProfiles() + stored)
         return stored
+    }
+
+    /**
+     * Upserts the single reserved "My Profile" row ([Profile.MY_PROFILE_ID]). It's a real
+     * [Profile] persisted alongside normal ones - so [setActive]/HCE emulation need no
+     * special-casing - but is filtered out of every user-facing profile list (see
+     * [com.nfcemu.ui.home.HomeViewModel]/[com.nfcemu.ui.profilelist.ProfileListViewModel]).
+     */
+    suspend fun saveMyProfile(vcard: NdefPayload.VCard) {
+        val profiles = currentProfiles()
+        val existing = profiles.find { it.id == Profile.MY_PROFILE_ID }
+        val row = Profile(
+            id = Profile.MY_PROFILE_ID,
+            name = vcard.name?.takeIf { it.isNotBlank() } ?: "My Profile",
+            fields = vcard,
+            pinned = false,
+            createdAt = existing?.createdAt ?: System.currentTimeMillis(),
+            lastUsedAt = existing?.lastUsedAt,
+        )
+        dataStore.saveProfiles(
+            if (existing != null) profiles.map { if (it.id == Profile.MY_PROFILE_ID) row else it } else profiles + row,
+        )
     }
 }

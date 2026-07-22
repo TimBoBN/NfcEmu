@@ -61,6 +61,22 @@ fun NdefPayload.typeGlyph(): TypeGlyph = when (this) {
     }
 }
 
+/** Human label for an already-encoded payload - same scheme-sniffing as [NdefPayload.typeGlyph], used by Transmit's type-label line. */
+fun NdefPayload.typeDisplayLabel(): String = when (this) {
+    is NdefPayload.VCard -> "Business card"
+    is NdefPayload.Text -> "Text"
+    is NdefPayload.WifiHandover -> "Wi-Fi access"
+    is NdefPayload.Uri -> when {
+        uri.startsWith("tel:") -> "Phone number"
+        uri.startsWith("mailto:") -> "Email"
+        uri.startsWith("sms:") -> "SMS"
+        uri.startsWith("geo:") -> "Location"
+        uri.startsWith("market://") -> "Play Store app"
+        uri.startsWith("http://") || uri.startsWith("https://") -> "Website"
+        else -> "Custom URI"
+    }
+}
+
 /**
  * Glyph for a [com.nfcemu.data.library.LibraryEntry], which only stores the coarse
  * [com.nfcemu.data.typeLabel] discriminator ("uri"/"vcard"/"text"/"wifi"), not the full

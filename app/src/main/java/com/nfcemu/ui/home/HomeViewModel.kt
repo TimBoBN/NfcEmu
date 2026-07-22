@@ -4,6 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.nfcemu.data.Profile
 import com.nfcemu.data.ProfileRepository
+import com.nfcemu.data.activity.RecentActivityEntry
+import com.nfcemu.data.activity.RecentActivityRepository
 import com.nfcemu.nfc.NfcHardwareState
 import com.nfcemu.nfc.NfcStateSource
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -19,23 +21,28 @@ data class HomeUiState(
     val activeProfile: Profile? = null,
     val quickSelectProfiles: List<Profile> = emptyList(),
     val nfcState: NfcHardwareState = NfcHardwareState.ENABLED,
+    val recentActivity: List<RecentActivityEntry> = emptyList(),
 )
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val profileRepository: ProfileRepository,
     nfcStateSource: NfcStateSource,
+    recentActivityRepository: RecentActivityRepository,
 ) : ViewModel() {
 
     val uiState: StateFlow<HomeUiState> = combine(
         profileRepository.profiles,
         profileRepository.activeProfileId,
         nfcStateSource.state,
-    ) { profiles, activeId, nfcState ->
+        recentActivityRepository.recent,
+    ) { profiles, activeId, nfcState, recentActivity ->
+        val visibleProfiles = profiles.filterNot { it.id == Profile.MY_PROFILE_ID }
         HomeUiState(
             activeProfile = profiles.find { it.id == activeId },
-            quickSelectProfiles = quickSelection(profiles, activeId),
+            quickSelectProfiles = quickSelection(visibleProfiles, activeId),
             nfcState = nfcState,
+            recentActivity = recentActivity,
         )
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), HomeUiState())
 

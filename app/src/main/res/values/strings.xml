@@ -12,6 +12,13 @@
     <string name="home_nfc_not_supported">This device does not support NFC.</string>
     <string name="home_nfc_disabled">NFC is disabled. Turn it on so readers can detect your profile.</string>
     <string name="home_nfc_open_settings">Settings</string>
+    <string name="home_contacts">Contacts</string>
+    <string name="home_my_profile">My Profile</string>
+    <string name="home_scan_tag">Scan a tag</string>
+    <string name="home_receive_contact">Read a contact via NFC</string>
+    <string name="home_recent_activity">Recently sent</string>
+    <string name="home_recent_today">Today, %1$s</string>
+    <string name="home_recent_yesterday">Yesterday, %1$s</string>
     <string name="profile_pinned">Pinned</string>
 
     <!-- Profile list -->
@@ -48,6 +55,22 @@
     <string name="transmit_ready">Ready to transmit</string>
     <string name="transmit_subtitle">Hold your phone against a reader or another NFC-capable device.</string>
     <string name="transmit_done">Done</string>
+
+    <!-- My Profile -->
+    <string name="myprofile_title">My Profile</string>
+    <string name="myprofile_intro">These details are shared as a contact card via NFC when you tap “Share via NFC”.</string>
+    <string name="myprofile_share">Share via NFC</string>
+
+    <!-- Receive contact -->
+    <string name="receive_contact_title">Read a Contact</string>
+    <string name="receive_contact_waiting">Hold your phone against the other person\'s device to receive their profile.</string>
+    <string name="receive_contact_error_title">Could not read this tag</string>
+    <string name="receive_contact_discard">Discard</string>
+    <string name="receive_contact_save">Save as Contact</string>
+
+    <!-- Contacts -->
+    <string name="contacts_title">Contacts</string>
+    <string name="contacts_empty">No contacts yet. Read a profile via NFC to save it here.</string>
 
     <!-- Write tag -->
     <string name="write_tag_title">Write to Tag</string>

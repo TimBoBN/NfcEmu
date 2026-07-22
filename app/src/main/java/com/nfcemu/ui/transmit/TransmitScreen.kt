@@ -43,6 +43,7 @@ import com.nfcemu.ui.components.NfcEmuCard
 import com.nfcemu.ui.components.NfcEmuSecondaryButton
 import com.nfcemu.ui.components.TypeIconBadge
 import com.nfcemu.ui.components.previewText
+import com.nfcemu.ui.components.typeDisplayLabel
 import com.nfcemu.ui.components.typeGlyph
 import com.nfcemu.ui.theme.Spacing
 
@@ -108,20 +109,23 @@ fun TransmitScreen(
 @Composable
 private fun TransmitCard(profile: Profile) {
     NfcEmuCard {
-        Row(
-            modifier = Modifier.padding(Spacing.md),
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
-            TypeIconBadge(profile.fields.typeGlyph(), size = 56.dp)
-            Spacer(Modifier.width(Spacing.sm))
-            Column {
-                Text(profile.name, style = MaterialTheme.typography.titleMedium)
+        Column(modifier = Modifier.padding(Spacing.md)) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                TypeIconBadge(profile.fields.typeGlyph(), size = 32.dp)
+                Spacer(Modifier.width(Spacing.sm))
                 Text(
-                    profile.fields.previewText(),
-                    style = MaterialTheme.typography.bodySmall,
+                    profile.fields.typeDisplayLabel().uppercase(),
+                    style = MaterialTheme.typography.labelSmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
             }
+            Spacer(Modifier.height(Spacing.sm))
+            Text(profile.name, style = MaterialTheme.typography.titleMedium)
+            Text(
+                profile.fields.previewText(),
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
         }
     }
 }

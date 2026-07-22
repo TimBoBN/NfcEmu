@@ -19,6 +19,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
@@ -43,6 +44,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.nfcemu.R
 import com.nfcemu.data.Profile
+import com.nfcemu.data.activity.RecentActivityEntry
 import com.nfcemu.nfc.NfcHardwareState
 import com.nfcemu.ui.components.NfcEmuCard
 import com.nfcemu.ui.components.NfcEmuOutlinedFab
@@ -50,8 +52,12 @@ import com.nfcemu.ui.components.NfcEmuSecondaryButton
 import com.nfcemu.ui.components.TypeIconBadge
 import com.nfcemu.ui.components.previewText
 import com.nfcemu.ui.components.typeGlyph
+import com.nfcemu.ui.components.typeGlyphForLabel
 import com.nfcemu.ui.theme.Motion
 import com.nfcemu.ui.theme.Spacing
+import java.text.DateFormat
+import java.util.Calendar
+import java.util.Date
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -61,6 +67,10 @@ fun HomeScreen(
     onNavigateToNewProfile: () -> Unit,
     onNavigateToSettings: () -> Unit,
     onNavigateToTransmit: () -> Unit,
+    onNavigateToScanTag: () -> Unit,
+    onNavigateToContacts: () -> Unit,
+    onNavigateToMyProfile: () -> Unit,
+    onNavigateToReceiveContact: () -> Unit,
     viewModel: HomeViewModel = hiltViewModel(),
 ) {
     val uiState by viewModel.uiState.collectAsState()
@@ -71,6 +81,18 @@ fun HomeScreen(
             TopAppBar(
                 title = { Text(stringResource(R.string.app_name)) },
                 actions = {
+                    IconButton(onClick = onNavigateToContacts) {
+                        Icon(
+                            ImageVector.vectorResource(R.drawable.ic_nocturne_contacts),
+                            contentDescription = stringResource(R.string.home_contacts),
+                        )
+                    }
+                    IconButton(onClick = onNavigateToMyProfile) {
+                        Icon(
+                            ImageVector.vectorResource(R.drawable.ic_nocturne_person),
+                            contentDescription = stringResource(R.string.home_my_profile),
+                        )
+                    }
                     IconButton(onClick = onNavigateToSettings) {
                         Icon(
                             ImageVector.vectorResource(R.drawable.ic_nocturne_settings),
@@ -114,6 +136,39 @@ fun HomeScreen(
             Spacer(Modifier.height(Spacing.lg))
 
             Row(horizontalArrangement = Arrangement.spacedBy(Spacing.sm)) {
+                QuickActionTile(
+                    icon = ImageVector.vectorResource(R.drawable.ic_nocturne_nfc),
+                    label = stringResource(R.string.home_scan_tag),
+                    onClick = onNavigateToScanTag,
+                    modifier = Modifier.weight(1f),
+                )
+                QuickActionTile(
+                    icon = ImageVector.vectorResource(R.drawable.ic_nocturne_add),
+                    label = stringResource(R.string.home_new_profile),
+                    onClick = onNavigateToNewProfile,
+                    modifier = Modifier.weight(1f),
+                )
+            }
+
+            Spacer(Modifier.height(Spacing.md))
+            NfcEmuSecondaryButton(onClick = onNavigateToReceiveContact, modifier = Modifier.fillMaxWidth()) {
+                Icon(ImageVector.vectorResource(R.drawable.ic_nocturne_nfc), contentDescription = null, modifier = Modifier.size(18.dp))
+                Spacer(Modifier.width(Spacing.sm))
+                Text(stringResource(R.string.home_receive_contact))
+            }
+
+            if (uiState.recentActivity.isNotEmpty()) {
+                Spacer(Modifier.height(Spacing.lg))
+                Text(stringResource(R.string.home_recent_activity), style = MaterialTheme.typography.titleMedium)
+                Spacer(Modifier.height(Spacing.sm))
+                Column(verticalArrangement = Arrangement.spacedBy(Spacing.xs)) {
+                    uiState.recentActivity.forEach { entry -> RecentActivityRow(entry) }
+                }
+            }
+
+            Spacer(Modifier.height(Spacing.lg))
+
+            Row(horizontalArrangement = Arrangement.spacedBy(Spacing.sm)) {
                 NfcEmuSecondaryButton(onClick = onNavigateToProfiles) {
                     Text(stringResource(R.string.home_all_profiles))
                 }
@@ -122,6 +177,50 @@ fun HomeScreen(
                 }
             }
         }
+    }
+}
+
+@Composable
+private fun QuickActionTile(icon: ImageVector, label: String, onClick: () -> Unit, modifier: Modifier = Modifier) {
+    NfcEmuCard(onClick = onClick, modifier = modifier) {
+        Column(modifier = Modifier.fillMaxWidth().padding(Spacing.md)) {
+            Icon(icon, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
+            Spacer(Modifier.height(Spacing.sm))
+            Text(label, style = MaterialTheme.typography.labelLarge)
+        }
+    }
+}
+
+@Composable
+private fun RecentActivityRow(entry: RecentActivityEntry) {
+    Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth().padding(vertical = Spacing.xs)) {
+        TypeIconBadge(typeGlyphForLabel(entry.typeLabel), size = 28.dp)
+        Spacer(Modifier.width(Spacing.sm))
+        Text(
+            entry.name,
+            style = MaterialTheme.typography.bodyMedium,
+            modifier = Modifier.weight(1f),
+        )
+        Text(
+            entry.whenLabel(),
+            style = MaterialTheme.typography.labelSmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+        )
+    }
+}
+
+@Composable
+private fun RecentActivityEntry.whenLabel(): String {
+    val now = Calendar.getInstance()
+    val then = Calendar.getInstance().apply { timeInMillis = timestamp }
+    val timeText = DateFormat.getTimeInstance(DateFormat.SHORT).format(Date(timestamp))
+    val isSameDay = now.get(Calendar.YEAR) == then.get(Calendar.YEAR) && now.get(Calendar.DAY_OF_YEAR) == then.get(Calendar.DAY_OF_YEAR)
+    val yesterday = (now.clone() as Calendar).apply { add(Calendar.DAY_OF_YEAR, -1) }
+    val isYesterday = yesterday.get(Calendar.YEAR) == then.get(Calendar.YEAR) && yesterday.get(Calendar.DAY_OF_YEAR) == then.get(Calendar.DAY_OF_YEAR)
+    return when {
+        isSameDay -> stringResource(R.string.home_recent_today, timeText)
+        isYesterday -> stringResource(R.string.home_recent_yesterday, timeText)
+        else -> DateFormat.getDateTimeInstance().format(Date(timestamp))
     }
 }
 

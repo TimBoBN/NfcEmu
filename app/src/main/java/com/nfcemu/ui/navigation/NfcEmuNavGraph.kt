@@ -14,13 +14,16 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.nfcemu.ui.contacts.ContactsScreen
 import com.nfcemu.ui.home.HomeScreen
 import com.nfcemu.ui.library.LibraryScreen
+import com.nfcemu.ui.myprofile.MyProfileScreen
 import com.nfcemu.ui.onboarding.OnboardingScreen
 import com.nfcemu.ui.onboarding.OnboardingViewModel
 import com.nfcemu.ui.profileform.ProfileFormScreen
 import com.nfcemu.ui.profileform.TypePickerScreen
 import com.nfcemu.ui.profilelist.ProfileListScreen
+import com.nfcemu.ui.receivecontact.ReceiveContactScreen
 import com.nfcemu.ui.scantag.ScanTagScreen
 import com.nfcemu.ui.scantag.ScannedPayloadCodec
 import com.nfcemu.ui.settings.SettingsScreen
@@ -40,6 +43,9 @@ private object Routes {
     const val SETTINGS = "settings"
     const val LIBRARY = "library"
     const val TRANSMIT = "transmit"
+    const val MY_PROFILE = "myProfile"
+    const val CONTACTS = "contacts"
+    const val RECEIVE_CONTACT = "receiveContact"
 }
 
 /**
@@ -98,6 +104,10 @@ fun NfcEmuNavGraph() {
                     onNavigateToNewProfile = { navController.navigate(Routes.TYPE_PICKER) },
                     onNavigateToSettings = { navController.navigate(Routes.SETTINGS) },
                     onNavigateToTransmit = { navController.navigate(Routes.TRANSMIT) },
+                    onNavigateToScanTag = { navController.navigate(Routes.SCAN_TAG) },
+                    onNavigateToContacts = { navController.navigate(Routes.CONTACTS) },
+                    onNavigateToMyProfile = { navController.navigate(Routes.MY_PROFILE) },
+                    onNavigateToReceiveContact = { navController.navigate(Routes.RECEIVE_CONTACT) },
                 )
             }
         }
@@ -176,6 +186,18 @@ fun NfcEmuNavGraph() {
         }
         composable(Routes.TRANSMIT) {
             TransmitScreen(onClose = { navController.popBackStack() })
+        }
+        composable(Routes.MY_PROFILE) {
+            MyProfileScreen(
+                onBack = { navController.popBackStack() },
+                onNavigateToTransmit = { navController.navigate(Routes.TRANSMIT) },
+            )
+        }
+        composable(Routes.CONTACTS) {
+            ContactsScreen(onBack = { navController.popBackStack() })
+        }
+        composable(Routes.RECEIVE_CONTACT) {
+            ReceiveContactScreen(onBack = { navController.popBackStack() })
         }
     }
 }

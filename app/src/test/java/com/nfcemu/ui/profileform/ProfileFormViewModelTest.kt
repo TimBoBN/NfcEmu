@@ -4,6 +4,8 @@ import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import androidx.lifecycle.SavedStateHandle
 import com.nfcemu.data.Profile
 import com.nfcemu.data.ProfileRepository
+import com.nfcemu.data.activity.RecentActivityDataStore
+import com.nfcemu.data.activity.RecentActivityRepository
 import com.nfcemu.data.local.ProfileDataStore
 import com.nfcemu.ndefengine.NdefPayload
 import com.nfcemu.ui.scantag.ScannedPayloadCodec
@@ -51,7 +53,12 @@ class ProfileFormViewModelTest {
         // can race against runTest's own end-of-test bookkeeping under load.
         repositoryScope = CoroutineScope(SupervisorJob() + dispatcher)
         val dataStore = PreferenceDataStoreFactory.create(scope = repositoryScope, produceFile = { File(tempDir, "profiles.preferences_pb") })
-        repository = ProfileRepository(ProfileDataStore(dataStore), repositoryScope)
+        val activityDataStore = PreferenceDataStoreFactory.create(scope = repositoryScope, produceFile = { File(tempDir, "recent_activity.preferences_pb") })
+        repository = ProfileRepository(
+            ProfileDataStore(dataStore),
+            RecentActivityRepository(RecentActivityDataStore(activityDataStore), repositoryScope),
+            repositoryScope,
+        )
     }
 
     @AfterTest

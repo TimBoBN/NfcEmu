@@ -12,6 +12,13 @@
     <string name="home_nfc_not_supported">Dieses Gerät unterstützt kein NFC.</string>
     <string name="home_nfc_disabled">NFC ist deaktiviert. Schalte es ein, damit Lesegeräte dein Profil erkennen können.</string>
     <string name="home_nfc_open_settings">Einstellungen</string>
+    <string name="home_contacts">Kontakte</string>
+    <string name="home_my_profile">Mein Profil</string>
+    <string name="home_scan_tag">Tag scannen</string>
+    <string name="home_receive_contact">Kontakt per NFC einlesen</string>
+    <string name="home_recent_activity">Zuletzt gesendet</string>
+    <string name="home_recent_today">Heute, %1$s</string>
+    <string name="home_recent_yesterday">Gestern, %1$s</string>
     <string name="profile_pinned">Angeheftet</string>
 
     <!-- Profile list -->
@@ -48,6 +55,22 @@
     <string name="transmit_ready">Bereit zum Übertragen</string>
     <string name="transmit_subtitle">Halte dein Handy an ein Lesegerät oder ein anderes NFC-fähiges Gerät.</string>
     <string name="transmit_done">Fertig</string>
+
+    <!-- My Profile -->
+    <string name="myprofile_title">Mein Profil</string>
+    <string name="myprofile_intro">Diese Angaben werden per NFC als Visitenkarte geteilt, wenn du „Per NFC teilen“ antippst.</string>
+    <string name="myprofile_share">Per NFC teilen</string>
+
+    <!-- Receive contact -->
+    <string name="receive_contact_title">Kontakt einlesen</string>
+    <string name="receive_contact_waiting">Halte dein Handy an das Gerät der anderen Person, um deren Profil zu empfangen.</string>
+    <string name="receive_contact_error_title">Tag konnte nicht gelesen werden</string>
+    <string name="receive_contact_discard">Verwerfen</string>
+    <string name="receive_contact_save">Als Kontakt speichern</string>
+
+    <!-- Contacts -->
+    <string name="contacts_title">Kontakte</string>
+    <string name="contacts_empty">Noch keine Kontakte. Lies ein Profil per NFC ein, um es hier zu speichern.</string>
 
     <!-- Write tag -->
     <string name="write_tag_title">Auf Tag schreiben</string>
