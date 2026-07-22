@@ -68,6 +68,13 @@ class ProfileListViewModel @Inject constructor(
         }
     }
 
+    fun exportAllAsZip(targetUri: Uri) {
+        viewModelScope.launch {
+            fileRepository.exportLibraryAsZip(profileRepository.profiles.value, targetUri)
+                .onFailure { _exportError.value = it.message ?: "Export failed" }
+        }
+    }
+
     fun clearExportError() {
         _exportError.value = null
     }

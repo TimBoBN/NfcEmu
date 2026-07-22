@@ -147,19 +147,30 @@ raw NDEF bytes (Base64) for interop with third-party tools:
 
 ## Known limitations
 
-- The Wi-Fi handover encoder (Connection Handover + WSC carrier) is deliberately
-  isolated as a stretch goal; the structure follows the spec closely but hasn't
-  been verified against real hardware.
-- The home screen widget shows a single generic icon per row instead of a
-  type-specific one (website/vCard/Wi-Fi/...): `RemoteViews` can only reference
-  drawable resources, not the Compose `ImageVector`s the rest of the app uses, so
-  matching the in-app icon set exactly would mean maintaining a parallel set of
-  vector drawables purely for the widget.
+- The Wi-Fi handover encoder/decoder (Connection Handover + WSC carrier) is
+  deliberately isolated as a stretch goal; the structure follows the spec
+  closely but hasn't been verified against real hardware.
 - This development environment had no access to a physical Android device or an
   NFC-capable emulator - the debug and minified release builds were verified
   locally with an installed Android SDK (Platform 34), all unit/round-trip tests
   were run, and a real release APK downloaded from a GitHub Release was verified
-  byte-for-byte (zip integrity, signature, manifest)
+  byte-for-byte (zip integrity, signature, manifest). This also means physical
+  tag scanning and the Wi-Fi handover encoder above are untested against actual
+  NFC hardware - both need manual verification on a real device before relying
+  on them.
+
+## Play Store
+
+A privacy policy draft and store listing copy live in
+[`docs/PRIVACY_POLICY.md`](docs/PRIVACY_POLICY.md) and
+[`docs/PLAY_STORE_LISTING.md`](docs/PLAY_STORE_LISTING.md). `:app:bundleRelease`
+builds a signed App Bundle using the same `signingConfigs.release` block as the
+APK; the release workflow builds and attaches one on every tag alongside the
+APK. Uploading to Play Console is a separate, manual step - Play Store releases
+are staged, unlike "every tag is a public GitHub release". Play Store also
+requires the same upload key for an app's lifetime, so decide deliberately
+whether the signing key already in use should be that permanent key before the
+first submission.
 
 ## Requirements
 

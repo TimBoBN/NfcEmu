@@ -80,7 +80,11 @@ fun ProfileFormScreen(
             TopAppBar(
                 title = {
                     Text(
-                        if (uiState.isEditing) stringResource(R.string.profile_form_edit_title) else stringResource(R.string.profile_form_new_title),
+                        when {
+                            uiState.isEditing -> stringResource(R.string.profile_form_edit_title)
+                            uiState.isScanned -> stringResource(R.string.profile_form_scanned_title)
+                            else -> stringResource(R.string.profile_form_new_title)
+                        },
                     )
                 },
                 navigationIcon = {

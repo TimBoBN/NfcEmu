@@ -1,0 +1,116 @@
+<resources>
+    <string name="app_name">NfcEmu</string>
+    <string name="hce_service_description">NfcEmu NDEF-Tag-Emulation</string>
+    <string name="hce_aid_group_description">NDEF-Tag-Anwendung</string>
+
+    <!-- Home -->
+    <string name="home_new_profile">Neues Profil</string>
+    <string name="home_quick_select">Schnellauswahl</string>
+    <string name="home_quick_select_empty">Noch keine Profile angeheftet oder verwendet.</string>
+    <string name="home_all_profiles">Alle Profile</string>
+    <string name="home_library">Bibliothek</string>
+    <string name="home_nfc_not_supported">Dieses Gerät unterstützt kein NFC.</string>
+    <string name="home_nfc_disabled">NFC ist deaktiviert. Schalte es ein, damit Lesegeräte dein Profil erkennen können.</string>
+    <string name="home_nfc_open_settings">Einstellungen</string>
+    <string name="home_active_profile">Aktives Profil</string>
+    <string name="home_no_active_profile">Kein Profil aktiv. Wähle eines aus der Liste oder erstelle ein neues.</string>
+    <string name="profile_pinned">Angeheftet</string>
+
+    <!-- Profile list -->
+    <string name="profile_list_title">Alle Profile</string>
+    <string name="action_back">Zurück</string>
+    <string name="action_more">Weitere Aktionen</string>
+    <string name="action_set_active">Als aktiv festlegen</string>
+    <string name="action_deactivate">Deaktivieren</string>
+    <string name="action_edit">Bearbeiten</string>
+    <string name="action_duplicate">Duplizieren</string>
+    <string name="action_pin">Anheften</string>
+    <string name="action_unpin">Lösen</string>
+    <string name="action_export_nfcemu">Als .nfcemu exportieren</string>
+    <string name="action_export_raw">Als rohe NDEF-Datei exportieren</string>
+    <string name="action_export_all_zip">Alle als ZIP exportieren</string>
+    <string name="action_delete">Löschen</string>
+    <string name="action_cancel">Abbrechen</string>
+    <string name="profile_active">Aktiv</string>
+    <string name="profile_delete_title">Profil löschen?</string>
+    <string name="profile_delete_message">„%1$s“ wird endgültig gelöscht. Dies kann nicht rückgängig gemacht werden.</string>
+
+    <!-- Type picker -->
+    <string name="type_picker_title">Profiltyp wählen</string>
+    <string name="type_picker_scan_tag">Physischen Tag scannen</string>
+
+    <!-- Scan tag -->
+    <string name="scan_tag_title">Tag scannen</string>
+    <string name="scan_tag_waiting">Halte dein Handy an einen NFC-Tag, um dessen Inhalt zu lesen.</string>
+    <string name="scan_tag_error_title">Tag konnte nicht gelesen werden</string>
+    <string name="scan_tag_try_again">Erneut versuchen</string>
+
+    <!-- Profile form -->
+    <string name="profile_form_new_title">Neues Profil</string>
+    <string name="profile_form_edit_title">Profil bearbeiten</string>
+    <string name="profile_form_scanned_title">Gescanntes Profil</string>
+    <string name="profile_form_name">Profilname</string>
+    <string name="field_website_url">Website-Adresse</string>
+    <string name="field_phone_number">Telefonnummer</string>
+    <string name="field_email_address">E-Mail-Adresse</string>
+    <string name="field_email_subject">Betreff (optional)</string>
+    <string name="field_email_body">Nachricht (optional)</string>
+    <string name="field_sms_body">Nachricht (optional)</string>
+    <string name="field_latitude">Breitengrad</string>
+    <string name="field_longitude">Längengrad</string>
+    <string name="field_play_store_id">App-ID (z. B. com.example.app)</string>
+    <string name="field_wifi_ssid">Netzwerkname (SSID)</string>
+    <string name="field_wifi_auth_type">Sicherheitstyp</string>
+    <string name="field_wifi_password">Passwort</string>
+    <string name="field_vcard_name">Name</string>
+    <string name="field_vcard_phone">Telefonnummer</string>
+    <string name="field_vcard_email">E-Mail</string>
+    <string name="field_vcard_organization">Organisation</string>
+    <string name="field_vcard_title">Titel/Position</string>
+    <string name="field_vcard_website">Website</string>
+    <string name="field_vcard_address">Adresse</string>
+    <string name="field_text">Text</string>
+    <string name="field_language_code">Sprachcode (z. B. de)</string>
+    <string name="field_custom_uri">Beliebige URI (z. B. myapp://…)</string>
+    <string name="field_aar_checkbox">An eine bestimmte App binden (Android Application Record)</string>
+    <string name="field_aar_package">App-Paketname</string>
+    <string name="field_aar_pick_app">Aus installierten Apps wählen</string>
+    <string name="field_aar_pick_app_title">App auswählen</string>
+    <string name="field_aar_pick_app_empty">Keine passende App gefunden. Du kannst trotzdem manuell einen Paketnamen eingeben.</string>
+    <string name="field_aar_pick_app_loading">Installierte Apps werden geladen…</string>
+    <string name="action_search">Suchen</string>
+    <string name="action_add_phone">+ Telefonnummer</string>
+    <string name="action_add_email">+ E-Mail</string>
+    <string name="action_save">Speichern</string>
+    <string name="profile_form_preview_title">Vorschau: Was beim Antippen passiert</string>
+    <string name="profile_form_preview_incomplete">Bitte fülle alle erforderlichen Felder aus.</string>
+    <string name="profile_form_estimated_size">Geschätzte NDEF-Größe: %1$d Bytes</string>
+
+    <!-- Library -->
+    <string name="library_title">Gespeicherte Dateien</string>
+    <string name="library_import">.nfcemu-Datei importieren</string>
+    <string name="library_import_zip">ZIP-Archiv importieren</string>
+    <string name="library_empty">Noch keine gespeicherten Dateien. Exportiere ein Profil oder importiere eine .nfcemu-Datei.</string>
+    <string name="library_exported">Exportiert</string>
+    <string name="library_imported">Importiert</string>
+    <string name="library_load_active">Aktivieren</string>
+    <string name="action_share">Teilen</string>
+    <string name="library_delete_title">Aus Bibliothek entfernen?</string>
+    <string name="library_delete_message">„%1$s“ wird nur aus dieser Liste entfernt, die Datei selbst bleibt an ihrem Ort.</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_title">Willkommen bei NfcEmu</string>
+    <string name="onboarding_body">Aktiviere ein Profil und halte dein Handy an ein Lesegerät oder ein anderes NFC-fähiges Gerät. Das andere Gerät muss sich im Lesemodus befinden, genau wie bei einer physischen NFC-Karte.</string>
+    <string name="onboarding_confirm">Los geht’s</string>
+
+    <!-- Home screen widget -->
+    <string name="widget_description">Aktives NfcEmu-Profil schnell wechseln</string>
+    <string name="widget_active_prefix">Aktiv: %1$s</string>
+    <string name="widget_no_active">Kein aktives Profil</string>
+    <string name="widget_empty">Heft ein Profil an, um es hier zu sehen</string>
+
+    <!-- Quick Settings tile -->
+    <string name="tile_label">NfcEmu</string>
+    <string name="tile_no_active">Kein aktives Profil</string>
+    <string name="tile_no_pinned_profiles">Heft ein Profil in NfcEmu an, um diese Kachel zu nutzen</string>
+</resources>

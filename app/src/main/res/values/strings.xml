@@ -28,6 +28,7 @@
     <string name="action_unpin">Unpin</string>
     <string name="action_export_nfcemu">Export as .nfcemu</string>
     <string name="action_export_raw">Export as raw NDEF file</string>
+    <string name="action_export_all_zip">Export all as ZIP</string>
     <string name="action_delete">Delete</string>
     <string name="action_cancel">Cancel</string>
     <string name="profile_active">Active</string>
@@ -36,10 +37,18 @@
 
     <!-- Type picker -->
     <string name="type_picker_title">Choose Profile Type</string>
+    <string name="type_picker_scan_tag">Scan a physical tag</string>
+
+    <!-- Scan tag -->
+    <string name="scan_tag_title">Scan a Tag</string>
+    <string name="scan_tag_waiting">Hold your phone against an NFC tag to read its content.</string>
+    <string name="scan_tag_error_title">Could not read this tag</string>
+    <string name="scan_tag_try_again">Try again</string>
 
     <!-- Profile form -->
     <string name="profile_form_new_title">New Profile</string>
     <string name="profile_form_edit_title">Edit Profile</string>
+    <string name="profile_form_scanned_title">Scanned Profile</string>
     <string name="profile_form_name">Profile name</string>
     <string name="field_website_url">Website address</string>
     <string name="field_phone_number">Phone number</string>
@@ -80,6 +89,7 @@
     <!-- Library -->
     <string name="library_title">Saved Files</string>
     <string name="library_import">Import .nfcemu file</string>
+    <string name="library_import_zip">Import ZIP archive</string>
     <string name="library_empty">No saved files yet. Export a profile or import a .nfcemu file.</string>
     <string name="library_exported">Exported</string>
     <string name="library_imported">Imported</string>

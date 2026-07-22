@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import com.nfcemu.data.export.DecodedNfcEmuFile
+import com.nfcemu.data.export.LibraryZipCodec
 import com.nfcemu.data.export.NfcEmuFileCodec
 import com.nfcemu.data.library.LibraryDataStore
 import com.nfcemu.data.library.LibraryEntry
@@ -17,6 +18,9 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import javax.inject.Singleton
+
+/** Result of [FileRepository.importLibraryFromZip]: how many of the ZIP's entries decoded successfully. */
+data class BulkImportSummary(val imported: Int, val skipped: Int)
 
 /**
  * Storage Access Framework based export/import of `.nfcemu` files, plus the raw NDEF
@@ -46,6 +50,40 @@ class FileRepository @Inject constructor(
     suspend fun exportRawNdef(profile: Profile, targetUri: Uri): Result<Unit> = withContext(Dispatchers.IO) {
         runCatching {
             writeBytes(targetUri, encode(profile))
+        }
+    }
+
+    /**
+     * Exports every given profile as its own unmodified `.nfcemu` file bundled into one ZIP
+     * (see [LibraryZipCodec]). Not recorded in the library list: unlike a single-file export,
+     * individual profiles inside the ZIP aren't separately re-openable via [targetUri] once
+     * this stream closes, so there's no URI a library entry could correctly point back at.
+     */
+    suspend fun exportLibraryAsZip(profiles: List<Profile>, targetUri: Uri): Result<Unit> = withContext(Dispatchers.IO) {
+        runCatching {
+            val zipBytes = LibraryZipCodec.buildZip(profiles.map { it to encode(it) })
+            writeBytes(targetUri, zipBytes)
+        }
+    }
+
+    /**
+     * Imports every `.nfcemu` file found in the ZIP as a new, inactive profile (see
+     * [LibraryZipCodec] for how corrupt/foreign entries are skipped rather than aborting the
+     * whole import). Imports run sequentially (not launched concurrently): [ProfileRepository]'s
+     * mutators read the DataStore's current state fresh on every call specifically to avoid a
+     * stale-snapshot race (see its kdoc) - parallel imports here would reintroduce exactly that
+     * bug. Unlike [importProfile], these profiles are not recorded in the library list - see
+     * [exportLibraryAsZip]'s kdoc for why a ZIP entry has no reload-able URI of its own.
+     */
+    suspend fun importLibraryFromZip(sourceUri: Uri): Result<BulkImportSummary> = withContext(Dispatchers.IO) {
+        runCatching {
+            val zipBytes = context.contentResolver.openInputStream(sourceUri)?.use { it.readBytes() }
+                ?: error("Could not open source file")
+            val extracted = LibraryZipCodec.extractProfiles(zipBytes)
+            for (profile in extracted.profiles) {
+                profileRepository.importProfile(profile)
+            }
+            BulkImportSummary(imported = extracted.profiles.size, skipped = extracted.skipped)
         }
     }
 

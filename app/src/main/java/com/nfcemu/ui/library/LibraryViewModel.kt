@@ -33,6 +33,20 @@ class LibraryViewModel @Inject constructor(
         }
     }
 
+    fun importZip(uri: Uri) {
+        viewModelScope.launch {
+            fileRepository.importLibraryFromZip(uri)
+                .onSuccess { summary ->
+                    _message.value = if (summary.skipped == 0) {
+                        "Imported ${summary.imported} profile(s)."
+                    } else {
+                        "Imported ${summary.imported} profile(s), skipped ${summary.skipped} invalid entr${if (summary.skipped == 1) "y" else "ies"}."
+                    }
+                }
+                .onFailure { _message.value = it.message ?: "Import failed" }
+        }
+    }
+
     fun loadAsActive(entry: LibraryEntry) {
         viewModelScope.launch {
             fileRepository.loadEntryAsActiveProfile(entry)

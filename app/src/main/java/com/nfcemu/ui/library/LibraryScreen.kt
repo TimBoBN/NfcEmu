@@ -12,6 +12,7 @@ import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -32,6 +33,8 @@ import androidx.compose.material.icons.filled.TextFields
 import androidx.compose.material.icons.filled.Wifi
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Card
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.FloatingActionButton
@@ -78,9 +81,13 @@ fun LibraryScreen(
     val snackbarHostState = remember { SnackbarHostState() }
     val context = LocalContext.current
     var entryPendingDelete by remember { mutableStateOf<LibraryEntry?>(null) }
+    var importMenuExpanded by remember { mutableStateOf(false) }
 
     val importLauncher = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
         uri?.let(viewModel::importFile)
+    }
+    val importZipLauncher = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
+        uri?.let(viewModel::importZip)
     }
 
     LaunchedEffect(message) {
@@ -102,8 +109,20 @@ fun LibraryScreen(
             )
         },
         floatingActionButton = {
-            FloatingActionButton(onClick = { importLauncher.launch(arrayOf("*/*")) }) {
-                Icon(Icons.Filled.FileDownload, contentDescription = stringResource(R.string.library_import))
+            Box {
+                FloatingActionButton(onClick = { importMenuExpanded = true }) {
+                    Icon(Icons.Filled.FileDownload, contentDescription = stringResource(R.string.library_import))
+                }
+                DropdownMenu(expanded = importMenuExpanded, onDismissRequest = { importMenuExpanded = false }) {
+                    DropdownMenuItem(
+                        text = { Text(stringResource(R.string.library_import)) },
+                        onClick = { importMenuExpanded = false; importLauncher.launch(arrayOf("*/*")) },
+                    )
+                    DropdownMenuItem(
+                        text = { Text(stringResource(R.string.library_import_zip)) },
+                        onClick = { importMenuExpanded = false; importZipLauncher.launch(arrayOf("application/zip")) },
+                    )
+                }
             }
         },
         snackbarHost = { SnackbarHost(snackbarHostState) { Snackbar(it) } },

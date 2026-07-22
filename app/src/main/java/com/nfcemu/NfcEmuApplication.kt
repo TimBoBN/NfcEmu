@@ -2,6 +2,7 @@ package com.nfcemu
 
 import android.app.Application
 import com.nfcemu.data.ProfileRepository
+import com.nfcemu.shortcuts.ProfileShortcutUpdater
 import com.nfcemu.widget.ProfileWidgetUpdater
 import dagger.hilt.android.HiltAndroidApp
 import javax.inject.Inject
@@ -16,6 +17,8 @@ import javax.inject.Inject
  *   Activity hasn't run yet.
  * - [ProfileWidgetUpdater]: so the home screen widget keeps refreshing even if the
  *   user never opens the app after placing it.
+ * - [ProfileShortcutUpdater]: so pinning/unpinning a profile is reflected in the
+ *   launcher's app shortcuts even if the user never opens the app afterwards.
  */
 @HiltAndroidApp
 class NfcEmuApplication : Application() {
@@ -25,4 +28,7 @@ class NfcEmuApplication : Application() {
 
     @Inject
     lateinit var profileWidgetUpdater: ProfileWidgetUpdater
+
+    @Inject
+    lateinit var profileShortcutUpdater: ProfileShortcutUpdater
 }

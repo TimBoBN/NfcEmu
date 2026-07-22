@@ -9,7 +9,8 @@ package com.nfcemu.ndefengine
 object UriRecordEncoder {
 
     // Index == abbreviation code. Index 0 ("") means "store as-is".
-    private val PREFIXES = listOf(
+    // internal, not private: reused by UriRecordDecoder for the inverse lookup.
+    internal val PREFIXES = listOf(
         "", "http://www.", "https://www.", "http://", "https://", "tel:", "mailto:",
         "ftp://anonymous:anonymous@", "ftp://ftp.", "ftps://", "sftp://", "smb://", "nfs://",
         "ftp://", "dav://", "news:", "telnet://", "imap:", "rtsp://", "urn:", "pop:", "sip:",

@@ -64,6 +64,7 @@ fun ProfileListScreen(
     var profilePendingDelete by remember { mutableStateOf<Profile?>(null) }
     var profilePendingExport by rememberSaveable { mutableStateOf<String?>(null) }
     var pendingExportRaw by rememberSaveable { mutableStateOf(false) }
+    var topBarMenuExpanded by remember { mutableStateOf(false) }
 
     val nfcemuLauncher = rememberLauncherForActivityResult(ActivityResultContracts.CreateDocument("application/octet-stream")) { uri ->
         val profile = uiState.profiles.find { it.id == profilePendingExport }
@@ -71,6 +72,9 @@ fun ProfileListScreen(
             viewModel.exportProfile(profile, uri, rawNdefOnly = pendingExportRaw)
         }
         profilePendingExport = null
+    }
+    val zipExportLauncher = rememberLauncherForActivityResult(ActivityResultContracts.CreateDocument("application/zip")) { uri ->
+        uri?.let(viewModel::exportAllAsZip)
     }
 
     Scaffold(
@@ -80,6 +84,20 @@ fun ProfileListScreen(
                 navigationIcon = {
                     IconButton(onClick = onBack) {
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(R.string.action_back))
+                    }
+                },
+                actions = {
+                    IconButton(onClick = { topBarMenuExpanded = true }) {
+                        Icon(Icons.Filled.MoreVert, contentDescription = stringResource(R.string.action_more))
+                    }
+                    DropdownMenu(expanded = topBarMenuExpanded, onDismissRequest = { topBarMenuExpanded = false }) {
+                        DropdownMenuItem(
+                            text = { Text(stringResource(R.string.action_export_all_zip)) },
+                            onClick = {
+                                topBarMenuExpanded = false
+                                zipExportLauncher.launch("NfcEmu-profiles.zip")
+                            },
+                        )
                     }
                 },
             )

@@ -6,6 +6,8 @@ import com.nfcemu.data.Profile
 import com.nfcemu.data.ProfileRepository
 import com.nfcemu.data.local.ProfileDataStore
 import com.nfcemu.ndefengine.NdefPayload
+import com.nfcemu.ui.scantag.ScannedPayloadCodec
+import com.nfcemu.ui.scantag.ScannedTag
 import com.nfcemu.util.InstalledApp
 import com.nfcemu.util.InstalledAppsSource
 import kotlinx.coroutines.CoroutineScope
@@ -142,5 +144,46 @@ class ProfileFormViewModelTest {
         val profiles = repository.profiles.first { list -> list.any { (it.fields as? NdefPayload.Text)?.text == "v2" } }
         assertEquals(1, profiles.size, "editing must not create a second profile")
         assertEquals(existing.id, profiles.single().id)
+    }
+
+    @Test
+    fun `a scanned tag pre-fills the form as a new, unpinned profile rather than an edit`() {
+        val scannedTag = ScannedTag(NdefPayload.Uri("https://example.com"), aarPackageName = null)
+        val encoded = ScannedPayloadCodec.encode(scannedTag)
+
+        val viewModel = ProfileFormViewModel(repository, FakeInstalledAppsSource, SavedStateHandle(mapOf("scannedTag" to encoded)))
+        val state = viewModel.uiState.value
+
+        assertTrue(!state.isEditing)
+        assertTrue(state.isScanned)
+        assertEquals(ProfileTypeTemplate.WEBSITE, state.template)
+        assertEquals(ProfileFormFields.Website("https://example.com"), state.fields)
+        assertTrue(!state.aarEnabled)
+    }
+
+    @Test
+    fun `a scanned tag with an aar record pre-fills and enables the aar section`() {
+        val scannedTag = ScannedTag(NdefPayload.Text("hi"), aarPackageName = "com.example.app")
+        val encoded = ScannedPayloadCodec.encode(scannedTag)
+
+        val viewModel = ProfileFormViewModel(repository, FakeInstalledAppsSource, SavedStateHandle(mapOf("scannedTag" to encoded)))
+        val state = viewModel.uiState.value
+
+        assertTrue(state.aarEnabled)
+        assertEquals("com.example.app", state.aarPackageName)
+    }
+
+    @Test
+    fun `saving a scanned tag creates a new profile, not an edit of anything existing`() = runTest {
+        val scannedTag = ScannedTag(NdefPayload.Text("scanned text"), aarPackageName = null)
+        val encoded = ScannedPayloadCodec.encode(scannedTag)
+        val viewModel = ProfileFormViewModel(repository, FakeInstalledAppsSource, SavedStateHandle(mapOf("scannedTag" to encoded)))
+        viewModel.updateName("My Scanned Tag")
+
+        viewModel.save()
+
+        val created = repository.profiles.first { it.isNotEmpty() }.single()
+        assertEquals("My Scanned Tag", created.name)
+        assertEquals(NdefPayload.Text("scanned text"), created.fields)
     }
 }

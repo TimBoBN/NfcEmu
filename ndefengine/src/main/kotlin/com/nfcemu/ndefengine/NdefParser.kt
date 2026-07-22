@@ -11,11 +11,12 @@ data class ParsedNdefRecord(
 )
 
 /**
- * Minimal NDEF binary parser used only to verify, in tests, that [NdefMessageEncoder]
- * output round-trips correctly. Not used by the HCE service at runtime (the service
- * only ever serves pre-built bytes). Throws [IllegalArgumentException] with a
- * descriptive message on truncated/malformed input rather than throwing raw
- * index-out-of-bounds errors.
+ * Minimal NDEF binary parser. Originally written only to verify, in tests, that
+ * [NdefMessageEncoder] output round-trips correctly - now also the parsing step behind
+ * [NdefPayloadDecoder], which decodes physically-scanned (and therefore untrusted) third-
+ * party tags. Not used by the HCE service at runtime (the service only ever serves
+ * pre-built bytes). Throws [IllegalArgumentException] with a descriptive message on
+ * truncated/malformed input rather than throwing raw index-out-of-bounds errors.
  */
 object NdefParser {
 

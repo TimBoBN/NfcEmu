@@ -9,17 +9,26 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.lifecycle.lifecycleScope
+import com.nfcemu.data.ProfileRepository
+import com.nfcemu.shortcuts.ProfileShortcutUpdater
 import com.nfcemu.ui.navigation.NfcEmuNavGraph
 import com.nfcemu.ui.theme.NfcEmuTheme
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
+    @Inject
+    lateinit var profileRepository: ProfileRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        handleActivateProfileIntent(intent)
         setContent {
             NfcEmuTheme {
                 NfcEmuNavGraph()
@@ -58,9 +67,21 @@ class MainActivity : ComponentActivity() {
         super.onPause()
     }
 
+    /**
+     * Handles both a warm restart (this) and the initial launch (onCreate's `intent`).
+     * Tag-discovery intents (see onResume kdoc) fall through unhandled here - they're
+     * absorbed simply by not being acted on, not by an explicit branch - so that
+     * behavior is unaffected by the shortcut-activation branch added below.
+     */
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
-        // Intentionally a no-op: this exists purely to absorb tag-discovery intents
-        // (see onResume kdoc) while the app is in the foreground, not to read tags.
+        handleActivateProfileIntent(intent)
+    }
+
+    /** Target of a launcher shortcut tap (see [ProfileShortcutUpdater]): activates the profile it names. */
+    private fun handleActivateProfileIntent(intent: Intent) {
+        if (intent.action != Intent.ACTION_VIEW) return
+        val profileId = intent.getStringExtra(ProfileShortcutUpdater.EXTRA_ACTIVATE_PROFILE_ID) ?: return
+        lifecycleScope.launch { profileRepository.setActive(profileId) }
     }
 }

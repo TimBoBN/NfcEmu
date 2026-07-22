@@ -31,13 +31,13 @@ fun ProfileTypeTemplate.icon(): ImageVector = when (this) {
 
 fun ProfileTypeTemplate.label(): String = when (this) {
     ProfileTypeTemplate.WEBSITE -> "Website"
-    ProfileTypeTemplate.PHONE -> "Telefonnummer"
-    ProfileTypeTemplate.EMAIL -> "E-Mail"
+    ProfileTypeTemplate.PHONE -> "Phone number"
+    ProfileTypeTemplate.EMAIL -> "Email"
     ProfileTypeTemplate.SMS -> "SMS"
-    ProfileTypeTemplate.LOCATION -> "Standort"
-    ProfileTypeTemplate.PLAY_STORE -> "Play Store App"
-    ProfileTypeTemplate.WIFI -> "WLAN-Zugang"
-    ProfileTypeTemplate.VCARD -> "Visitenkarte"
+    ProfileTypeTemplate.LOCATION -> "Location"
+    ProfileTypeTemplate.PLAY_STORE -> "Play Store app"
+    ProfileTypeTemplate.WIFI -> "Wi-Fi access"
+    ProfileTypeTemplate.VCARD -> "Business card"
     ProfileTypeTemplate.TEXT -> "Text"
     ProfileTypeTemplate.CUSTOM_URI -> "Custom URI"
 }

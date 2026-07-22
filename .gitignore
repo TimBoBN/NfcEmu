@@ -1,4 +1,7 @@
 # Gradle / build output (matches at any depth: app/build, ndefengine/build, ...)
+doc/
+.secrets/
+secrets/
 build/
 .gradle/
 .kotlin/

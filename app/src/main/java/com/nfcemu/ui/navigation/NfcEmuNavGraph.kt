@@ -21,6 +21,8 @@ import com.nfcemu.ui.onboarding.OnboardingViewModel
 import com.nfcemu.ui.profileform.ProfileFormScreen
 import com.nfcemu.ui.profileform.TypePickerScreen
 import com.nfcemu.ui.profilelist.ProfileListScreen
+import com.nfcemu.ui.scantag.ScanTagScreen
+import com.nfcemu.ui.scantag.ScannedPayloadCodec
 import com.nfcemu.ui.theme.Motion
 
 private object Routes {
@@ -29,6 +31,8 @@ private object Routes {
     const val TYPE_PICKER = "typePicker"
     const val PROFILE_FORM_NEW = "profileForm/new/{template}"
     const val PROFILE_FORM_EDIT = "profileForm/edit/{profileId}"
+    const val PROFILE_FORM_SCAN_REVIEW = "profileForm/scanReview/{scannedTag}"
+    const val SCAN_TAG = "scanTag"
     const val LIBRARY = "library"
 }
 
@@ -104,6 +108,18 @@ fun NfcEmuNavGraph() {
                         popUpTo(Routes.TYPE_PICKER) { inclusive = true }
                     }
                 },
+                onScanTag = { navController.navigate(Routes.SCAN_TAG) },
+            )
+        }
+        composable(Routes.SCAN_TAG) {
+            ScanTagScreen(
+                onBack = { navController.popBackStack() },
+                onScanned = { scannedTag ->
+                    val encoded = ScannedPayloadCodec.encode(scannedTag)
+                    navController.navigate("profileForm/scanReview/$encoded") {
+                        popUpTo(Routes.TYPE_PICKER) { inclusive = true }
+                    }
+                },
             )
         }
         composable(
@@ -122,6 +138,15 @@ fun NfcEmuNavGraph() {
             ProfileFormScreen(
                 onBack = { navController.popBackStack() },
                 onSaved = { navController.popBackStack() },
+            )
+        }
+        composable(
+            route = Routes.PROFILE_FORM_SCAN_REVIEW,
+            arguments = listOf(navArgument("scannedTag") { type = NavType.StringType }),
+        ) {
+            ProfileFormScreen(
+                onBack = { navController.popBackStack() },
+                onSaved = { navController.popBackStack(Routes.HOME, inclusive = false) },
             )
         }
         composable(Routes.LIBRARY) {

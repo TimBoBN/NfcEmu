@@ -8,6 +8,7 @@ import com.nfcemu.data.ProfileRepository
 import com.nfcemu.ndefengine.AarConfig
 import com.nfcemu.ndefengine.NdefMessageFactory
 import com.nfcemu.ui.components.previewText
+import com.nfcemu.ui.scantag.ScannedPayloadCodec
 import com.nfcemu.util.InstalledApp
 import com.nfcemu.util.InstalledAppsSource
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -21,6 +22,7 @@ import javax.inject.Inject
 data class ProfileFormUiState(
     val template: ProfileTypeTemplate = ProfileTypeTemplate.TEXT,
     val isEditing: Boolean = false,
+    val isScanned: Boolean = false,
     val name: String = "",
     val fields: ProfileFormFields = ProfileFormFields.Text(),
     val aarEnabled: Boolean = false,
@@ -63,21 +65,37 @@ class ProfileFormViewModel @Inject constructor(
 
     private fun buildInitialState(savedStateHandle: SavedStateHandle): ProfileFormUiState {
         val profile = existingProfile
-        return if (profile != null) {
-            val fields = ProfileFormCodec.toFormFields(profile.fields)
-            ProfileFormUiState(
-                template = fields.template,
-                isEditing = true,
-                name = profile.name,
-                fields = fields,
-                aarEnabled = profile.aarPackageName != null,
-                aarPackageName = profile.aarPackageName.orEmpty(),
-            )
-        } else {
-            val template = savedStateHandle.get<String>("template")
-                ?.let { runCatching { ProfileTypeTemplate.valueOf(it) }.getOrNull() }
-                ?: ProfileTypeTemplate.TEXT
-            ProfileFormUiState(template = template, isEditing = false, fields = ProfileFormFields.initialFor(template))
+        val scannedTag = savedStateHandle.get<String>("scannedTag")?.let(ScannedPayloadCodec::decode)
+        return when {
+            profile != null -> {
+                val fields = ProfileFormCodec.toFormFields(profile.fields)
+                ProfileFormUiState(
+                    template = fields.template,
+                    isEditing = true,
+                    name = profile.name,
+                    fields = fields,
+                    aarEnabled = profile.aarPackageName != null,
+                    aarPackageName = profile.aarPackageName.orEmpty(),
+                )
+            }
+            scannedTag != null -> {
+                val fields = ProfileFormCodec.toFormFields(scannedTag.payload)
+                ProfileFormUiState(
+                    template = fields.template,
+                    isEditing = false,
+                    isScanned = true,
+                    name = "Scanned profile",
+                    fields = fields,
+                    aarEnabled = scannedTag.aarPackageName != null,
+                    aarPackageName = scannedTag.aarPackageName.orEmpty(),
+                )
+            }
+            else -> {
+                val template = savedStateHandle.get<String>("template")
+                    ?.let { runCatching { ProfileTypeTemplate.valueOf(it) }.getOrNull() }
+                    ?: ProfileTypeTemplate.TEXT
+                ProfileFormUiState(template = template, isEditing = false, fields = ProfileFormFields.initialFor(template))
+            }
         }
     }
 

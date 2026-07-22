@@ -6,6 +6,7 @@ import android.widget.RemoteViewsService
 import com.nfcemu.R
 import com.nfcemu.data.Profile
 import com.nfcemu.data.ProfileRepository
+import com.nfcemu.ndefengine.NdefPayload
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -57,7 +58,7 @@ private class ProfileWidgetRemoteViewsFactory(
         val profile = items[position]
         val views = RemoteViews(packageName, R.layout.widget_profile_item)
         views.setTextViewText(R.id.widget_item_name, profile.name)
-        views.setImageViewResource(R.id.widget_item_icon, R.drawable.ic_widget_profile)
+        views.setImageViewResource(R.id.widget_item_icon, profile.fields.widgetIconRes())
         views.setOnClickFillInIntent(
             R.id.widget_item_root,
             Intent().putExtra(ProfileWidgetClickReceiver.EXTRA_PROFILE_ID, profile.id),
@@ -72,5 +73,26 @@ private class ProfileWidgetRemoteViewsFactory(
 
     private companion object {
         const val MAX_RECENT = 8
+    }
+}
+
+/**
+ * Widget rows can't use the Compose `ImageVector`s from `NdefPayload.icon()` (see
+ * `ui/components/ProfileTypeIcon.kt`) - [RemoteViews] only accepts drawable resource ids -
+ * so this mirrors that function's exact bucket logic (including URI-scheme sniffing)
+ * against a parallel drawable set instead.
+ */
+internal fun NdefPayload.widgetIconRes(): Int = when (this) {
+    is NdefPayload.VCard -> R.drawable.ic_widget_vcard
+    is NdefPayload.Text -> R.drawable.ic_widget_text
+    is NdefPayload.WifiHandover -> R.drawable.ic_widget_wifi
+    is NdefPayload.Uri -> when {
+        uri.startsWith("tel:") -> R.drawable.ic_widget_phone
+        uri.startsWith("mailto:") -> R.drawable.ic_widget_email
+        uri.startsWith("sms:") -> R.drawable.ic_widget_sms
+        uri.startsWith("geo:") -> R.drawable.ic_widget_location
+        uri.startsWith("market://") -> R.drawable.ic_widget_play_store
+        uri.startsWith("http://") || uri.startsWith("https://") -> R.drawable.ic_widget_website
+        else -> R.drawable.ic_widget_link
     }
 }
