@@ -1,24 +1,26 @@
-package com.nfcemu.ui.scantag
+package com.nfcemu.ui.writetag
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.Nfc
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -33,30 +35,25 @@ import com.nfcemu.ui.util.findActivity
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ScanTagScreen(
+fun WriteTagScreen(
     onBack: () -> Unit,
-    onScanned: (ScannedTag) -> Unit,
-    viewModel: ScanTagViewModel = hiltViewModel(),
+    onWritten: () -> Unit,
+    viewModel: WriteTagViewModel = hiltViewModel(),
 ) {
     val uiState by viewModel.uiState.collectAsState()
     val activity = LocalContext.current.findActivity()
 
     DisposableEffect(activity) {
-        if (activity != null) viewModel.startScanning(activity)
+        if (activity != null) viewModel.startWriting(activity)
         onDispose {
-            if (activity != null) viewModel.stopScanning(activity)
+            if (activity != null) viewModel.stopWriting(activity)
         }
-    }
-
-    LaunchedEffect(uiState) {
-        val scanned = uiState as? ScanTagUiState.Scanned ?: return@LaunchedEffect
-        onScanned(ScannedTag(scanned.payload, scanned.aarPackageName))
     }
 
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(stringResource(R.string.scan_tag_title)) },
+                title = { Text(stringResource(R.string.write_tag_title)) },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(R.string.action_back))
@@ -71,7 +68,7 @@ fun ScanTagScreen(
             verticalArrangement = Arrangement.Center,
         ) {
             when (val state = uiState) {
-                is ScanTagUiState.Unsupported -> {
+                is WriteTagUiState.ProfileNotFound -> {
                     Icon(
                         imageVector = Icons.Filled.Nfc,
                         contentDescription = null,
@@ -79,7 +76,24 @@ fun ScanTagScreen(
                         tint = MaterialTheme.colorScheme.error,
                     )
                     Spacer()
-                    Text(stringResource(R.string.scan_tag_error_title), style = MaterialTheme.typography.titleMedium)
+                    Text(
+                        stringResource(R.string.write_tag_profile_not_found),
+                        style = MaterialTheme.typography.bodyLarge,
+                    )
+                    Spacer()
+                    Button(onClick = onBack) {
+                        Text(stringResource(R.string.action_back))
+                    }
+                }
+                is WriteTagUiState.Failure -> {
+                    Icon(
+                        imageVector = Icons.Filled.Nfc,
+                        contentDescription = null,
+                        modifier = Modifier.size(64.dp),
+                        tint = MaterialTheme.colorScheme.error,
+                    )
+                    Spacer()
+                    Text(stringResource(R.string.write_tag_error_title), style = MaterialTheme.typography.titleMedium)
                     Spacer()
                     Text(
                         state.reason,
@@ -91,7 +105,30 @@ fun ScanTagScreen(
                         Text(stringResource(R.string.scan_tag_try_again))
                     }
                 }
-                else -> {
+                is WriteTagUiState.Success -> {
+                    Icon(
+                        imageVector = Icons.Filled.CheckCircle,
+                        contentDescription = null,
+                        modifier = Modifier.size(64.dp),
+                        tint = MaterialTheme.colorScheme.primary,
+                    )
+                    Spacer()
+                    Text(
+                        stringResource(R.string.write_tag_success_message, viewModel.profileName),
+                        style = MaterialTheme.typography.bodyLarge,
+                        modifier = Modifier.padding(horizontal = Spacing.md),
+                    )
+                    Spacer()
+                    Row(horizontalArrangement = Arrangement.spacedBy(Spacing.sm)) {
+                        OutlinedButton(onClick = viewModel::dismissResult) {
+                            Text(stringResource(R.string.write_tag_write_another))
+                        }
+                        Button(onClick = onWritten) {
+                            Text(stringResource(R.string.write_tag_done))
+                        }
+                    }
+                }
+                is WriteTagUiState.Waiting -> {
                     Icon(
                         imageVector = Icons.Filled.Nfc,
                         contentDescription = null,
@@ -100,7 +137,7 @@ fun ScanTagScreen(
                     )
                     Spacer()
                     Text(
-                        stringResource(R.string.scan_tag_waiting),
+                        stringResource(R.string.write_tag_waiting, viewModel.profileName),
                         style = MaterialTheme.typography.bodyLarge,
                         modifier = Modifier.padding(horizontal = Spacing.md),
                     )

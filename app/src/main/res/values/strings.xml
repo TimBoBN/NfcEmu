@@ -29,6 +29,7 @@
     <string name="action_export_nfcemu">Export as .nfcemu</string>
     <string name="action_export_raw">Export as raw NDEF file</string>
     <string name="action_export_all_zip">Export all as ZIP</string>
+    <string name="action_write_to_tag">Write to tag</string>
     <string name="action_delete">Delete</string>
     <string name="action_cancel">Cancel</string>
     <string name="profile_active">Active</string>
@@ -44,6 +45,15 @@
     <string name="scan_tag_waiting">Hold your phone against an NFC tag to read its content.</string>
     <string name="scan_tag_error_title">Could not read this tag</string>
     <string name="scan_tag_try_again">Try again</string>
+
+    <!-- Write tag -->
+    <string name="write_tag_title">Write to Tag</string>
+    <string name="write_tag_waiting">Hold your phone against a blank or writable NFC tag to write “%1$s” to it.</string>
+    <string name="write_tag_profile_not_found">This profile could not be found.</string>
+    <string name="write_tag_success_message">“%1$s” was written to the tag. You can now use it like any other NFC tag.</string>
+    <string name="write_tag_write_another">Write another tag</string>
+    <string name="write_tag_done">Done</string>
+    <string name="write_tag_error_title">Could not write to this tag</string>
 
     <!-- Profile form -->
     <string name="profile_form_new_title">New Profile</string>
@@ -113,4 +123,19 @@
     <string name="tile_label">NfcEmu</string>
     <string name="tile_no_active">No active profile</string>
     <string name="tile_no_pinned_profiles">Pin a profile in NfcEmu to use this tile</string>
+
+    <!-- Settings -->
+    <string name="action_settings">Settings</string>
+    <string name="settings_title">Settings</string>
+    <string name="settings_biometric_lock_title">Require biometric unlock</string>
+    <string name="settings_biometric_lock_description">Ask for your fingerprint, face, PIN, or pattern before opening NfcEmu.</string>
+    <string name="settings_biometric_lock_hce_caveat">This does not stop the phone from answering NFC readers while the app is locked or backgrounded — only NfcEmu\'s own screens (profile list, editing, exports) are protected.</string>
+    <string name="settings_biometric_unavailable">Set up a screen lock or biometric unlock in your device settings to use this feature.</string>
+
+    <!-- App lock -->
+    <string name="lock_title">NfcEmu is locked</string>
+    <string name="lock_subtitle">Verify it\'s you to continue.</string>
+    <string name="lock_unlock_button">Unlock</string>
+    <string name="lock_no_credential_message">Your device no longer has a screen lock or biometric set up, so NfcEmu can\'t verify it\'s you.</string>
+    <string name="lock_disable_button">Turn off app lock</string>
 </resources>

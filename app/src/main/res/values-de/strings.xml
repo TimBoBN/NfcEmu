@@ -29,6 +29,7 @@
     <string name="action_export_nfcemu">Als .nfcemu exportieren</string>
     <string name="action_export_raw">Als rohe NDEF-Datei exportieren</string>
     <string name="action_export_all_zip">Alle als ZIP exportieren</string>
+    <string name="action_write_to_tag">Auf Tag schreiben</string>
     <string name="action_delete">Löschen</string>
     <string name="action_cancel">Abbrechen</string>
     <string name="profile_active">Aktiv</string>
@@ -44,6 +45,15 @@
     <string name="scan_tag_waiting">Halte dein Handy an einen NFC-Tag, um dessen Inhalt zu lesen.</string>
     <string name="scan_tag_error_title">Tag konnte nicht gelesen werden</string>
     <string name="scan_tag_try_again">Erneut versuchen</string>
+
+    <!-- Write tag -->
+    <string name="write_tag_title">Auf Tag schreiben</string>
+    <string name="write_tag_waiting">Halte dein Handy an einen leeren oder beschreibbaren NFC-Tag, um „%1$s“ darauf zu schreiben.</string>
+    <string name="write_tag_profile_not_found">Dieses Profil konnte nicht gefunden werden.</string>
+    <string name="write_tag_success_message">„%1$s“ wurde auf den Tag geschrieben. Du kannst ihn jetzt wie jeden anderen NFC-Tag verwenden.</string>
+    <string name="write_tag_write_another">Weiteren Tag beschreiben</string>
+    <string name="write_tag_done">Fertig</string>
+    <string name="write_tag_error_title">Auf diesen Tag konnte nicht geschrieben werden</string>
 
     <!-- Profile form -->
     <string name="profile_form_new_title">Neues Profil</string>
@@ -113,4 +123,19 @@
     <string name="tile_label">NfcEmu</string>
     <string name="tile_no_active">Kein aktives Profil</string>
     <string name="tile_no_pinned_profiles">Heft ein Profil in NfcEmu an, um diese Kachel zu nutzen</string>
+
+    <!-- Settings -->
+    <string name="action_settings">Einstellungen</string>
+    <string name="settings_title">Einstellungen</string>
+    <string name="settings_biometric_lock_title">Biometrische Entsperrung erforderlich</string>
+    <string name="settings_biometric_lock_description">Frage vor dem Öffnen von NfcEmu nach Fingerabdruck, Gesicht, PIN oder Muster.</string>
+    <string name="settings_biometric_lock_hce_caveat">Dies verhindert nicht, dass das Handy auf NFC-Lesegeräte antwortet, während die App gesperrt oder im Hintergrund ist — geschützt werden nur die Bildschirme von NfcEmu selbst (Profilliste, Bearbeitung, Exporte).</string>
+    <string name="settings_biometric_unavailable">Richte in den Geräteeinstellungen eine Displaysperre oder biometrische Entsperrung ein, um diese Funktion zu nutzen.</string>
+
+    <!-- App lock -->
+    <string name="lock_title">NfcEmu ist gesperrt</string>
+    <string name="lock_subtitle">Bestätige, dass du es bist, um fortzufahren.</string>
+    <string name="lock_unlock_button">Entsperren</string>
+    <string name="lock_no_credential_message">Auf deinem Gerät ist keine Displaysperre oder biometrische Entsperrung mehr eingerichtet, daher kann NfcEmu dich nicht verifizieren.</string>
+    <string name="lock_disable_button">App-Sperre deaktivieren</string>
 </resources>

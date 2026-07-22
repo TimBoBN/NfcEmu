@@ -58,6 +58,7 @@ fun ProfileListScreen(
     onBack: () -> Unit,
     onNewProfile: () -> Unit,
     onEditProfile: (Profile) -> Unit,
+    onWriteToTag: (Profile) -> Unit,
     viewModel: ProfileListViewModel = hiltViewModel(),
 ) {
     val uiState by viewModel.uiState.collectAsState()
@@ -119,6 +120,7 @@ fun ProfileListScreen(
                     onSetActive = { viewModel.setActive(profile.id) },
                     onDeactivate = viewModel::deactivate,
                     onEdit = { onEditProfile(profile) },
+                    onWriteToTag = { onWriteToTag(profile) },
                     onDuplicate = { viewModel.duplicate(profile.id) },
                     onTogglePin = { viewModel.togglePinned(profile.id) },
                     onDelete = { profilePendingDelete = profile },
@@ -161,6 +163,7 @@ private fun ProfileRow(
     onSetActive: () -> Unit,
     onDeactivate: () -> Unit,
     onEdit: () -> Unit,
+    onWriteToTag: () -> Unit,
     onDuplicate: () -> Unit,
     onTogglePin: () -> Unit,
     onDelete: () -> Unit,
@@ -231,6 +234,10 @@ private fun ProfileRow(
                     DropdownMenuItem(
                         text = { Text(stringResource(R.string.action_edit)) },
                         onClick = { menuExpanded = false; onEdit() },
+                    )
+                    DropdownMenuItem(
+                        text = { Text(stringResource(R.string.action_write_to_tag)) },
+                        onClick = { menuExpanded = false; onWriteToTag() },
                     )
                     DropdownMenuItem(
                         text = { Text(stringResource(R.string.action_duplicate)) },

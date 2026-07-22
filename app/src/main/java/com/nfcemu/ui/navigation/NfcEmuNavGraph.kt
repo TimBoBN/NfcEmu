@@ -23,7 +23,9 @@ import com.nfcemu.ui.profileform.TypePickerScreen
 import com.nfcemu.ui.profilelist.ProfileListScreen
 import com.nfcemu.ui.scantag.ScanTagScreen
 import com.nfcemu.ui.scantag.ScannedPayloadCodec
+import com.nfcemu.ui.settings.SettingsScreen
 import com.nfcemu.ui.theme.Motion
+import com.nfcemu.ui.writetag.WriteTagScreen
 
 private object Routes {
     const val HOME = "home"
@@ -33,6 +35,8 @@ private object Routes {
     const val PROFILE_FORM_EDIT = "profileForm/edit/{profileId}"
     const val PROFILE_FORM_SCAN_REVIEW = "profileForm/scanReview/{scannedTag}"
     const val SCAN_TAG = "scanTag"
+    const val WRITE_TAG = "writeTag/{profileId}"
+    const val SETTINGS = "settings"
     const val LIBRARY = "library"
 }
 
@@ -90,6 +94,7 @@ fun NfcEmuNavGraph() {
                     onNavigateToProfiles = { navController.navigate(Routes.PROFILE_LIST) },
                     onNavigateToLibrary = { navController.navigate(Routes.LIBRARY) },
                     onNavigateToNewProfile = { navController.navigate(Routes.TYPE_PICKER) },
+                    onNavigateToSettings = { navController.navigate(Routes.SETTINGS) },
                 )
             }
         }
@@ -98,6 +103,7 @@ fun NfcEmuNavGraph() {
                 onBack = { navController.popBackStack() },
                 onNewProfile = { navController.navigate(Routes.TYPE_PICKER) },
                 onEditProfile = { profile -> navController.navigate("profileForm/edit/${profile.id}") },
+                onWriteToTag = { profile -> navController.navigate("writeTag/${profile.id}") },
             )
         }
         composable(Routes.TYPE_PICKER) {
@@ -148,6 +154,18 @@ fun NfcEmuNavGraph() {
                 onBack = { navController.popBackStack() },
                 onSaved = { navController.popBackStack(Routes.HOME, inclusive = false) },
             )
+        }
+        composable(
+            route = Routes.WRITE_TAG,
+            arguments = listOf(navArgument("profileId") { type = NavType.StringType }),
+        ) {
+            WriteTagScreen(
+                onBack = { navController.popBackStack() },
+                onWritten = { navController.popBackStack() },
+            )
+        }
+        composable(Routes.SETTINGS) {
+            SettingsScreen(onBack = { navController.popBackStack() })
         }
         composable(Routes.LIBRARY) {
             LibraryScreen(onBack = { navController.popBackStack() })

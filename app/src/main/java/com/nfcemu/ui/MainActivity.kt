@@ -5,21 +5,23 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.nfc.NfcAdapter
 import android.os.Bundle
-import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.lifecycleScope
 import com.nfcemu.data.ProfileRepository
 import com.nfcemu.shortcuts.ProfileShortcutUpdater
+import com.nfcemu.ui.lock.AppLockGate
 import com.nfcemu.ui.navigation.NfcEmuNavGraph
 import com.nfcemu.ui.theme.NfcEmuTheme
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+/** Extends [FragmentActivity] (not just `ComponentActivity`) because [androidx.biometric.BiometricPrompt]'s constructor requires one. */
 @AndroidEntryPoint
-class MainActivity : ComponentActivity() {
+class MainActivity : FragmentActivity() {
 
     @Inject
     lateinit var profileRepository: ProfileRepository
@@ -31,7 +33,9 @@ class MainActivity : ComponentActivity() {
         handleActivateProfileIntent(intent)
         setContent {
             NfcEmuTheme {
-                NfcEmuNavGraph()
+                AppLockGate {
+                    NfcEmuNavGraph()
+                }
             }
         }
     }

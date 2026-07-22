@@ -1,7 +1,11 @@
 package com.nfcemu
 
 import android.app.Application
+import androidx.lifecycle.DefaultLifecycleObserver
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.ProcessLifecycleOwner
 import com.nfcemu.data.ProfileRepository
+import com.nfcemu.lock.AppLockState
 import com.nfcemu.shortcuts.ProfileShortcutUpdater
 import com.nfcemu.widget.ProfileWidgetUpdater
 import dagger.hilt.android.HiltAndroidApp
@@ -19,6 +23,9 @@ import javax.inject.Inject
  *   user never opens the app after placing it.
  * - [ProfileShortcutUpdater]: so pinning/unpinning a profile is reflected in the
  *   launcher's app shortcuts even if the user never opens the app afterwards.
+ * - [AppLockState]: so its persisted "is the lock enabled" read starts immediately,
+ *   not on first UI access - see [onCreate] for the [ProcessLifecycleOwner] wiring
+ *   that also lives here, the only place this app touches that Android singleton.
  */
 @HiltAndroidApp
 class NfcEmuApplication : Application() {
@@ -31,4 +38,19 @@ class NfcEmuApplication : Application() {
 
     @Inject
     lateinit var profileShortcutUpdater: ProfileShortcutUpdater
+
+    @Inject
+    lateinit var appLockState: AppLockState
+
+    override fun onCreate() {
+        super.onCreate()
+        // ON_STOP fires once the whole process has zero started Activities - unlike
+        // MainActivity's own onPause, it does not fire on a config-change-triggered
+        // Activity recreation, so this can't spuriously re-lock on rotation.
+        ProcessLifecycleOwner.get().lifecycle.addObserver(
+            object : DefaultLifecycleObserver {
+                override fun onStop(owner: LifecycleOwner) = appLockState.onAppBackgrounded()
+            },
+        )
+    }
 }
