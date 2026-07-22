@@ -13,19 +13,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.CheckCircle
-import androidx.compose.material.icons.filled.MoreVert
-import androidx.compose.material.icons.filled.PushPin
 import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -42,13 +33,18 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.nfcemu.R
 import com.nfcemu.data.Profile
-import com.nfcemu.ui.components.icon
+import com.nfcemu.ui.components.NfcEmuCard
+import com.nfcemu.ui.components.NfcEmuOutlinedFab
+import com.nfcemu.ui.components.TypeIconBadge
 import com.nfcemu.ui.components.previewText
+import com.nfcemu.ui.components.typeGlyph
 import com.nfcemu.ui.theme.Motion
 import com.nfcemu.ui.theme.Spacing
 
@@ -59,6 +55,7 @@ fun ProfileListScreen(
     onNewProfile: () -> Unit,
     onEditProfile: (Profile) -> Unit,
     onWriteToTag: (Profile) -> Unit,
+    onNavigateToTransmit: () -> Unit,
     viewModel: ProfileListViewModel = hiltViewModel(),
 ) {
     val uiState by viewModel.uiState.collectAsState()
@@ -84,12 +81,12 @@ fun ProfileListScreen(
                 title = { Text(stringResource(R.string.profile_list_title)) },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(R.string.action_back))
+                        Icon(ImageVector.vectorResource(R.drawable.ic_nocturne_back), contentDescription = stringResource(R.string.action_back))
                     }
                 },
                 actions = {
                     IconButton(onClick = { topBarMenuExpanded = true }) {
-                        Icon(Icons.Filled.MoreVert, contentDescription = stringResource(R.string.action_more))
+                        Icon(ImageVector.vectorResource(R.drawable.ic_nocturne_more_vert), contentDescription = stringResource(R.string.action_more))
                     }
                     DropdownMenu(expanded = topBarMenuExpanded, onDismissRequest = { topBarMenuExpanded = false }) {
                         DropdownMenuItem(
@@ -104,9 +101,11 @@ fun ProfileListScreen(
             )
         },
         floatingActionButton = {
-            FloatingActionButton(onClick = onNewProfile) {
-                Icon(Icons.Filled.Add, contentDescription = stringResource(R.string.home_new_profile))
-            }
+            NfcEmuOutlinedFab(
+                onClick = onNewProfile,
+                icon = ImageVector.vectorResource(R.drawable.ic_nocturne_add),
+                contentDescription = stringResource(R.string.home_new_profile),
+            )
         },
     ) { padding ->
         LazyColumn(
@@ -119,6 +118,7 @@ fun ProfileListScreen(
                     isActive = profile.id == uiState.activeProfileId,
                     onSetActive = { viewModel.setActive(profile.id) },
                     onDeactivate = viewModel::deactivate,
+                    onOpenTransmit = { viewModel.setActive(profile.id); onNavigateToTransmit() },
                     onEdit = { onEditProfile(profile) },
                     onWriteToTag = { onWriteToTag(profile) },
                     onDuplicate = { viewModel.duplicate(profile.id) },
@@ -162,6 +162,7 @@ private fun ProfileRow(
     isActive: Boolean,
     onSetActive: () -> Unit,
     onDeactivate: () -> Unit,
+    onOpenTransmit: () -> Unit,
     onEdit: () -> Unit,
     onWriteToTag: () -> Unit,
     onDuplicate: () -> Unit,
@@ -172,25 +173,21 @@ private fun ProfileRow(
 ) {
     var menuExpanded by remember { mutableStateOf(false) }
     val containerColor by animateColorAsState(
-        targetValue = if (isActive) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.surfaceVariant,
+        targetValue = if (isActive) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.surface,
         animationSpec = Motion.standard(),
         label = "profile-row-highlight",
     )
 
-    Card(
+    NfcEmuCard(
         modifier = modifier.fillMaxWidth(),
-        colors = CardDefaults.cardColors(containerColor = containerColor),
+        onClick = onOpenTransmit,
+        containerColor = containerColor,
     ) {
         Row(
             modifier = Modifier.fillMaxWidth().padding(Spacing.sm + Spacing.xs),
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            Icon(
-                imageVector = profile.fields.icon(),
-                contentDescription = null,
-                tint = MaterialTheme.colorScheme.primary,
-                modifier = Modifier.size(32.dp),
-            )
+            TypeIconBadge(profile.fields.typeGlyph(), size = 36.dp)
             Spacer(Modifier.size(Spacing.sm + Spacing.xs))
             Column(modifier = Modifier.weight(1f)) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
@@ -198,7 +195,7 @@ private fun ProfileRow(
                     if (profile.pinned) {
                         Spacer(Modifier.size(6.dp))
                         Icon(
-                            Icons.Filled.PushPin,
+                            ImageVector.vectorResource(R.drawable.ic_nocturne_pin),
                             contentDescription = stringResource(R.string.profile_pinned),
                             modifier = Modifier.size(14.dp),
                         )
@@ -212,7 +209,7 @@ private fun ProfileRow(
             }
             if (isActive) {
                 Icon(
-                    Icons.Filled.CheckCircle,
+                    ImageVector.vectorResource(R.drawable.ic_nocturne_active_check),
                     contentDescription = stringResource(R.string.profile_active),
                     tint = MaterialTheme.colorScheme.primary,
                 )
@@ -220,7 +217,7 @@ private fun ProfileRow(
             }
             Column {
                 IconButton(onClick = { menuExpanded = true }) {
-                    Icon(Icons.Filled.MoreVert, contentDescription = stringResource(R.string.action_more))
+                    Icon(ImageVector.vectorResource(R.drawable.ic_nocturne_more_vert), contentDescription = stringResource(R.string.action_more))
                 }
                 DropdownMenu(expanded = menuExpanded, onDismissRequest = { menuExpanded = false }) {
                     DropdownMenuItem(

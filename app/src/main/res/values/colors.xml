@@ -1,7 +1,8 @@
 <resources>
-    <!-- Matches Material3's default light background/surface token so the raw
-         Android window background can never visibly differ from what Compose
-         draws (avoids a flash during activity start or screen transitions). -->
-    <color name="splash_background">#FFFBFE</color>
-    <color name="window_background">#FFFBFE</color>
+    <!-- Matches Theme.kt's Nocturne background token so the raw Android window
+         background can never visibly differ from what Compose draws (avoids a
+         flash during activity start or screen transitions). Dark-only design -
+         no values-night variant needed since there's no light theme at all. -->
+    <color name="splash_background">#161826</color>
+    <color name="window_background">#161826</color>
 </resources>

@@ -21,23 +21,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.ContactPage
-import androidx.compose.material.icons.filled.Delete
-import androidx.compose.material.icons.filled.FileDownload
-import androidx.compose.material.icons.filled.FolderOpen
-import androidx.compose.material.icons.filled.Language
-import androidx.compose.material.icons.filled.Share
-import androidx.compose.material.icons.filled.TextFields
-import androidx.compose.material.icons.filled.Wifi
 import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.Card
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.FilledTonalButton
-import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -60,11 +47,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.nfcemu.R
 import com.nfcemu.data.library.LibraryEntry
 import com.nfcemu.data.library.LibraryEntryDirection
+import com.nfcemu.ui.components.NfcEmuCard
+import com.nfcemu.ui.components.NfcEmuOutlinedFab
+import com.nfcemu.ui.components.NfcEmuSecondaryButton
+import com.nfcemu.ui.components.TypeIconBadge
+import com.nfcemu.ui.components.typeGlyphForLabel
 import com.nfcemu.ui.theme.Motion
 import com.nfcemu.ui.theme.Spacing
 import java.text.DateFormat
@@ -103,16 +96,18 @@ fun LibraryScreen(
                 title = { Text(stringResource(R.string.library_title)) },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(R.string.action_back))
+                        Icon(ImageVector.vectorResource(R.drawable.ic_nocturne_back), contentDescription = stringResource(R.string.action_back))
                     }
                 },
             )
         },
         floatingActionButton = {
             Box {
-                FloatingActionButton(onClick = { importMenuExpanded = true }) {
-                    Icon(Icons.Filled.FileDownload, contentDescription = stringResource(R.string.library_import))
-                }
+                NfcEmuOutlinedFab(
+                    onClick = { importMenuExpanded = true },
+                    icon = ImageVector.vectorResource(R.drawable.ic_nocturne_import),
+                    contentDescription = stringResource(R.string.library_import),
+                )
                 DropdownMenu(expanded = importMenuExpanded, onDismissRequest = { importMenuExpanded = false }) {
                     DropdownMenuItem(
                         text = { Text(stringResource(R.string.library_import)) },
@@ -139,7 +134,7 @@ fun LibraryScreen(
                     verticalArrangement = Arrangement.Center,
                 ) {
                     Icon(
-                        Icons.Filled.FolderOpen,
+                        ImageVector.vectorResource(R.drawable.ic_nocturne_folder),
                         contentDescription = null,
                         modifier = Modifier.size(48.dp),
                         tint = MaterialTheme.colorScheme.onSurfaceVariant,
@@ -197,13 +192,6 @@ private fun shareEntry(context: android.content.Context, entry: LibraryEntry) {
     context.startActivity(Intent.createChooser(intent, entry.displayName))
 }
 
-private fun payloadTypeIcon(label: String): ImageVector = when (label) {
-    "vcard" -> Icons.Filled.ContactPage
-    "text" -> Icons.Filled.TextFields
-    "wifi" -> Icons.Filled.Wifi
-    else -> Icons.Filled.Language
-}
-
 @Composable
 private fun LibraryRow(
     entry: LibraryEntry,
@@ -212,17 +200,12 @@ private fun LibraryRow(
     onDelete: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    Card(modifier = modifier.fillMaxWidth()) {
+    NfcEmuCard(modifier = modifier.fillMaxWidth()) {
         Row(
             modifier = Modifier.fillMaxWidth().padding(Spacing.sm + Spacing.xs),
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            Icon(
-                imageVector = payloadTypeIcon(entry.payloadTypeLabel),
-                contentDescription = null,
-                tint = MaterialTheme.colorScheme.primary,
-                modifier = Modifier.size(28.dp),
-            )
+            TypeIconBadge(typeGlyphForLabel(entry.payloadTypeLabel), size = 32.dp)
             Spacer(Modifier.size(Spacing.sm + Spacing.xs))
             Column(modifier = Modifier.weight(1f)) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
@@ -245,12 +228,12 @@ private fun LibraryRow(
                 )
             }
             IconButton(onClick = onShare) {
-                Icon(Icons.Filled.Share, contentDescription = stringResource(R.string.action_share))
+                Icon(ImageVector.vectorResource(R.drawable.ic_nocturne_share), contentDescription = stringResource(R.string.action_share))
             }
             IconButton(onClick = onDelete) {
-                Icon(Icons.Filled.Delete, contentDescription = stringResource(R.string.action_delete))
+                Icon(ImageVector.vectorResource(R.drawable.ic_nocturne_delete), contentDescription = stringResource(R.string.action_delete))
             }
-            FilledTonalButton(onClick = onLoadActive) {
+            NfcEmuSecondaryButton(onClick = onLoadActive) {
                 Text(stringResource(R.string.library_load_active))
             }
         }

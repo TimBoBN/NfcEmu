@@ -16,18 +16,13 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.Apps
 import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.Button
-import androidx.compose.material3.Card
-import androidx.compose.material3.Checkbox
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
@@ -49,7 +44,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
@@ -57,6 +54,9 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.nfcemu.R
 import com.nfcemu.ndefengine.WifiAuthType
+import com.nfcemu.ui.components.NfcEmuCard
+import com.nfcemu.ui.components.NfcEmuPrimaryButton
+import com.nfcemu.ui.components.OutlineCheckbox
 import com.nfcemu.ui.theme.Motion
 import com.nfcemu.ui.theme.Spacing
 import com.nfcemu.util.InstalledApp
@@ -89,7 +89,7 @@ fun ProfileFormScreen(
                 },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(R.string.action_back))
+                        Icon(ImageVector.vectorResource(R.drawable.ic_nocturne_back), contentDescription = stringResource(R.string.action_back))
                     }
                 },
             )
@@ -129,7 +129,7 @@ fun ProfileFormScreen(
             PreviewCard(previewText = uiState.previewText, estimatedSize = uiState.estimatedNdefSize, isValid = uiState.isValid)
 
             Spacer()
-            Button(
+            NfcEmuPrimaryButton(
                 onClick = viewModel::save,
                 enabled = uiState.isValid,
                 modifier = Modifier.fillMaxWidth(),
@@ -294,7 +294,8 @@ private fun AarSection(
 
     Column {
         Row(verticalAlignment = Alignment.CenterVertically) {
-            Checkbox(checked = enabled, onCheckedChange = onEnabledChange)
+            OutlineCheckbox(checked = enabled, onCheckedChange = onEnabledChange)
+            androidx.compose.foundation.layout.Spacer(Modifier.width(Spacing.sm))
             Text(stringResource(R.string.field_aar_checkbox))
         }
         AnimatedVisibility(
@@ -312,7 +313,10 @@ private fun AarSection(
                     supportingText = { error?.let { Text(it) } },
                     trailingIcon = {
                         IconButton(onClick = { showPicker = true }) {
-                            Icon(Icons.Filled.Apps, contentDescription = stringResource(R.string.field_aar_pick_app))
+                            Icon(
+                                ImageVector.vectorResource(R.drawable.ic_nocturne_apps),
+                                contentDescription = stringResource(R.string.field_aar_pick_app),
+                            )
                         }
                     },
                     modifier = Modifier.fillMaxWidth(),
@@ -403,7 +407,7 @@ private fun AppPickerDialog(
 
 @Composable
 private fun PreviewCard(previewText: String, estimatedSize: Int, isValid: Boolean) {
-    Card(modifier = Modifier.fillMaxWidth()) {
+    NfcEmuCard(modifier = Modifier.fillMaxWidth()) {
         Column(modifier = Modifier.padding(Spacing.md).animateContentSize(Motion.standard())) {
             Text(stringResource(R.string.profile_form_preview_title), style = MaterialTheme.typography.labelLarge)
             Spacer()

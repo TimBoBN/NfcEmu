@@ -12,8 +12,6 @@
     <string name="home_nfc_not_supported">This device does not support NFC.</string>
     <string name="home_nfc_disabled">NFC is disabled. Turn it on so readers can detect your profile.</string>
     <string name="home_nfc_open_settings">Settings</string>
-    <string name="home_active_profile">Active Profile</string>
-    <string name="home_no_active_profile">No profile active. Choose one from the list or create a new one.</string>
     <string name="profile_pinned">Pinned</string>
 
     <!-- Profile list -->
@@ -45,6 +43,11 @@
     <string name="scan_tag_waiting">Hold your phone against an NFC tag to read its content.</string>
     <string name="scan_tag_error_title">Could not read this tag</string>
     <string name="scan_tag_try_again">Try again</string>
+
+    <!-- Transmit -->
+    <string name="transmit_ready">Ready to transmit</string>
+    <string name="transmit_subtitle">Hold your phone against a reader or another NFC-capable device.</string>
+    <string name="transmit_done">Done</string>
 
     <!-- Write tag -->
     <string name="write_tag_title">Write to Tag</string>

@@ -1,10 +1,8 @@
 <resources>
-    <!-- android:windowBackground is set explicitly (and overridden in values-night)
-         to match NfcEmuTheme's Compose background exactly. Without this, the raw
-         Android window background (a generic light default) can flash through
-         for a frame during activity start or screen transitions - most jarring
-         in dark mode, where it's white against otherwise-dark content. -->
-    <style name="Theme.NfcEmu" parent="android:Theme.Material.Light.NoActionBar">
+    <!-- android:windowBackground is set explicitly to match NfcEmuTheme's fixed dark
+         Compose background exactly. Without this, the raw Android window background
+         can flash through for a frame during activity start or screen transitions. -->
+    <style name="Theme.NfcEmu" parent="android:Theme.Material.NoActionBar">
         <item name="android:windowBackground">@color/window_background</item>
     </style>
 

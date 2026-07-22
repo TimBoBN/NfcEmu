@@ -25,6 +25,7 @@ import com.nfcemu.ui.scantag.ScanTagScreen
 import com.nfcemu.ui.scantag.ScannedPayloadCodec
 import com.nfcemu.ui.settings.SettingsScreen
 import com.nfcemu.ui.theme.Motion
+import com.nfcemu.ui.transmit.TransmitScreen
 import com.nfcemu.ui.writetag.WriteTagScreen
 
 private object Routes {
@@ -38,6 +39,7 @@ private object Routes {
     const val WRITE_TAG = "writeTag/{profileId}"
     const val SETTINGS = "settings"
     const val LIBRARY = "library"
+    const val TRANSMIT = "transmit"
 }
 
 /**
@@ -95,6 +97,7 @@ fun NfcEmuNavGraph() {
                     onNavigateToLibrary = { navController.navigate(Routes.LIBRARY) },
                     onNavigateToNewProfile = { navController.navigate(Routes.TYPE_PICKER) },
                     onNavigateToSettings = { navController.navigate(Routes.SETTINGS) },
+                    onNavigateToTransmit = { navController.navigate(Routes.TRANSMIT) },
                 )
             }
         }
@@ -104,6 +107,7 @@ fun NfcEmuNavGraph() {
                 onNewProfile = { navController.navigate(Routes.TYPE_PICKER) },
                 onEditProfile = { profile -> navController.navigate("profileForm/edit/${profile.id}") },
                 onWriteToTag = { profile -> navController.navigate("writeTag/${profile.id}") },
+                onNavigateToTransmit = { navController.navigate(Routes.TRANSMIT) },
             )
         }
         composable(Routes.TYPE_PICKER) {
@@ -169,6 +173,9 @@ fun NfcEmuNavGraph() {
         }
         composable(Routes.LIBRARY) {
             LibraryScreen(onBack = { navController.popBackStack() })
+        }
+        composable(Routes.TRANSMIT) {
+            TransmitScreen(onClose = { navController.popBackStack() })
         }
     }
 }

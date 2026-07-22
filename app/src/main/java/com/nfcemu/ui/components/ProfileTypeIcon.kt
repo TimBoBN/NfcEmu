@@ -1,32 +1,34 @@
 package com.nfcemu.ui.components
 
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ContactPage
-import androidx.compose.material.icons.filled.Email
-import androidx.compose.material.icons.filled.Language
-import androidx.compose.material.icons.filled.LocationOn
-import androidx.compose.material.icons.automirrored.filled.Message
-import androidx.compose.material.icons.filled.Phone
-import androidx.compose.material.icons.filled.Shop
-import androidx.compose.material.icons.filled.TextFields
-import androidx.compose.material.icons.filled.Wifi
-import androidx.compose.material.icons.filled.Link
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.vectorResource
+import com.nfcemu.R
 import com.nfcemu.ndefengine.NdefPayload
 import com.nfcemu.ui.profileform.ProfileTypeTemplate
 
-/** Maps a payload/template to its icon + a short human label, used across list, quick-select and type picker. */
-fun ProfileTypeTemplate.icon(): ImageVector = when (this) {
-    ProfileTypeTemplate.WEBSITE -> Icons.Filled.Language
-    ProfileTypeTemplate.PHONE -> Icons.Filled.Phone
-    ProfileTypeTemplate.EMAIL -> Icons.Filled.Email
-    ProfileTypeTemplate.SMS -> Icons.AutoMirrored.Filled.Message
-    ProfileTypeTemplate.LOCATION -> Icons.Filled.LocationOn
-    ProfileTypeTemplate.PLAY_STORE -> Icons.Filled.Shop
-    ProfileTypeTemplate.WIFI -> Icons.Filled.Wifi
-    ProfileTypeTemplate.VCARD -> Icons.Filled.ContactPage
-    ProfileTypeTemplate.TEXT -> Icons.Filled.TextFields
-    ProfileTypeTemplate.CUSTOM_URI -> Icons.Filled.Link
+/**
+ * Every profile type shows an icon except Text, which the design renders as a stylized "Aa"
+ * text glyph instead - see [TypeIconBadge], the sole consumer of this type.
+ */
+sealed interface TypeGlyph {
+    data class Icon(val imageVector: ImageVector) : TypeGlyph
+    data object Text : TypeGlyph
+}
+
+/** Maps a payload/template to its glyph + a short human label, used across list, quick-select and type picker. */
+@Composable
+fun ProfileTypeTemplate.typeGlyph(): TypeGlyph = when (this) {
+    ProfileTypeTemplate.WEBSITE -> TypeGlyph.Icon(ImageVector.vectorResource(R.drawable.ic_nocturne_website))
+    ProfileTypeTemplate.PHONE -> TypeGlyph.Icon(ImageVector.vectorResource(R.drawable.ic_nocturne_phone))
+    ProfileTypeTemplate.EMAIL -> TypeGlyph.Icon(ImageVector.vectorResource(R.drawable.ic_nocturne_email))
+    ProfileTypeTemplate.SMS -> TypeGlyph.Icon(ImageVector.vectorResource(R.drawable.ic_nocturne_sms))
+    ProfileTypeTemplate.LOCATION -> TypeGlyph.Icon(ImageVector.vectorResource(R.drawable.ic_nocturne_location))
+    ProfileTypeTemplate.PLAY_STORE -> TypeGlyph.Icon(ImageVector.vectorResource(R.drawable.ic_nocturne_play_store))
+    ProfileTypeTemplate.WIFI -> TypeGlyph.Icon(ImageVector.vectorResource(R.drawable.ic_nocturne_wifi))
+    ProfileTypeTemplate.VCARD -> TypeGlyph.Icon(ImageVector.vectorResource(R.drawable.ic_nocturne_vcard))
+    ProfileTypeTemplate.TEXT -> TypeGlyph.Text
+    ProfileTypeTemplate.CUSTOM_URI -> TypeGlyph.Icon(ImageVector.vectorResource(R.drawable.ic_nocturne_custom_uri))
 }
 
 fun ProfileTypeTemplate.label(): String = when (this) {
@@ -42,18 +44,35 @@ fun ProfileTypeTemplate.label(): String = when (this) {
     ProfileTypeTemplate.CUSTOM_URI -> "Custom URI"
 }
 
-/** Best-effort icon for an already-encoded payload (list/quick-select rows don't know the original template). */
-fun NdefPayload.icon(): ImageVector = when (this) {
-    is NdefPayload.VCard -> Icons.Filled.ContactPage
-    is NdefPayload.Text -> Icons.Filled.TextFields
-    is NdefPayload.WifiHandover -> Icons.Filled.Wifi
+/** Best-effort glyph for an already-encoded payload (list/quick-select rows don't know the original template). */
+@Composable
+fun NdefPayload.typeGlyph(): TypeGlyph = when (this) {
+    is NdefPayload.VCard -> TypeGlyph.Icon(ImageVector.vectorResource(R.drawable.ic_nocturne_vcard))
+    is NdefPayload.Text -> TypeGlyph.Text
+    is NdefPayload.WifiHandover -> TypeGlyph.Icon(ImageVector.vectorResource(R.drawable.ic_nocturne_wifi))
     is NdefPayload.Uri -> when {
-        uri.startsWith("tel:") -> Icons.Filled.Phone
-        uri.startsWith("mailto:") -> Icons.Filled.Email
-        uri.startsWith("sms:") -> Icons.AutoMirrored.Filled.Message
-        uri.startsWith("geo:") -> Icons.Filled.LocationOn
-        uri.startsWith("market://") -> Icons.Filled.Shop
-        uri.startsWith("http://") || uri.startsWith("https://") -> Icons.Filled.Language
-        else -> Icons.Filled.Link
+        uri.startsWith("tel:") -> TypeGlyph.Icon(ImageVector.vectorResource(R.drawable.ic_nocturne_phone))
+        uri.startsWith("mailto:") -> TypeGlyph.Icon(ImageVector.vectorResource(R.drawable.ic_nocturne_email))
+        uri.startsWith("sms:") -> TypeGlyph.Icon(ImageVector.vectorResource(R.drawable.ic_nocturne_sms))
+        uri.startsWith("geo:") -> TypeGlyph.Icon(ImageVector.vectorResource(R.drawable.ic_nocturne_location))
+        uri.startsWith("market://") -> TypeGlyph.Icon(ImageVector.vectorResource(R.drawable.ic_nocturne_play_store))
+        uri.startsWith("http://") || uri.startsWith("https://") -> TypeGlyph.Icon(ImageVector.vectorResource(R.drawable.ic_nocturne_website))
+        else -> TypeGlyph.Icon(ImageVector.vectorResource(R.drawable.ic_nocturne_custom_uri))
     }
+}
+
+/**
+ * Glyph for a [com.nfcemu.data.library.LibraryEntry], which only stores the coarse
+ * [com.nfcemu.data.typeLabel] discriminator ("uri"/"vcard"/"text"/"wifi"), not the full
+ * payload - so, unlike [NdefPayload.typeGlyph], this can't distinguish a website from a
+ * phone number, both being "uri". The single mapping this and [NdefPayload.typeGlyph] both
+ * ultimately draw from is the same vector drawable set, just keyed differently out of
+ * necessity.
+ */
+@Composable
+fun typeGlyphForLabel(label: String): TypeGlyph = when (label) {
+    "vcard" -> TypeGlyph.Icon(ImageVector.vectorResource(R.drawable.ic_nocturne_vcard))
+    "text" -> TypeGlyph.Text
+    "wifi" -> TypeGlyph.Icon(ImageVector.vectorResource(R.drawable.ic_nocturne_wifi))
+    else -> TypeGlyph.Icon(ImageVector.vectorResource(R.drawable.ic_nocturne_website))
 }

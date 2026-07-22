@@ -6,16 +6,10 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.CheckCircle
-import androidx.compose.material.icons.filled.Nfc
-import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -25,11 +19,16 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.nfcemu.R
+import com.nfcemu.ui.components.NfcEmuPrimaryButton
+import com.nfcemu.ui.components.NfcEmuSecondaryButton
+import com.nfcemu.ui.components.PulsingIconCircle
 import com.nfcemu.ui.theme.Spacing
 import com.nfcemu.ui.util.findActivity
 
@@ -56,7 +55,7 @@ fun WriteTagScreen(
                 title = { Text(stringResource(R.string.write_tag_title)) },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(R.string.action_back))
+                        Icon(ImageVector.vectorResource(R.drawable.ic_nocturne_back), contentDescription = stringResource(R.string.action_back))
                     }
                 },
             )
@@ -70,7 +69,7 @@ fun WriteTagScreen(
             when (val state = uiState) {
                 is WriteTagUiState.ProfileNotFound -> {
                     Icon(
-                        imageVector = Icons.Filled.Nfc,
+                        imageVector = ImageVector.vectorResource(R.drawable.ic_nocturne_nfc),
                         contentDescription = null,
                         modifier = Modifier.size(64.dp),
                         tint = MaterialTheme.colorScheme.error,
@@ -81,13 +80,13 @@ fun WriteTagScreen(
                         style = MaterialTheme.typography.bodyLarge,
                     )
                     Spacer()
-                    Button(onClick = onBack) {
+                    NfcEmuPrimaryButton(onClick = onBack) {
                         Text(stringResource(R.string.action_back))
                     }
                 }
                 is WriteTagUiState.Failure -> {
                     Icon(
-                        imageVector = Icons.Filled.Nfc,
+                        imageVector = ImageVector.vectorResource(R.drawable.ic_nocturne_nfc),
                         contentDescription = null,
                         modifier = Modifier.size(64.dp),
                         tint = MaterialTheme.colorScheme.error,
@@ -101,13 +100,13 @@ fun WriteTagScreen(
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )
                     Spacer()
-                    Button(onClick = viewModel::dismissResult) {
+                    NfcEmuPrimaryButton(onClick = viewModel::dismissResult) {
                         Text(stringResource(R.string.scan_tag_try_again))
                     }
                 }
                 is WriteTagUiState.Success -> {
                     Icon(
-                        imageVector = Icons.Filled.CheckCircle,
+                        imageVector = ImageVector.vectorResource(R.drawable.ic_nocturne_active_check),
                         contentDescription = null,
                         modifier = Modifier.size(64.dp),
                         tint = MaterialTheme.colorScheme.primary,
@@ -120,21 +119,16 @@ fun WriteTagScreen(
                     )
                     Spacer()
                     Row(horizontalArrangement = Arrangement.spacedBy(Spacing.sm)) {
-                        OutlinedButton(onClick = viewModel::dismissResult) {
+                        NfcEmuSecondaryButton(onClick = viewModel::dismissResult) {
                             Text(stringResource(R.string.write_tag_write_another))
                         }
-                        Button(onClick = onWritten) {
+                        NfcEmuPrimaryButton(onClick = onWritten) {
                             Text(stringResource(R.string.write_tag_done))
                         }
                     }
                 }
                 is WriteTagUiState.Waiting -> {
-                    Icon(
-                        imageVector = Icons.Filled.Nfc,
-                        contentDescription = null,
-                        modifier = Modifier.size(64.dp),
-                        tint = MaterialTheme.colorScheme.primary,
-                    )
+                    PulsingIconCircle(icon = ImageVector.vectorResource(R.drawable.ic_nocturne_nfc), size = 80.dp)
                     Spacer()
                     Text(
                         stringResource(R.string.write_tag_waiting, viewModel.profileName),

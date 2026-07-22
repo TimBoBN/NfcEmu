@@ -4,11 +4,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.Nfc
-import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -23,11 +18,15 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.nfcemu.R
+import com.nfcemu.ui.components.NfcEmuPrimaryButton
+import com.nfcemu.ui.components.PulsingIconCircle
 import com.nfcemu.ui.theme.Spacing
 import com.nfcemu.ui.util.findActivity
 
@@ -59,7 +58,7 @@ fun ScanTagScreen(
                 title = { Text(stringResource(R.string.scan_tag_title)) },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(R.string.action_back))
+                        Icon(ImageVector.vectorResource(R.drawable.ic_nocturne_back), contentDescription = stringResource(R.string.action_back))
                     }
                 },
             )
@@ -73,9 +72,8 @@ fun ScanTagScreen(
             when (val state = uiState) {
                 is ScanTagUiState.Unsupported -> {
                     Icon(
-                        imageVector = Icons.Filled.Nfc,
+                        imageVector = ImageVector.vectorResource(R.drawable.ic_nocturne_nfc),
                         contentDescription = null,
-                        modifier = Modifier.size(64.dp),
                         tint = MaterialTheme.colorScheme.error,
                     )
                     Spacer()
@@ -87,17 +85,12 @@ fun ScanTagScreen(
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )
                     Spacer()
-                    Button(onClick = viewModel::dismissResult) {
+                    NfcEmuPrimaryButton(onClick = viewModel::dismissResult) {
                         Text(stringResource(R.string.scan_tag_try_again))
                     }
                 }
                 else -> {
-                    Icon(
-                        imageVector = Icons.Filled.Nfc,
-                        contentDescription = null,
-                        modifier = Modifier.size(64.dp),
-                        tint = MaterialTheme.colorScheme.primary,
-                    )
+                    PulsingIconCircle(icon = ImageVector.vectorResource(R.drawable.ic_nocturne_nfc), size = 80.dp)
                     Spacer()
                     Text(
                         stringResource(R.string.scan_tag_waiting),

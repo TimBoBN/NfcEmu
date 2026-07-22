@@ -5,9 +5,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Lock
-import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -20,12 +17,15 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.FragmentActivity
 import com.nfcemu.R
 import com.nfcemu.lock.BiometricAvailability
+import com.nfcemu.ui.components.NfcEmuPrimaryButton
 import com.nfcemu.ui.theme.Spacing
 import com.nfcemu.ui.util.findActivity
 
@@ -43,7 +43,7 @@ fun LockScreen(viewModel: LockGateViewModel) {
             verticalArrangement = Arrangement.Center,
         ) {
             Icon(
-                imageVector = Icons.Filled.Lock,
+                imageVector = ImageVector.vectorResource(R.drawable.ic_nocturne_lock),
                 contentDescription = null,
                 modifier = Modifier.size(64.dp),
                 tint = MaterialTheme.colorScheme.primary,
@@ -65,7 +65,7 @@ fun LockScreen(viewModel: LockGateViewModel) {
                     onSuccess = viewModel::onUnlocked,
                     onError = { message -> errorMessage = message },
                 )
-                Button(onClick = launchPrompt) {
+                NfcEmuPrimaryButton(onClick = launchPrompt) {
                     Text(stringResource(R.string.lock_unlock_button))
                 }
                 errorMessage?.let { message ->

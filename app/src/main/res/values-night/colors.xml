@@ -1,6 +1,0 @@
-<resources>
-    <!-- Matches Material3's default dark background/surface token, see the base
-         values/colors.xml comment for why this needs to track Compose's palette. -->
-    <color name="splash_background">#1C1B1F</color>
-    <color name="window_background">#1C1B1F</color>
-</resources>
