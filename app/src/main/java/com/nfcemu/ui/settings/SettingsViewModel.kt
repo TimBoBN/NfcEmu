@@ -26,7 +26,7 @@ class SettingsViewModel @Inject constructor(
 
     val uiState: StateFlow<SettingsUiState> = settingsDataStore.requireBiometricUnlock
         .map { enabled -> SettingsUiState(enabled, biometricAvailabilitySource.currentAvailability()) }
-        .stateIn(viewModelScope, SharingStarted.Eagerly, SettingsUiState())
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), SettingsUiState())
 
     /** No-ops (rather than persisting) if biometric/device-credential isn't configured - the switch is also disabled in the UI, this is defense-in-depth. */
     fun setRequireBiometricUnlock(enabled: Boolean) {
