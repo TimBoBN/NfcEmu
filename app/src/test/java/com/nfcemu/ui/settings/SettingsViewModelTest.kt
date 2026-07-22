@@ -9,6 +9,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.test.TestDispatcher
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.resetMain
@@ -28,14 +29,16 @@ private class FakeBiometricAvailabilitySource(private val availability: Biometri
 class SettingsViewModelTest {
 
     private lateinit var tempDir: File
+    private lateinit var dispatcher: TestDispatcher
     private lateinit var scope: CoroutineScope
     private lateinit var settingsDataStore: SettingsDataStore
 
     @BeforeTest
     fun setUp() {
-        Dispatchers.setMain(UnconfinedTestDispatcher())
+        dispatcher = UnconfinedTestDispatcher()
+        Dispatchers.setMain(dispatcher)
         tempDir = File.createTempFile("nfcemu-settings-vm-test", "").apply { delete(); mkdirs() }
-        scope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
+        scope = CoroutineScope(SupervisorJob() + dispatcher)
         // Passing our own `scope` (cancelled in tearDown) instead of letting the factory
         // default to its own uncancelled Dispatchers.IO scope - otherwise DataStore's
         // internal write-actor coroutine leaks for the rest of the test JVM's lifetime,
