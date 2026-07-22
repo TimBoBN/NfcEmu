@@ -21,14 +21,16 @@ import kotlin.test.assertEquals
 class DefaultAppLockStateTest {
 
     private lateinit var tempDir: File
+    private lateinit var dispatcher: UnconfinedTestDispatcher
     private lateinit var scope: CoroutineScope
     private lateinit var settingsDataStore: SettingsDataStore
 
     @BeforeTest
     fun setUp() {
-        Dispatchers.setMain(UnconfinedTestDispatcher())
+        dispatcher = UnconfinedTestDispatcher()
+        Dispatchers.setMain(dispatcher)
         tempDir = File.createTempFile("nfcemu-app-lock-test", "").apply { delete(); mkdirs() }
-        scope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
+        scope = CoroutineScope(SupervisorJob() + dispatcher)
         // Passing our own `scope` (cancelled in tearDown) instead of letting the factory
         // default to its own uncancelled Dispatchers.IO scope - otherwise DataStore's
         // internal write-actor coroutine leaks for the rest of the test JVM's lifetime,
