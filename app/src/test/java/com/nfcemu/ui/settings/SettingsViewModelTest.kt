@@ -7,6 +7,7 @@ import com.nfcemu.lock.BiometricAvailabilitySource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
+import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.test.setMain
@@ -60,6 +61,12 @@ class SettingsViewModelTest {
         // Persists via viewModelScope.launch{} - DataStore's write completes asynchronously
         // on its own dispatcher, so this must wait for the eventual value, not assume it landed.
         assertEquals(true, settingsDataStore.requireBiometricUnlock.first { it })
+
+        // Drains any trailing continuation of that launch{} still pending in the shared
+        // test scheduler (viewModelScope shares it via Dispatchers.setMain above) - without
+        // this, runTest can end while that coroutine hasn't formally completed yet, even
+        // though the write it performed has already landed and been observed above.
+        advanceUntilIdle()
     }
 
     @Test
@@ -67,6 +74,7 @@ class SettingsViewModelTest {
         val viewModel = SettingsViewModel(settingsDataStore, FakeBiometricAvailabilitySource(BiometricAvailability.NOT_CONFIGURED))
 
         viewModel.setRequireBiometricUnlock(true)
+        advanceUntilIdle()
 
         assertEquals(false, settingsDataStore.requireBiometricUnlock.first())
     }
@@ -79,5 +87,6 @@ class SettingsViewModelTest {
         viewModel.setRequireBiometricUnlock(false)
 
         assertEquals(false, settingsDataStore.requireBiometricUnlock.first { !it })
+        advanceUntilIdle()
     }
 }
