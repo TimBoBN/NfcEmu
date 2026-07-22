@@ -42,8 +42,8 @@ class ProfileFormViewModelTest {
     fun setUp() {
         Dispatchers.setMain(UnconfinedTestDispatcher())
         tempDir = File.createTempFile("nfcemu-form-vm-test", "").apply { delete(); mkdirs() }
-        val dataStore = PreferenceDataStoreFactory.create(produceFile = { File(tempDir, "profiles.preferences_pb") })
         repositoryScope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
+        val dataStore = PreferenceDataStoreFactory.create(scope = repositoryScope, produceFile = { File(tempDir, "profiles.preferences_pb") })
         repository = ProfileRepository(ProfileDataStore(dataStore), repositoryScope)
     }
 

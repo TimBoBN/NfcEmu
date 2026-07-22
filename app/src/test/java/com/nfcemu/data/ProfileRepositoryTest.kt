@@ -35,10 +35,14 @@ class ProfileRepositoryTest {
             delete()
             mkdirs()
         }
+        repositoryScope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
+        // Passing our own scope (cancelled in tearDown) instead of the factory's default,
+        // uncancelled Dispatchers.IO scope - otherwise DataStore's internal write-actor
+        // coroutine leaks for the rest of the test JVM's lifetime, one per test.
         val dataStore = PreferenceDataStoreFactory.create(
+            scope = repositoryScope,
             produceFile = { File(tempDir, "profiles.preferences_pb") },
         )
-        repositoryScope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
         repository = ProfileRepository(ProfileDataStore(dataStore), repositoryScope)
     }
 
