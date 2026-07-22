@@ -14,6 +14,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.test.TestDispatcher
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runTest
@@ -40,17 +41,20 @@ private class FakeTagWriterSource : TagWriterSource {
 class WriteTagViewModelTest {
 
     private lateinit var tempDir: File
+    private lateinit var dispatcher: TestDispatcher
     private lateinit var repositoryScope: CoroutineScope
     private lateinit var repository: ProfileRepository
 
     @BeforeTest
     fun setUp() {
-        Dispatchers.setMain(UnconfinedTestDispatcher())
+        dispatcher = UnconfinedTestDispatcher()
+        Dispatchers.setMain(dispatcher)
         tempDir = File.createTempFile("nfcemu-write-tag-vm-test", "").apply { delete(); mkdirs() }
-        repositoryScope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
-        // Passing our own scope (cancelled in tearDown) instead of the factory's default,
-        // uncancelled Dispatchers.IO scope - otherwise DataStore's internal write-actor
-        // coroutine leaks for the rest of the test JVM's lifetime, one per test.
+        // Built on the same dispatcher installed as Main above (not Dispatchers.Default), so
+        // runTest's virtual scheduler can see and deterministically drive this scope's work -
+        // otherwise repository/DataStore internals run on a real, untracked dispatcher that
+        // can race against runTest's own end-of-test bookkeeping under load.
+        repositoryScope = CoroutineScope(SupervisorJob() + dispatcher)
         val dataStore = PreferenceDataStoreFactory.create(scope = repositoryScope, produceFile = { File(tempDir, "profiles.preferences_pb") })
         repository = ProfileRepository(ProfileDataStore(dataStore), repositoryScope)
     }
