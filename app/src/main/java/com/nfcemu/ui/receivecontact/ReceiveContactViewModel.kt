@@ -2,9 +2,6 @@ package com.nfcemu.ui.receivecontact
 
 import android.app.Activity
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.nfcemu.data.contacts.Contact
-import com.nfcemu.data.contacts.ContactsRepository
 import com.nfcemu.ndefengine.DecodedTagResult
 import com.nfcemu.ndefengine.NdefPayload
 import com.nfcemu.ndefengine.NdefPayloadDecoder
@@ -15,7 +12,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 sealed interface ReceiveContactUiState {
@@ -27,13 +23,16 @@ sealed interface ReceiveContactUiState {
 /**
  * Near-identical to [com.nfcemu.ui.scantag.ScanTagViewModel] (same [TagReaderSource], same
  * start/stop-scanning lifecycle contract) but scoped to vCard content only - any other
- * payload type becomes [ReceiveContactUiState.Unsupported], since "Contacts" only makes
- * sense for actual contact cards.
+ * payload type becomes [ReceiveContactUiState.Unsupported], since this screen only makes
+ * sense for actual contact cards. Doesn't persist anything itself: [ReceiveContactUiState.Scanned]
+ * carries the raw [NdefPayload.VCard] straight to [com.nfcemu.ui.receivecontact.ReceiveContactScreen],
+ * which hands it to the system Contacts app via an `ACTION_INSERT` intent - keeping Android's
+ * `Context`/`Intent` framework types out of this ViewModel, same as every other Android-boundary
+ * seam in this app.
  */
 @HiltViewModel
 class ReceiveContactViewModel @Inject constructor(
     private val tagReaderSource: TagReaderSource,
-    private val contactsRepository: ContactsRepository,
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow<ReceiveContactUiState>(ReceiveContactUiState.Waiting)
@@ -69,20 +68,6 @@ class ReceiveContactViewModel @Inject constructor(
                     DecodedTagResult.Empty -> ReceiveContactUiState.Unsupported("This tag is empty")
                 }
             }
-        }
-    }
-
-    fun saveContact() {
-        val state = _uiState.value as? ReceiveContactUiState.Scanned ?: return
-        viewModelScope.launch {
-            contactsRepository.add(
-                Contact(
-                    name = state.vcard.name?.takeIf { it.isNotBlank() } ?: "Unknown",
-                    phone = state.vcard.phones.firstOrNull(),
-                    email = state.vcard.emails.firstOrNull(),
-                    organization = state.vcard.organization,
-                ),
-            )
         }
     }
 }

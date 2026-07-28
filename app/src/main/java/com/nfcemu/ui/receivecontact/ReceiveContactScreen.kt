@@ -1,5 +1,7 @@
 package com.nfcemu.ui.receivecontact
 
+import android.content.Intent
+import android.provider.ContactsContract
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -26,6 +28,7 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.nfcemu.R
+import com.nfcemu.ndefengine.NdefPayload
 import com.nfcemu.ui.components.NfcEmuCard
 import com.nfcemu.ui.components.NfcEmuPrimaryButton
 import com.nfcemu.ui.components.NfcEmuSecondaryButton
@@ -98,7 +101,15 @@ fun ReceiveContactScreen(
                                 Spacer()
                                 Text(it, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
                             }
-                            state.vcard.organization?.let {
+                            listOfNotNull(state.vcard.organization, state.vcard.title).takeIf { it.isNotEmpty() }?.let {
+                                Spacer()
+                                Text(it.joinToString(" · "), style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                            }
+                            state.vcard.address?.let {
+                                Spacer()
+                                Text(it, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                            }
+                            state.vcard.website?.let {
                                 Spacer()
                                 Text(it, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
                             }
@@ -109,7 +120,8 @@ fun ReceiveContactScreen(
                         NfcEmuSecondaryButton(onClick = onBack) {
                             Text(stringResource(R.string.receive_contact_discard))
                         }
-                        NfcEmuPrimaryButton(onClick = { viewModel.saveContact(); onBack() }) {
+                        val context = LocalContext.current
+                        NfcEmuPrimaryButton(onClick = { context.startActivity(state.vcard.toSystemContactIntent()); onBack() }) {
                             Text(stringResource(R.string.receive_contact_save))
                         }
                     }
@@ -130,3 +142,20 @@ fun ReceiveContactScreen(
 
 @Composable
 private fun Spacer() = androidx.compose.foundation.layout.Spacer(Modifier.padding(top = Spacing.sm + Spacing.xs))
+
+/**
+ * Hands the scanned card to the system Contacts app to create/edit rather than writing it
+ * anywhere ourselves - this app deliberately has no contact storage of its own. `website` has
+ * no dedicated [ContactsContract.Intents.Insert] extra, so it rides along in [ContactsContract.Intents.Insert.NOTES]
+ * instead of being silently dropped.
+ */
+private fun NdefPayload.VCard.toSystemContactIntent(): Intent =
+    Intent(Intent.ACTION_INSERT, ContactsContract.Contacts.CONTENT_URI).apply {
+        name?.takeIf { it.isNotBlank() }?.let { putExtra(ContactsContract.Intents.Insert.NAME, it) }
+        phones.firstOrNull()?.let { putExtra(ContactsContract.Intents.Insert.PHONE, it) }
+        emails.firstOrNull()?.let { putExtra(ContactsContract.Intents.Insert.EMAIL, it) }
+        organization?.let { putExtra(ContactsContract.Intents.Insert.COMPANY, it) }
+        title?.let { putExtra(ContactsContract.Intents.Insert.JOB_TITLE, it) }
+        address?.let { putExtra(ContactsContract.Intents.Insert.POSTAL, it) }
+        website?.let { putExtra(ContactsContract.Intents.Insert.NOTES, "Website: $it") }
+    }

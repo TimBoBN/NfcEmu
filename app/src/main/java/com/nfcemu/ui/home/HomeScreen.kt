@@ -68,7 +68,6 @@ fun HomeScreen(
     onNavigateToSettings: () -> Unit,
     onNavigateToTransmit: () -> Unit,
     onNavigateToScanTag: () -> Unit,
-    onNavigateToContacts: () -> Unit,
     onNavigateToMyProfile: () -> Unit,
     onNavigateToReceiveContact: () -> Unit,
     onNavigateToManageQuickSelect: () -> Unit,
@@ -82,12 +81,6 @@ fun HomeScreen(
             TopAppBar(
                 title = { Text(stringResource(R.string.app_name)) },
                 actions = {
-                    IconButton(onClick = onNavigateToContacts) {
-                        Icon(
-                            ImageVector.vectorResource(R.drawable.ic_nocturne_contacts),
-                            contentDescription = stringResource(R.string.home_contacts),
-                        )
-                    }
                     IconButton(onClick = onNavigateToMyProfile) {
                         Icon(
                             ImageVector.vectorResource(R.drawable.ic_nocturne_person),

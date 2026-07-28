@@ -13,7 +13,6 @@
     <string name="home_nfc_not_supported">Dieses Gerät unterstützt kein NFC.</string>
     <string name="home_nfc_disabled">NFC ist deaktiviert. Schalte es ein, damit Lesegeräte dein Profil erkennen können.</string>
     <string name="home_nfc_open_settings">Einstellungen</string>
-    <string name="home_contacts">Kontakte</string>
     <string name="home_my_profile">Mein Profil</string>
     <string name="home_scan_tag">Tag scannen</string>
     <string name="home_receive_contact">Kontakt per NFC einlesen</string>
@@ -81,11 +80,7 @@
     <string name="receive_contact_waiting">Halte dein Handy an das Gerät der anderen Person, um deren Profil zu empfangen.</string>
     <string name="receive_contact_error_title">Tag konnte nicht gelesen werden</string>
     <string name="receive_contact_discard">Verwerfen</string>
-    <string name="receive_contact_save">Als Kontakt speichern</string>
-
-    <!-- Contacts -->
-    <string name="contacts_title">Kontakte</string>
-    <string name="contacts_empty">Noch keine Kontakte. Lies ein Profil per NFC ein, um es hier zu speichern.</string>
+    <string name="receive_contact_save">Zu Kontakten hinzufügen</string>
 
     <!-- Write tag -->
     <string name="write_tag_title">Auf Tag schreiben</string>

@@ -15,7 +15,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.nfcemu.ui.contacts.ContactsScreen
 import com.nfcemu.ui.home.HomeScreen
 import com.nfcemu.ui.home.ManageQuickSelectScreen
 import com.nfcemu.ui.library.LibraryScreen
@@ -48,7 +47,6 @@ private object Routes {
     const val LIBRARY = "library"
     const val TRANSMIT = "transmit"
     const val MY_PROFILE = "myProfile"
-    const val CONTACTS = "contacts"
     const val RECEIVE_CONTACT = "receiveContact"
     const val SHARE_PREVIEW = "sharePreview/{sharedText}"
     const val MANAGE_QUICK_SELECT = "manageQuickSelect"
@@ -126,7 +124,6 @@ fun NfcEmuNavGraph(
                     onNavigateToSettings = { navController.navigate(Routes.SETTINGS) },
                     onNavigateToTransmit = { navController.navigate(Routes.TRANSMIT) },
                     onNavigateToScanTag = { navController.navigate(Routes.SCAN_TAG) },
-                    onNavigateToContacts = { navController.navigate(Routes.CONTACTS) },
                     onNavigateToMyProfile = { navController.navigate(Routes.MY_PROFILE) },
                     onNavigateToReceiveContact = { navController.navigate(Routes.RECEIVE_CONTACT) },
                     onNavigateToManageQuickSelect = { navController.navigate(Routes.MANAGE_QUICK_SELECT) },
@@ -214,9 +211,6 @@ fun NfcEmuNavGraph(
                 onBack = { navController.popBackStack() },
                 onNavigateToTransmit = { navController.navigate(Routes.TRANSMIT) },
             )
-        }
-        composable(Routes.CONTACTS) {
-            ContactsScreen(onBack = { navController.popBackStack() })
         }
         composable(Routes.RECEIVE_CONTACT) {
             ReceiveContactScreen(onBack = { navController.popBackStack() })

@@ -27,10 +27,6 @@ annotation class SettingsStore
 
 @Qualifier
 @Retention(AnnotationRetention.BINARY)
-annotation class ContactsStore
-
-@Qualifier
-@Retention(AnnotationRetention.BINARY)
 annotation class ActivityStore
 
 /**
@@ -60,12 +56,6 @@ object DataStoreModule {
     @SettingsStore
     fun provideSettingsDataStore(@ApplicationContext context: Context): DataStore<Preferences> =
         PreferenceDataStoreFactory.create(produceFile = { context.preferencesDataStoreFile("settings") })
-
-    @Provides
-    @Singleton
-    @ContactsStore
-    fun provideContactsDataStore(@ApplicationContext context: Context): DataStore<Preferences> =
-        PreferenceDataStoreFactory.create(produceFile = { context.preferencesDataStoreFile("contacts") })
 
     @Provides
     @Singleton
