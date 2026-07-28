@@ -37,7 +37,7 @@ class HomeViewModel @Inject constructor(
         nfcStateSource.state,
         recentActivityRepository.recent,
     ) { profiles, activeId, nfcState, recentActivity ->
-        val visibleProfiles = profiles.filterNot { it.id == Profile.MY_PROFILE_ID }
+        val visibleProfiles = profiles.filterNot { it.id in Profile.RESERVED_IDS }
         HomeUiState(
             activeProfile = profiles.find { it.id == activeId },
             quickSelectProfiles = quickSelection(visibleProfiles, activeId),
@@ -57,10 +57,6 @@ class HomeViewModel @Inject constructor(
 
     fun selectProfile(id: String) {
         viewModelScope.launch { profileRepository.setActive(id) }
-    }
-
-    fun deactivate() {
-        viewModelScope.launch { profileRepository.clearActive() }
     }
 
     fun togglePinned(id: String) {

@@ -137,6 +137,42 @@ class ProfileRepository @Inject constructor(
      * special-casing - but is filtered out of every user-facing profile list (see
      * [com.nfcemu.ui.home.HomeViewModel]/[com.nfcemu.ui.profilelist.ProfileListViewModel]).
      */
+    /**
+     * Activates arbitrary content shared into the app (e.g. via the Android share sheet)
+     * without the user creating a profile first. Upserts the reserved [Profile.SHARED_ID] row
+     * then delegates to [setActive] so activation/"recently sent" logging behave identically
+     * to a normal profile. Ephemeral by default - [discardShared] removes the row again unless
+     * [saveSharedAsProfile] promotes it first.
+     */
+    suspend fun activateShared(fields: NdefPayload, displayName: String) {
+        val profiles = currentProfiles()
+        val row = Profile(id = Profile.SHARED_ID, name = displayName, fields = fields)
+        dataStore.saveProfiles(
+            if (profiles.any { it.id == Profile.SHARED_ID }) {
+                profiles.map { if (it.id == Profile.SHARED_ID) row else it }
+            } else {
+                profiles + row
+            },
+        )
+        setActive(Profile.SHARED_ID)
+    }
+
+    /** Deactivates and discards the ephemeral shared-content row - the default outcome of closing Transmit. */
+    suspend fun discardShared() {
+        dataStore.saveActiveProfileId(null)
+        dataStore.saveProfiles(currentProfiles().filterNot { it.id == Profile.SHARED_ID })
+    }
+
+    /** Promotes the ephemeral shared-content row to a real, permanent profile under a fresh id. */
+    suspend fun saveSharedAsProfile(name: String): Profile? {
+        val profiles = currentProfiles()
+        val shared = profiles.find { it.id == Profile.SHARED_ID } ?: return null
+        val saved = shared.copy(id = UUID.randomUUID().toString(), name = name.trim())
+        dataStore.saveProfiles(profiles.filterNot { it.id == Profile.SHARED_ID } + saved)
+        dataStore.saveActiveProfileId(saved.id)
+        return saved
+    }
+
     suspend fun saveMyProfile(vcard: NdefPayload.VCard) {
         val profiles = currentProfiles()
         val existing = profiles.find { it.id == Profile.MY_PROFILE_ID }

@@ -5,6 +5,7 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.navigation.NavBackStackEntry
@@ -27,6 +28,8 @@ import com.nfcemu.ui.receivecontact.ReceiveContactScreen
 import com.nfcemu.ui.scantag.ScanTagScreen
 import com.nfcemu.ui.scantag.ScannedPayloadCodec
 import com.nfcemu.ui.settings.SettingsScreen
+import com.nfcemu.ui.share.SharePreviewScreen
+import com.nfcemu.ui.share.SharedTextCodec
 import com.nfcemu.ui.theme.Motion
 import com.nfcemu.ui.transmit.TransmitScreen
 import com.nfcemu.ui.writetag.WriteTagScreen
@@ -46,6 +49,7 @@ private object Routes {
     const val MY_PROFILE = "myProfile"
     const val CONTACTS = "contacts"
     const val RECEIVE_CONTACT = "receiveContact"
+    const val SHARE_PREVIEW = "sharePreview/{sharedText}"
 }
 
 /**
@@ -79,9 +83,24 @@ private fun AnimatedContentTransitionScope<NavBackStackEntry>.backExit() =
         animationSpec = tween(Motion.DURATION_MEDIUM, easing = Motion.emphasizedEasing),
     ) + fadeOut(tween(Motion.DURATION_SHORT))
 
+/**
+ * [pendingSharedText] carries text handed to the app via the Android share sheet
+ * (`ACTION_SEND`, see [com.nfcemu.ui.MainActivity]) - a one-shot event, not nav state, so it's
+ * consumed via [onSharedTextConsumed] immediately after triggering navigation to keep it from
+ * refiring on recomposition or process restoration.
+ */
 @Composable
-fun NfcEmuNavGraph() {
+fun NfcEmuNavGraph(
+    pendingSharedText: String? = null,
+    onSharedTextConsumed: () -> Unit = {},
+) {
     val navController = rememberNavController()
+
+    LaunchedEffect(pendingSharedText) {
+        val text = pendingSharedText ?: return@LaunchedEffect
+        navController.navigate("sharePreview/${SharedTextCodec.encode(text)}")
+        onSharedTextConsumed()
+    }
 
     NavHost(
         navController = navController,
@@ -198,6 +217,19 @@ fun NfcEmuNavGraph() {
         }
         composable(Routes.RECEIVE_CONTACT) {
             ReceiveContactScreen(onBack = { navController.popBackStack() })
+        }
+        composable(
+            route = Routes.SHARE_PREVIEW,
+            arguments = listOf(navArgument("sharedText") { type = NavType.StringType }),
+        ) {
+            SharePreviewScreen(
+                onBack = { navController.popBackStack() },
+                onActivated = {
+                    navController.navigate(Routes.TRANSMIT) {
+                        popUpTo(Routes.SHARE_PREVIEW) { inclusive = true }
+                    }
+                },
+            )
         }
     }
 }

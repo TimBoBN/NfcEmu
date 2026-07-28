@@ -31,7 +31,7 @@ class ProfileListViewModel @Inject constructor(
         profileRepository.profiles,
         profileRepository.activeProfileId,
     ) { profiles, activeId ->
-        val visibleProfiles = profiles.filterNot { it.id == Profile.MY_PROFILE_ID }
+        val visibleProfiles = profiles.filterNot { it.id in Profile.RESERVED_IDS }
         ProfileListUiState(profiles = visibleProfiles.sortedByDescending { it.pinned }, activeProfileId = activeId)
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), ProfileListUiState())
 
@@ -40,10 +40,6 @@ class ProfileListViewModel @Inject constructor(
 
     fun setActive(id: String) {
         viewModelScope.launch { profileRepository.setActive(id) }
-    }
-
-    fun deactivate() {
-        viewModelScope.launch { profileRepository.clearActive() }
     }
 
     fun duplicate(id: String) {
@@ -71,7 +67,7 @@ class ProfileListViewModel @Inject constructor(
 
     fun exportAllAsZip(targetUri: Uri) {
         viewModelScope.launch {
-            val exportable = profileRepository.profiles.value.filterNot { it.id == Profile.MY_PROFILE_ID }
+            val exportable = profileRepository.profiles.value.filterNot { it.id in Profile.RESERVED_IDS }
             fileRepository.exportLibraryAsZip(exportable, targetUri)
                 .onFailure { _exportError.value = it.message ?: "Export failed" }
         }

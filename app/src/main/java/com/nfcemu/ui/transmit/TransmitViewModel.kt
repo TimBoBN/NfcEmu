@@ -12,7 +12,10 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-data class TransmitUiState(val activeProfile: Profile? = null)
+data class TransmitUiState(val activeProfile: Profile? = null) {
+    /** True while broadcasting content shared in via the Android share sheet, not a saved profile. */
+    val isEphemeralShare: Boolean get() = activeProfile?.id == Profile.SHARED_ID
+}
 
 /**
  * Deliberately thin: the *calling* screen (Home's carousel, Profile List's row) already
@@ -32,8 +35,19 @@ class TransmitViewModel @Inject constructor(
         TransmitUiState(profiles.find { it.id == activeId })
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), TransmitUiState())
 
-    /** Closing this screen stops emulation - "Transmit open" is the mental model for "actively broadcasting". */
+    /**
+     * Closing this screen stops emulation - "Transmit open" is the mental model for "actively
+     * broadcasting". A share-sheet row that was never saved (see [saveAsProfile]) is discarded
+     * outright rather than just deactivated, since it has no place in the profile list.
+     */
     fun deactivate() {
-        viewModelScope.launch { profileRepository.clearActive() }
+        viewModelScope.launch {
+            if (uiState.value.isEphemeralShare) profileRepository.discardShared() else profileRepository.clearActive()
+        }
+    }
+
+    /** Promotes the ephemeral share-sheet row (see [TransmitUiState.isEphemeralShare]) to a real, saved profile. */
+    fun saveAsProfile(name: String) {
+        viewModelScope.launch { profileRepository.saveSharedAsProfile(name) }
     }
 }

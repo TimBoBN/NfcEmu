@@ -25,8 +25,6 @@
     <string name="profile_list_title">Alle Profile</string>
     <string name="action_back">Zurück</string>
     <string name="action_more">Weitere Aktionen</string>
-    <string name="action_set_active">Als aktiv festlegen</string>
-    <string name="action_deactivate">Deaktivieren</string>
     <string name="action_edit">Bearbeiten</string>
     <string name="action_duplicate">Duplizieren</string>
     <string name="action_pin">Anheften</string>
@@ -55,6 +53,12 @@
     <string name="transmit_ready">Bereit zum Übertragen</string>
     <string name="transmit_subtitle">Halte dein Handy an ein Lesegerät oder ein anderes NFC-fähiges Gerät.</string>
     <string name="transmit_done">Fertig</string>
+    <string name="transmit_save_as_profile">Als Profil speichern</string>
+
+    <!-- Share sheet -->
+    <string name="share_preview_title">Per NFC teilen</string>
+    <string name="share_preview_content_label">Inhalt</string>
+    <string name="share_preview_send">Senden</string>
 
     <!-- My Profile -->
     <string name="myprofile_title">Mein Profil</string>

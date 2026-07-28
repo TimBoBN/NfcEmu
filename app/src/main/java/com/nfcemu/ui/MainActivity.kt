@@ -7,6 +7,9 @@ import android.nfc.NfcAdapter
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.lifecycleScope
@@ -26,15 +29,21 @@ class MainActivity : FragmentActivity() {
     @Inject
     lateinit var profileRepository: ProfileRepository
 
+    private var pendingSharedText by mutableStateOf<String?>(null)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         handleActivateProfileIntent(intent)
+        handleShareIntent(intent)
         setContent {
             NfcEmuTheme {
                 AppLockGate {
-                    NfcEmuNavGraph()
+                    NfcEmuNavGraph(
+                        pendingSharedText = pendingSharedText,
+                        onSharedTextConsumed = { pendingSharedText = null },
+                    )
                 }
             }
         }
@@ -80,6 +89,7 @@ class MainActivity : FragmentActivity() {
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
         handleActivateProfileIntent(intent)
+        handleShareIntent(intent)
     }
 
     /** Target of a launcher shortcut tap (see [ProfileShortcutUpdater]): activates the profile it names. */
@@ -87,5 +97,16 @@ class MainActivity : FragmentActivity() {
         if (intent.action != Intent.ACTION_VIEW) return
         val profileId = intent.getStringExtra(ProfileShortcutUpdater.EXTRA_ACTIVATE_PROFILE_ID) ?: return
         lifecycleScope.launch { profileRepository.setActive(profileId) }
+    }
+
+    /**
+     * Target of the Android share sheet ("Share" -> NfcEmu on a link or phone number from
+     * another app, see the `ACTION_SEND` filter in AndroidManifest.xml). Doesn't activate
+     * anything directly - just hands the raw text to [NfcEmuNavGraph], which routes to
+     * `sharePreview` so the user confirms/corrects it before anything broadcasts.
+     */
+    private fun handleShareIntent(intent: Intent) {
+        if (intent.action != Intent.ACTION_SEND || intent.type != "text/plain") return
+        pendingSharedText = intent.getStringExtra(Intent.EXTRA_TEXT)?.takeIf { it.isNotBlank() }
     }
 }

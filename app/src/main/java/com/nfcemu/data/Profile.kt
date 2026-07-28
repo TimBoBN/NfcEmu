@@ -27,5 +27,17 @@ data class Profile(
          * [com.nfcemu.ui.profilelist.ProfileListViewModel].
          */
         const val MY_PROFILE_ID = "my-profile"
+
+        /**
+         * Reserved id for the ephemeral "shared via Android share sheet" row: a real
+         * [Profile] persisted just like [MY_PROFILE_ID] (so HCE emulation/Transmit need zero
+         * special-casing), filtered out of every user-facing profile list, and removed again
+         * once Transmit closes unless the user explicitly keeps it via "Save as profile" - see
+         * [com.nfcemu.data.ProfileRepository.activateShared].
+         */
+        const val SHARED_ID = "shared"
+
+        /** Ids never shown in the profile list/carousel - see [MY_PROFILE_ID] and [SHARED_ID]. */
+        val RESERVED_IDS = setOf(MY_PROFILE_ID, SHARED_ID)
     }
 }

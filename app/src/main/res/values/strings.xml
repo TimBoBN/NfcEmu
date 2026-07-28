@@ -25,8 +25,6 @@
     <string name="profile_list_title">All Profiles</string>
     <string name="action_back">Back</string>
     <string name="action_more">More actions</string>
-    <string name="action_set_active">Set as active</string>
-    <string name="action_deactivate">Deactivate</string>
     <string name="action_edit">Edit</string>
     <string name="action_duplicate">Duplicate</string>
     <string name="action_pin">Pin</string>
@@ -55,6 +53,12 @@
     <string name="transmit_ready">Ready to transmit</string>
     <string name="transmit_subtitle">Hold your phone against a reader or another NFC-capable device.</string>
     <string name="transmit_done">Done</string>
+    <string name="transmit_save_as_profile">Save as profile</string>
+
+    <!-- Share sheet -->
+    <string name="share_preview_title">Share via NFC</string>
+    <string name="share_preview_content_label">Content</string>
+    <string name="share_preview_send">Send</string>
 
     <!-- My Profile -->
     <string name="myprofile_title">My Profile</string>

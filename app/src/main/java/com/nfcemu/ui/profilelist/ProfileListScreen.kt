@@ -17,9 +17,11 @@ import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.MenuDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -116,8 +118,6 @@ fun ProfileListScreen(
                 ProfileRow(
                     profile = profile,
                     isActive = profile.id == uiState.activeProfileId,
-                    onSetActive = { viewModel.setActive(profile.id) },
-                    onDeactivate = viewModel::deactivate,
                     onOpenTransmit = { viewModel.setActive(profile.id); onNavigateToTransmit() },
                     onEdit = { onEditProfile(profile) },
                     onWriteToTag = { onWriteToTag(profile) },
@@ -160,8 +160,6 @@ fun ProfileListScreen(
 private fun ProfileRow(
     profile: Profile,
     isActive: Boolean,
-    onSetActive: () -> Unit,
-    onDeactivate: () -> Unit,
     onOpenTransmit: () -> Unit,
     onEdit: () -> Unit,
     onWriteToTag: () -> Unit,
@@ -221,39 +219,43 @@ private fun ProfileRow(
                 }
                 DropdownMenu(expanded = menuExpanded, onDismissRequest = { menuExpanded = false }) {
                     DropdownMenuItem(
-                        text = {
-                            Text(
-                                if (isActive) stringResource(R.string.action_deactivate) else stringResource(R.string.action_set_active),
-                            )
-                        },
-                        onClick = { menuExpanded = false; if (isActive) onDeactivate() else onSetActive() },
-                    )
-                    DropdownMenuItem(
                         text = { Text(stringResource(R.string.action_edit)) },
+                        leadingIcon = { Icon(ImageVector.vectorResource(R.drawable.ic_nocturne_edit), contentDescription = null) },
                         onClick = { menuExpanded = false; onEdit() },
                     )
                     DropdownMenuItem(
                         text = { Text(stringResource(R.string.action_write_to_tag)) },
+                        leadingIcon = { Icon(ImageVector.vectorResource(R.drawable.ic_nocturne_nfc), contentDescription = null) },
                         onClick = { menuExpanded = false; onWriteToTag() },
                     )
                     DropdownMenuItem(
                         text = { Text(stringResource(R.string.action_duplicate)) },
+                        leadingIcon = { Icon(ImageVector.vectorResource(R.drawable.ic_nocturne_duplicate), contentDescription = null) },
                         onClick = { menuExpanded = false; onDuplicate() },
                     )
                     DropdownMenuItem(
                         text = { Text(if (profile.pinned) stringResource(R.string.action_unpin) else stringResource(R.string.action_pin)) },
+                        leadingIcon = { Icon(ImageVector.vectorResource(R.drawable.ic_nocturne_pin), contentDescription = null) },
                         onClick = { menuExpanded = false; onTogglePin() },
                     )
                     DropdownMenuItem(
                         text = { Text(stringResource(R.string.action_export_nfcemu)) },
+                        leadingIcon = { Icon(ImageVector.vectorResource(R.drawable.ic_nocturne_folder), contentDescription = null) },
                         onClick = { menuExpanded = false; onExport(false) },
                     )
                     DropdownMenuItem(
                         text = { Text(stringResource(R.string.action_export_raw)) },
+                        leadingIcon = { Icon(ImageVector.vectorResource(R.drawable.ic_nocturne_folder), contentDescription = null) },
                         onClick = { menuExpanded = false; onExport(true) },
                     )
+                    HorizontalDivider()
                     DropdownMenuItem(
                         text = { Text(stringResource(R.string.action_delete)) },
+                        leadingIcon = { Icon(ImageVector.vectorResource(R.drawable.ic_nocturne_delete), contentDescription = null) },
+                        colors = MenuDefaults.itemColors(
+                            textColor = MaterialTheme.colorScheme.error,
+                            leadingIconColor = MaterialTheme.colorScheme.error,
+                        ),
                         onClick = { menuExpanded = false; onDelete() },
                     )
                 }
