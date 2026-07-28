@@ -40,30 +40,15 @@ class HomeViewModel @Inject constructor(
         val visibleProfiles = profiles.filterNot { it.id in Profile.RESERVED_IDS }
         HomeUiState(
             activeProfile = profiles.find { it.id == activeId },
-            quickSelectProfiles = quickSelection(visibleProfiles, activeId),
+            quickSelectProfiles = visibleProfiles
+                .filter { it.quickSelectOrder != null }
+                .sortedBy { it.quickSelectOrder },
             nfcState = nfcState,
             recentActivity = recentActivity,
         )
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), HomeUiState())
 
-    private fun quickSelection(profiles: List<Profile>, activeId: String?): List<Profile> {
-        val pinned = profiles.filter { it.pinned }
-        val recent = profiles
-            .filter { !it.pinned && it.id != activeId }
-            .sortedByDescending { it.lastUsedAt ?: it.createdAt }
-            .take(MAX_RECENT)
-        return (pinned + recent).distinctBy { it.id }
-    }
-
     fun selectProfile(id: String) {
         viewModelScope.launch { profileRepository.setActive(id) }
-    }
-
-    fun togglePinned(id: String) {
-        viewModelScope.launch { profileRepository.togglePinned(id) }
-    }
-
-    private companion object {
-        const val MAX_RECENT = 8
     }
 }

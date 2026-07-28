@@ -121,6 +121,25 @@ class ProfileRepository @Inject constructor(
         )
     }
 
+    /** Appends a profile to the end of Home's quick-select carousel. No-op if already in it. */
+    suspend fun addToQuickSelect(id: String) {
+        val profiles = currentProfiles()
+        if (profiles.find { it.id == id }?.quickSelectOrder != null) return
+        val nextOrder = (profiles.mapNotNull { it.quickSelectOrder }.maxOrNull() ?: -1) + 1
+        dataStore.saveProfiles(profiles.map { if (it.id == id) it.copy(quickSelectOrder = nextOrder) else it })
+    }
+
+    /** Removes a profile from Home's quick-select carousel. */
+    suspend fun removeFromQuickSelect(id: String) {
+        dataStore.saveProfiles(currentProfiles().map { if (it.id == id) it.copy(quickSelectOrder = null) else it })
+    }
+
+    /** Replaces the full quick-select order - [orderedIds] must be exactly the currently-selected ids, reordered. */
+    suspend fun reorderQuickSelect(orderedIds: List<String>) {
+        val orderById = orderedIds.withIndex().associate { (index, id) -> id to index }
+        dataStore.saveProfiles(currentProfiles().map { it.copy(quickSelectOrder = orderById[it.id]) })
+    }
+
     /**
      * Adds an imported profile to the library and returns it with its final id.
      * Never sets it active - the user must do that explicitly.
@@ -131,12 +150,6 @@ class ProfileRepository @Inject constructor(
         return stored
     }
 
-    /**
-     * Upserts the single reserved "My Profile" row ([Profile.MY_PROFILE_ID]). It's a real
-     * [Profile] persisted alongside normal ones - so [setActive]/HCE emulation need no
-     * special-casing - but is filtered out of every user-facing profile list (see
-     * [com.nfcemu.ui.home.HomeViewModel]/[com.nfcemu.ui.profilelist.ProfileListViewModel]).
-     */
     /**
      * Activates arbitrary content shared into the app (e.g. via the Android share sheet)
      * without the user creating a profile first. Upserts the reserved [Profile.SHARED_ID] row
@@ -173,6 +186,12 @@ class ProfileRepository @Inject constructor(
         return saved
     }
 
+    /**
+     * Upserts the single reserved "My Profile" row ([Profile.MY_PROFILE_ID]). It's a real
+     * [Profile] persisted alongside normal ones - so [setActive]/HCE emulation need no
+     * special-casing - but is filtered out of every user-facing profile list (see
+     * [com.nfcemu.ui.home.HomeViewModel]/[com.nfcemu.ui.profilelist.ProfileListViewModel]).
+     */
     suspend fun saveMyProfile(vcard: NdefPayload.VCard) {
         val profiles = currentProfiles()
         val existing = profiles.find { it.id == Profile.MY_PROFILE_ID }

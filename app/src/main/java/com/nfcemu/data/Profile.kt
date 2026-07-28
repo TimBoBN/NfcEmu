@@ -18,6 +18,13 @@ data class Profile(
     val pinned: Boolean = false,
     val createdAt: Long = System.currentTimeMillis(),
     val lastUsedAt: Long? = null,
+    /**
+     * Position in Home's quick-select carousel, ascending; `null` means "not shown there".
+     * Independent of [pinned] - [pinned] still drives the home screen widget/Quick Settings
+     * tile/launcher shortcuts, which weren't part of this manual-curation redesign - see
+     * [com.nfcemu.ui.home.HomeViewModel] and [com.nfcemu.data.ProfileRepository.reorderQuickSelect].
+     */
+    val quickSelectOrder: Int? = null,
 ) {
     companion object {
         /**

@@ -71,6 +71,7 @@ fun HomeScreen(
     onNavigateToContacts: () -> Unit,
     onNavigateToMyProfile: () -> Unit,
     onNavigateToReceiveContact: () -> Unit,
+    onNavigateToManageQuickSelect: () -> Unit,
     viewModel: HomeViewModel = hiltViewModel(),
 ) {
     val uiState by viewModel.uiState.collectAsState()
@@ -126,7 +127,20 @@ fun HomeScreen(
                 }
             }
 
-            Text(stringResource(R.string.home_quick_select), style = MaterialTheme.typography.titleMedium)
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Text(
+                    stringResource(R.string.home_quick_select),
+                    style = MaterialTheme.typography.titleMedium,
+                    modifier = Modifier.weight(1f),
+                )
+                IconButton(onClick = onNavigateToManageQuickSelect) {
+                    Icon(
+                        ImageVector.vectorResource(R.drawable.ic_nocturne_edit),
+                        contentDescription = stringResource(R.string.home_manage_quick_select),
+                        modifier = Modifier.size(20.dp),
+                    )
+                }
+            }
             Spacer(Modifier.height(Spacing.sm))
             QuickSelectCarousel(
                 profiles = uiState.quickSelectProfiles,

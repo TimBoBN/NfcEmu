@@ -26,7 +26,6 @@ import kotlin.test.AfterTest
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import kotlin.test.assertTrue
 
 private class FakeNfcStateSource(initial: NfcHardwareState = NfcHardwareState.ENABLED) : NfcStateSource {
     private val flow = MutableStateFlow(initial)
@@ -36,8 +35,8 @@ private class FakeNfcStateSource(initial: NfcHardwareState = NfcHardwareState.EN
 /**
  * [HomeViewModel] is exercised against a real temp-file-backed [ProfileRepository] (same
  * approach as [com.nfcemu.data.ProfileRepositoryTest]) plus a [FakeNfcStateSource], so
- * quick-select composition (pinned + recently used) is tested end-to-end rather than
- * mocking the repository's Flow shapes.
+ * quick-select composition (manual [Profile.quickSelectOrder] curation) is tested end-to-end
+ * rather than mocking the repository's Flow shapes.
  */
 @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
 class HomeViewModelTest {
@@ -72,39 +71,39 @@ class HomeViewModelTest {
     }
 
     @Test
-    fun `quick select includes pinned and recently used profiles, both excluding the active one`() = runTest {
-        val pinned = Profile(name = "Pinned", fields = NdefPayload.Text("p"), pinned = true)
-        val recentlyUsed = Profile(name = "RecentlyUsed", fields = NdefPayload.Text("r"))
-        val active = Profile(name = "Active", fields = NdefPayload.Text("a"))
-        repository.createProfile(pinned)
-        repository.createProfile(recentlyUsed)
-        repository.createProfile(active)
-        repository.setActive(recentlyUsed.id) // marks lastUsedAt
-        repository.setActive(active.id) // now active; recentlyUsed remains "recently used" but inactive
+    fun `quick select only includes profiles explicitly added, in the order they were added`() = runTest {
+        val first = Profile(name = "First", fields = NdefPayload.Text("f"))
+        val second = Profile(name = "Second", fields = NdefPayload.Text("s"))
+        val notSelected = Profile(name = "NotSelected", fields = NdefPayload.Text("n"))
+        repository.createProfile(first)
+        repository.createProfile(second)
+        repository.createProfile(notSelected)
         repository.profiles.first { it.size == 3 }
+
+        repository.addToQuickSelect(second.id)
+        repository.addToQuickSelect(first.id)
 
         val viewModel = HomeViewModel(repository, FakeNfcStateSource(), recentActivityRepository)
         val state = viewModel.uiState.first { it.quickSelectProfiles.size == 2 }
 
-        assertEquals(setOf("Pinned", "RecentlyUsed"), state.quickSelectProfiles.map { it.name }.toSet())
-        assertTrue(state.quickSelectProfiles.none { it.id == active.id })
+        assertEquals(listOf(second.id, first.id), state.quickSelectProfiles.map { it.id })
     }
 
     @Test
-    fun `the active profile itself is excluded from the recent (non-pinned) quick-select bucket`() = runTest {
+    fun `quick select includes the active profile if it was explicitly added, and reflects reordering`() = runTest {
         val active = Profile(name = "Active", fields = NdefPayload.Text("a"))
         val other = Profile(name = "Other", fields = NdefPayload.Text("o"))
         repository.createProfile(active)
         repository.createProfile(other)
+        repository.addToQuickSelect(active.id)
+        repository.addToQuickSelect(other.id)
         repository.setActive(active.id)
-        repository.setActive(other.id) // "other" was used, then we switch back
-        repository.setActive(active.id)
-        repository.activeProfileId.first { it == active.id }
+        repository.reorderQuickSelect(listOf(other.id, active.id))
 
         val viewModel = HomeViewModel(repository, FakeNfcStateSource(), recentActivityRepository)
         val state = viewModel.uiState.first { it.activeProfile != null }
 
-        assertTrue(state.quickSelectProfiles.none { it.id == active.id })
+        assertEquals(listOf(other.id, active.id), state.quickSelectProfiles.map { it.id })
         assertEquals(active.id, state.activeProfile?.id)
     }
 

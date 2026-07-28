@@ -17,6 +17,7 @@ import androidx.navigation.navArgument
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.nfcemu.ui.contacts.ContactsScreen
 import com.nfcemu.ui.home.HomeScreen
+import com.nfcemu.ui.home.ManageQuickSelectScreen
 import com.nfcemu.ui.library.LibraryScreen
 import com.nfcemu.ui.myprofile.MyProfileScreen
 import com.nfcemu.ui.onboarding.OnboardingScreen
@@ -50,6 +51,7 @@ private object Routes {
     const val CONTACTS = "contacts"
     const val RECEIVE_CONTACT = "receiveContact"
     const val SHARE_PREVIEW = "sharePreview/{sharedText}"
+    const val MANAGE_QUICK_SELECT = "manageQuickSelect"
 }
 
 /**
@@ -127,6 +129,7 @@ fun NfcEmuNavGraph(
                     onNavigateToContacts = { navController.navigate(Routes.CONTACTS) },
                     onNavigateToMyProfile = { navController.navigate(Routes.MY_PROFILE) },
                     onNavigateToReceiveContact = { navController.navigate(Routes.RECEIVE_CONTACT) },
+                    onNavigateToManageQuickSelect = { navController.navigate(Routes.MANAGE_QUICK_SELECT) },
                 )
             }
         }
@@ -217,6 +220,9 @@ fun NfcEmuNavGraph(
         }
         composable(Routes.RECEIVE_CONTACT) {
             ReceiveContactScreen(onBack = { navController.popBackStack() })
+        }
+        composable(Routes.MANAGE_QUICK_SELECT) {
+            ManageQuickSelectScreen(onBack = { navController.popBackStack() })
         }
         composable(
             route = Routes.SHARE_PREVIEW,

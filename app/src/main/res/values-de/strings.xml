@@ -6,7 +6,8 @@
     <!-- Home -->
     <string name="home_new_profile">Neues Profil</string>
     <string name="home_quick_select">Schnellauswahl</string>
-    <string name="home_quick_select_empty">Noch keine Profile angeheftet oder verwendet.</string>
+    <string name="home_quick_select_empty">Noch keine Profile ausgewählt. Tippe auf den Stift, um welche hinzuzufügen.</string>
+    <string name="home_manage_quick_select">Schnellauswahl verwalten</string>
     <string name="home_all_profiles">Alle Profile</string>
     <string name="home_library">Bibliothek</string>
     <string name="home_nfc_not_supported">Dieses Gerät unterstützt kein NFC.</string>
@@ -20,6 +21,16 @@
     <string name="home_recent_today">Heute, %1$s</string>
     <string name="home_recent_yesterday">Gestern, %1$s</string>
     <string name="profile_pinned">Angeheftet</string>
+
+    <!-- Manage quick select -->
+    <string name="manage_quick_select_title">Schnellauswahl verwalten</string>
+    <string name="manage_quick_select_selected_header">Auf der Startseite angezeigt</string>
+    <string name="manage_quick_select_selected_empty">Noch nichts ausgewählt - füge unten Profile hinzu.</string>
+    <string name="manage_quick_select_available_header">Verfügbare Profile</string>
+    <string name="manage_quick_select_available_empty">Alle Profile werden bereits auf der Startseite angezeigt.</string>
+    <string name="manage_quick_select_add">Zur Schnellauswahl hinzufügen</string>
+    <string name="manage_quick_select_remove">Aus Schnellauswahl entfernen</string>
+    <string name="manage_quick_select_drag_handle">Ziehen zum Umsortieren</string>
 
     <!-- Profile list -->
     <string name="profile_list_title">Alle Profile</string>
