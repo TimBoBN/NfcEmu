@@ -64,26 +64,26 @@ private object Routes {
 private fun AnimatedContentTransitionScope<NavBackStackEntry>.forwardEnter() =
     slideIntoContainer(
         AnimatedContentTransitionScope.SlideDirection.Start,
-        animationSpec = tween(Motion.DURATION_MEDIUM, easing = Motion.emphasizedEasing),
-    ) + fadeIn(tween(Motion.DURATION_MEDIUM))
+        animationSpec = tween(Motion.DURATION_MEDIUM, easing = Motion.emphasizedDecelerate),
+    ) + fadeIn(tween(Motion.DURATION_MEDIUM, easing = Motion.emphasizedDecelerate))
 
 private fun AnimatedContentTransitionScope<NavBackStackEntry>.forwardExit() =
     slideOutOfContainer(
         AnimatedContentTransitionScope.SlideDirection.Start,
-        animationSpec = tween(Motion.DURATION_MEDIUM, easing = Motion.emphasizedEasing),
-    ) + fadeOut(tween(Motion.DURATION_SHORT))
+        animationSpec = tween(Motion.DURATION_MEDIUM, easing = Motion.emphasizedAccelerate),
+    ) + fadeOut(tween(Motion.DURATION_SHORT, easing = Motion.emphasizedAccelerate))
 
 private fun AnimatedContentTransitionScope<NavBackStackEntry>.backEnter() =
     slideIntoContainer(
         AnimatedContentTransitionScope.SlideDirection.End,
-        animationSpec = tween(Motion.DURATION_MEDIUM, easing = Motion.emphasizedEasing),
-    ) + fadeIn(tween(Motion.DURATION_MEDIUM))
+        animationSpec = tween(Motion.DURATION_MEDIUM, easing = Motion.emphasizedDecelerate),
+    ) + fadeIn(tween(Motion.DURATION_MEDIUM, easing = Motion.emphasizedDecelerate))
 
 private fun AnimatedContentTransitionScope<NavBackStackEntry>.backExit() =
     slideOutOfContainer(
         AnimatedContentTransitionScope.SlideDirection.End,
-        animationSpec = tween(Motion.DURATION_MEDIUM, easing = Motion.emphasizedEasing),
-    ) + fadeOut(tween(Motion.DURATION_SHORT))
+        animationSpec = tween(Motion.DURATION_MEDIUM, easing = Motion.emphasizedAccelerate),
+    ) + fadeOut(tween(Motion.DURATION_SHORT, easing = Motion.emphasizedAccelerate))
 
 /**
  * [pendingSharedText] carries text handed to the app via the Android share sheet

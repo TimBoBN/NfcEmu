@@ -1,7 +1,6 @@
 package com.nfcemu.ui.transmit
 
 import androidx.activity.compose.BackHandler
-import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.StartOffset
 import androidx.compose.animation.core.animateFloat
@@ -53,6 +52,7 @@ import com.nfcemu.ui.components.TypeIconBadge
 import com.nfcemu.ui.components.previewText
 import com.nfcemu.ui.components.typeDisplayLabel
 import com.nfcemu.ui.components.typeGlyph
+import com.nfcemu.ui.theme.Motion
 import com.nfcemu.ui.theme.Spacing
 
 /**
@@ -198,7 +198,7 @@ private fun PulseRings(modifier: Modifier = Modifier, baseSize: Dp = 140.dp) {
                 initialValue = 0f,
                 targetValue = 1f,
                 animationSpec = infiniteRepeatable(
-                    animation = tween(2200, easing = LinearEasing),
+                    animation = tween(2200, easing = Motion.standardEasing),
                     repeatMode = RepeatMode.Restart,
                     initialStartOffset = StartOffset(i * 700),
                 ),

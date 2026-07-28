@@ -1,6 +1,5 @@
 package com.nfcemu.ui.components
 
-import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.infiniteRepeatable
@@ -20,11 +19,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.nfcemu.ui.theme.Motion
 
 /**
  * A static bordered circle with a centered icon, plus a single ring expanding outward and
  * fading as it grows - mirrors the mockup's `@keyframes nfcPulse` (a growing, fading
- * `box-shadow` ring around a fixed circle), used by Onboarding and Scan Tag.
+ * `box-shadow` ring around a fixed circle), used by Onboarding and Scan Tag. Eased rather than
+ * linear so the ring decelerates as it grows, like a real pulse, instead of expanding at a
+ * constant mechanical speed.
  */
 @Composable
 fun PulsingIconCircle(icon: ImageVector, modifier: Modifier = Modifier, size: Dp = 84.dp) {
@@ -32,7 +34,7 @@ fun PulsingIconCircle(icon: ImageVector, modifier: Modifier = Modifier, size: Dp
     val ringProgress by infiniteTransition.animateFloat(
         initialValue = 0f,
         targetValue = 1f,
-        animationSpec = infiniteRepeatable(tween(2200, easing = LinearEasing), repeatMode = RepeatMode.Restart),
+        animationSpec = infiniteRepeatable(tween(2200, easing = Motion.standardEasing), repeatMode = RepeatMode.Restart),
         label = "pulse-ring",
     )
     val maxRingGrowth = 26.dp
