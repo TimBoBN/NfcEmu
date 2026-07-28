@@ -5,26 +5,27 @@
     android:viewportWidth="108"
     android:viewportHeight="108">
     <!-- Broadcast/NFC-style waves radiating from a source point, kept within the
-         adaptive icon safe zone (center 66dp circle). -->
+         adaptive icon safe zone (center 66dp circle). Colors match Theme.kt's
+         NocturneColors: primary for the waves, onPrimaryContainer for the source dot. -->
     <path
-        android:fillColor="#FFFFFF"
-        android:pathData="M32,76 m-6,0 a6,6 0 1,0 12,0 a6,6 0 1,0 -12,0" />
+        android:fillColor="#E7E5FE"
+        android:pathData="M34,78 m-7,0 a7,7 0 1,0 14,0 a7,7 0 1,0 -14,0" />
     <path
-        android:strokeColor="#FFFFFF"
-        android:strokeWidth="6"
+        android:strokeColor="#9184D9"
+        android:strokeWidth="7"
         android:strokeLineCap="round"
         android:fillColor="#00000000"
-        android:pathData="M46,76 A14,14 0 0,0 32,62" />
+        android:pathData="M50,78 A16,16 0 0,0 34,62" />
     <path
-        android:strokeColor="#FFFFFF"
-        android:strokeWidth="6"
+        android:strokeColor="#9184D9"
+        android:strokeWidth="7"
         android:strokeLineCap="round"
         android:fillColor="#00000000"
-        android:pathData="M58,76 A26,26 0 0,0 32,50" />
+        android:pathData="M64,78 A30,30 0 0,0 34,48" />
     <path
-        android:strokeColor="#FFFFFF"
-        android:strokeWidth="6"
+        android:strokeColor="#9184D9"
+        android:strokeWidth="7"
         android:strokeLineCap="round"
         android:fillColor="#00000000"
-        android:pathData="M70,76 A38,38 0 0,0 32,38" />
+        android:pathData="M78,78 A44,44 0 0,0 34,34" />
 </vector>
