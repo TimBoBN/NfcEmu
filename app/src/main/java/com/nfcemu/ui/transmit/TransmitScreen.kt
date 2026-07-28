@@ -1,5 +1,6 @@
 package com.nfcemu.ui.transmit
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.StartOffset
@@ -64,6 +65,7 @@ fun TransmitScreen(
         viewModel.deactivate()
         onClose()
     }
+    BackHandler(onBack = close)
 
     Scaffold(
         topBar = {
