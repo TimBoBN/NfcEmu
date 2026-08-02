@@ -23,6 +23,7 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -126,59 +127,70 @@ private fun SelectedList(items: List<Profile>, onReordered: (List<String>) -> Un
 
     Column(verticalArrangement = Arrangement.spacedBy(Spacing.sm)) {
         localItems.forEach { profile ->
-            val isDragging = profile.id == draggingId
-            NfcEmuCard(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .zIndex(if (isDragging) 1f else 0f)
-                    .graphicsLayer { translationY = if (isDragging) dragOffsetY else 0f }
-                    .alpha(if (isDragging) 0.85f else 1f)
-                    .onGloballyPositioned { rowHeightPx = it.size.height },
-            ) {
-                Row(
-                    modifier = Modifier.fillMaxWidth().padding(Spacing.sm + Spacing.xs),
-                    verticalAlignment = Alignment.CenterVertically,
+            key(profile.id) {
+                val isDragging = profile.id == draggingId
+                var itemHeightPx by remember { mutableStateOf(0) }
+                NfcEmuCard(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .zIndex(if (isDragging) 1f else 0f)
+                        .graphicsLayer { translationY = if (isDragging) dragOffsetY else 0f }
+                        .alpha(if (isDragging) 0.85f else 1f)
+                        .onGloballyPositioned {
+                            itemHeightPx = it.size.height
+                            if (!isDragging) rowHeightPx = it.size.height
+                        },
                 ) {
-                    TypeIconBadge(profile.fields.typeGlyph(), size = 32.dp)
-                    Spacer(Modifier.width(Spacing.sm))
-                    Text(profile.name, style = MaterialTheme.typography.titleMedium, modifier = Modifier.weight(1f))
-                    IconButton(onClick = { onRemove(profile.id) }) {
+                    Row(
+                        modifier = Modifier.fillMaxWidth().padding(Spacing.sm + Spacing.xs),
+                        verticalAlignment = Alignment.CenterVertically,
+                    ) {
+                        TypeIconBadge(profile.fields.typeGlyph(), size = 32.dp)
+                        Spacer(Modifier.width(Spacing.sm))
+                        Text(profile.name, style = MaterialTheme.typography.titleMedium, modifier = Modifier.weight(1f))
+                        IconButton(onClick = { onRemove(profile.id) }) {
+                            Icon(
+                                ImageVector.vectorResource(R.drawable.ic_nocturne_close),
+                                contentDescription = stringResource(R.string.manage_quick_select_remove),
+                            )
+                        }
                         Icon(
-                            ImageVector.vectorResource(R.drawable.ic_nocturne_close),
-                            contentDescription = stringResource(R.string.manage_quick_select_remove),
+                            ImageVector.vectorResource(R.drawable.ic_nocturne_drag_handle),
+                            contentDescription = stringResource(R.string.manage_quick_select_drag_handle),
+                            tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                            modifier = Modifier
+                                .size(48.dp)
+                                .padding(12.dp)
+                                .pointerInput(profile.id) {
+                                    detectDragGesturesAfterLongPress(
+                                        onDragStart = {
+                                            draggingId = profile.id
+                                            dragOffsetY = 0f
+                                            if (itemHeightPx > 0) rowHeightPx = itemHeightPx
+                                        },
+                                        onDragEnd = {
+                                            draggingId = null
+                                            dragOffsetY = 0f
+                                            onReordered(localItems.map { it.id })
+                                        },
+                                        onDragCancel = { draggingId = null; dragOffsetY = 0f },
+                                        onDrag = { change, delta ->
+                                            change.consume()
+                                            dragOffsetY += delta.y
+                                            val rowHeight = rowHeightPx.toFloat()
+                                            if (rowHeight <= 0f) return@detectDragGesturesAfterLongPress
+                                            val fromIndex = localItems.indexOfFirst { it.id == profile.id }
+                                            val steps = (dragOffsetY / rowHeight).roundToInt()
+                                            val toIndex = (fromIndex + steps).coerceIn(0, localItems.lastIndex)
+                                            if (toIndex != fromIndex) {
+                                                localItems = localItems.toMutableList().apply { add(toIndex, removeAt(fromIndex)) }
+                                                dragOffsetY -= (toIndex - fromIndex) * rowHeight
+                                            }
+                                        },
+                                    )
+                                },
                         )
                     }
-                    Icon(
-                        ImageVector.vectorResource(R.drawable.ic_nocturne_drag_handle),
-                        contentDescription = stringResource(R.string.manage_quick_select_drag_handle),
-                        tint = MaterialTheme.colorScheme.onSurfaceVariant,
-                        modifier = Modifier
-                            .size(24.dp)
-                            .pointerInput(profile.id) {
-                                detectDragGesturesAfterLongPress(
-                                    onDragStart = { draggingId = profile.id; dragOffsetY = 0f },
-                                    onDragEnd = {
-                                        draggingId = null
-                                        dragOffsetY = 0f
-                                        onReordered(localItems.map { it.id })
-                                    },
-                                    onDragCancel = { draggingId = null; dragOffsetY = 0f },
-                                    onDrag = { change, delta ->
-                                        change.consume()
-                                        dragOffsetY += delta.y
-                                        val rowHeight = rowHeightPx.toFloat()
-                                        if (rowHeight <= 0f) return@detectDragGesturesAfterLongPress
-                                        val fromIndex = localItems.indexOfFirst { it.id == profile.id }
-                                        val steps = (dragOffsetY / rowHeight).roundToInt()
-                                        val toIndex = (fromIndex + steps).coerceIn(0, localItems.lastIndex)
-                                        if (toIndex != fromIndex) {
-                                            localItems = localItems.toMutableList().apply { add(toIndex, removeAt(fromIndex)) }
-                                            dragOffsetY -= (toIndex - fromIndex) * rowHeight
-                                        }
-                                    },
-                                )
-                            },
-                    )
                 }
             }
         }
