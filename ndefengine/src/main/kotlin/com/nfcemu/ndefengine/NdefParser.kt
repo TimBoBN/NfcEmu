@@ -10,6 +10,11 @@ data class ParsedNdefRecord(
     val messageEnd: Boolean,
 )
 
+/** A still-open chunked record sequence: real TNF/type/id come from the first (CF=1) chunk. */
+private class PendingChunk(val tnf: Int, val type: ByteArray, val id: ByteArray, val messageBegin: Boolean) {
+    val payloadChunks = mutableListOf<ByteArray>()
+}
+
 /**
  * Minimal NDEF binary parser. Originally written only to verify, in tests, that
  * [NdefMessageEncoder] output round-trips correctly - now also the parsing step behind
@@ -17,24 +22,62 @@ data class ParsedNdefRecord(
  * party tags. Not used by the HCE service at runtime (the service only ever serves
  * pre-built bytes). Throws [IllegalArgumentException] with a descriptive message on
  * truncated/malformed input rather than throwing raw index-out-of-bounds errors.
+ *
+ * Reassembles chunked records (CF flag, NDEF binary spec section 3.2.6): a record with CF=1
+ * carries the real TNF/type/id and is followed by zero or more [Tnf.UNCHANGED] continuation
+ * records, the last of which has CF=0. Those are merged into one [ParsedNdefRecord] with the
+ * concatenated payload rather than being surfaced as several malformed records.
  */
 object NdefParser {
 
     fun parse(data: ByteArray): List<ParsedNdefRecord> {
         val records = mutableListOf<ParsedNdefRecord>()
+        var pending: PendingChunk? = null
         var offset = 0
         while (offset < data.size) {
-            offset = parseOneRecord(data, offset, records)
+            val (raw, nextOffset) = parseOneRecord(data, offset)
+            offset = nextOffset
+
+            val chunk = pending
+            when {
+                chunk == null && raw.cf -> pending = PendingChunk(raw.tnf, raw.type, raw.id, raw.mb).apply {
+                    payloadChunks.add(raw.payload)
+                }
+                chunk == null -> records.add(ParsedNdefRecord(raw.tnf, raw.type, raw.id, raw.payload, raw.mb, raw.me))
+                else -> {
+                    require(raw.tnf == Tnf.UNCHANGED) {
+                        "Malformed chunked NDEF record at offset $offset: expected TNF_UNCHANGED continuation"
+                    }
+                    chunk.payloadChunks.add(raw.payload)
+                    if (!raw.cf) {
+                        val fullPayload = chunk.payloadChunks.reduce { acc, part -> acc + part }
+                        records.add(ParsedNdefRecord(chunk.tnf, chunk.type, chunk.id, fullPayload, chunk.messageBegin, raw.me))
+                        pending = null
+                    }
+                }
+            }
         }
+        require(pending == null) { "Truncated NDEF message: chunked record was never terminated" }
         return records
     }
 
-    private fun parseOneRecord(data: ByteArray, start: Int, out: MutableList<ParsedNdefRecord>): Int {
+    private class RawRecord(
+        val tnf: Int,
+        val type: ByteArray,
+        val id: ByteArray,
+        val payload: ByteArray,
+        val mb: Boolean,
+        val me: Boolean,
+        val cf: Boolean,
+    )
+
+    private fun parseOneRecord(data: ByteArray, start: Int): Pair<RawRecord, Int> {
         var offset = start
         require(offset < data.size) { "Truncated NDEF message at offset $offset: expected record header" }
         val header = data[offset].toInt() and 0xFF
         val mb = header and 0x80 != 0
         val me = header and 0x40 != 0
+        val cf = header and 0x20 != 0
         val sr = header and 0x10 != 0
         val il = header and 0x08 != 0
         val tnf = header and 0x07
@@ -80,7 +123,6 @@ object NdefParser {
         val payload = data.copyOfRange(offset, offset + payloadLength)
         offset += payloadLength
 
-        out.add(ParsedNdefRecord(tnf, type, id, payload, mb, me))
-        return offset
+        return RawRecord(tnf, type, id, payload, mb, me, cf) to offset
     }
 }

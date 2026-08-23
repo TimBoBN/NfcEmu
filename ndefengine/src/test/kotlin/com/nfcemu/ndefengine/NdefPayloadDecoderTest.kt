@@ -115,4 +115,49 @@ class NdefPayloadDecoderTest {
         val bytes = NdefMessageEncoder.encode(listOf(record))
         assertIs<DecodedTagResult.Unsupported>(NdefPayloadDecoder.decode(bytes))
     }
+
+    @Test
+    fun `a smart poster's wrapped uri is unwrapped and decoded`() {
+        // RTD-SP: the "Sp" record's own payload is a nested NDEF message, here a title Text
+        // record (decorative, this app has no field for it) followed by the mandatory Uri record.
+        val innerMessage = NdefMessageEncoder.encode(
+            listOf(
+                TextRecordEncoder.encode("Acme Website"),
+                UriRecordEncoder.encode("https://acme.example.com"),
+            ),
+        )
+        val smartPoster = RawNdefRecord(tnf = Tnf.WELL_KNOWN, type = "Sp".toByteArray(Charsets.US_ASCII), payload = innerMessage)
+        val bytes = NdefMessageEncoder.encode(listOf(smartPoster))
+
+        val result = assertIs<DecodedTagResult.Success>(NdefPayloadDecoder.decode(bytes))
+        assertEquals(NdefPayload.Uri("https://acme.example.com"), result.payload)
+    }
+
+    @Test
+    fun `a smart poster without a uri record is unsupported`() {
+        val innerMessage = NdefMessageEncoder.encode(listOf(TextRecordEncoder.encode("Title only, no link")))
+        val smartPoster = RawNdefRecord(tnf = Tnf.WELL_KNOWN, type = "Sp".toByteArray(Charsets.US_ASCII), payload = innerMessage)
+        val bytes = NdefMessageEncoder.encode(listOf(smartPoster))
+
+        assertIs<DecodedTagResult.Unsupported>(NdefPayloadDecoder.decode(bytes))
+    }
+
+    @Test
+    fun `an unrecognized leading record does not hide a recognized record behind it`() {
+        val unrecognized = RawNdefRecord(tnf = Tnf.UNKNOWN, type = ByteArray(0), payload = byteArrayOf(9, 9))
+        val bytes = NdefMessageEncoder.encode(listOf(unrecognized, UriRecordEncoder.encode("https://example.com")))
+
+        val result = assertIs<DecodedTagResult.Success>(NdefPayloadDecoder.decode(bytes))
+        assertEquals(NdefPayload.Uri("https://example.com"), result.payload)
+    }
+
+    @Test
+    fun `a uri record followed by a text record only surfaces the first recognized record`() {
+        val bytes = NdefMessageEncoder.encode(
+            listOf(UriRecordEncoder.encode("https://example.com"), TextRecordEncoder.encode("secondary text")),
+        )
+
+        val result = assertIs<DecodedTagResult.Success>(NdefPayloadDecoder.decode(bytes))
+        assertEquals(NdefPayload.Uri("https://example.com"), result.payload)
+    }
 }
