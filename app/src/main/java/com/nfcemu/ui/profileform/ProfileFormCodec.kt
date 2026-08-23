@@ -45,7 +45,7 @@ object ProfileFormCodec {
                 password = fields.password.takeIf { it.isNotBlank() },
             )
             is ProfileFormFields.Bluetooth -> NdefPayload.BluetoothHandover(
-                deviceAddress = fields.deviceAddress.trim().uppercase(),
+                deviceAddress = fields.deviceAddress.trim().replace("-", ":").uppercase(),
                 deviceName = fields.deviceName.trim().takeIf { it.isNotBlank() },
             )
             is ProfileFormFields.VCard -> NdefPayload.VCard(

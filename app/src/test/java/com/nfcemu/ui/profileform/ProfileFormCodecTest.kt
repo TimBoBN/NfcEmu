@@ -239,6 +239,20 @@ class ProfileFormCodecTest {
     }
 
     @Test
+    fun `dash separated bluetooth address is normalized to colons in the payload`() {
+        val payload = ProfileFormCodec.toPayload(ProfileFormFields.Bluetooth(deviceAddress = "aa-bb-cc-dd-ee-ff"))
+        assertTrue(payload is NdefPayload.BluetoothHandover)
+        assertEquals("AA:BB:CC:DD:EE:FF", payload.deviceAddress)
+    }
+
+    @Test
+    fun `mixed colon and dash separators normalize to colons in the payload`() {
+        val payload = ProfileFormCodec.toPayload(ProfileFormFields.Bluetooth(deviceAddress = "AA:BB-CC:DD-EE:FF"))
+        assertTrue(payload is NdefPayload.BluetoothHandover)
+        assertEquals("AA:BB:CC:DD:EE:FF", payload.deviceAddress)
+    }
+
+    @Test
     fun `bluetooth payload round-trips into form fields`() {
         val fields = ProfileFormCodec.toFormFields(NdefPayload.BluetoothHandover("AA:BB:CC:DD:EE:FF", "Speaker"))
         assertTrue(fields is ProfileFormFields.Bluetooth)
