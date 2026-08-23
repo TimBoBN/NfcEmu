@@ -108,6 +108,8 @@
     <string name="field_wifi_ssid">Network name (SSID)</string>
     <string name="field_wifi_auth_type">Security type</string>
     <string name="field_wifi_password">Password</string>
+    <string name="field_bluetooth_address">Device address (e.g. AA:BB:CC:DD:EE:FF)</string>
+    <string name="field_bluetooth_name">Device name (optional)</string>
     <string name="field_vcard_name">Name</string>
     <string name="field_vcard_phone">Phone number</string>
     <string name="field_vcard_email">Email</string>

@@ -205,4 +205,44 @@ class ProfileFormCodecTest {
         assertEquals(WifiAuthType.WPA2_PSK, fields.authType)
         assertEquals("supersecret", fields.password)
     }
+
+    // --- Bluetooth ---
+
+    @Test
+    fun `a well formed colon separated bluetooth address is valid`() {
+        assertTrue(ProfileFormCodec.validate(ProfileFormFields.Bluetooth(deviceAddress = "AA:BB:CC:DD:EE:FF")).isValid)
+    }
+
+    @Test
+    fun `a well formed dash separated bluetooth address is valid`() {
+        assertTrue(ProfileFormCodec.validate(ProfileFormFields.Bluetooth(deviceAddress = "aa-bb-cc-dd-ee-ff")).isValid)
+    }
+
+    @Test
+    fun `a malformed bluetooth address is invalid`() {
+        val result = ProfileFormCodec.validate(ProfileFormFields.Bluetooth(deviceAddress = "not-a-mac"))
+        assertTrue(!result.isValid)
+        assertTrue("deviceAddress" in result.errors)
+    }
+
+    @Test
+    fun `bluetooth device name is optional`() {
+        assertTrue(ProfileFormCodec.validate(ProfileFormFields.Bluetooth(deviceAddress = "AA:BB:CC:DD:EE:FF", deviceName = "")).isValid)
+    }
+
+    @Test
+    fun `bluetooth address is normalized to uppercase in the payload`() {
+        val payload = ProfileFormCodec.toPayload(ProfileFormFields.Bluetooth(deviceAddress = "aa:bb:cc:dd:ee:ff", deviceName = "Speaker"))
+        assertTrue(payload is NdefPayload.BluetoothHandover)
+        assertEquals("AA:BB:CC:DD:EE:FF", payload.deviceAddress)
+        assertEquals("Speaker", payload.deviceName)
+    }
+
+    @Test
+    fun `bluetooth payload round-trips into form fields`() {
+        val fields = ProfileFormCodec.toFormFields(NdefPayload.BluetoothHandover("AA:BB:CC:DD:EE:FF", "Speaker"))
+        assertTrue(fields is ProfileFormFields.Bluetooth)
+        assertEquals("AA:BB:CC:DD:EE:FF", fields.deviceAddress)
+        assertEquals("Speaker", fields.deviceName)
+    }
 }

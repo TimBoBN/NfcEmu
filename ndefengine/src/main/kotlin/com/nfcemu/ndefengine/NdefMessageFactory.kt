@@ -18,5 +18,6 @@ object NdefMessageFactory {
         is NdefPayload.Text -> listOf(TextRecordEncoder.encode(payload.text, payload.languageCode))
         is NdefPayload.VCard -> listOf(VCardRecordEncoder.encode(payload))
         is NdefPayload.WifiHandover -> WifiHandoverRecordEncoder.encode(payload)
+        is NdefPayload.BluetoothHandover -> BluetoothHandoverRecordEncoder.encode(payload)
     }
 }

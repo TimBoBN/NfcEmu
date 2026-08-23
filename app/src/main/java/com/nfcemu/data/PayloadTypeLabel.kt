@@ -8,4 +8,5 @@ fun NdefPayload.typeLabel(): String = when (this) {
     is NdefPayload.VCard -> "vcard"
     is NdefPayload.Text -> "text"
     is NdefPayload.WifiHandover -> "wifi"
+    is NdefPayload.BluetoothHandover -> "bluetooth"
 }

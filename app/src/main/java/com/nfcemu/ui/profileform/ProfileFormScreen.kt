@@ -179,6 +179,7 @@ private fun TemplateFormBody(
             fields.appId, stringResource(R.string.field_play_store_id), errors["appId"], { onChange(fields.copy(appId = it)) },
         )
         is ProfileFormFields.Wifi -> WifiForm(fields, errors, onChange)
+        is ProfileFormFields.Bluetooth -> BluetoothForm(fields, errors, onChange)
         is ProfileFormFields.VCard -> VCardForm(fields, onChange)
         is ProfileFormFields.Text -> Column {
             LabeledField(fields.text, stringResource(R.string.field_text), errors["text"], { onChange(fields.copy(text = it)) })
@@ -221,6 +222,18 @@ private fun WifiForm(fields: ProfileFormFields.Wifi, errors: Map<String, String>
             fields.password, stringResource(R.string.field_wifi_password), errors["password"],
             { onChange(fields.copy(password = it)) }, isPassword = true,
         )
+    }
+}
+
+@Composable
+private fun BluetoothForm(fields: ProfileFormFields.Bluetooth, errors: Map<String, String>, onChange: (ProfileFormFields) -> Unit) {
+    Column {
+        LabeledField(
+            fields.deviceAddress, stringResource(R.string.field_bluetooth_address), errors["deviceAddress"],
+            { onChange(fields.copy(deviceAddress = it)) },
+        )
+        Spacer()
+        LabeledField(fields.deviceName, stringResource(R.string.field_bluetooth_name), null, { onChange(fields.copy(deviceName = it)) })
     }
 }
 

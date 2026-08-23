@@ -86,6 +86,7 @@ internal fun NdefPayload.widgetIconRes(): Int = when (this) {
     is NdefPayload.VCard -> R.drawable.ic_widget_vcard
     is NdefPayload.Text -> R.drawable.ic_widget_text
     is NdefPayload.WifiHandover -> R.drawable.ic_widget_wifi
+    is NdefPayload.BluetoothHandover -> R.drawable.ic_widget_bluetooth
     is NdefPayload.Uri -> when {
         uri.startsWith("tel:") -> R.drawable.ic_widget_phone
         uri.startsWith("mailto:") -> R.drawable.ic_widget_email

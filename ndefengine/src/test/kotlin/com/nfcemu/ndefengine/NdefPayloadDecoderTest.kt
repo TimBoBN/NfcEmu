@@ -43,6 +43,8 @@ class NdefPayloadDecoderTest {
             NdefPayload.WifiHandover("Wep", WifiAuthType.WEP, "12345"),
             NdefPayload.WifiHandover("Wpa", WifiAuthType.WPA_PSK, "password1"),
             NdefPayload.WifiHandover("Wpa2", WifiAuthType.WPA2_PSK, "password1"),
+            NdefPayload.BluetoothHandover("AA:BB:CC:DD:EE:FF", "Acme Speaker"),
+            NdefPayload.BluetoothHandover("00:11:22:33:44:55"),
         )
 
         for (payload in payloads) {

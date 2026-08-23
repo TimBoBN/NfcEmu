@@ -51,6 +51,14 @@ sealed interface NdefPayload {
         val authType: WifiAuthType,
         val password: String? = null,
     ) : NdefPayload
+
+    /** Bluetooth pairing info delivered via NFC Forum Connection Handover + Bluetooth OOB carrier record. */
+    @Serializable
+    @SerialName("bluetooth")
+    data class BluetoothHandover(
+        val deviceAddress: String,
+        val deviceName: String? = null,
+    ) : NdefPayload
 }
 
 @Serializable

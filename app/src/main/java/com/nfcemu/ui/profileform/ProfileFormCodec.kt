@@ -23,6 +23,7 @@ object ProfileFormCodec {
         is ProfileFormFields.Location -> validateLocation(fields)
         is ProfileFormFields.PlayStore -> validatePlayStore(fields)
         is ProfileFormFields.Wifi -> validateWifi(fields)
+        is ProfileFormFields.Bluetooth -> validateBluetooth(fields)
         is ProfileFormFields.VCard -> validateVCard(fields)
         is ProfileFormFields.Text -> validateText(fields)
         is ProfileFormFields.CustomUri -> validateCustomUri(fields)
@@ -42,6 +43,10 @@ object ProfileFormCodec {
                 ssid = fields.ssid.trim(),
                 authType = fields.authType,
                 password = fields.password.takeIf { it.isNotBlank() },
+            )
+            is ProfileFormFields.Bluetooth -> NdefPayload.BluetoothHandover(
+                deviceAddress = fields.deviceAddress.trim().uppercase(),
+                deviceName = fields.deviceName.trim().takeIf { it.isNotBlank() },
             )
             is ProfileFormFields.VCard -> NdefPayload.VCard(
                 name = fields.name.trim().takeIf { it.isNotBlank() },
@@ -70,6 +75,7 @@ object ProfileFormCodec {
         )
         is NdefPayload.Text -> ProfileFormFields.Text(payload.text, payload.languageCode)
         is NdefPayload.WifiHandover -> ProfileFormFields.Wifi(payload.ssid, payload.authType, payload.password.orEmpty())
+        is NdefPayload.BluetoothHandover -> ProfileFormFields.Bluetooth(payload.deviceAddress, payload.deviceName.orEmpty())
         is NdefPayload.Uri -> inferUriTemplate(payload.uri)
     }
 
@@ -189,6 +195,11 @@ object ProfileFormCodec {
             }
         }
         return FormValidationResult(errors)
+    }
+
+    private fun validateBluetooth(fields: ProfileFormFields.Bluetooth): FormValidationResult {
+        val valid = fields.deviceAddress.trim().matches(Regex("^([0-9A-Fa-f]{2}[:-]){5}[0-9A-Fa-f]{2}$"))
+        return errorsOf("deviceAddress" to "Please enter a valid Bluetooth address (e.g. AA:BB:CC:DD:EE:FF)".takeIf { !valid })
     }
 
     private fun validateVCard(fields: ProfileFormFields.VCard): FormValidationResult {

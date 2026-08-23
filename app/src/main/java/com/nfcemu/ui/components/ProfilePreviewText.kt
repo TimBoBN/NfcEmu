@@ -16,4 +16,5 @@ fun NdefPayload.previewText(): String = when (this) {
     is NdefPayload.VCard -> "Save contact: ${name ?: "(no name)"}"
     is NdefPayload.Text -> if (text.length > 60) text.take(57) + "…" else text
     is NdefPayload.WifiHandover -> "Connect to Wi-Fi “$ssid”"
+    is NdefPayload.BluetoothHandover -> "Pair with ${deviceName ?: deviceAddress}"
 }

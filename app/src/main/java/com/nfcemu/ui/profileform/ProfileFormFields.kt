@@ -17,6 +17,7 @@ enum class ProfileTypeTemplate {
     LOCATION,
     PLAY_STORE,
     WIFI,
+    BLUETOOTH,
     VCARD,
     TEXT,
     CUSTOM_URI,
@@ -58,6 +59,13 @@ sealed interface ProfileFormFields {
         override val template get() = ProfileTypeTemplate.WIFI
     }
 
+    data class Bluetooth(
+        val deviceAddress: String = "",
+        val deviceName: String = "",
+    ) : ProfileFormFields {
+        override val template get() = ProfileTypeTemplate.BLUETOOTH
+    }
+
     data class VCard(
         val name: String = "",
         val phones: List<String> = listOf(""),
@@ -87,6 +95,7 @@ sealed interface ProfileFormFields {
             ProfileTypeTemplate.LOCATION -> Location()
             ProfileTypeTemplate.PLAY_STORE -> PlayStore()
             ProfileTypeTemplate.WIFI -> Wifi()
+            ProfileTypeTemplate.BLUETOOTH -> Bluetooth()
             ProfileTypeTemplate.VCARD -> VCard()
             ProfileTypeTemplate.TEXT -> Text()
             ProfileTypeTemplate.CUSTOM_URI -> CustomUri()

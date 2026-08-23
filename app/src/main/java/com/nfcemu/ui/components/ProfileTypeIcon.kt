@@ -26,6 +26,7 @@ fun ProfileTypeTemplate.typeGlyph(): TypeGlyph = when (this) {
     ProfileTypeTemplate.LOCATION -> TypeGlyph.Icon(ImageVector.vectorResource(R.drawable.ic_nocturne_location))
     ProfileTypeTemplate.PLAY_STORE -> TypeGlyph.Icon(ImageVector.vectorResource(R.drawable.ic_nocturne_play_store))
     ProfileTypeTemplate.WIFI -> TypeGlyph.Icon(ImageVector.vectorResource(R.drawable.ic_nocturne_wifi))
+    ProfileTypeTemplate.BLUETOOTH -> TypeGlyph.Icon(ImageVector.vectorResource(R.drawable.ic_nocturne_bluetooth))
     ProfileTypeTemplate.VCARD -> TypeGlyph.Icon(ImageVector.vectorResource(R.drawable.ic_nocturne_vcard))
     ProfileTypeTemplate.TEXT -> TypeGlyph.Text
     ProfileTypeTemplate.CUSTOM_URI -> TypeGlyph.Icon(ImageVector.vectorResource(R.drawable.ic_nocturne_custom_uri))
@@ -39,6 +40,7 @@ fun ProfileTypeTemplate.label(): String = when (this) {
     ProfileTypeTemplate.LOCATION -> "Location"
     ProfileTypeTemplate.PLAY_STORE -> "Play Store app"
     ProfileTypeTemplate.WIFI -> "Wi-Fi access"
+    ProfileTypeTemplate.BLUETOOTH -> "Bluetooth pairing"
     ProfileTypeTemplate.VCARD -> "Business card"
     ProfileTypeTemplate.TEXT -> "Text"
     ProfileTypeTemplate.CUSTOM_URI -> "Custom URI"
@@ -50,6 +52,7 @@ fun NdefPayload.typeGlyph(): TypeGlyph = when (this) {
     is NdefPayload.VCard -> TypeGlyph.Icon(ImageVector.vectorResource(R.drawable.ic_nocturne_vcard))
     is NdefPayload.Text -> TypeGlyph.Text
     is NdefPayload.WifiHandover -> TypeGlyph.Icon(ImageVector.vectorResource(R.drawable.ic_nocturne_wifi))
+    is NdefPayload.BluetoothHandover -> TypeGlyph.Icon(ImageVector.vectorResource(R.drawable.ic_nocturne_bluetooth))
     is NdefPayload.Uri -> when {
         uri.startsWith("tel:") -> TypeGlyph.Icon(ImageVector.vectorResource(R.drawable.ic_nocturne_phone))
         uri.startsWith("mailto:") -> TypeGlyph.Icon(ImageVector.vectorResource(R.drawable.ic_nocturne_email))
@@ -66,6 +69,7 @@ fun NdefPayload.typeDisplayLabel(): String = when (this) {
     is NdefPayload.VCard -> "Business card"
     is NdefPayload.Text -> "Text"
     is NdefPayload.WifiHandover -> "Wi-Fi access"
+    is NdefPayload.BluetoothHandover -> "Bluetooth pairing"
     is NdefPayload.Uri -> when {
         uri.startsWith("tel:") -> "Phone number"
         uri.startsWith("mailto:") -> "Email"
@@ -90,5 +94,6 @@ fun typeGlyphForLabel(label: String): TypeGlyph = when (label) {
     "vcard" -> TypeGlyph.Icon(ImageVector.vectorResource(R.drawable.ic_nocturne_vcard))
     "text" -> TypeGlyph.Text
     "wifi" -> TypeGlyph.Icon(ImageVector.vectorResource(R.drawable.ic_nocturne_wifi))
+    "bluetooth" -> TypeGlyph.Icon(ImageVector.vectorResource(R.drawable.ic_nocturne_bluetooth))
     else -> TypeGlyph.Icon(ImageVector.vectorResource(R.drawable.ic_nocturne_website))
 }

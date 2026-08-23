@@ -54,7 +54,7 @@ object NdefPayloadDecoder {
      */
     private fun decodeContent(records: List<ParsedNdefRecord>, aarPackageName: String?): DecodedTagResult {
         if (records.any { it.tnf == Tnf.WELL_KNOWN && typeStringOf(it) == "Hs" }) {
-            return decodeWifiHandover(records, aarPackageName)
+            return decodeConnectionHandover(records, aarPackageName)
         }
 
         val recognized = records.firstOrNull(::isRecognized)
@@ -109,13 +109,26 @@ object NdefPayloadDecoder {
         return DecodedTagResult.Success(NdefPayload.Uri(UriRecordDecoder.decode(uriRecord.payload)), aarPackageName)
     }
 
-    private fun decodeWifiHandover(records: List<ParsedNdefRecord>, aarPackageName: String?): DecodedTagResult {
-        val carrier = records.firstOrNull {
-            it.tnf == Tnf.MIME_MEDIA && typeStringOf(it) == "application/vnd.wfa.wsc"
-        } ?: return DecodedTagResult.Unsupported("Handover message did not contain a Wi-Fi Simple Config carrier")
+    /**
+     * A Handover Select message can in principle carry several alternative carriers; this app
+     * only ever emits one, so it picks the first carrier type it recognizes rather than trying
+     * to represent "pick one of several" in [NdefPayload].
+     */
+    private fun decodeConnectionHandover(records: List<ParsedNdefRecord>, aarPackageName: String?): DecodedTagResult {
+        val wifiCarrier = records.firstOrNull { it.tnf == Tnf.MIME_MEDIA && typeStringOf(it) == "application/vnd.wfa.wsc" }
+        if (wifiCarrier != null) {
+            val wifi = WifiHandoverRecordDecoder.decode(wifiCarrier.payload)
+                ?: return DecodedTagResult.Unsupported("Could not parse Wi-Fi credential data")
+            return DecodedTagResult.Success(wifi, aarPackageName)
+        }
 
-        val wifi = WifiHandoverRecordDecoder.decode(carrier.payload)
-            ?: return DecodedTagResult.Unsupported("Could not parse Wi-Fi credential data")
-        return DecodedTagResult.Success(wifi, aarPackageName)
+        val bluetoothCarrier = records.firstOrNull { it.tnf == Tnf.MIME_MEDIA && typeStringOf(it) == "application/vnd.bluetooth.ep.oob" }
+        if (bluetoothCarrier != null) {
+            val bluetooth = BluetoothHandoverRecordDecoder.decode(bluetoothCarrier.payload)
+                ?: return DecodedTagResult.Unsupported("Could not parse Bluetooth pairing data")
+            return DecodedTagResult.Success(bluetooth, aarPackageName)
+        }
+
+        return DecodedTagResult.Unsupported("Handover message did not contain a Wi-Fi or Bluetooth carrier")
     }
 }
